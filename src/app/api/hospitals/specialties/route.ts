@@ -22,7 +22,6 @@ export async function GET() {
         NOT: [
           { specialties: '' },
           { specialties: '0' },
-          { specialties: null }
         ]
       },
     })

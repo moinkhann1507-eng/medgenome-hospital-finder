@@ -150,7 +150,7 @@ export default function HomePage() {
   // Initialize Leaflet map
   useEffect(() => {
     if (!mapContainerRef.current || mapRef.current) return
-    const L = (window as unknown as { L: typeof import('leaflet') }).L
+    const L = (window as unknown as { L: typeof L }).L
     if (!L) return
 
     const map = L.map(mapContainerRef.current, {
@@ -171,7 +171,7 @@ export default function HomePage() {
 
   // Update map markers
   useEffect(() => {
-    const L = (window as unknown as { L: typeof import('leaflet') }).L
+    const L = (window as unknown as { L: typeof L }).L
     if (!mapRef.current || !L) return
 
     markersRef.current.forEach(m => mapRef.current?.removeLayer(m))

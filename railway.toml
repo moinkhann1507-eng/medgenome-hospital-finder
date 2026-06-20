@@ -1,0 +1,22 @@
+# Railway deployment config for MedGenome Hospital Finder
+[build]
+builder = "nixpacks"
+
+[build.nixpacks.plan.phases.setup]
+nixPkgs = ["...", "openssl"]
+
+[build.nixpacks.plan.phases.build]
+cmds = ["npx prisma generate", "npm run build"]
+
+[deploy]
+startCommand = "npx prisma db push && node .next/standalone/server.js"
+healthcheckPath = "/"
+healthcheckTimeout = 30
+
+[[deploy.envVars]]
+name = "DATABASE_URL"
+value = "file:/app/db/hospitals.db"
+
+[[deploy.envVars]]
+name = "NODE_ENV"
+value = "production"

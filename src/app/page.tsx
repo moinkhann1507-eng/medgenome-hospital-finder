@@ -28,6 +28,13 @@ interface ChatMessage {
   role: 'user' | 'ai'
   text: string
   hospitals?: Hospital[]
+  source?: string
+  webResults?: string
+}
+
+interface Specialty {
+  name: string
+  count: number
 }
 
 const CATEGORY_ICONS: Record<string, string> = {
@@ -51,6 +58,15 @@ const CATEGORY_COLORS: Record<string, string> = {
   phc: 'bg-yellow-100 text-yellow-700', clinic: 'bg-gray-100 text-gray-700',
 }
 
+const AI_SUGGESTIONS = [
+  { icon: 'fa-heart-pulse', text: 'Best cardiac hospitals in Mumbai', color: 'text-red-500' },
+  { icon: 'fa-brain', text: 'Neuro hospitals near Delhi', color: 'text-purple-500' },
+  { icon: 'fa-baby', text: 'Pediatric care in Bangalore', color: 'text-amber-500' },
+  { icon: 'fa-ribbon', text: 'Top cancer hospitals in India', color: 'text-pink-500' },
+  { icon: 'fa-truck-medical', text: '24/7 emergency hospitals near me', color: 'text-orange-500' },
+  { icon: 'fa-building-columns', text: 'Government hospitals in Tamil Nadu', color: 'text-green-500' },
+]
+
 export default function HomePage() {
   const [hospitals, setHospitals] = useState<Hospital[]>([])
   const [filteredHospitals, setFilteredHospitals] = useState<Hospital[]>([])
@@ -66,17 +82,33 @@ export default function HomePage() {
   const [chatLoading, setChatLoading] = useState(false)
   const [showChat, setShowChat] = useState(false)
   const [showDetail, setShowDetail] = useState(false)
+  const [specialties, setSpecialties] = useState<Specialty[]>([])
+  const [specialtySearch, setSpecialtySearch] = useState('')
+  const [showSpecialtyPicker, setShowSpecialtyPicker] = useState(false)
+  const [isAiTyping, setIsAiTyping] = useState(false)
+  const [displayedText, setDisplayedText] = useState('')
 
   const mapRef = useRef<L.Map | null>(null)
   const markersRef = useRef<L.Marker[]>([])
   const userMarkerRef = useRef<L.Marker | null>(null)
   const mapContainerRef = useRef<HTMLDivElement>(null)
+  const chatEndRef = useRef<HTMLDivElement>(null)
+  const chatInputRef = useRef<HTMLInputElement>(null)
+  const specialtyPickerRef = useRef<HTMLDivElement>(null)
 
   // Load stats on mount
   useEffect(() => {
     fetch('/api/hospitals/stats')
       .then(r => r.json())
       .then(data => setStats(data))
+      .catch(console.error)
+  }, [])
+
+  // Load specialties from pre-generated static file (much faster than API)
+  useEffect(() => {
+    fetch('/specialties.json')
+      .then(r => r.json())
+      .then(data => setSpecialties(data.specialties || []))
       .catch(console.error)
   }, [])
 
@@ -142,7 +174,6 @@ export default function HomePage() {
     const L = (window as unknown as { L: typeof import('leaflet') }).L
     if (!mapRef.current || !L) return
 
-    // Clear old markers
     markersRef.current.forEach(m => mapRef.current?.removeLayer(m))
     markersRef.current = []
 
@@ -165,7 +196,6 @@ export default function HomePage() {
       markersRef.current.push(marker)
     })
 
-    // Fit bounds
     if (withCoords.length > 1) {
       const bounds = L.latLngBounds(withCoords.map(h => [h.lat!, h.lng!]))
       mapRef.current.fitBounds(bounds, { padding: [40, 40], maxZoom: 12 })
@@ -174,13 +204,41 @@ export default function HomePage() {
     }
   }, [filteredHospitals, selectedHospital])
 
+  // Auto-scroll chat
+  useEffect(() => {
+    chatEndRef.current?.scrollIntoView({ behavior: 'smooth' })
+  }, [chatMessages, chatLoading])
+
+  // Typing animation for AI
+  useEffect(() => {
+    if (!isAiTyping) return
+    const lastAi = chatMessages[chatMessages.length - 1]
+    if (!lastAi || lastAi.role !== 'ai') { setIsAiTyping(false); return }
+    
+    const target = lastAi.text
+    let idx = 0
+    setDisplayedText('')
+    const interval = setInterval(() => {
+      idx += 2
+      if (idx >= target.length) {
+        setDisplayedText(target)
+        setIsAiTyping(false)
+        clearInterval(interval)
+      } else {
+        setDisplayedText(target.slice(0, idx))
+      }
+    }, 8)
+    return () => clearInterval(interval)
+  }, [isAiTyping, chatMessages.length])
+
   // AI Chat
-  const sendChatMessage = async () => {
-    if (!chatInput.trim() || chatLoading) return
-    const userMsg = chatInput.trim()
-    setChatInput('')
+  const sendChatMessage = async (overrideMsg?: string) => {
+    const userMsg = (overrideMsg || chatInput).trim()
+    if (!userMsg || chatLoading) return
+    if (!overrideMsg) setChatInput('')
     setChatMessages(prev => [...prev, { role: 'user', text: userMsg }])
     setChatLoading(true)
+    setIsAiTyping(false)
 
     try {
       const res = await fetch('/api/gemini', {
@@ -189,11 +247,15 @@ export default function HomePage() {
         body: JSON.stringify({ query: userMsg }),
       })
       const data = await res.json()
-      setChatMessages(prev => [...prev, {
+      const aiMsg: ChatMessage = {
         role: 'ai',
         text: data.response || 'Sorry, I could not process your request.',
         hospitals: data.hospitals || [],
-      }])
+        source: data.source,
+        webResults: data.webResults,
+      }
+      setChatMessages(prev => [...prev, aiMsg])
+      setIsAiTyping(true)
       if (data.hospitals?.length > 0) {
         setFilteredHospitals(data.hospitals)
       }
@@ -203,12 +265,50 @@ export default function HomePage() {
     setChatLoading(false)
   }
 
+  // Navigate to hospital from AI results
+  const navigateToHospital = (h: Hospital) => {
+    setSelectedHospital(h)
+    setShowDetail(true)
+    if (h.lat && h.lng && mapRef.current) {
+      mapRef.current.setView([h.lat, h.lng], 14)
+    }
+  }
+
+  // Close specialty picker on outside click
+  useEffect(() => {
+    const handler = (e: MouseEvent) => {
+      if (specialtyPickerRef.current && !specialtyPickerRef.current.contains(e.target as Node)) {
+        setShowSpecialtyPicker(false)
+      }
+    }
+    document.addEventListener('mousedown', handler)
+    return () => document.removeEventListener('mousedown', handler)
+  }, [])
+
+  const filteredSpecialties = specialties.filter(s =>
+    s.name.toLowerCase().includes(specialtySearch.toLowerCase())
+  )
+
+  // Render AI message text with markdown-like bold
+  const renderAiText = (text: string) => {
+    const parts = text.split(/(\*\*[^*]+\*\*)/g)
+    return parts.map((part, i) => {
+      if (part.startsWith('**') && part.endsWith('**')) {
+        return <strong key={i} className="text-blue-800">{part.slice(2, -2)}</strong>
+      }
+      return <span key={i}>{part}</span>
+    })
+  }
+
   return (
     <>
       <Script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" strategy="beforeInteractive" />
       <div className="min-h-screen flex flex-col" style={{ fontFamily: "'Inter', sans-serif" }}>
         {/* Header */}
         <header className="relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #0052CC 0%, #003D99 100%)' }}>
+          <div className="absolute inset-0 opacity-10">
+            <div className="absolute top-0 right-0 w-96 h-96 rounded-full" style={{ background: 'radial-gradient(circle, rgba(0,198,255,0.4) 0%, transparent 70%)', transform: 'translate(30%, -50%)' }} />
+          </div>
           <div className="max-w-[1480px] mx-auto px-4 sm:px-6 py-3 flex items-center justify-between relative z-10">
             <div className="flex items-center gap-3">
               <div className="w-9 h-9 rounded-lg flex items-center justify-center" style={{ background: 'rgba(255,255,255,0.15)' }}>
@@ -223,10 +323,14 @@ export default function HomePage() {
               <div className="hidden md:flex items-center gap-4 text-[10px] text-blue-200" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
                 <span><span className="font-bold text-white">{stats.total.toLocaleString()}</span> HOSPITALS</span>
                 <span><span className="font-bold text-white">{stats.states.length}</span> STATES</span>
-                <span><span className="font-bold text-white">{stats.categories.length}</span> SPECIALTIES</span>
+                <span><span className="font-bold text-white">{specialties.length.toLocaleString()}</span> SPECIALTIES</span>
               </div>
-              <button onClick={() => setShowChat(!showChat)} className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-semibold transition-all hover:scale-105" style={{ background: 'rgba(255,255,255,0.15)', border: '1.5px solid rgba(255,255,255,0.3)', color: '#fff' }}>
-                <i className="fa-solid fa-robot" />
+              <button 
+                onClick={() => { setShowChat(!showChat); if (!showChat) setTimeout(() => chatInputRef.current?.focus(), 100) }} 
+                className="flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-semibold transition-all hover:scale-105 active:scale-95 shadow-lg"
+                style={{ background: 'linear-gradient(135deg, rgba(0,198,255,0.3) 0%, rgba(0,198,255,0.1) 100%)', border: '1.5px solid rgba(0,198,255,0.4)', color: '#fff' }}
+              >
+                <i className="fa-solid fa-sparkles" />
                 <span className="hidden sm:inline">AI Search</span>
               </button>
             </div>
@@ -264,6 +368,49 @@ export default function HomePage() {
                 <option value="Government">Government</option>
                 <option value="Private">Private</option>
               </select>
+              {/* Specialty Picker Button */}
+              <div className="relative" ref={specialtyPickerRef}>
+                <button
+                  onClick={() => setShowSpecialtyPicker(!showSpecialtyPicker)}
+                  className="flex items-center gap-1.5 px-3 py-2.5 rounded-lg border text-sm bg-white hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-colors"
+                >
+                  <i className="fa-solid fa-stethoscope text-blue-500" />
+                  <span className="hidden sm:inline">Specialties</span>
+                  <span className="text-[10px] text-blue-500 font-semibold">{specialties.length}</span>
+                </button>
+                {showSpecialtyPicker && (
+                  <div className="absolute top-full mt-1 right-0 w-80 max-h-96 bg-white rounded-xl shadow-2xl border z-50 overflow-hidden" style={{ borderColor: '#E2E8F0' }}>
+                    <div className="p-2 border-b" style={{ borderColor: '#E2E8F0' }}>
+                      <div className="relative">
+                        <i className="fa-solid fa-magnifying-glass absolute left-2.5 top-1/2 -translate-y-1/2 text-gray-400 text-xs" />
+                        <input
+                          type="text"
+                          className="w-full pl-8 pr-3 py-2 rounded-lg border text-xs focus:outline-none focus:ring-2 focus:ring-blue-500/20"
+                          placeholder="Search 2,576 specialties..."
+                          value={specialtySearch}
+                          onChange={e => setSpecialtySearch(e.target.value)}
+                          autoFocus
+                        />
+                      </div>
+                    </div>
+                    <div className="overflow-y-auto max-h-72 p-1">
+                      {filteredSpecialties.slice(0, 50).map((spec, i) => (
+                        <button
+                          key={i}
+                          onClick={() => { setSearch(spec.name); setShowSpecialtyPicker(false) }}
+                          className="w-full flex items-center justify-between px-3 py-2 text-xs hover:bg-blue-50 rounded-lg transition-colors"
+                        >
+                          <span className="text-gray-700">{spec.name}</span>
+                          <span className="text-gray-400 ml-2 flex-shrink-0" style={{ fontFamily: "'JetBrains Mono', monospace" }}>{spec.count}</span>
+                        </button>
+                      ))}
+                      {filteredSpecialties.length > 50 && (
+                        <p className="text-center text-[10px] text-gray-400 py-2">Showing top 50 of {filteredSpecialties.length} — type to narrow down</p>
+                      )}
+                    </div>
+                  </div>
+                )}
+              </div>
             </div>
             <div className="flex gap-1.5 mt-2.5 overflow-x-auto pb-1">
               <button onClick={() => setSelectedCategory('all')} className={`px-3 py-1.5 rounded-full text-xs font-medium whitespace-nowrap transition-all ${selectedCategory === 'all' ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}>
@@ -281,61 +428,8 @@ export default function HomePage() {
 
         {/* Main Content */}
         <main className="flex-1 max-w-[1480px] mx-auto w-full px-4 sm:px-6 py-4">
-          <div className="grid gap-4" style={{ gridTemplateColumns: showChat ? '300px 1fr 1fr' : '360px 1fr', height: 'calc(100vh - 200px)', minHeight: '400px' }}>
+          <div className="grid gap-4" style={{ gridTemplateColumns: '360px 1fr', height: 'calc(100vh - 200px)', minHeight: '400px' }}>
             
-            {/* AI Chat Panel */}
-            {showChat && (
-              <div className="hidden md:flex flex-col rounded-xl border bg-white overflow-hidden" style={{ borderColor: '#E2E8F0' }}>
-                <div className="px-4 py-3 border-b flex items-center gap-2" style={{ background: '#E8F0FE', borderColor: '#E2E8F0' }}>
-                  <i className="fa-solid fa-robot text-blue-600" />
-                  <span className="text-sm font-semibold text-blue-900">Gemini AI</span>
-                </div>
-                <div className="flex-1 overflow-y-auto p-3 space-y-3">
-                  {chatMessages.length === 0 && (
-                    <div className="text-center py-8 text-gray-400">
-                      <i className="fa-solid fa-robot text-3xl mb-3 block" />
-                      <p className="text-sm">Ask me anything about hospitals in India</p>
-                      <p className="text-xs mt-1 text-gray-300">e.g., &ldquo;Best cardiac hospital in Mumbai&rdquo;</p>
-                    </div>
-                  )}
-                  {chatMessages.map((msg, i) => (
-                    <div key={i} className={`${msg.role === 'ai' ? 'ai-message' : 'user-message'} p-3 rounded-lg`}>
-                      <p className="text-xs font-medium mb-1" style={{ color: msg.role === 'ai' ? '#0052CC' : '#475569' }}>
-                        {msg.role === 'ai' ? 'Gemini AI' : 'You'}
-                      </p>
-                      <div className="text-sm text-gray-700 whitespace-pre-wrap">{msg.text}</div>
-                      {msg.hospitals && msg.hospitals.length > 0 && (
-                        <p className="text-xs text-gray-400 mt-2">Found {msg.hospitals.length} matching hospitals</p>
-                      )}
-                    </div>
-                  ))}
-                  {chatLoading && (
-                    <div className="ai-message p-3 rounded-lg">
-                      <div className="flex items-center gap-2">
-                        <div className="w-4 h-4 border-2 border-blue-500 border-t-transparent rounded-full animate-spin" />
-                        <span className="text-sm text-blue-600">AI is thinking...</span>
-                      </div>
-                    </div>
-                  )}
-                </div>
-                <div className="p-3 border-t" style={{ borderColor: '#E2E8F0' }}>
-                  <div className="flex gap-2">
-                    <input
-                      type="text"
-                      className="flex-1 px-3 py-2 rounded-lg border text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
-                      placeholder="Ask AI about hospitals..."
-                      value={chatInput}
-                      onChange={e => setChatInput(e.target.value)}
-                      onKeyDown={e => e.key === 'Enter' && sendChatMessage()}
-                    />
-                    <button onClick={sendChatMessage} className="px-3 py-2 rounded-lg bg-blue-600 text-white text-sm font-medium hover:bg-blue-700 transition-colors">
-                      <i className="fa-solid fa-paper-plane" />
-                    </button>
-                  </div>
-                </div>
-              </div>
-            )}
-
             {/* Results List */}
             <div className="flex flex-col rounded-xl border bg-white overflow-hidden" style={{ borderColor: '#E2E8F0' }}>
               <div className="px-4 py-2.5 border-b flex items-center justify-between" style={{ borderColor: '#E2E8F0' }}>
@@ -420,6 +514,211 @@ export default function HomePage() {
             </div>
           </div>
         </main>
+
+        {/* ============ AI SEARCH PANEL - Floating Overlay ============ */}
+        {showChat && (
+          <div className="fixed inset-0 z-[1000] flex items-center justify-center p-4">
+            {/* Backdrop */}
+            <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" onClick={() => setShowChat(false)} />
+            
+            {/* AI Panel */}
+            <div className="relative w-full max-w-2xl h-[85vh] bg-white rounded-2xl shadow-2xl overflow-hidden flex flex-col" style={{ border: '1px solid rgba(0,82,204,0.15)' }}>
+              {/* AI Header */}
+              <div className="px-5 py-4 flex items-center justify-between flex-shrink-0" style={{ background: 'linear-gradient(135deg, #0052CC 0%, #003D99 100%)' }}>
+                <div className="flex items-center gap-3">
+                  <div className="w-9 h-9 rounded-xl flex items-center justify-center" style={{ background: 'linear-gradient(135deg, rgba(0,198,255,0.4) 0%, rgba(0,198,255,0.1) 100%)', border: '1px solid rgba(0,198,255,0.3)' }}>
+                    <i className="fa-solid fa-sparkles text-white text-sm" />
+                  </div>
+                  <div>
+                    <h2 className="text-sm font-bold text-white">MedGenome AI</h2>
+                    <p className="text-[10px] text-blue-200">Smart Hospital Search across 30,000+ hospitals</p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-2">
+                  <button 
+                    onClick={() => { setChatMessages([]); setIsAiTyping(false) }}
+                    className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-white/10 transition-colors"
+                    title="Clear conversation"
+                  >
+                    <i className="fa-solid fa-trash-can text-blue-200 text-xs" />
+                  </button>
+                  <button 
+                    onClick={() => setShowChat(false)}
+                    className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-white/10 transition-colors"
+                  >
+                    <i className="fa-solid fa-xmark text-white" />
+                  </button>
+                </div>
+              </div>
+
+              {/* Chat Messages */}
+              <div className="flex-1 overflow-y-auto px-5 py-4 space-y-4">
+                {chatMessages.length === 0 && !chatLoading && (
+                  <div className="flex flex-col items-center justify-center h-full text-center">
+                    <div className="w-16 h-16 rounded-2xl flex items-center justify-center mb-4" style={{ background: 'linear-gradient(135deg, #E8F0FE 0%, #F0F7FF 100%)' }}>
+                      <i className="fa-solid fa-sparkles text-2xl" style={{ color: '#0052CC' }} />
+                    </div>
+                    <h3 className="text-lg font-bold text-gray-900 mb-1">How can I help you find hospitals?</h3>
+                    <p className="text-sm text-gray-500 mb-6 max-w-xs">Search by specialty, city, condition, or any natural language query</p>
+                    
+                    {/* Suggestion Chips */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 w-full max-w-md">
+                      {AI_SUGGESTIONS.map((sug, i) => (
+                        <button
+                          key={i}
+                          onClick={() => sendChatMessage(sug.text)}
+                          className="flex items-center gap-3 px-4 py-3 rounded-xl border text-left hover:shadow-md hover:border-blue-200 transition-all group"
+                          style={{ borderColor: '#E2E8F0' }}
+                        >
+                          <i className={`fa-solid ${sug.icon} ${sug.color} text-sm group-hover:scale-110 transition-transform`} />
+                          <span className="text-xs text-gray-700 group-hover:text-blue-700 transition-colors">{sug.text}</span>
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {chatMessages.map((msg, i) => {
+                  const isLast = i === chatMessages.length - 1
+                  const showTyping = isLast && msg.role === 'ai' && isAiTyping
+                  
+                  return (
+                    <div key={i} className={`${msg.role === 'user' ? 'flex justify-end' : ''}`}>
+                      {msg.role === 'ai' && (
+                        <div className="flex gap-3">
+                          <div className="w-7 h-7 rounded-lg flex-shrink-0 flex items-center justify-center mt-1" style={{ background: '#E8F0FE' }}>
+                            <i className="fa-solid fa-sparkles text-[10px]" style={{ color: '#0052CC' }} />
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <div className="rounded-2xl rounded-tl-md px-4 py-3" style={{ background: 'linear-gradient(135deg, #F0F7FF 0%, #E8F0FE 100%)' }}>
+                              <div className="text-sm text-gray-700 leading-relaxed whitespace-pre-wrap">
+                                {showTyping ? renderAiText(displayedText) : renderAiText(msg.text)}
+                                {showTyping && <span className="inline-block w-0.5 h-4 bg-blue-500 ml-0.5 animate-pulse" />}
+                              </div>
+                            </div>
+                            {/* Source badge */}
+                            {msg.source && (
+                              <div className="flex items-center gap-2 mt-1.5 px-1">
+                                <span className="text-[10px] text-gray-400" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
+                                  {msg.source === 'z-ai' ? 'AI + Directory' : 'Local Search'}
+                                </span>
+                                {msg.webResults && (
+                                  <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-green-50 text-green-600 font-medium">
+                                    <i className="fa-solid fa-globe mr-0.5" />Web
+                                  </span>
+                                )}
+                              </div>
+                            )}
+                            {/* Hospital cards from AI */}
+                            {msg.hospitals && msg.hospitals.length > 0 && (
+                              <div className="mt-3 space-y-2">
+                                <p className="text-[10px] font-semibold text-gray-400 uppercase tracking-wider px-1" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
+                                  Matching Hospitals ({msg.hospitals.length})
+                                </p>
+                                {msg.hospitals.slice(0, 5).map((h, hi) => (
+                                  <div
+                                    key={hi}
+                                    onClick={() => navigateToHospital(h)}
+                                    className="flex items-center gap-3 p-2.5 rounded-xl border bg-white hover:border-blue-300 hover:shadow-sm cursor-pointer transition-all group"
+                                    style={{ borderColor: '#E2E8F0' }}
+                                  >
+                                    <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0" style={{ background: '#E8F0FE' }}>
+                                      <i className={`fa-solid ${CATEGORY_ICONS[h.category?.[0]] || 'fa-hospital'} text-xs`} style={{ color: '#0052CC' }} />
+                                    </div>
+                                    <div className="flex-1 min-w-0">
+                                      <h4 className="text-xs font-semibold text-gray-900 truncate group-hover:text-blue-700 transition-colors">{h.name}</h4>
+                                      <p className="text-[10px] text-gray-500">{h.city || h.district}, {h.state}</p>
+                                    </div>
+                                    <div className="flex items-center gap-1 flex-shrink-0">
+                                      {h.emergency && (
+                                        <span className="text-[9px] px-1.5 py-0.5 rounded font-medium bg-red-50 text-red-600">ER</span>
+                                      )}
+                                      <i className="fa-solid fa-chevron-right text-[8px] text-gray-300 group-hover:text-blue-400 transition-colors" />
+                                    </div>
+                                  </div>
+                                ))}
+                                {msg.hospitals.length > 5 && (
+                                  <button
+                                    onClick={() => {
+                                      setFilteredHospitals(msg.hospitals || [])
+                                      setShowChat(false)
+                                    }}
+                                    className="w-full py-2 rounded-lg text-xs font-medium text-blue-600 hover:bg-blue-50 transition-colors"
+                                  >
+                                    View all {msg.hospitals.length} hospitals on map
+                                  </button>
+                                )}
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      )}
+                      {msg.role === 'user' && (
+                        <div className="max-w-[80%]">
+                          <div className="rounded-2xl rounded-tr-md px-4 py-2.5 bg-blue-600 text-white text-sm">
+                            {msg.text}
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  )
+                })}
+
+                {/* Loading indicator */}
+                {chatLoading && (
+                  <div className="flex gap-3">
+                    <div className="w-7 h-7 rounded-lg flex-shrink-0 flex items-center justify-center" style={{ background: '#E8F0FE' }}>
+                      <i className="fa-solid fa-sparkles text-[10px]" style={{ color: '#0052CC' }} />
+                    </div>
+                    <div className="rounded-2xl rounded-tl-md px-4 py-3" style={{ background: 'linear-gradient(135deg, #F0F7FF 0%, #E8F0FE 100%)' }}>
+                      <div className="flex items-center gap-2">
+                        <div className="flex gap-1">
+                          <div className="w-1.5 h-1.5 rounded-full bg-blue-400 animate-bounce" style={{ animationDelay: '0ms' }} />
+                          <div className="w-1.5 h-1.5 rounded-full bg-blue-400 animate-bounce" style={{ animationDelay: '150ms' }} />
+                          <div className="w-1.5 h-1.5 rounded-full bg-blue-400 animate-bounce" style={{ animationDelay: '300ms' }} />
+                        </div>
+                        <span className="text-xs text-blue-500">Searching hospitals...</span>
+                      </div>
+                    </div>
+                  </div>
+                )}
+                <div ref={chatEndRef} />
+              </div>
+
+              {/* Chat Input */}
+              <div className="px-5 py-4 border-t flex-shrink-0" style={{ borderColor: '#E2E8F0', background: '#FAFBFC' }}>
+                <div className="flex gap-2 items-end">
+                  <div className="flex-1 relative">
+                    <input
+                      ref={chatInputRef}
+                      type="text"
+                      className="w-full px-4 py-3 rounded-xl border text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 pr-12"
+                      placeholder="Ask about hospitals, specialties, cities..."
+                      value={chatInput}
+                      onChange={e => setChatInput(e.target.value)}
+                      onKeyDown={e => e.key === 'Enter' && sendChatMessage()}
+                      disabled={chatLoading}
+                    />
+                    <div className="absolute right-2 top-1/2 -translate-y-1/2 text-[10px] text-gray-300" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
+                      ↵
+                    </div>
+                  </div>
+                  <button
+                    onClick={() => sendChatMessage()}
+                    disabled={chatLoading || !chatInput.trim()}
+                    className="w-11 h-11 rounded-xl flex items-center justify-center text-white transition-all hover:scale-105 active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed"
+                    style={{ background: chatLoading || !chatInput.trim() ? '#94A3B8' : 'linear-gradient(135deg, #0052CC 0%, #003D99 100%)' }}
+                  >
+                    <i className="fa-solid fa-arrow-up text-sm" />
+                  </button>
+                </div>
+                <p className="text-[10px] text-gray-400 mt-2 text-center">
+                  MedGenome AI searches 30,000+ hospitals and the web for results
+                </p>
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* Detail Panel Overlay */}
         {showDetail && selectedHospital && (

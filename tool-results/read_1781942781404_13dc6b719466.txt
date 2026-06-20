@@ -1,0 +1,522 @@
+     1→'use client'
+     2→
+     3→import { useEffect, useState, useRef, useCallback } from 'react'
+     4→import Script from 'next/script'
+     5→
+     6→interface Hospital {
+     7→  id: number
+     8→  name: string
+     9→  address: string
+    10→  city: string
+    11→  state: string
+    12→  district: string
+    13→  pincode: string
+    14→  lat: number | null
+    15→  lng: number | null
+    16→  category: string[]
+    17→  careType: string
+    18→  discipline: string
+    19→  ownership: string
+    20→  beds: number
+    21→  emergency: boolean
+    22→  phones: string[]
+    23→  specialties: string
+    24→  facilities: string
+    25→}
+    26→
+    27→interface ChatMessage {
+    28→  role: 'user' | 'ai'
+    29→  text: string
+    30→  hospitals?: Hospital[]
+    31→}
+    32→
+    33→const CATEGORY_ICONS: Record<string, string> = {
+    34→  general: 'fa-hospital', cardiac: 'fa-heart-pulse', pediatric: 'fa-baby',
+    35→  orthopedic: 'fa-bone', neuro: 'fa-brain', oncology: 'fa-ribbon',
+    36→  trauma: 'fa-truck-medical', maternity: 'fa-person-pregnant', eye: 'fa-eye',
+    37→  dental: 'fa-tooth', ent: 'fa-ear-listen', ayurveda: 'fa-leaf',
+    38→  mental: 'fa-comments', transplant: 'fa-hand-holding-medical', rehab: 'fa-person-walking',
+    39→  diagnostic: 'fa-flask', phc: 'fa-house-medical', clinic: 'fa-stethoscope',
+    40→}
+    41→
+    42→const CATEGORY_COLORS: Record<string, string> = {
+    43→  general: 'bg-blue-100 text-blue-700', cardiac: 'bg-red-100 text-red-700',
+    44→  pediatric: 'bg-amber-100 text-amber-700', orthopedic: 'bg-purple-100 text-purple-700',
+    45→  neuro: 'bg-emerald-100 text-emerald-700', oncology: 'bg-pink-100 text-pink-700',
+    46→  trauma: 'bg-orange-100 text-orange-700', maternity: 'bg-rose-100 text-rose-700',
+    47→  eye: 'bg-cyan-100 text-cyan-700', dental: 'bg-teal-100 text-teal-700',
+    48→  ent: 'bg-indigo-100 text-indigo-700', ayurveda: 'bg-green-100 text-green-700',
+    49→  mental: 'bg-violet-100 text-violet-700', transplant: 'bg-lime-100 text-lime-700',
+    50→  rehab: 'bg-sky-100 text-sky-700', diagnostic: 'bg-slate-100 text-slate-700',
+    51→  phc: 'bg-yellow-100 text-yellow-700', clinic: 'bg-gray-100 text-gray-700',
+    52→}
+    53→
+    54→export default function HomePage() {
+    55→  const [hospitals, setHospitals] = useState<Hospital[]>([])
+    56→  const [filteredHospitals, setFilteredHospitals] = useState<Hospital[]>([])
+    57→  const [search, setSearch] = useState('')
+    58→  const [selectedCategory, setSelectedCategory] = useState('all')
+    59→  const [selectedState, setSelectedState] = useState('')
+    60→  const [selectedOwnership, setSelectedOwnership] = useState('all')
+    61→  const [selectedHospital, setSelectedHospital] = useState<Hospital | null>(null)
+    62→  const [stats, setStats] = useState({ total: 0, withCoords: 0, withEmergency: 0, states: [] as string[], categories: [] as string[] })
+    63→  const [loading, setLoading] = useState(true)
+    64→  const [chatMessages, setChatMessages] = useState<ChatMessage[]>([])
+    65→  const [chatInput, setChatInput] = useState('')
+    66→  const [chatLoading, setChatLoading] = useState(false)
+    67→  const [showChat, setShowChat] = useState(false)
+    68→  const [showDetail, setShowDetail] = useState(false)
+    69→
+    70→  const mapRef = useRef<L.Map | null>(null)
+    71→  const markersRef = useRef<L.Marker[]>([])
+    72→  const userMarkerRef = useRef<L.Marker | null>(null)
+    73→  const mapContainerRef = useRef<HTMLDivElement>(null)
+    74→
+    75→  // Load stats on mount
+    76→  useEffect(() => {
+    77→    fetch('/api/hospitals/stats')
+    78→      .then(r => r.json())
+    79→      .then(data => setStats(data))
+    80→      .catch(console.error)
+    81→  }, [])
+    82→
+    83→  // Search hospitals
+    84→  const searchHospitals = useCallback(async (q?: string, cat?: string, state?: string, own?: string) => {
+    85→    setLoading(true)
+    86→    try {
+    87→      const params = new URLSearchParams()
+    88→      const query = q ?? search
+    89→      const category = cat ?? selectedCategory
+    90→      const st = state ?? selectedState
+    91→      const ownership = own ?? selectedOwnership
+    92→      
+    93→      if (query) params.set('q', query)
+    94→      if (category && category !== 'all') params.set('category', category)
+    95→      if (st) params.set('state', st)
+    96→      if (ownership && ownership !== 'all') params.set('ownership', ownership)
+    97→      if (category === 'all' && !query && !st) {
+    98→        params.set('hasCoords', 'true')
+    99→        params.set('limit', '500')
+   100→      } else {
+   101→        params.set('limit', '200')
+   102→      }
+   103→
+   104→      const res = await fetch(`/api/hospitals?${params}`)
+   105→      const data = await res.json()
+   106→      setFilteredHospitals(data.hospitals || [])
+   107→    } catch (err) {
+   108→      console.error('Search error:', err)
+   109→    }
+   110→    setLoading(false)
+   111→  }, [search, selectedCategory, selectedState, selectedOwnership])
+   112→
+   113→  useEffect(() => {
+   114→    const timer = setTimeout(() => searchHospitals(), 500)
+   115→    return () => clearTimeout(timer)
+   116→  }, [search, selectedCategory, selectedState, selectedOwnership, searchHospitals])
+   117→
+   118→  // Initialize Leaflet map
+   119→  useEffect(() => {
+   120→    if (!mapContainerRef.current || mapRef.current) return
+   121→    const L = (window as unknown as { L: typeof import('leaflet') }).L
+   122→    if (!L) return
+   123→
+   124→    const map = L.map(mapContainerRef.current, {
+   125→      center: [22.5, 79.0],
+   126→      zoom: 5,
+   127→      minZoom: 4,
+   128→      maxZoom: 18,
+   129→      zoomControl: true,
+   130→    })
+   131→
+   132→    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+   133→      maxZoom: 19,
+   134→      attribution: '&copy; OpenStreetMap',
+   135→    }).addTo(map)
+   136→
+   137→    mapRef.current = map
+   138→  }, [])
+   139→
+   140→  // Update map markers
+   141→  useEffect(() => {
+   142→    const L = (window as unknown as { L: typeof import('leaflet') }).L
+   143→    if (!mapRef.current || !L) return
+   144→
+   145→    // Clear old markers
+   146→    markersRef.current.forEach(m => mapRef.current?.removeLayer(m))
+   147→    markersRef.current = []
+   148→
+   149→    const withCoords = filteredHospitals.filter(h => h.lat && h.lng)
+   150→    withCoords.forEach(h => {
+   151→      const isActive = selectedHospital?.id === h.id
+   152→      const icon = L.divIcon({
+   153→        html: `<div class="hospital-marker ${isActive ? 'active' : ''}"><i class="fa-solid fa-hospital"></i></div>`,
+   154→        className: '',
+   155→        iconSize: [isActive ? 34 : 28, isActive ? 34 : 28],
+   156→        iconAnchor: [isActive ? 17 : 14, isActive ? 34 : 28],
+   157→      })
+   158→      const marker = L.marker([h.lat!, h.lng!], { icon })
+   159→        .addTo(mapRef.current!)
+   160→        .on('click', () => {
+   161→          setSelectedHospital(h)
+   162→          setShowDetail(true)
+   163→        })
+   164→      marker.bindTooltip(h.name, { direction: 'top', offset: [0, -28] })
+   165→      markersRef.current.push(marker)
+   166→    })
+   167→
+   168→    // Fit bounds
+   169→    if (withCoords.length > 1) {
+   170→      const bounds = L.latLngBounds(withCoords.map(h => [h.lat!, h.lng!]))
+   171→      mapRef.current.fitBounds(bounds, { padding: [40, 40], maxZoom: 12 })
+   172→    } else if (withCoords.length === 1) {
+   173→      mapRef.current.setView([withCoords[0].lat!, withCoords[0].lng!], 12)
+   174→    }
+   175→  }, [filteredHospitals, selectedHospital])
+   176→
+   177→  // AI Chat
+   178→  const sendChatMessage = async () => {
+   179→    if (!chatInput.trim() || chatLoading) return
+   180→    const userMsg = chatInput.trim()
+   181→    setChatInput('')
+   182→    setChatMessages(prev => [...prev, { role: 'user', text: userMsg }])
+   183→    setChatLoading(true)
+   184→
+   185→    try {
+   186→      const res = await fetch('/api/gemini', {
+   187→        method: 'POST',
+   188→        headers: { 'Content-Type': 'application/json' },
+   189→        body: JSON.stringify({ query: userMsg }),
+   190→      })
+   191→      const data = await res.json()
+   192→      setChatMessages(prev => [...prev, {
+   193→        role: 'ai',
+   194→        text: data.response || 'Sorry, I could not process your request.',
+   195→        hospitals: data.hospitals || [],
+   196→      }])
+   197→      if (data.hospitals?.length > 0) {
+   198→        setFilteredHospitals(data.hospitals)
+   199→      }
+   200→    } catch {
+   201→      setChatMessages(prev => [...prev, { role: 'ai', text: 'Something went wrong. Please try again.' }])
+   202→    }
+   203→    setChatLoading(false)
+   204→  }
+   205→
+   206→  return (
+   207→    <>
+   208→      <Script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" strategy="beforeInteractive" />
+   209→      <div className="min-h-screen flex flex-col" style={{ fontFamily: "'Inter', sans-serif" }}>
+   210→        {/* Header */}
+   211→        <header className="relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #0052CC 0%, #003D99 100%)' }}>
+   212→          <div className="max-w-[1480px] mx-auto px-4 sm:px-6 py-3 flex items-center justify-between relative z-10">
+   213→            <div className="flex items-center gap-3">
+   214→              <div className="w-9 h-9 rounded-lg flex items-center justify-center" style={{ background: 'rgba(255,255,255,0.15)' }}>
+   215→                <i className="fa-solid fa-hospital text-white text-sm" />
+   216→              </div>
+   217→              <div>
+   218→                <h1 className="text-base sm:text-lg font-bold text-white tracking-tight">MedGenome <span style={{ color: '#00C6FF' }}>Hospital Finder</span></h1>
+   219→                <p className="text-[10px] sm:text-xs text-blue-200" style={{ fontFamily: "'JetBrains Mono', monospace" }}>PAN India — {stats.total.toLocaleString()} Hospitals</p>
+   220→              </div>
+   221→            </div>
+   222→            <div className="flex items-center gap-2 sm:gap-4">
+   223→              <div className="hidden md:flex items-center gap-4 text-[10px] text-blue-200" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
+   224→                <span><span className="font-bold text-white">{stats.total.toLocaleString()}</span> HOSPITALS</span>
+   225→                <span><span className="font-bold text-white">{stats.states.length}</span> STATES</span>
+   226→                <span><span className="font-bold text-white">{stats.categories.length}</span> SPECIALTIES</span>
+   227→              </div>
+   228→              <button onClick={() => setShowChat(!showChat)} className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-semibold transition-all hover:scale-105" style={{ background: 'rgba(255,255,255,0.15)', border: '1.5px solid rgba(255,255,255,0.3)', color: '#fff' }}>
+   229→                <i className="fa-solid fa-robot" />
+   230→                <span className="hidden sm:inline">AI Search</span>
+   231→              </button>
+   232→            </div>
+   233→          </div>
+   234→        </header>
+   235→
+   236→        {/* Search & Filters */}
+   237→        <div className="bg-white border-b" style={{ borderColor: '#E2E8F0' }}>
+   238→          <div className="max-w-[1480px] mx-auto px-4 sm:px-6 py-3">
+   239→            <div className="flex gap-2">
+   240→              <div className="relative flex-1">
+   241→                <i className="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm" />
+   242→                <input
+   243→                  type="text"
+   244→                  className="w-full pl-9 pr-4 py-2.5 rounded-lg border text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
+   245→                  placeholder="Search hospitals by name, city, state, specialty..."
+   246→                  value={search}
+   247→                  onChange={e => setSearch(e.target.value)}
+   248→                />
+   249→              </div>
+   250→              <select
+   251→                className="px-3 py-2.5 rounded-lg border text-sm bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/20"
+   252→                value={selectedState}
+   253→                onChange={e => setSelectedState(e.target.value)}
+   254→              >
+   255→                <option value="">All States</option>
+   256→                {stats.states.map(s => <option key={s} value={s}>{s}</option>)}
+   257→              </select>
+   258→              <select
+   259→                className="hidden sm:block px-3 py-2.5 rounded-lg border text-sm bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/20"
+   260→                value={selectedOwnership}
+   261→                onChange={e => setSelectedOwnership(e.target.value)}
+   262→              >
+   263→                <option value="all">All Types</option>
+   264→                <option value="Government">Government</option>
+   265→                <option value="Private">Private</option>
+   266→              </select>
+   267→            </div>
+   268→            <div className="flex gap-1.5 mt-2.5 overflow-x-auto pb-1">
+   269→              <button onClick={() => setSelectedCategory('all')} className={`px-3 py-1.5 rounded-full text-xs font-medium whitespace-nowrap transition-all ${selectedCategory === 'all' ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}>
+   270→                All
+   271→              </button>
+   272→              {stats.categories.map(cat => (
+   273→                <button key={cat} onClick={() => setSelectedCategory(cat)} className={`px-3 py-1.5 rounded-full text-xs font-medium whitespace-nowrap transition-all flex items-center gap-1 ${selectedCategory === cat ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}>
+   274→                  <i className={`fa-solid ${CATEGORY_ICONS[cat] || 'fa-tag'}`} />
+   275→                  <span className="hidden sm:inline">{cat.charAt(0).toUpperCase() + cat.slice(1)}</span>
+   276→                </button>
+   277→              ))}
+   278→            </div>
+   279→          </div>
+   280→        </div>
+   281→
+   282→        {/* Main Content */}
+   283→        <main className="flex-1 max-w-[1480px] mx-auto w-full px-4 sm:px-6 py-4">
+   284→          <div className="grid gap-4" style={{ gridTemplateColumns: showChat ? '300px 1fr 1fr' : '360px 1fr', height: 'calc(100vh - 200px)', minHeight: '400px' }}>
+   285→            
+   286→            {/* AI Chat Panel */}
+   287→            {showChat && (
+   288→              <div className="hidden md:flex flex-col rounded-xl border bg-white overflow-hidden" style={{ borderColor: '#E2E8F0' }}>
+   289→                <div className="px-4 py-3 border-b flex items-center gap-2" style={{ background: '#E8F0FE', borderColor: '#E2E8F0' }}>
+   290→                  <i className="fa-solid fa-robot text-blue-600" />
+   291→                  <span className="text-sm font-semibold text-blue-900">Gemini AI</span>
+   292→                </div>
+   293→                <div className="flex-1 overflow-y-auto p-3 space-y-3">
+   294→                  {chatMessages.length === 0 && (
+   295→                    <div className="text-center py-8 text-gray-400">
+   296→                      <i className="fa-solid fa-robot text-3xl mb-3 block" />
+   297→                      <p className="text-sm">Ask me anything about hospitals in India</p>
+   298→                      <p className="text-xs mt-1 text-gray-300">e.g., &ldquo;Best cardiac hospital in Mumbai&rdquo;</p>
+   299→                    </div>
+   300→                  )}
+   301→                  {chatMessages.map((msg, i) => (
+   302→                    <div key={i} className={`${msg.role === 'ai' ? 'ai-message' : 'user-message'} p-3 rounded-lg`}>
+   303→                      <p className="text-xs font-medium mb-1" style={{ color: msg.role === 'ai' ? '#0052CC' : '#475569' }}>
+   304→                        {msg.role === 'ai' ? 'Gemini AI' : 'You'}
+   305→                      </p>
+   306→                      <div className="text-sm text-gray-700 whitespace-pre-wrap">{msg.text}</div>
+   307→                      {msg.hospitals && msg.hospitals.length > 0 && (
+   308→                        <p className="text-xs text-gray-400 mt-2">Found {msg.hospitals.length} matching hospitals</p>
+   309→                      )}
+   310→                    </div>
+   311→                  ))}
+   312→                  {chatLoading && (
+   313→                    <div className="ai-message p-3 rounded-lg">
+   314→                      <div className="flex items-center gap-2">
+   315→                        <div className="w-4 h-4 border-2 border-blue-500 border-t-transparent rounded-full animate-spin" />
+   316→                        <span className="text-sm text-blue-600">AI is thinking...</span>
+   317→                      </div>
+   318→                    </div>
+   319→                  )}
+   320→                </div>
+   321→                <div className="p-3 border-t" style={{ borderColor: '#E2E8F0' }}>
+   322→                  <div className="flex gap-2">
+   323→                    <input
+   324→                      type="text"
+   325→                      className="flex-1 px-3 py-2 rounded-lg border text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
+   326→                      placeholder="Ask AI about hospitals..."
+   327→                      value={chatInput}
+   328→                      onChange={e => setChatInput(e.target.value)}
+   329→                      onKeyDown={e => e.key === 'Enter' && sendChatMessage()}
+   330→                    />
+   331→                    <button onClick={sendChatMessage} className="px-3 py-2 rounded-lg bg-blue-600 text-white text-sm font-medium hover:bg-blue-700 transition-colors">
+   332→                      <i className="fa-solid fa-paper-plane" />
+   333→                    </button>
+   334→                  </div>
+   335→                </div>
+   336→              </div>
+   337→            )}
+   338→
+   339→            {/* Results List */}
+   340→            <div className="flex flex-col rounded-xl border bg-white overflow-hidden" style={{ borderColor: '#E2E8F0' }}>
+   341→              <div className="px-4 py-2.5 border-b flex items-center justify-between" style={{ borderColor: '#E2E8F0' }}>
+   342→                <span className="text-xs font-semibold text-gray-500" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
+   343→                  RESULTS <span className="text-blue-600">{filteredHospitals.length}</span>
+   344→                </span>
+   345→                <span className="text-xs text-gray-400">{loading ? 'Searching...' : ''}</span>
+   346→              </div>
+   347→              <div className="flex-1 overflow-y-auto">
+   348→                {filteredHospitals.length === 0 && !loading ? (
+   349→                  <div className="text-center py-12 text-gray-400">
+   350→                    <i className="fa-solid fa-magnifying-glass text-2xl mb-3 block" />
+   351→                    <p className="text-sm">No hospitals found</p>
+   352→                    <p className="text-xs mt-1">Try adjusting your search or filters</p>
+   353→                  </div>
+   354→                ) : (
+   355→                  <div className="p-2 space-y-1.5">
+   356→                    {filteredHospitals.slice(0, 100).map(h => (
+   357→                      <div
+   358→                        key={h.id}
+   359→                        onClick={() => { setSelectedHospital(h); setShowDetail(true) }}
+   360→                        className={`p-3 rounded-lg cursor-pointer transition-all hover:shadow-md border ${selectedHospital?.id === h.id ? 'border-blue-500 bg-blue-50' : 'border-transparent hover:bg-gray-50'}`}
+   361→                      >
+   362→                        <div className="flex items-start justify-between gap-2">
+   363→                          <h3 className="text-sm font-semibold text-gray-900 leading-tight line-clamp-2">{h.name}</h3>
+   364→                          {h.category[0] && (
+   365→                            <span className={`flex-shrink-0 px-2 py-0.5 rounded-full text-[10px] font-semibold ${CATEGORY_COLORS[h.category[0]] || 'bg-gray-100 text-gray-600'}`}>
+   366→                              {h.category[0]}
+   367→                            </span>
+   368→                          )}
+   369→                        </div>
+   370→                        <div className="flex items-center gap-1.5 mt-1.5 text-xs text-gray-500">
+   371→                          <i className="fa-solid fa-location-dot text-blue-500" />
+   372→                          <span>{h.city || h.district}, {h.state}</span>
+   373→                        </div>
+   374→                        <div className="flex items-center gap-2 mt-1.5 flex-wrap">
+   375→                          {h.ownership && h.ownership !== 'Unknown' && (
+   376→                            <span className={`text-[10px] px-1.5 py-0.5 rounded font-medium ${h.ownership === 'Government' ? 'bg-green-50 text-green-700' : 'bg-purple-50 text-purple-700'}`}>
+   377→                              {h.ownership}
+   378→                            </span>
+   379→                          )}
+   380→                          {h.emergency && (
+   381→                            <span className="text-[10px] px-1.5 py-0.5 rounded font-medium bg-red-50 text-red-600">
+   382→                              <i className="fa-solid fa-kit-medical mr-0.5" />24/7 ER
+   383→                            </span>
+   384→                          )}
+   385→                          {h.beds > 0 && (
+   386→                            <span className="text-[10px] text-gray-400">
+   387→                              <i className="fa-solid fa-bed mr-0.5" />{h.beds} beds
+   388→                            </span>
+   389→                          )}
+   390→                        </div>
+   391→                      </div>
+   392→                    ))}
+   393→                    {filteredHospitals.length > 100 && (
+   394→                      <p className="text-center text-xs text-gray-400 py-2">Showing top 100 of {filteredHospitals.length}</p>
+   395→                    )}
+   396→                  </div>
+   397→                )}
+   398→              </div>
+   399→            </div>
+   400→
+   401→            {/* Map */}
+   402→            <div className="relative rounded-xl border overflow-hidden" style={{ borderColor: '#E2E8F0' }}>
+   403→              <div ref={mapContainerRef} className="w-full h-full" style={{ minHeight: '400px' }} />
+   404→              <div className="absolute top-3 left-3 z-[500] p-2.5 rounded-lg bg-white/90 backdrop-blur-sm shadow-sm border" style={{ borderColor: '#E2E8F0' }}>
+   405→                <div className="flex gap-4">
+   406→                  <div>
+   407→                    <div className="text-lg font-bold text-blue-600" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
+   408→                      {filteredHospitals.filter(h => h.lat && h.lng).length}
+   409→                    </div>
+   410→                    <div className="text-[10px] text-gray-400 font-medium" style={{ fontFamily: "'JetBrains Mono', monospace" }}>ON MAP</div>
+   411→                  </div>
+   412→                  <div>
+   413→                    <div className="text-lg font-bold text-blue-600" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
+   414→                      {stats.total.toLocaleString()}
+   415→                    </div>
+   416→                    <div className="text-[10px] text-gray-400 font-medium" style={{ fontFamily: "'JetBrains Mono', monospace" }}>TOTAL</div>
+   417→                  </div>
+   418→                </div>
+   419→              </div>
+   420→            </div>
+   421→          </div>
+   422→        </main>
+   423→
+   424→        {/* Detail Panel Overlay */}
+   425→        {showDetail && selectedHospital && (
+   426→          <div className="fixed inset-0 z-50 flex justify-end">
+   427→            <div className="absolute inset-0 bg-black/30 backdrop-blur-sm" onClick={() => setShowDetail(false)} />
+   428→            <div className="relative w-full max-w-md bg-white shadow-xl overflow-y-auto">
+   429→              <div className="p-5">
+   430→                <div className="flex justify-between items-start mb-4">
+   431→                  <div className="flex items-center gap-2">
+   432→                    <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ background: '#E8F0FE' }}>
+   433→                      <i className="fa-solid fa-hospital text-blue-600 text-sm" />
+   434→                    </div>
+   435→                    <span className="text-[10px] font-semibold text-blue-600" style={{ fontFamily: "'JetBrains Mono', monospace" }}>HOSPITAL DETAILS</span>
+   436→                  </div>
+   437→                  <button onClick={() => setShowDetail(false)} className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-gray-100">
+   438→                    <i className="fa-solid fa-xmark text-gray-400" />
+   439→                  </button>
+   440→                </div>
+   441→
+   442→                <h2 className="text-lg font-bold text-gray-900 mb-1">{selectedHospital.name}</h2>
+   443→                <div className="flex items-center gap-2 mb-4">
+   444→                  {selectedHospital.category.map((cat, i) => (
+   445→                    <span key={i} className={`px-2 py-0.5 rounded-full text-[10px] font-semibold ${CATEGORY_COLORS[cat] || 'bg-gray-100 text-gray-600'}`}>
+   446→                      {cat}
+   447→                    </span>
+   448→                  ))}
+   449→                  {selectedHospital.emergency && (
+   450→                    <span className="px-2 py-0.5 rounded-full text-[10px] font-semibold bg-red-50 text-red-600">EMERGENCY</span>
+   451→                  )}
+   452→                </div>
+   453→
+   454→                <div className="space-y-4">
+   455→                  <div className="p-3 rounded-lg" style={{ background: '#E8F0FE' }}>
+   456→                    <div className="flex items-start gap-2">
+   457→                      <i className="fa-solid fa-location-dot text-blue-600 mt-0.5" />
+   458→                      <div>
+   459→                        <p className="text-sm font-medium text-gray-900">{selectedHospital.address}</p>
+   460→                        <p className="text-sm text-gray-600">{selectedHospital.city || selectedHospital.district}, {selectedHospital.state}</p>
+   461→                        {selectedHospital.pincode && <p className="text-xs text-gray-400 mt-0.5">Pincode: {selectedHospital.pincode}</p>}
+   462→                      </div>
+   463→                    </div>
+   464→                  </div>
+   465→
+   466→                  <div className="grid grid-cols-2 gap-2">
+   467→                    <div className="p-3 rounded-lg bg-gray-50 text-center">
+   468→                      <div className="text-lg font-bold text-blue-600" style={{ fontFamily: "'JetBrains Mono', monospace" }}>{selectedHospital.beds || 'N/A'}</div>
+   469→                      <div className="text-[10px] text-gray-400">Total Beds</div>
+   470→                    </div>
+   471→                    <div className="p-3 rounded-lg bg-gray-50 text-center">
+   472→                      <div className="text-lg font-bold text-gray-700" style={{ fontFamily: "'JetBrains Mono', monospace" }}>{selectedHospital.ownership}</div>
+   473→                      <div className="text-[10px] text-gray-400">Ownership</div>
+   474→                    </div>
+   475→                  </div>
+   476→
+   477→                  {selectedHospital.specialties && (
+   478→                    <div>
+   479→                      <h4 className="text-xs font-semibold text-gray-500 mb-2" style={{ fontFamily: "'JetBrains Mono', monospace" }}>SPECIALTIES</h4>
+   480→                      <p className="text-sm text-gray-700 leading-relaxed">{selectedHospital.specialties}</p>
+   481→                    </div>
+   482→                  )}
+   483→
+   484→                  {selectedHospital.phones && selectedHospital.phones.length > 0 && (
+   485→                    <div>
+   486→                      <h4 className="text-xs font-semibold text-gray-500 mb-2" style={{ fontFamily: "'JetBrains Mono', monospace" }}>CONTACT</h4>
+   487→                      {selectedHospital.phones.map((phone, i) => (
+   488→                        <div key={i} className="flex items-center gap-2 p-2 rounded-lg bg-gray-50 mb-1">
+   489→                          <i className="fa-solid fa-phone text-blue-500 text-xs" />
+   490→                          <span className="text-sm text-gray-700">{phone}</span>
+   491→                        </div>
+   492→                      ))}
+   493→                    </div>
+   494→                  )}
+   495→
+   496→                  {selectedHospital.lat && selectedHospital.lng && (
+   497→                    <a
+   498→                      href={`https://www.google.com/maps/search/?api=1&query=${selectedHospital.lat},${selectedHospital.lng}`}
+   499→                      target="_blank"
+   500→                      rel="noopener noreferrer"
+   501→                      className="flex items-center justify-center gap-2 w-full py-2.5 rounded-lg text-sm font-semibold text-white transition-colors hover:bg-blue-700"
+   502→                      style={{ background: '#0052CC' }}
+   503→                    >
+   504→                      <i className="fa-solid fa-diamond-turn-right" />
+   505→                      Get Directions on Google Maps
+   506→                    </a>
+   507→                  )}
+   508→                </div>
+   509→              </div>
+   510→            </div>
+   511→          </div>
+   512→        )}
+   513→
+   514→        {/* Footer */}
+   515→        <footer className="text-center py-3 text-xs text-gray-400 border-t" style={{ borderColor: '#E2E8F0' }}>
+   516→          <span style={{ fontFamily: "'JetBrains Mono', monospace" }}>MedGenome Hospitals</span> — PAN India Hospital Network Finder
+   517→        </footer>
+   518→      </div>
+   519→    </>
+   520→  )
+   521→}
+   522→

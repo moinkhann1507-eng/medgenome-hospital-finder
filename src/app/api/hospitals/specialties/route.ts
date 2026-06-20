@@ -1,15 +1,30 @@
-import { NextRequest, NextResponse } from 'next/server'
-import { db } from '@/lib/db'
+import { NextResponse } from 'next/server'
 
-export async function GET(request: NextRequest) {
-  const searchParams = request.nextUrl.searchParams
-  const q = searchParams.get('q') || ''
+// Cache specialties to avoid re-computing on every request
+let cachedSpecialties: { name: string; count: number }[] | null = null
+let cacheTime = 0
+const CACHE_TTL = 10 * 60 * 1000 // 10 minutes
 
+export async function GET() {
   try {
-    // Get all hospitals with specialties data
+    // Return cached result if available
+    if (cachedSpecialties && Date.now() - cacheTime < CACHE_TTL) {
+      return NextResponse.json({ specialties: cachedSpecialties, total: cachedSpecialties.length })
+    }
+
+    // Import db lazily
+    const { db } = await import('@/lib/db')
+
+    // Get all hospitals with specialties data - only non-empty specialties
     const hospitals = await db.hospital.findMany({
       select: { specialties: true },
-      where: q ? { specialties: { contains: q } } : {},
+      where: { 
+        NOT: [
+          { specialties: '' },
+          { specialties: '0' },
+          { specialties: null }
+        ]
+      },
     })
 
     const specMap = new Map<string, number>()
@@ -27,11 +42,12 @@ export async function GET(request: NextRequest) {
       })
     })
 
-    const specialties = Array.from(specMap.entries())
+    cachedSpecialties = Array.from(specMap.entries())
       .map(([name, count]) => ({ name, count }))
       .sort((a, b) => b.count - a.count)
+    cacheTime = Date.now()
 
-    return NextResponse.json({ specialties, total: specialties.length })
+    return NextResponse.json({ specialties: cachedSpecialties, total: cachedSpecialties.length })
   } catch (error) {
     console.error('Specialties API error:', error)
     return NextResponse.json({ error: 'Failed to fetch specialties' }, { status: 500 })

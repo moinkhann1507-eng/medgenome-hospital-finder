@@ -22,11 +22,6 @@ interface HospitalRow {
   pincode: string
 }
 
-interface ChatMessage {
-  role: 'system' | 'user' | 'assistant'
-  content: string
-}
-
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
@@ -85,29 +80,58 @@ export async function POST(request: NextRequest) {
       beds: parseInt(h.beds as string) || 0,
     }))
 
-    // Use z-ai-web-dev-sdk (built-in, no API key needed, no rate limits)
+    // Try web search for additional hospital information
+    let webResults = ''
+    let hasWebResults = false
+    try {
+      const ZAI = (await import('z-ai-web-dev-sdk')).default
+      const zai = await ZAI.create()
+      
+      // Use web search to find hospitals not in our directory
+      const webSearchResult = await zai.functions.invoke('web_search', {
+        query: `hospitals in India ${query}`,
+      })
+      
+      if (Array.isArray(webSearchResult) && webSearchResult.length > 0) {
+        webResults = webSearchResult
+          .slice(0, 5)
+          .map((r: { name?: string; title?: string; snippet?: string; url?: string }) => `${r.name || r.title}: ${r.snippet}`)
+          .join('\n')
+        hasWebResults = true
+      }
+    } catch (e) {
+      console.log('Web search not available or failed:', e instanceof Error ? e.message : String(e))
+    }
+
+    // Use z-ai-web-dev-sdk for AI chat
     try {
       const ZAI = (await import('z-ai-web-dev-sdk')).default
       const zai = await ZAI.create()
 
-      const systemPrompt = `You are MedGenome Hospital Finder AI, an expert assistant for finding hospitals across India. You have access to a database of 30,000+ hospitals across all 36 states and union territories.
+      const systemPrompt = `You are MedGenome AI, an expert assistant for finding hospitals across India. You have access to a database of 30,000+ hospitals across all 36 states and union territories, plus web search results.
 
-Given a user query and hospital data, provide helpful recommendations. Important guidelines:
-- Recommend hospitals from the provided data when possible
+Given a user query, hospital data from our directory, and web search results, provide helpful recommendations. Important guidelines:
+- Recommend hospitals from the provided directory data when possible
+- If the user asks about hospitals NOT in our directory, use the web search results to provide additional information
+- Clearly indicate which hospitals are from our directory vs. found on the web
 - If exact match not found, suggest the closest alternatives  
 - Mention if hospitals have emergency services when relevant
 - Consider ownership (Government/Private) when user mentions budget
-- Categories include: general, cardiac, pediatric, orthopedic, neuro, oncology, trauma, maternity, eye, dental, ent, ayurveda, mental, transplant, rehab, diagnostic, phc, clinic
+- We have 2,576+ specialties including: Cardiology, Neurology, Orthopedics, Oncology, Pediatrics, Nephrology, Urology, Dermatology, Gastroenterology, Pulmonology, Endocrinology, Rheumatology, Ophthalmology, ENT, Psychiatry, Obstetrics & Gynecology, General Surgery, Plastic Surgery, Cardiothoracic Surgery, Neurosurgery, and many more
 - Be helpful, concise, and practical
 - Respond in the same language the user uses (Hindi/English/etc)
-- Format hospital names in bold using **name**`
+- Format hospital names in bold using **name**
+- When showing hospital results, include city and state`
 
       const userPrompt = `User Query: "${query}"
 
-Available Hospital Data (top matches from database of 30,273 hospitals):
-${JSON.stringify(hospitalContext, null, 2)}
+Available Hospital Data from Directory (top matches from database of 30,273 hospitals):
+${hospitalContext.length > 0 ? JSON.stringify(hospitalContext, null, 2) : 'No matches found in directory'}
 
-Provide practical hospital recommendations based on the query and available data.`
+${webResults ? `Web Search Results (hospitals that may NOT be in our directory):
+${webResults}` : 'No web search results available.'}
+
+Provide practical hospital recommendations. If you found results from the web that are not in our directory, mention them separately as "Also found on the web" to help the user discover additional options.`
 
       const completion = await zai.chat.completions.create({
         messages: [
@@ -123,6 +147,7 @@ Provide practical hospital recommendations based on the query and available data
         response: aiText,
         hospitals: parsedHospitals,
         source: 'z-ai',
+        webResults: hasWebResults ? 'found' : undefined,
       })
     } catch (aiError) {
       console.error('Z-AI SDK error, falling back to local:', aiError instanceof Error ? aiError.message : String(aiError))

@@ -1,0 +1,1424 @@
+     1→<!DOCTYPE html>
+     2→<html lang="en">
+     3→<head>
+     4→<meta charset="UTF-8">
+     5→<meta name="viewport" content="width=device-width, initial-scale=1.0">
+     6→<title>MedLoc AI — Intelligent Hospital Architecture Finder</title>
+     7→<script src="https://cdn.tailwindcss.com"></script>
+     8→<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+     9→<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    10→<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    11→<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    12→<style>
+    13→  :root {
+    14→    --bg: #0a0f0d;
+    15→    --bg-elevated: #111a16;
+    16→    --card: #152019;
+    17→    --border: #1e3329;
+    18→    --fg: #e8f0ec;
+    19→    --muted: #7a9b8a;
+    20→    --accent: #00e68a;
+    21→    --accent-dim: #00b36b;
+    22→    --accent-glow: rgba(0, 230, 138, 0.15);
+    23→    --danger: #ff5c5c;
+    24→    --warning: #ffb347;
+    25→    --info: #47b8ff;
+    26→  }
+    27→
+    28→  * { margin: 0; padding: 0; box-sizing: border-box; }
+    29→
+    30→  body {
+    31→    font-family: 'Space Grotesk', sans-serif;
+    32→    background: var(--bg);
+    33→    color: var(--fg);
+    34→    overflow-x: hidden;
+    35→    min-height: 100vh;
+    36→  }
+    37→
+    38→  /* Architectural grid background */
+    39→  .arch-grid {
+    40→    position: fixed;
+    41→    inset: 0;
+    42→    z-index: 0;
+    43→    pointer-events: none;
+    44→    background-image:
+    45→      linear-gradient(rgba(0,230,138,0.03) 1px, transparent 1px),
+    46→      linear-gradient(90deg, rgba(0,230,138,0.03) 1px, transparent 1px);
+    47→    background-size: 60px 60px;
+    48→    mask-image: radial-gradient(ellipse at 50% 30%, black 20%, transparent 70%);
+    49→  }
+    50→
+    51→  .arch-grid::after {
+    52→    content: '';
+    53→    position: absolute;
+    54→    inset: 0;
+    55→    background:
+    56→      radial-gradient(circle at 20% 20%, rgba(0,230,138,0.06) 0%, transparent 50%),
+    57→      radial-gradient(circle at 80% 70%, rgba(0,179,107,0.04) 0%, transparent 50%);
+    58→  }
+    59→
+    60→  /* Scrollbar */
+    61→  ::-webkit-scrollbar { width: 6px; }
+    62→  ::-webkit-scrollbar-track { background: var(--bg); }
+    63→  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+    64→  ::-webkit-scrollbar-thumb:hover { background: var(--accent-dim); }
+    65→
+    66→  /* Search input */
+    67→  .search-input {
+    68→    background: var(--bg-elevated);
+    69→    border: 1.5px solid var(--border);
+    70→    color: var(--fg);
+    71→    font-family: 'Space Grotesk', sans-serif;
+    72→    transition: all 0.3s ease;
+    73→  }
+    74→  .search-input:focus {
+    75→    outline: none;
+    76→    border-color: var(--accent);
+    77→    box-shadow: 0 0 0 3px var(--accent-glow), 0 0 30px var(--accent-glow);
+    78→  }
+    79→  .search-input::placeholder { color: var(--muted); opacity: 0.6; }
+    80→
+    81→  /* Filter chips */
+    82→  .chip {
+    83→    background: var(--bg-elevated);
+    84→    border: 1px solid var(--border);
+    85→    color: var(--muted);
+    86→    cursor: pointer;
+    87→    transition: all 0.25s ease;
+    88→    font-size: 0.8rem;
+    89→    padding: 6px 14px;
+    90→    border-radius: 20px;
+    91→    white-space: nowrap;
+    92→    user-select: none;
+    93→  }
+    94→  .chip:hover { border-color: var(--accent-dim); color: var(--fg); }
+    95→  .chip.active {
+    96→    background: var(--accent);
+    97→    border-color: var(--accent);
+    98→    color: var(--bg);
+    99→    font-weight: 600;
+   100→    box-shadow: 0 0 15px var(--accent-glow);
+   101→  }
+   102→
+   103→  /* Hospital cards */
+   104→  .hospital-card {
+   105→    background: var(--card);
+   106→    border: 1px solid var(--border);
+   107→    border-radius: 12px;
+   108→    padding: 18px;
+   109→    cursor: pointer;
+   110→    transition: all 0.3s ease;
+   111→    position: relative;
+   112→    overflow: hidden;
+   113→  }
+   114→  .hospital-card::before {
+   115→    content: '';
+   116→    position: absolute;
+   117→    top: 0; left: 0;
+   118→    width: 3px; height: 100%;
+   119→    background: var(--accent);
+   120→    opacity: 0;
+   121→    transition: opacity 0.3s;
+   122→  }
+   123→  .hospital-card:hover {
+   124→    border-color: var(--accent-dim);
+   125→    transform: translateX(4px);
+   126→    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+   127→  }
+   128→  .hospital-card:hover::before { opacity: 1; }
+   129→  .hospital-card.active {
+   130→    border-color: var(--accent);
+   131→    background: rgba(0,230,138,0.05);
+   132→    box-shadow: 0 0 25px var(--accent-glow);
+   133→  }
+   134→  .hospital-card.active::before { opacity: 1; }
+   135→
+   136→  /* Rating stars */
+   137→  .star-filled { color: var(--warning); }
+   138→  .star-empty { color: var(--border); }
+   139→
+   140→  /* Type badge */
+   141→  .type-badge {
+   142→    font-family: 'JetBrains Mono', monospace;
+   143→    font-size: 0.65rem;
+   144→    padding: 3px 8px;
+   145→    border-radius: 4px;
+   146→    font-weight: 500;
+   147→    text-transform: uppercase;
+   148→    letter-spacing: 0.5px;
+   149→  }
+   150→
+   151→  /* Map container */
+   152→  #map {
+   153→    width: 100%;
+   154→    height: 100%;
+   155→    border-radius: 12px;
+   156→    z-index: 1;
+   157→  }
+   158→  .leaflet-tile-pane { filter: saturate(0.3) brightness(0.35) contrast(1.2); }
+   159→  .leaflet-control-zoom a {
+   160→    background: var(--card) !important;
+   161→    color: var(--fg) !important;
+   162→    border-color: var(--border) !important;
+   163→  }
+   164→  .leaflet-control-attribution { display: none !important; }
+   165→
+   166→  /* Custom marker */
+   167→  .custom-marker {
+   168→    width: 36px; height: 36px;
+   169→    background: var(--accent);
+   170→    border-radius: 50% 50% 50% 0;
+   171→    transform: rotate(-45deg);
+   172→    display: flex; align-items: center; justify-content: center;
+   173→    box-shadow: 0 0 15px rgba(0,230,138,0.5);
+   174→    border: 2px solid rgba(255,255,255,0.2);
+   175→    transition: all 0.3s;
+   176→  }
+   177→  .custom-marker i {
+   178→    transform: rotate(45deg);
+   179→    color: var(--bg);
+   180→    font-size: 14px;
+   181→  }
+   182→  .custom-marker.active-marker {
+   183→    background: var(--warning);
+   184→    box-shadow: 0 0 25px rgba(255,179,71,0.6);
+   185→    width: 44px; height: 44px;
+   186→  }
+   187→  .custom-marker.active-marker i { font-size: 16px; }
+   188→
+   189→  /* Pulse animation for markers */
+   190→  .marker-pulse {
+   191→    position: absolute;
+   192→    width: 36px; height: 36px;
+   193→    border-radius: 50%;
+   194→    background: rgba(0,230,138,0.3);
+   195→    animation: pulse 2s ease-out infinite;
+   196→    top: 0; left: 0;
+   197→  }
+   198→  @keyframes pulse {
+   199→    0% { transform: scale(1); opacity: 0.6; }
+   200→    100% { transform: scale(3); opacity: 0; }
+   201→  }
+   202→
+   203→  /* AI Processing animation */
+   204→  .ai-processing {
+   205→    display: inline-flex;
+   206→    gap: 3px;
+   207→    align-items: center;
+   208→    padding: 4px 10px;
+   209→    background: var(--accent-glow);
+   210→    border-radius: 20px;
+   211→    font-family: 'JetBrains Mono', monospace;
+   212→    font-size: 0.7rem;
+   213→    color: var(--accent);
+   214→  }
+   215→  .ai-dot {
+   216→    width: 5px; height: 5px;
+   217→    background: var(--accent);
+   218→    border-radius: 50%;
+   219→    animation: aiBounce 1.4s ease-in-out infinite;
+   220→  }
+   221→  .ai-dot:nth-child(2) { animation-delay: 0.2s; }
+   222→  .ai-dot:nth-child(3) { animation-delay: 0.4s; }
+   223→  @keyframes aiBounce {
+   224→    0%, 80%, 100% { transform: scale(0.6); opacity: 0.4; }
+   225→    40% { transform: scale(1); opacity: 1; }
+   226→  }
+   227→
+   228→  /* Toast notification */
+   229→  .toast {
+   230→    position: fixed;
+   231→    bottom: 24px;
+   232→    right: 24px;
+   233→    background: var(--card);
+   234→    border: 1px solid var(--border);
+   235→    border-radius: 10px;
+   236→    padding: 14px 20px;
+   237→    z-index: 10000;
+   238→    transform: translateY(100px);
+   239→    opacity: 0;
+   240→    transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+   241→    box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+   242→    max-width: 360px;
+   243→  }
+   244→  .toast.show { transform: translateY(0); opacity: 1; }
+   245→
+   246→  /* Detail panel */
+   247→  .detail-panel {
+   248→    position: fixed;
+   249→    top: 0; right: 0;
+   250→    width: 420px;
+   251→    max-width: 90vw;
+   252→    height: 100vh;
+   253→    background: var(--bg-elevated);
+   254→    border-left: 1px solid var(--border);
+   255→    z-index: 1000;
+   256→    transform: translateX(100%);
+   257→    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+   258→    overflow-y: auto;
+   259→    box-shadow: -10px 0 40px rgba(0,0,0,0.5);
+   260→  }
+   261→  .detail-panel.open { transform: translateX(0); }
+   262→  .detail-overlay {
+   263→    position: fixed; inset: 0;
+   264→    background: rgba(0,0,0,0.5);
+   265→    z-index: 999;
+   266→    opacity: 0;
+   267→    pointer-events: none;
+   268→    transition: opacity 0.3s;
+   269→  }
+   270→  .detail-overlay.open { opacity: 1; pointer-events: all; }
+   271→
+   272→  /* Stats counter animation */
+   273→  .stat-number {
+   274→    font-family: 'JetBrains Mono', monospace;
+   275→    font-size: 1.8rem;
+   276→    font-weight: 700;
+   277→    color: var(--accent);
+   278→    line-height: 1;
+   279→  }
+   280→
+   281→  /* Suggestion dropdown */
+   282→  .suggestions {
+   283→    position: absolute;
+   284→    top: 100%;
+   285→    left: 0; right: 0;
+   286→    background: var(--bg-elevated);
+   287→    border: 1px solid var(--border);
+   288→    border-radius: 10px;
+   289→    margin-top: 6px;
+   290→    max-height: 260px;
+   291→    overflow-y: auto;
+   292→    z-index: 100;
+   293→    display: none;
+   294→    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+   295→  }
+   296→  .suggestions.visible { display: block; }
+   297→  .suggestion-item {
+   298→    padding: 10px 16px;
+   299→    cursor: pointer;
+   300→    transition: background 0.15s;
+   301→    display: flex;
+   302→    align-items: center;
+   303→    gap: 10px;
+   304→    font-size: 0.9rem;
+   305→  }
+   306→  .suggestion-item:hover { background: var(--accent-glow); }
+   307→  .suggestion-item:first-child { border-radius: 10px 10px 0 0; }
+   308→  .suggestion-item:last-child { border-radius: 0 0 10px 10px; }
+   309→
+   310→  /* Floating elements */
+   311→  .float-orb {
+   312→    position: absolute;
+   313→    border-radius: 50%;
+   314→    filter: blur(80px);
+   315→    pointer-events: none;
+   316→    animation: floatOrb 8s ease-in-out infinite alternate;
+   317→  }
+   318→  @keyframes floatOrb {
+   319→    0% { transform: translate(0, 0) scale(1); }
+   320→    100% { transform: translate(30px, -20px) scale(1.1); }
+   321→  }
+   322→
+   323→  /* No results */
+   324→  .no-results {
+   325→    text-align: center;
+   326→    padding: 60px 20px;
+   327→    color: var(--muted);
+   328→  }
+   329→
+   330→  /* Responsive */
+   331→  @media (max-width: 1024px) {
+   332→    .main-grid { grid-template-columns: 1fr !important; }
+   333→    .map-section { height: 350px !important; }
+   334→  }
+   335→
+   336→  /* Smooth load */
+   337→  .fade-in { animation: fadeIn 0.6s ease forwards; }
+   338→  @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+   339→
+   340→  /* Scanline effect on header */
+   341→  .scanline::after {
+   342→    content: '';
+   343→    position: absolute;
+   344→    top: 0; left: 0; right: 0;
+   345→    height: 2px;
+   346→    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+   347→    animation: scanMove 4s linear infinite;
+   348→  }
+   349→  @keyframes scanMove {
+   350→    0% { top: 0; opacity: 0; }
+   351→    10% { opacity: 1; }
+   352→    90% { opacity: 1; }
+   353→    100% { top: 100%; opacity: 0; }
+   354→  }
+   355→</style>
+   356→</head>
+   357→<body>
+   358→
+   359→<!-- Architectural grid background -->
+   360→<div class="arch-grid"></div>
+   361→
+   362→<!-- Floating orbs -->
+   363→<div class="float-orb" style="width:300px;height:300px;background:rgba(0,230,138,0.05);top:10%;left:5%;"></div>
+   364→<div class="float-orb" style="width:250px;height:250px;background:rgba(0,179,107,0.04);bottom:20%;right:10%;animation-delay:-3s;"></div>
+   365→
+   366→<!-- Toast -->
+   367→<div id="toast" class="toast">
+   368→  <div class="flex items-center gap-3">
+   369→    <i id="toastIcon" class="fa-solid fa-circle-check" style="color:var(--accent)"></i>
+   370→    <span id="toastMsg" class="text-sm" style="color:var(--fg)"></span>
+   371→  </div>
+   372→</div>
+   373→
+   374→<!-- Detail overlay -->
+   375→<div id="detailOverlay" class="detail-overlay" onclick="closeDetail()"></div>
+   376→
+   377→<!-- Detail panel -->
+   378→<div id="detailPanel" class="detail-panel">
+   379→  <div class="p-6">
+   380→    <div class="flex justify-between items-start mb-6">
+   381→      <div class="ai-processing">
+   382→        <span>AI ANALYSIS</span>
+   383→        <div class="ai-dot"></div>
+   384→        <div class="ai-dot"></div>
+   385→        <div class="ai-dot"></div>
+   386→      </div>
+   387→      <button onclick="closeDetail()" class="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-white/10 transition-colors">
+   388→        <i class="fa-solid fa-xmark" style="color:var(--muted)"></i>
+   389→      </button>
+   390→    </div>
+   391→    <div id="detailContent"></div>
+   392→  </div>
+   393→</div>
+   394→
+   395→<!-- Main app -->
+   396→<div class="relative z-10 min-h-screen flex flex-col">
+   397→
+   398→  <!-- Header -->
+   399→  <header class="relative overflow-hidden" style="background:var(--bg-elevated);border-bottom:1px solid var(--border);">
+   400→    <div class="scanline absolute inset-0 pointer-events-none"></div>
+   401→    <div class="max-w-[1440px] mx-auto px-6 py-5 flex items-center justify-between relative z-10">
+   402→      <div class="flex items-center gap-4">
+   403→        <div class="w-10 h-10 rounded-lg flex items-center justify-center" style="background:var(--accent);box-shadow:0 0 20px var(--accent-glow);">
+   404→          <i class="fa-solid fa-hospital" style="color:var(--bg);font-size:18px;"></i>
+   405→        </div>
+   406→        <div>
+   407→          <h1 class="text-xl font-bold tracking-tight" style="color:var(--fg);">MedLoc <span style="color:var(--accent);">AI</span></h1>
+   408→          <p class="text-xs" style="color:var(--muted);font-family:'JetBrains Mono',monospace;">Intelligent Hospital Architecture Finder</p>
+   409→        </div>
+   410→      </div>
+   411→      <div class="flex items-center gap-6">
+   412→        <div class="hidden md:flex items-center gap-6 text-xs" style="font-family:'JetBrains Mono',monospace;color:var(--muted);">
+   413→          <span><span style="color:var(--accent);" id="totalCount">0</span> FACILITIES</span>
+   414→          <span><span style="color:var(--accent);" id="countryCount">0</span> COUNTRIES</span>
+   415→          <span><span style="color:var(--accent);" id="typeCount">0</span> SPECIALTIES</span>
+   416→        </div>
+   417→        <button id="geoBtn" onclick="geoLocate()" class="hidden sm:flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all hover:scale-105" style="background:var(--accent-glow);border:1px solid var(--accent-dim);color:var(--accent);">
+   418→          <i class="fa-solid fa-location-crosshairs"></i>
+   419→          <span>Near Me</span>
+   420→        </button>
+   421→      </div>
+   422→    </div>
+   423→  </header>
+   424→
+   425→  <!-- Search section -->
+   426→  <section class="max-w-[1440px] mx-auto w-full px-6 pt-6 pb-4">
+   427→    <div class="relative">
+   428→      <div class="flex gap-3">
+   429→        <div class="relative flex-1">
+   430→          <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2" style="color:var(--muted);"></i>
+   431→          <input
+   432→            id="searchInput"
+   433→            type="text"
+   434→            class="search-input w-full pl-11 pr-12 py-4 rounded-xl text-base"
+   435→            placeholder="Ask AI: 'Find cardiac hospitals in New York' or 'Emergency near Tokyo'..."
+   436→            autocomplete="off"
+   437→            oninput="handleSearch()"
+   438→            onkeydown="handleKeydown(event)"
+   439→            onfocus="showSuggestions()"
+   440→          >
+   441→          <button id="clearBtn" onclick="clearSearch()" class="absolute right-4 top-1/2 -translate-y-1/2 w-6 h-6 flex items-center justify-center rounded-full hover:bg-white/10 transition-colors" style="display:none;">
+   442→            <i class="fa-solid fa-xmark text-xs" style="color:var(--muted);"></i>
+   443→          </button>
+   444→          <div id="suggestions" class="suggestions"></div>
+   445→        </div>
+   446→        <button onclick="executeSearch()" class="px-6 py-4 rounded-xl font-semibold text-sm transition-all hover:scale-[1.02] active:scale-[0.98]" style="background:var(--accent);color:var(--bg);box-shadow:0 0 20px var(--accent-glow);">
+   447→          <i class="fa-solid fa-microchip mr-2"></i>Analyze
+   448→        </button>
+   449→      </div>
+   450→
+   451→      <!-- Filter chips -->
+   452→      <div class="flex gap-2 mt-4 overflow-x-auto pb-2" id="filterChips" style="-webkit-overflow-scrolling:touch;">
+   453→        <div class="chip active" data-filter="all" onclick="setFilter('all', this)">All Types</div>
+   454→        <div class="chip" data-filter="general" onclick="setFilter('general', this)"><i class="fa-solid fa-hospital mr-1"></i>General</div>
+   455→        <div class="chip" data-filter="cardiac" onclick="setFilter('cardiac', this)"><i class="fa-solid fa-heart-pulse mr-1"></i>Cardiac</div>
+   456→        <div class="chip" data-filter="pediatric" onclick="setFilter('pediatric', this)"><i class="fa-solid fa-baby mr-1"></i>Pediatric</div>
+   457→        <div class="chip" data-filter="orthopedic" onclick="setFilter('orthopedic', this)"><i class="fa-solid fa-bone mr-1"></i>Orthopedic</div>
+   458→        <div class="chip" data-filter="neuro" onclick="setFilter('neuro', this)"><i class="fa-solid fa-brain mr-1"></i>Neurological</div>
+   459→        <div class="chip" data-filter="oncology" onclick="setFilter('oncology', this)"><i class="fa-solid fa-ribbon mr-1"></i>Oncology</div>
+   460→        <div class="chip" data-filter="trauma" onclick="setFilter('trauma', this)"><i class="fa-solid fa-truck-medical mr-1"></i>Trauma</div>
+   461→        <div class="chip" data-filter="maternity" onclick="setFilter('maternity', this)"><i class="fa-solid fa-person-pregnant mr-1"></i>Maternity</div>
+   462→        <div class="chip" data-filter="psychiatric" onclick="setFilter('psychiatric', this)"><i class="fa-solid fa-comments mr-1"></i>Psychiatric</div>
+   463→      </div>
+   464→    </div>
+   465→
+   466→    <!-- AI insight bar -->
+   467→    <div id="aiInsight" class="mt-4 p-3 rounded-lg flex items-center gap-3 text-sm" style="background:var(--accent-glow);border:1px solid rgba(0,230,138,0.15);display:none;">
+   468→      <i class="fa-solid fa-robot" style="color:var(--accent);"></i>
+   469→      <span id="aiInsightText" style="color:var(--muted);"></span>
+   470→    </div>
+   471→  </section>
+   472→
+   473→  <!-- Main content grid -->
+   474→  <main class="flex-1 max-w-[1440px] mx-auto w-full px-6 pb-6">
+   475→    <div class="main-grid grid gap-5" style="grid-template-columns: 400px 1fr; height: calc(100vh - 240px); min-height: 500px;">
+   476→
+   477→      <!-- Results list -->
+   478→      <div class="flex flex-col overflow-hidden rounded-xl" style="background:var(--bg-elevated);border:1px solid var(--border);">
+   479→        <div class="px-4 py-3 flex items-center justify-between" style="border-bottom:1px solid var(--border);">
+   480→          <span class="text-xs font-medium" style="font-family:'JetBrains Mono',monospace;color:var(--muted);">
+   481→            RESULTS <span id="resultCount" style="color:var(--accent);">0</span>
+   482→          </span>
+   483→          <div class="flex items-center gap-2">
+   484→            <button onclick="sortResults('rating')" class="text-xs px-2 py-1 rounded hover:bg-white/5 transition-colors" style="color:var(--muted);">
+   485→              <i class="fa-solid fa-arrow-down-wide-short mr-1"></i>Rating
+   486→            </button>
+   487→            <button onclick="sortResults('name')" class="text-xs px-2 py-1 rounded hover:bg-white/5 transition-colors" style="color:var(--muted);">
+   488→              <i class="fa-solid fa-arrow-down-a-z mr-1"></i>Name
+   489→            </button>
+   490→          </div>
+   491→        </div>
+   492→        <div id="resultsList" class="flex-1 overflow-y-auto p-3 flex flex-col gap-3"></div>
+   493→      </div>
+   494→
+   495→      <!-- Map section -->
+   496→      <div class="map-section relative overflow-hidden rounded-xl" style="border:1px solid var(--border);">
+   497→        <div id="map"></div>
+   498→        <!-- Map overlay stats -->
+   499→        <div class="absolute top-4 left-4 z-[500] p-3 rounded-lg" style="background:rgba(10,15,13,0.85);border:1px solid var(--border);backdrop-filter:blur(10px);">
+   500→          <div class="flex gap-5">
+   501→            <div>
+   502→              <div class="stat-number" id="mapStatShown">0</div>
+   503→              <div class="text-xs mt-1" style="color:var(--muted);font-family:'JetBrains Mono',monospace;">ON MAP</div>
+   504→            </div>
+   505→            <div>
+   506→              <div class="stat-number" id="mapStatAvg">0</div>
+   507→              <div class="text-xs mt-1" style="color:var(--muted);font-family:'JetBrains Mono',monospace;">AVG RATING</div>
+   508→            </div>
+   509→          </div>
+   510→        </div>
+   511→        <!-- Map legend -->
+   512→        <div class="absolute bottom-4 left-4 z-[500] p-3 rounded-lg" style="background:rgba(10,15,13,0.85);border:1px solid var(--border);backdrop-filter:blur(10px);">
+   513→          <div class="text-xs mb-2 font-medium" style="color:var(--muted);font-family:'JetBrains Mono',monospace;">LEGEND</div>
+   514→          <div class="flex flex-col gap-1.5">
+   515→            <div class="flex items-center gap-2 text-xs" style="color:var(--fg);">
+   516→              <div class="w-3 h-3 rounded-full" style="background:var(--accent);"></div> Hospital Location
+   517→            </div>
+   518→            <div class="flex items-center gap-2 text-xs" style="color:var(--fg);">
+   519→              <div class="w-3 h-3 rounded-full" style="background:var(--warning);"></div> Selected
+   520→            </div>
+   521→            <div class="flex items-center gap-2 text-xs" style="color:var(--fg);">
+   522→              <div class="w-3 h-3 rounded-full" style="background:var(--info);"></div> Your Location
+   523→            </div>
+   524→          </div>
+   525→        </div>
+   526→      </div>
+   527→    </div>
+   528→  </main>
+   529→</div>
+   530→
+   531→<script>
+   532→// ============================================================
+   533→// HOSPITAL DATABASE — 60+ real hospitals across the world
+   534→// ============================================================
+   535→const hospitals = [
+   536→  // United States
+   537→  { id:1, name:"Mayo Clinic", address:"200 First St SW", city:"Rochester", state:"Minnesota", country:"USA", lat:44.0234, lng:-92.4655, type:"general", specialty:"Multi-Specialty", phone:"+1 507-284-2511", rating:4.9, beds:1265, emergency:true, founded:1889 },
+   538→  { id:2, name:"Cleveland Clinic", address:"9500 Euclid Ave", city:"Cleveland", state:"Ohio", country:"USA", lat:41.5048, lng:-81.6109, type:"cardiac", specialty:"Cardiology & Heart Surgery", phone:"+1 216-444-2200", rating:4.8, beds:1246, emergency:true, founded:1921 },
+   539→  { id:3, name:"Johns Hopkins Hospital", address:"1800 Orleans St", city:"Baltimore", state:"Maryland", country:"USA", lat:39.2962, lng:-76.5932, type:"general", specialty:"Research & Multi-Specialty", phone:"+1 410-955-5000", rating:4.8, beds:1071, emergency:true, founded:1889 },
+   540→  { id:4, name:"Massachusetts General Hospital", address:"55 Fruit St", city:"Boston", state:"Massachusetts", country:"USA", lat:42.3626, lng:-71.0700, type:"general", specialty:"General & Research", phone:"+1 617-726-2000", rating:4.7, beds:999, emergency:true, founded:1811 },
+   541→  { id:5, name:"New York-Presbyterian Hospital", address:"622 W 168th St", city:"New York", state:"New York", country:"USA", lat:40.8420, lng:-73.9400, type:"general", specialty:"Academic Medical Center", phone:"+1 212-305-2500", rating:4.7, beds:2265, emergency:true, founded:1868 },
+   542→  { id:6, name:"Texas Children's Hospital", address:"6621 Fannin St", city:"Houston", state:"Texas", country:"USA", lat:29.7080, lng:-95.4008, type:"pediatric", specialty:"Pediatrics", phone:"+1 832-824-1000", rating:4.8, beds:973, emergency:true, founded:1954 },
+   543→  { id:7, name:"MD Anderson Cancer Center", address:"1515 Holcombe Blvd", city:"Houston", state:"Texas", country:"USA", lat:29.7075, lng:-95.3980, type:"oncology", specialty:"Cancer Treatment & Research", phone:"+1 713-792-2121", rating:4.9, beds:654, emergency:false, founded:1941 },
+   544→  { id:8, name:"Hospital for Special Surgery", address:"535 E 70th St", city:"New York", state:"New York", country:"USA", lat:40.7660, lng:-73.9540, type:"orthopedic", specialty:"Orthopedics & Rheumatology", phone:"+1 212-606-1000", rating:4.8, beds:205, emergency:false, founded:1863 },
+   545→  { id:9, name:"UPMC Presbyterian", address:"200 Lothrop St", city:"Pittsburgh", state:"Pennsylvania", country:"USA", lat:40.4416, lng:-79.9606, type:"trauma", specialty:"Trauma & Transplant", phone:"+1 412-647-7000", rating:4.6, beds:1581, emergency:true, founded:1893 },
+   546→  { id:10, name:"McLean Hospital", address:"115 Mill St", city:"Belmont", state:"Massachusetts", country:"USA", lat:42.3960, lng:-71.1880, type:"psychiatric", specialty:"Psychiatric & Mental Health", phone:"+1 617-855-2000", rating:4.5, beds:181, emergency:true, founded:1811 },
+   547→
+   548→  // United Kingdom
+   549→  { id:11, name:"St Thomas' Hospital", address:"Westminster Bridge Rd", city:"London", country:"UK", lat:51.5007, lng:-0.1160, type:"general", specialty:"General & Cardiovascular", phone:"+44 20 7188 7188", rating:4.5, beds:840, emergency:true, founded:1173 },
+   550→  { id:12, name:"Great Ormond Street Hospital", address:"Great Ormond St", city:"London", country:"UK", lat:51.5224, lng:-0.1190, type:"pediatric", specialty:"Pediatric Specialties", phone:"+44 20 7405 9200", rating:4.7, beds:404, emergency:true, founded:1852 },
+   551→  { id:13, name:"The Royal Marsden Hospital", address:"Fulham Rd", city:"London", country:"UK", lat:51.4920, lng:-0.1720, type:"oncology", specialty:"Cancer Care & Research", phone:"+44 20 7808 2700", rating:4.7, beds:318, emergency:false, founded:1851 },
+   552→  { id:14, name:"John Radcliffe Hospital", address:"Headley Way", city:"Oxford", country:"UK", lat:51.7620, lng:-1.2220, type:"trauma", specialty:"Major Trauma Centre", phone:"+44 1865 741166", rating:4.4, beds:738, emergency:true, founded:1970 },
+   553→  { id:15, name:"Queen Elizabeth Hospital Birmingham", address:"Mindelsohn Way", city:"Birmingham", country:"UK", lat:52.4520, lng:-1.9270, type:"general", specialty:"Teaching Hospital", phone:"+44 121 627 2000", rating:4.3, beds:1213, emergency:true, founded:2010 },
+   554→  { id:16, name:"Royal Edinburgh Hospital", address:"Morningside Place", city:"Edinburgh", country:"UK", lat:55.9260, lng:-3.2090, type:"psychiatric", specialty:"Psychiatric Care", phone:"+44 131 537 6000", rating:4.2, beds:330, emergency:true, founded:1813 },
+   555→
+   556→  // Japan
+   557→  { id:17, name:"Tokyo University Hospital", address:"7-3-1 Hongo", city:"Tokyo", country:"Japan", lat:35.7128, lng:139.7632, type:"general", specialty:"Academic Medical Center", phone:"+81 3-3815-5411", rating:4.6, beds:1125, emergency:true, founded:1858 },
+   558→  { id:18, name:"National Cancer Center Hospital", address:"5-1-1 Tsukiji", city:"Tokyo", country:"Japan", lat:35.6660, lng:139.7710, type:"oncology", specialty:"Oncology", phone:"+81 3-3542-2511", rating:4.7, beds:700, emergency:false, founded:1962 },
+   559→  { id:19, name:"Keio University Hospital", address:"35 Shinanomachi", city:"Tokyo", country:"Japan", lat:35.6830, lng:139.7320, type:"cardiac", specialty:"Cardiovascular Medicine", phone:"+81 3-3353-1211", rating:4.5, beds:1072, emergency:true, founded:1920 },
+   560→  { id:20, name:"Osaka University Hospital", address:"2-15 Yamadaoka", city:"Osaka", country:"Japan", lat:34.8180, lng:135.5250, type:"general", specialty:"Multi-Specialty Teaching", phone:"+81 6-6879-5111", rating:4.5, beds:1076, emergency:true, founded:1869 },
+   561→  { id:21, name:"National Center for Child Health and Development", address:"2-10-1 Okura", city:"Tokyo", country:"Japan", lat:35.6610, lng:139.7150, type:"pediatric", specialty:"Pediatric & Maternal", phone:"+81 3-3416-0181", rating:4.6, beds:490, emergency:true, founded:2002 },
+   562→
+   563→  // Germany
+   564→  { id:22, name:"Charité - Universitätsmedizin Berlin", address:"Charitéplatz 1", city:"Berlin", country:"Germany", lat:52.5210, lng:13.3960, type:"general", specialty:"Europe's Largest University Hospital", phone:"+49 30 450 50", rating:4.6, beds:3006, emergency:true, founded:1710 },
+   565→  { id:23, name:"Deutsches Herzzentrum München", address:"Lazarettstr. 36", city:"Munich", country:"Germany", lat:48.1420, lng:11.5600, type:"cardiac", specialty:"Cardiovascular Diseases", phone:"+49 89 1218-0", rating:4.7, beds:449, emergency:true, founded:1974 },
+   566→  { id:24, name:"University Hospital Heidelberg", address:"Im Neuenheimer Feld 672", city:"Heidelberg", country:"Germany", lat:49.4160, lng:8.6710, type:"oncology", specialty:"Oncology & Hematology", phone:"+49 6221 56-0", rating:4.6, beds:1948, emergency:true, founded:1388 },
+   567→  { id:25, name:"Schön Klinik München", address:"Sanatoriumsplatz 2", city:"Munich", country:"Germany", lat:48.1530, lng:11.5870, type:"orthopedic", specialty:"Orthopedics & Neurology", phone:"+49 89 4521-0", rating:4.5, beds:560, emergency:false, founded:1985 },
+   568→
+   569→  // France
+   570→  { id:26, name:"Hôpital Européen Georges-Pompidou", address:"20 Rue Leblanc", city:"Paris", country:"France", lat:48.8360, lng:2.2860, type:"cardiac", specialty:"Cardiology & Vascular", phone:"+33 1 56 09 20 00", rating:4.4, beds:827, emergency:true, founded:2000 },
+   571→  { id:27, name:"Necker-Enfants Malades Hospital", address:"149 Rue de Sèvres", city:"Paris", country:"France", lat:48.8420, lng:2.3240, type:"pediatric", specialty:"Pediatric Rare Diseases", phone:"+33 1 44 49 40 00", rating:4.5, beds:400, emergency:true, founded:1778 },
+   572→  { id:28, name:"Gustave Roussy", address:"114 Rue Édouard-Vaillant", city:"Villejuif", country:"France", lat:48.7930, lng:2.3570, type:"oncology", specialty:"Cancer Research & Treatment", phone:"+33 1 42 11 40 00", rating:4.7, beds:475, emergency:false, founded:1926 },
+   573→  { id:29, name:"CHU de Bordeaux", address:"Place Amélie Raba-Léon", city:"Bordeaux", country:"France", lat:44.8390, lng:-0.5760, type:"general", specialty:"Teaching Hospital", phone:"+33 5 56 79 56 79", rating:4.3, beds:1850, emergency:true, founded:1838 },
+   574→
+   575→  // India
+   576→  { id:30, name:"All India Institute of Medical Sciences", address:"Ansari Nagar", city:"New Delhi", country:"India", lat:28.5670, lng:77.2100, type:"general", specialty:"Multi-Specialty Research", phone:"+91 11-2658-8500", rating:4.6, beds:2464, emergency:true, founded:1956 },
+   577→  { id:31, name:"Apollo Hospitals", address:"21 Greams Lane", city:"Chennai", country:"India", lat:13.0480, lng:80.2570, type:"cardiac", specialty:"Cardiology & Orthopedics", phone:"+91 44-2829-0200", rating:4.5, beds:710, emergency:true, founded:1983 },
+   578→  { id:32, name:"Tata Memorial Hospital", address:"Dr. E Borges Rd", city:"Mumbai", country:"India", lat:18.9680, lng:72.8300, type:"oncology", specialty:"Cancer Treatment & Research", phone:"+91 22-2417-7000", rating:4.7, beds:765, emergency:false, founded:1941 },
+   579→  { id:33, name:"Christian Medical College", address:"Ida Scudder Rd", city:"Vellore", country:"India", lat:12.9290, lng:79.1150, type:"general", specialty:"Teaching & Multi-Specialty", phone:"+91 416-228-1000", rating:4.6, beds:2700, emergency:true, founded:1900 },
+   580→  { id:34, name:"NIMHANS", address:"Hosur Road", city:"Bangalore", country:"India", lat:12.9400, lng:77.5940, type:"neuro", specialty:"Neuroscience & Mental Health", phone:"+91 80-2699-5000", rating:4.7, beds:750, emergency:true, founded:1925 },
+   581→
+   582→  // Australia
+   583→  { id:35, name:"Royal Melbourne Hospital", address:"300 Grattan St", city:"Melbourne", country:"Australia", lat:-37.8000, lng:144.9590, type:"trauma", specialty:"Major Trauma Service", phone:"+61 3 9342-7000", rating:4.4, beds:580, emergency:true, founded:1848 },
+   584→  { id:36, name:"Sydney Children's Hospital", address:"High St", city:"Randwick", country:"Australia", lat:-33.9160, lng:151.2370, type:"pediatric", specialty:"Pediatric Care", phone:"+61 2 9382-1111", rating:4.5, beds:330, emergency:true, founded:1880 },
+   585→  { id:37, name:"St Vincent's Hospital Sydney", address:"390 Victoria St", city:"Darlinghurst", country:"Australia", lat:-33.8730, lng:151.2150, type:"cardiac", specialty:"Heart & Lung Transplant", phone:"+61 2 8382-2111", rating:4.4, beds:430, emergency:true, founded:1857 },
+   586→  { id:38, name:"Peter MacCallum Cancer Centre", address:"305 Grattan St", city:"Melbourne", country:"Australia", lat:-37.8010, lng:144.9610, type:"oncology", specialty:"Cancer Treatment", phone:"+61 3 9656-1111", rating:4.6, beds:220, emergency:false, founded:1949 },
+   587→
+   588→  // Canada
+   589→  { id:39, name:"Toronto General Hospital", address:"200 Elizabeth St", city:"Toronto", country:"Canada", lat:43.6580, lng:-79.3880, type:"general", specialty:"Transplant & Cardiac", phone:"+1 416-340-3111", rating:4.6, beds:727, emergency:true, founded:1819 },
+   590→  { id:40, name:"The Hospital for Sick Children", address:"555 University Ave", city:"Toronto", country:"Canada", lat:43.6580, lng:-79.3890, type:"pediatric", specialty:"Pediatric Research Hospital", phone:"+1 416-813-1500", rating:4.7, beds:330, emergency:true, founded:1875 },
+   591→  { id:41, name:"McGill University Health Centre", address:"1001 Boulevard Décarie", city:"Montreal", country:"Canada", lat:45.4960, lng:-73.6330, type:"general", specialty:"Multi-Specialty Academic", phone:"+1 514-934-1934", rating:4.4, beds:1080, emergency:true, founded:1821 },
+   592→
+   593→  // China
+   594→  { id:42, name:"Peking Union Medical College Hospital", address:"1 Shuaifuyuan", city:"Beijing", country:"China", lat:39.9120, lng:116.4110, type:"general", specialty:"Comprehensive Medical Center", phone:"+86 10-6915-6699", rating:4.5, beds:2000, emergency:true, founded:1921 },
+   595→  { id:43, name:"Shanghai Ruijin Hospital", address:"197 Ruijin 2nd Rd", city:"Shanghai", country:"China", lat:31.2160, lng:121.4620, type:"general", specialty:"General & Endocrine", phone:"+86 21-6437-0045", rating:4.4, beds:1600, emergency:true, founded:1907 },
+   596→  { id:44, name:"Tongji Hospital", address:"1095 Jiefang Ave", city:"Wuhan", country:"China", lat:30.5850, lng:114.2810, type:"general", specialty:"Organ Transplant", phone:"+86 27-8366-2688", rating:4.5, beds:4000, emergency:true, founded:1900 },
+   597→
+   598→  // South Korea
+   599→  { id:45, name:"Seoul National University Hospital", address:"101 Daehak-ro", city:"Seoul", country:"South Korea", lat:37.5790, lng:126.9970, type:"general", specialty:"National Leading Hospital", phone:"+82 2-2072-2114", rating:4.6, beds:1800, emergency:true, founded:1885 },
+   600→  { id:46, name:"Asan Medical Center", address:"88 Olympic-ro 43-gil", city:"Seoul", country:"South Korea", lat:37.5100, lng:127.1070, type:"oncology", specialty:"Cancer & Transplant", phone:"+82 2-3010-1114", rating:4.7, beds:2789, emergency:true, founded:1989 },
+   601→  { id:47, name:"Samsung Medical Center", address:"81 Irwon-ro", city:"Seoul", country:"South Korea", lat:37.5090, lng:127.0650, type:"cardiac", specialty:"Cardiovascular & Oncology", phone:"+82 2-3410-0114", rating:4.6, beds:1954, emergency:true, founded:1994 },
+   602→
+   603→  // Brazil
+   604→  { id:48, name:"Hospital das Clínicas da USP", address:"Av. Dr. Enéas Carvalho de Aguiar, 255", city:"São Paulo", country:"Brazil", lat:-23.5550, lng:-46.6690, type:"general", specialty:"Teaching & Research", phone:"+55 11-3069-6000", rating:4.3, beds:2200, emergency:true, founded:1944 },
+   605→  { id:49, name:"Instituto Nacional de Câncer", address:"Praça da Cruz Vermelha, 23", city:"Rio de Janeiro", country:"Brazil", lat:-22.9100, lng:-43.1750, type:"oncology", specialty:"Cancer Treatment", phone:"+55 21-3207-1000", rating:4.4, beds:520, emergency:false, founded:1937 },
+   606→
+   607→  // Middle East
+   608→  { id:50, name:"Cleveland Clinic Abu Dhabi", address:"Al Maryah Island", city:"Abu Dhabi", country:"UAE", lat:24.4780, lng:54.3590, type:"cardiac", specialty:"Heart & Vascular", phone:"+971 2-203-0000", rating:4.6, beds:364, emergency:true, founded:2015 },
+   609→  { id:51, name:"King Faisal Specialist Hospital", address:"P.O. Box 3354", city:"Riyadh", country:"Saudi Arabia", lat:24.6870, lng:46.7210, type:"oncology", specialty:"Cancer & Organ Transplant", phone:"+966 11-442-4444", rating:4.5, beds:900, emergency:true, founded:1975 },
+   610→  { id:52, name:"Sheba Medical Center", address:"Emek HaEla St 1", city:"Ramat Gan", country:"Israel", lat:32.0280, lng:34.8540, type:"general", specialty:"National Research Hospital", phone:"+972 3-530-2222", rating:4.6, beds:1500, emergency:true, founded:1948 },
+   611→
+   612→  // Southeast Asia
+   613→  { id:53, name:"Singapore General Hospital", address:"Outram Road", city:"Singapore", country:"Singapore", lat:1.2800, lng:103.8380, type:"general", specialty:"Oldest & Largest Hospital", phone:"+65 6222-3322", rating:4.6, beds:1700, emergency:true, founded:1821 },
+   614→  { id:54, name:"Bumrungrad International Hospital", address:"33 Sukhumvit 3", city:"Bangkok", country:"Thailand", lat:13.7290, lng:100.5310, type:"general", specialty:"Medical Tourism", phone:"+66 2-667-1000", rating:4.5, beds:580, emergency:true, founded:1980 },
+   615→
+   616→  // Africa
+   617→  { id:55, name:"Groote Schuur Hospital", address:"Main Rd", city:"Cape Town", country:"South Africa", lat:-33.9420, lng:18.4620, type:"general", specialty:"Academic & Trauma", phone:"+27 21-404-9111", rating:4.2, beds:900, emergency:true, founded:1938 },
+   618→  { id:56, name:"Aga Khan University Hospital", address:"3rd Parklands Ave", city:"Nairobi", country:"Kenya", lat:-1.2590, lng:36.8130, type:"general", specialty:"Teaching Hospital", phone:"+254 20-366-2000", rating:4.3, beds:254, emergency:true, founded:1958 },
+   619→
+   620→  // Scandinavia
+   621→  { id:57, name:"Karolinska University Hospital", address:"171 76 Stockholm", city:"Stockholm", country:"Sweden", lat:59.3450, lng:18.0410, type:"neuro", specialty:"Neuroscience & Research", phone:"+46 8-517-700-00", rating:4.6, beds:1300, emergency:true, founded:1940 },
+   622→  { id:58, name:"Rigshospitalet", address:"Blegdamsvej 9", city:"Copenhagen", country:"Denmark", lat:55.6980, lng:12.5630, type:"general", specialty:"National Hospital of Denmark", phone:"+45 35-45-35-45", rating:4.5, beds:1100, emergency:true, founded:1757 },
+   623→
+   624→  // More specialty hospitals
+   625→  { id:59, name:"National Maternity Hospital", address:"Holles St", city:"Dublin", country:"Ireland", lat:53.3390, lng:-6.2570, type:"maternity", specialty:"Maternal & Infant Care", phone:"+353 1-637-3100", rating:4.3, beds:200, emergency:true, founded:1894 },
+   626→  { id:60, name:"Hôpital Femme-Mère-Enfant", address:"59 Boulevard Pinel", city:"Bron", country:"France", lat:45.7290, lng:4.8660, type:"maternity", specialty:"Maternity & Pediatrics", phone:"+33 4 27 85 55 55", rating:4.4, beds:540, emergency:true, founded:1992 },
+   627→  { id:61, name:"Spinal Cord Injury Center", address:"Hermann-Buhl-Str. 12", city:"Murnau", country:"Germany", lat:47.6790, lng:11.2090, type:"orthopedic", specialty:"Spinal Cord Rehabilitation", phone:"+49 8841-48-0", rating:4.3, beds:180, emergency:false, founded:1975 },
+   628→  { id:62, name:"National Hospital for Neurology", address:"Queen Square", city:"London", country:"UK", lat:51.5220, lng:-0.1220, type:"neuro", specialty:"Neurology & Neurosurgery", phone:"+44 20 3448 3000", rating:4.6, beds:200, emergency:true, founded:1859 },
+   629→];
+   630→
+   631→// ============================================================
+   632→// AI SEARCH ENGINE — NLP-like query processing
+   633→// ============================================================
+   634→const typeKeywords = {
+   635→  general: ['general','hospital','medical','multi','teaching','academic','comprehensive','any','all'],
+   636→  cardiac: ['cardiac','heart','cardiology','cardiovascular','coronary','heart surgery','cardiac surgery'],
+   637→  pediatric: ['pediatric','children','child','kids','infant','neonatal','baby','babies','newborn'],
+   638→  orthopedic: ['orthopedic','orthopaedic','bone','joint','spine','musculoskeletal','surgery','sports injury'],
+   639→  neuro: ['neuro','neurology','neuroscience','brain','neurological','neurosurgery','spinal cord','nervous'],
+   640→  oncology: ['cancer','oncology','tumor','chemotherapy','radiation','malignant','leukemia'],
+   641→  trauma: ['trauma','emergency','accident','injury','burn','critical care','icu','urgent'],
+   642→  maternity: ['maternity','pregnancy','birth','delivery','maternal','obstetrics','gynecology','prenatal','baby delivery'],
+   643→  psychiatric: ['psychiatric','mental health','psychology','depression','anxiety','bipolar','schizophrenia','therapy']
+   644→};
+   645→
+   646→const cityAliases = {
+   647→  'nyc':'new york','la':'los angeles','sf':'san francisco','dc':'washington',
+   648→  'tokyo':'tokyo','delhi':'new delhi','mumbai':'mumbai','bangalore':'bangalore','bengaluru':'bangalore',
+   649→  'paris':'paris','london':'london','berlin':'berlin','munich':'munich','sydney':'sydney',
+   650→  'beijing':'beijing','shanghai':'shanghai','seoul':'seoul','singapore':'singapore',
+   651→  'dubai':'abu dhabi','toronto':'toronto','melbourne':'melbourne','chicago':'chicago',
+   652→  'houston':'houston','boston':'boston','baltimore':'baltimore','pittsburgh':'pittsburgh'
+   653→};
+   654→
+   655→// Levenshtein distance for fuzzy matching
+   656→function levenshtein(a, b) {
+   657→  const m = a.length, n = b.length;
+   658→  const dp = Array.from({length: m+1}, () => Array(n+1).fill(0));
+   659→  for (let i = 0; i <= m; i++) dp[i][0] = i;
+   660→  for (let j = 0; j <= n; j++) dp[0][j] = j;
+   661→  for (let i = 1; i <= m; i++) {
+   662→    for (let j = 1; j <= n; j++) {
+   663→      dp[i][j] = Math.min(
+   664→        dp[i-1][j] + 1,
+   665→        dp[i][j-1] + 1,
+   666→        dp[i-1][j-1] + (a[i-1] !== b[j-1] ? 1 : 0)
+   667→      );
+   668→    }
+   669→  }
+   670→  return dp[m][n];
+   671→}
+   672→
+   673→// Fuzzy match score (0-1, 1 = perfect)
+   674→function fuzzyScore(query, target) {
+   675→  const q = query.toLowerCase();
+   676→  const t = target.toLowerCase();
+   677→  if (t.includes(q)) return 1;
+   678→  if (q.split(' ').every(w => t.includes(w))) return 0.95;
+   679→  const dist = levenshtein(q, t);
+   680→  const maxLen = Math.max(q.length, t.length);
+   681→  return Math.max(0, 1 - dist / maxLen);
+   682→}
+   683→
+   684→// Parse natural language query
+   685→function parseQuery(query) {
+   686→  const q = query.toLowerCase().trim();
+   687→  let detectedType = null;
+   688→  let detectedCity = null;
+   689→  let detectedCountry = null;
+   690→  let detectedName = null;
+   691→  let isEmergency = false;
+   692→
+   693→  // Check for emergency keywords
+   694→  if (/\b(emergency|urgent|nearest|closest|now|immediate)\b/.test(q)) {
+   695→    isEmergency = true;
+   696→  }
+   697→
+   698→  // Detect hospital type from keywords
+   699→  for (const [type, keywords] of Object.entries(typeKeywords)) {
+   700→    for (const kw of keywords) {
+   701→      if (q.includes(kw)) {
+   702→        detectedType = type;
+   703→        break;
+   704→      }
+   705→    }
+   706→    if (detectedType) break;
+   707→  }
+   708→
+   709→  // Detect city
+   710→  for (const [alias, city] of Object.entries(cityAliases)) {
+   711→    if (q.includes(alias)) {
+   712→      detectedCity = city;
+   713→      break;
+   714→    }
+   715→  }
+   716→  if (!detectedCity) {
+   717→    for (const h of hospitals) {
+   718→      if (q.includes(h.city.toLowerCase()) && !detectedCity) {
+   719→        detectedCity = h.city;
+   720→        break;
+   721→      }
+   722→    }
+   723→  }
+   724→
+   725→  // Detect country
+   726→  const countryNames = [...new Set(hospitals.map(h => h.country.toLowerCase()))];
+   727→  for (const c of countryNames) {
+   728→    if (q.includes(c)) {
+   729→      detectedCountry = c;
+   730→      break;
+   731→    }
+   732→  }
+   733→  // Country aliases
+   734→  if (q.includes('us') || q.includes('usa') || q.includes('america')) detectedCountry = 'usa';
+   735→  if (q.includes('uk') || q.includes('england') || q.includes('britain')) detectedCountry = 'uk';
+   736→  if (q.includes('uae') || q.includes('emirates')) detectedCountry = 'uae';
+   737→
+   738→  // Detect specific hospital name
+   739→  const nameWords = q.replace(/\b(find|hospital|in|near|at|the|a|an|show|get|locate|search|for|me|my|any|all|best|top|good)\b/g, '').trim();
+   740→  if (nameWords.length > 3) {
+   741→    for (const h of hospitals) {
+   742→      if (fuzzyScore(nameWords, h.name) > 0.6) {
+   743→        detectedName = h.name;
+   744→        break;
+   745→      }
+   746→    }
+   747→  }
+   748→
+   749→  return { detectedType, detectedCity, detectedCountry, detectedName, isEmergency };
+   750→}
+   751→
+   752→// Score a hospital against parsed query
+   753→function scoreHospital(hospital, parsed) {
+   754→  let score = 0;
+   755→
+   756→  if (parsed.detectedName) {
+   757→    score += fuzzyScore(parsed.detectedName, hospital.name) * 100;
+   758→    return score; // Name match is definitive
+   759→  }
+   760→
+   761→  if (parsed.detectedType && hospital.type === parsed.detectedType) score += 40;
+   762→  if (parsed.detectedCity && hospital.city.toLowerCase() === parsed.detectedCity.toLowerCase()) score += 35;
+   763→  if (parsed.detectedCountry && hospital.country.toLowerCase() === parsed.detectedCountry.toLowerCase()) score += 25;
+   764→  if (parsed.isEmergency && hospital.emergency) score += 20;
+   765→
+   766→  // Fuzzy name matching against query terms
+   767→  const terms = document.getElementById('searchInput').value.toLowerCase().split(/\s+/).filter(w => w.length > 2);
+   768→  for (const term of terms) {
+   769→    if (['find','hospital','near','in','the','show','best','top','any','all','get','locate','search','for','me','my'].includes(term)) continue;
+   770→    score += fuzzyScore(term, hospital.name) * 8;
+   771→    score += fuzzyScore(term, hospital.city) * 6;
+   772→    score += fuzzyScore(term, hospital.specialty.toLowerCase()) * 5;
+   773→    score += fuzzyScore(term, hospital.type) * 4;
+   774→  }
+   775→
+   776→  // Bonus for rating
+   777→  score += hospital.rating * 2;
+   778→
+   779→  return score;
+   780→}
+   781→
+   782→// ============================================================
+   783→// APPLICATION STATE
+   784→// ============================================================
+   785→let currentFilter = 'all';
+   786→let currentResults = [];
+   787→let selectedHospital = null;
+   788→let map = null;
+   789→let markers = [];
+   790→let userMarker = null;
+   791→let sortMode = null;
+   792→
+   793→// ============================================================
+   794→// MAP INITIALIZATION
+   795→// ============================================================
+   796→function initMap() {
+   797→  map = L.map('map', {
+   798→    center: [25, 10],
+   799→    zoom: 2,
+   800→    minZoom: 2,
+   801→    maxZoom: 18,
+   802→    zoomControl: true
+   803→  });
+   804→
+   805→  L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+   806→    subdomains: 'abcd',
+   807→    maxZoom: 19
+   808→  }).addTo(map);
+   809→
+   810→  // Show all hospitals initially
+   811→  showAllHospitals();
+   812→}
+   813→
+   814→function createMarkerIcon(isActive) {
+   815→  const div = document.createElement('div');
+   816→  div.style.position = 'relative';
+   817→  const marker = document.createElement('div');
+   818→  marker.className = 'custom-marker' + (isActive ? ' active-marker' : '');
+   819→  marker.innerHTML = '<i class="fa-solid fa-hospital"></i>';
+   820→  div.appendChild(marker);
+   821→  if (!isActive) {
+   822→    const pulse = document.createElement('div');
+   823→    pulse.className = 'marker-pulse';
+   824→    div.appendChild(pulse);
+   825→  }
+   826→  return L.divIcon({
+   827→    html: div.outerHTML,
+   828→    className: '',
+   829→    iconSize: [isActive ? 44 : 36, isActive ? 44 : 36],
+   830→    iconAnchor: [isActive ? 22 : 18, isActive ? 44 : 36],
+   831→    popupAnchor: [0, -40]
+   832→  });
+   833→}
+   834→
+   835→function clearMarkers() {
+   836→  markers.forEach(m => map.removeLayer(m));
+   837→  markers = [];
+   838→}
+   839→
+   840→function showHospitalsOnMap(hospitalsToShow) {
+   841→  clearMarkers();
+   842→  hospitalsToShow.forEach(h => {
+   843→    const isActive = selectedHospital && selectedHospital.id === h.id;
+   844→    const marker = L.marker([h.lat, h.lng], { icon: createMarkerIcon(isActive) })
+   845→      .addTo(map)
+   846→      .on('click', () => selectHospital(h));
+   847→    markers.push(marker);
+   848→  });
+   849→  document.getElementById('mapStatShown').textContent = hospitalsToShow.length;
+   850→  const avgRating = hospitalsToShow.length
+   851→    ? (hospitalsToShow.reduce((s, h) => s + h.rating, 0) / hospitalsToShow.length).toFixed(1)
+   852→    : '0';
+   853→  document.getElementById('mapStatAvg').textContent = avgRating;
+   854→}
+   855→
+   856→function showAllHospitals() {
+   857→  currentResults = [...hospitals];
+   858→  renderResults(currentResults);
+   859→  showHospitalsOnMap(currentResults);
+   860→  fitMapToHospitals(currentResults);
+   861→}
+   862→
+   863→function fitMapToHospitals(list) {
+   864→  if (list.length === 0) return;
+   865→  if (list.length === 1) {
+   866→    map.setView([list[0].lat, list[0].lng], 12);
+   867→    return;
+   868→  }
+   869→  const bounds = L.latLngBounds(list.map(h => [h.lat, h.lng]));
+   870→  map.fitBounds(bounds, { padding: [50, 50], maxZoom: 12 });
+   871→}
+   872→
+   873→// ============================================================
+   874→// SEARCH & FILTER LOGIC
+   875→// ============================================================
+   876→function handleSearch() {
+   877→  const val = document.getElementById('searchInput').value;
+   878→  document.getElementById('clearBtn').style.display = val.length > 0 ? 'flex' : 'none';
+   879→  showSuggestions();
+   880→}
+   881→
+   882→function showSuggestions() {
+   883→  const val = document.getElementById('searchInput').value.toLowerCase().trim();
+   884→  const box = document.getElementById('suggestions');
+   885→  if (val.length < 2) { box.classList.remove('visible'); return; }
+   886→
+   887→  // Generate smart suggestions
+   888→  const suggestions = [];
+   889→  const parsed = parseQuery(val);
+   890→
+   891→  // Match hospital names
+   892→  hospitals.forEach(h => {
+   893→    const score = fuzzyScore(val, h.name);
+   894→    if (score > 0.4) suggestions.push({ text: h.name, sub: `${h.city}, ${h.country}`, icon: 'fa-hospital', action: 'name', data: h.name, score });
+   895→  });
+   896→
+   897→  // Match cities
+   898→  const cities = [...new Set(hospitals.map(h => h.city))];
+   899→  cities.forEach(c => {
+   900→    if (fuzzyScore(val, c) > 0.5 && !suggestions.find(s => s.text === c)) {
+   901→      const count = hospitals.filter(h => h.city === c).length;
+   902→      suggestions.push({ text: c, sub: `${count} hospitals`, icon: 'fa-city', action: 'city', data: c, score: 0.5 });
+   903→    }
+   904→  });
+   905→
+   906→  // Match countries
+   907→  const countries = [...new Set(hospitals.map(h => h.country))];
+   908→  countries.forEach(c => {
+   909→    if (c.toLowerCase().includes(val) && !suggestions.find(s => s.text === c)) {
+   910→      const count = hospitals.filter(h => h.country === c).length;
+   911→      suggestions.push({ text: c, sub: `${count} hospitals`, icon: 'fa-globe', action: 'country', data: c, score: 0.4 });
+   912→    }
+   913→  });
+   914→
+   915→  // Match types
+   916→  if (!parsed.detectedType) {
+   917→    for (const [type, keywords] of Object.entries(typeKeywords)) {
+   918→      if (keywords.some(k => val.includes(k))) {
+   919→        const count = hospitals.filter(h => h.type === type).length;
+   920→        if (!suggestions.find(s => s.action === 'type' && s.data === type)) {
+   921→          suggestions.push({ text: type.charAt(0).toUpperCase() + type.slice(1) + ' Hospitals', sub: `${count} facilities`, icon: 'fa-tag', action: 'type', data: type, score: 0.3 });
+   922→        }
+   923→      }
+   924→    }
+   925→  }
+   926→
+   927→  suggestions.sort((a, b) => b.score - a.score);
+   928→  const top = suggestions.slice(0, 6);
+   929→
+   930→  if (top.length === 0) { box.classList.remove('visible'); return; }
+   931→
+   932→  box.innerHTML = top.map((s, i) => `
+   933→    <div class="suggestion-item" onclick="applySuggestion('${s.action}', '${s.data.replace(/'/g, "\\'")}')">
+   934→      <i class="fa-solid ${s.icon}" style="color:var(--accent);width:16px;text-align:center;"></i>
+   935→      <div>
+   936→        <div style="color:var(--fg);font-size:0.85rem;">${s.text}</div>
+   937→        <div style="color:var(--muted);font-size:0.7rem;">${s.sub}</div>
+   938→      </div>
+   939→    </div>
+   940→  `).join('');
+   941→  box.classList.add('visible');
+   942→}
+   943→
+   944→function applySuggestion(action, data) {
+   945→  const input = document.getElementById('searchInput');
+   946→  document.getElementById('suggestions').classList.remove('visible');
+   947→
+   948→  if (action === 'name') {
+   949→    input.value = data;
+   950→    executeSearch();
+   951→  } else if (action === 'city') {
+   952→    input.value = `hospitals in ${data}`;
+   953→    executeSearch();
+   954→  } else if (action === 'country') {
+   955→    input.value = `hospitals in ${data}`;
+   956→    executeSearch();
+   957→  } else if (action === 'type') {
+   958→    setFilter(data, document.querySelector(`.chip[data-filter="${data}"]`));
+   959→    input.value = '';
+   960→    executeSearch();
+   961→  }
+   962→}
+   963→
+   964→function handleKeydown(e) {
+   965→  if (e.key === 'Enter') {
+   966→    document.getElementById('suggestions').classList.remove('visible');
+   967→    executeSearch();
+   968→  }
+   969→  if (e.key === 'Escape') {
+   970→    document.getElementById('suggestions').classList.remove('visible');
+   971→    document.getElementById('searchInput').blur();
+   972→  }
+   973→}
+   974→
+   975→function executeSearch() {
+   976→  document.getElementById('suggestions').classList.remove('visible');
+   977→  const query = document.getElementById('searchInput').value.trim();
+   978→
+   979→  if (!query) {
+   980→    showAllHospitals();
+   981→    hideAIInsight();
+   982→    return;
+   983→  }
+   984→
+   985→  // Show AI processing feel
+   986→  showAIInsight('Analyzing your query with AI pattern matching...');
+   987→
+   988→  setTimeout(() => {
+   989→    const parsed = parseQuery(query);
+   990→    let scored = hospitals.map(h => ({ ...h, score: scoreHospital(h, parsed) }));
+   991→    scored = scored.filter(h => h.score > 5);
+   992→    scored.sort((a, b) => b.score - a.score);
+   993→
+   994→    // Apply type filter
+   995→    if (currentFilter !== 'all') {
+   996→      scored = scored.filter(h => h.type === currentFilter);
+   997→    }
+   998→
+   999→    currentResults = scored;
+  1000→    renderResults(currentResults);
+  1001→    showHospitalsOnMap(currentResults);
+  1002→
+  1003→    if (currentResults.length > 0) {
+  1004→      fitMapToHospitals(currentResults);
+  1005→      const parts = [];
+  1006→      if (parsed.detectedType) parts.push(`type: ${parsed.detectedType}`);
+  1007→      if (parsed.detectedCity) parts.push(`city: ${parsed.detectedCity}`);
+  1008→      if (parsed.detectedCountry) parts.push(`country: ${parsed.detectedCountry}`);
+  1009→      if (parsed.isEmergency) parts.push('emergency: yes');
+  1010→      const insightMsg = parts.length > 0
+  1011→        ? `Found ${currentResults.length} hospitals matching [${parts.join(', ')}]. Top result: ${currentResults[0].name} (${currentResults[0].rating}★)`
+  1012→        : `Found ${currentResults.length} relevant facilities. Best match: ${currentResults[0].name}.`;
+  1013→      showAIInsight(insightMsg);
+  1014→    } else {
+  1015→      showAIInsight('No facilities match your query. Try broadening your search terms or removing filters.');
+  1016→    }
+  1017→  }, 300);
+  1018→}
+  1019→
+  1020→function clearSearch() {
+  1021→  document.getElementById('searchInput').value = '';
+  1022→  document.getElementById('clearBtn').style.display = 'none';
+  1023→  document.getElementById('suggestions').classList.remove('visible');
+  1024→  hideAIInsight();
+  1025→  showAllHospitals();
+  1026→}
+  1027→
+  1028→function setFilter(filter, el) {
+  1029→  currentFilter = filter;
+  1030→  document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+  1031→  if (el) el.classList.add('active');
+  1032→  // Re-execute current search or show all
+  1033→  const query = document.getElementById('searchInput').value.trim();
+  1034→  if (query) {
+  1035→    executeSearch();
+  1036→  } else {
+  1037→    const filtered = filter === 'all' ? [...hospitals] : hospitals.filter(h => h.type === filter);
+  1038→    currentResults = filtered;
+  1039→    renderResults(currentResults);
+  1040→    showHospitalsOnMap(currentResults);
+  1041→    fitMapToHospitals(currentResults);
+  1042→  }
+  1043→}
+  1044→
+  1045→function sortResults(mode) {
+  1046→  sortMode = mode;
+  1047→  if (mode === 'rating') {
+  1048→    currentResults.sort((a, b) => b.rating - a.rating);
+  1049→  } else if (mode === 'name') {
+  1050→    currentResults.sort((a, b) => a.name.localeCompare(b.name));
+  1051→  }
+  1052→  renderResults(currentResults);
+  1053→}
+  1054→
+  1055→// ============================================================
+  1056→// RENDER RESULTS
+  1057→// ============================================================
+  1058→function getTypeColor(type) {
+  1059→  const colors = {
+  1060→    general: { bg: 'rgba(71,184,255,0.15)', fg: '#47b8ff' },
+  1061→    cardiac: { bg: 'rgba(255,92,92,0.15)', fg: '#ff5c5c' },
+  1062→    pediatric: { bg: 'rgba(255,179,71,0.15)', fg: '#ffb347' },
+  1063→    orthopedic: { bg: 'rgba(180,130,255,0.15)', fg: '#b482ff' },
+  1064→    neuro: { bg: 'rgba(0,230,138,0.15)', fg: '#00e68a' },
+  1065→    oncology: { bg: 'rgba(255,107,155,0.15)', fg: '#ff6b9b' },
+  1066→    trauma: { bg: 'rgba(255,140,0,0.15)', fg: '#ff8c00' },
+  1067→    maternity: { bg: 'rgba(255,182,193,0.15)', fg: '#ffb6c1' },
+  1068→    psychiatric: { bg: 'rgba(147,176,255,0.15)', fg: '#93b0ff' }
+  1069→  };
+  1070→  return colors[type] || colors.general;
+  1071→}
+  1072→
+  1073→function renderStars(rating) {
+  1074→  const full = Math.floor(rating);
+  1075→  const half = rating - full >= 0.5 ? 1 : 0;
+  1076→  const empty = 5 - full - half;
+  1077→  let html = '';
+  1078→  for (let i = 0; i < full; i++) html += '<i class="fa-solid fa-star star-filled"></i>';
+  1079→  if (half) html += '<i class="fa-solid fa-star-half-stroke star-filled"></i>';
+  1080→  for (let i = 0; i < empty; i++) html += '<i class="fa-regular fa-star star-empty"></i>';
+  1081→  return html;
+  1082→}
+  1083→
+  1084→function renderResults(list) {
+  1085→  const container = document.getElementById('resultsList');
+  1086→  document.getElementById('resultCount').textContent = list.length;
+  1087→
+  1088→  if (list.length === 0) {
+  1089→    container.innerHTML = `
+  1090→      <div class="no-results">
+  1091→        <i class="fa-solid fa-magnifying-glass text-4xl mb-4" style="color:var(--border);"></i>
+  1092→        <p class="text-lg font-medium mb-2" style="color:var(--fg);">No hospitals found</p>
+  1093→        <p class="text-sm" style="color:var(--muted);">Try different keywords or remove filters</p>
+  1094→      </div>
+  1095→    `;
+  1096→    return;
+  1097→  }
+  1098→
+  1099→  container.innerHTML = list.map((h, i) => {
+  1100→    const tc = getTypeColor(h.type);
+  1101→    const isActive = selectedHospital && selectedHospital.id === h.id;
+  1102→    return `
+  1103→      <div class="hospital-card ${isActive ? 'active' : ''} fade-in" style="animation-delay:${Math.min(i * 0.05, 0.5)}s" onclick="selectHospital(hospitals.find(x=>x.id===${h.id}))">
+  1104→        <div class="flex items-start justify-between mb-2">
+  1105→          <h3 class="font-semibold text-sm leading-tight" style="color:var(--fg);flex:1;margin-right:8px;">${h.name}</h3>
+  1106→          <span class="type-badge" style="background:${tc.bg};color:${tc.fg};">${h.type}</span>
+  1107→        </div>
+  1108→        <div class="flex items-center gap-1 mb-2">
+  1109→          ${renderStars(h.rating)}
+  1110→          <span class="text-xs ml-1" style="color:var(--muted);">${h.rating}</span>
+  1111→        </div>
+  1112→        <div class="flex items-start gap-2 mb-1.5">
+  1113→          <i class="fa-solid fa-location-dot mt-0.5 text-xs" style="color:var(--accent);"></i>
+  1114→          <p class="text-xs leading-relaxed" style="color:var(--muted);">${h.address}, ${h.city}${h.state ? ', ' + h.state : ''}, ${h.country}</p>
+  1115→        </div>
+  1116→        <div class="flex items-center gap-4 text-xs" style="color:var(--muted);">
+  1117→          <span><i class="fa-solid fa-bed mr-1" style="color:var(--accent);"></i>${h.beds} beds</span>
+  1118→          <span><i class="fa-solid fa-phone mr-1" style="color:var(--accent);"></i>${h.phone}</span>
+  1119→          ${h.emergency ? '<span style="color:var(--danger);"><i class="fa-solid fa-kit-medical mr-1"></i>24/7 ER</span>' : ''}
+  1120→        </div>
+  1121→      </div>
+  1122→    `;
+  1123→  }).join('');
+  1124→}
+  1125→
+  1126→// ============================================================
+  1127→// HOSPITAL SELECTION & DETAIL PANEL
+  1128→// ============================================================
+  1129→function selectHospital(h) {
+  1130→  selectedHospital = h;
+  1131→
+  1132→  // Update card states
+  1133→  document.querySelectorAll('.hospital-card').forEach(c => c.classList.remove('active'));
+  1134→  const cards = document.querySelectorAll('.hospital-card');
+  1135→  const idx = currentResults.findIndex(r => r.id === h.id);
+  1136→  if (idx >= 0 && cards[idx]) cards[idx].classList.add('active');
+  1137→
+  1138→  // Update markers
+  1139→  showHospitalsOnMap(currentResults);
+  1140→  map.setView([h.lat, h.lng], 14, { animate: true, duration: 0.8 });
+  1141→
+  1142→  // Open detail panel
+  1143→  openDetail(h);
+  1144→}
+  1145→
+  1146→function openDetail(h) {
+  1147→  const tc = getTypeColor(h.type);
+  1148→  const age = new Date().getFullYear() - h.founded;
+  1149→
+  1150→  // Generate AI insights
+  1151→  const insights = [];
+  1152→  if (h.rating >= 4.7) insights.push('Top-tier facility with exceptional patient outcomes');
+  1153→  if (h.beds > 1000) insights.push('Large-scale facility with extensive capacity');
+  1154→  if (h.founded < 1900) insights.push(`Historic institution with ${age}+ years of medical excellence`);
+  1155→  if (h.emergency) insights.push('Equipped with 24/7 emergency and trauma services');
+  1156→  if (h.type === 'oncology') insights.push('Specialized cancer treatment with research capabilities');
+  1157→  if (h.type === 'cardiac') insights.push('Advanced cardiac care with interventional capabilities');
+  1158→  if (h.type === 'pediatric') insights.push('Dedicated pediatric specialists and child-friendly facilities');
+  1159→  if (h.type === 'neuro') insights.push('Leading neurological diagnostics and neurosurgery');
+  1160→  if (h.type === 'trauma') insights.push('Level I trauma center with critical care expertise');
+  1161→
+  1162→  // Find nearby hospitals
+  1163→  const nearby = hospitals
+  1164→    .filter(n => n.id !== h.id)
+  1165→    .map(n => ({
+  1166→      ...n,
+  1167→      distance: getDistance(h.lat, h.lng, n.lat, n.lng)
+  1168→    }))
+  1169→    .sort((a, b) => a.distance - b.distance)
+  1170→    .slice(0, 3);
+  1171→
+  1172→  document.getElementById('detailContent').innerHTML = `
+  1173→    <div class="mb-6">
+  1174→      <div class="flex items-center gap-2 mb-3">
+  1175→        <span class="type-badge" style="background:${tc.bg};color:${tc.fg};">${h.type}</span>
+  1176→        ${h.emergency ? '<span class="type-badge" style="background:rgba(255,92,92,0.15);color:#ff5c5c;">EMERGENCY</span>' : ''}
+  1177→      </div>
+  1178→      <h2 class="text-xl font-bold mb-2" style="color:var(--fg);line-height:1.3;">${h.name}</h2>
+  1179→      <p class="text-sm" style="color:var(--accent);">${h.specialty}</p>
+  1180→    </div>
+  1181→
+  1182→    <!-- AI Analysis -->
+  1183→    <div class="p-4 rounded-lg mb-5" style="background:var(--accent-glow);border:1px solid rgba(0,230,138,0.15);">
+  1184→      <div class="flex items-center gap-2 mb-3">
+  1185→        <i class="fa-solid fa-robot" style="color:var(--accent);"></i>
+  1186→        <span class="text-xs font-semibold" style="color:var(--accent);font-family:'JetBrains Mono',monospace;">AI ANALYSIS</span>
+  1187→      </div>
+  1188→      <ul class="space-y-2">
+  1189→        ${insights.map(i => `
+  1190→          <li class="flex items-start gap-2 text-sm" style="color:var(--muted);">
+  1191→            <i class="fa-solid fa-check-circle mt-0.5" style="color:var(--accent);font-size:10px;"></i>
+  1192→            ${i}
+  1193→          </li>
+  1194→        `).join('')}
+  1195→      </ul>
+  1196→    </div>
+  1197→
+  1198→    <!-- Address section -->
+  1199→    <div class="mb-5">
+  1200→      <div class="text-xs font-semibold mb-3" style="color:var(--muted);font-family:'JetBrains Mono',monospace;">ADDRESS</div>
+  1201→      <div class="p-4 rounded-lg" style="background:var(--card);border:1px solid var(--border);">
+  1202→        <div class="flex items-start gap-3 mb-3">
+  1203→          <i class="fa-solid fa-location-dot mt-1" style="color:var(--accent);"></i>
+  1204→          <div>
+  1205→            <p class="text-sm font-medium" style="color:var(--fg);">${h.address}</p>
+  1206→            <p class="text-sm" style="color:var(--muted);">${h.city}${h.state ? ', ' + h.state : ''}, ${h.country}</p>
+  1207→            <p class="text-xs mt-1" style="color:var(--muted);font-family:'JetBrains Mono',monospace;">${h.lat.toFixed(4)}°N, ${Math.abs(h.lng).toFixed(4)}°${h.lng >= 0 ? 'E' : 'W'}</p>
+  1208→          </div>
+  1209→        </div>
+  1210→        <button onclick="copyAddress('${h.address}, ${h.city}${h.state ? ', ' + h.state : ''}, ${h.country}')" class="w-full py-2 rounded-lg text-xs font-medium transition-all hover:brightness-110" style="background:var(--accent);color:var(--bg);">
+  1211→          <i class="fa-solid fa-copy mr-1"></i>Copy Full Address
+  1212→        </button>
+  1213→      </div>
+  1214→    </div>
+  1215→
+  1216→    <!-- Contact -->
+  1217→    <div class="mb-5">
+  1218→      <div class="text-xs font-semibold mb-3" style="color:var(--muted);font-family:'JetBrains Mono',monospace;">CONTACT</div>
+  1219→      <div class="space-y-2">
+  1220→        <div class="flex items-center gap-3 p-3 rounded-lg" style="background:var(--card);border:1px solid var(--border);">
+  1221→          <i class="fa-solid fa-phone" style="color:var(--accent);width:16px;text-align:center;"></i>
+  1222→          <span class="text-sm" style="color:var(--fg);">${h.phone}</span>
+  1223→        </div>
+  1224→        <a href="https://www.google.com/maps/search/?api=1&query=${h.lat},${h.lng}" target="_blank" class="flex items-center gap-3 p-3 rounded-lg transition-all hover:brightness-110" style="background:var(--card);border:1px solid var(--border);text-decoration:none;">
+  1225→          <i class="fa-solid fa-diamond-turn-right" style="color:var(--accent);width:16px;text-align:center;"></i>
+  1226→          <span class="text-sm" style="color:var(--fg);">Get Directions on Google Maps</span>
+  1227→        </a>
+  1228→      </div>
+  1229→    </div>
+  1230→
+  1231→    <!-- Stats -->
+  1232→    <div class="mb-5">
+  1233→      <div class="text-xs font-semibold mb-3" style="color:var(--muted);font-family:'JetBrains Mono',monospace;">FACILITY DATA</div>
+  1234→      <div class="grid grid-cols-2 gap-2">
+  1235→        <div class="p-3 rounded-lg text-center" style="background:var(--card);border:1px solid var(--border);">
+  1236→          <div class="text-lg font-bold" style="color:var(--accent);font-family:'JetBrains Mono',monospace;">${h.beds}</div>
+  1237→          <div class="text-xs" style="color:var(--muted);">Total Beds</div>
+  1238→        </div>
+  1239→        <div class="p-3 rounded-lg text-center" style="background:var(--card);border:1px solid var(--border);">
+  1240→          <div class="text-lg font-bold" style="color:var(--warning);font-family:'JetBrains Mono',monospace;">${h.rating}</div>
+  1241→          <div class="text-xs" style="color:var(--muted);">Rating / 5.0</div>
+  1242→        </div>
+  1243→        <div class="p-3 rounded-lg text-center" style="background:var(--card);border:1px solid var(--border);">
+  1244→          <div class="text-lg font-bold" style="color:var(--info);font-family:'JetBrains Mono',monospace;">${h.founded}</div>
+  1245→          <div class="text-xs" style="color:var(--muted);">Founded</div>
+  1246→        </div>
+  1247→        <div class="p-3 rounded-lg text-center" style="background:var(--card);border:1px solid var(--border);">
+  1248→          <div class="text-lg font-bold" style="color:var(--fg);font-family:'JetBrains Mono',monospace;">${age}</div>
+  1249→          <div class="text-xs" style="color:var(--muted);">Years Active</div>
+  1250→        </div>
+  1251→      </div>
+  1252→    </div>
+  1253→
+  1254→    <!-- Nearby hospitals -->
+  1255→    ${nearby.length > 0 ? `
+  1256→    <div class="mb-5">
+  1257→      <div class="text-xs font-semibold mb-3" style="color:var(--muted);font-family:'JetBrains Mono',monospace;">NEARBY FACILITIES</div>
+  1258→      <div class="space-y-2">
+  1259→        ${nearby.map(n => {
+  1260→          const ntc = getTypeColor(n.type);
+  1261→          const distText = n.distance < 1 ? `${Math.round(n.distance * 1000)}m` : `${n.distance.toFixed(1)}km`;
+  1262→          return `
+  1263→          <div class="flex items-center gap-3 p-3 rounded-lg cursor-pointer transition-all hover:brightness-110" style="background:var(--card);border:1px solid var(--border);" onclick="selectHospital(hospitals.find(x=>x.id===${n.id}))">
+  1264→            <div class="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0" style="background:${ntc.bg};">
+  1265→              <i class="fa-solid fa-hospital text-xs" style="color:${ntc.fg};"></i>
+  1266→            </div>
+  1267→            <div class="flex-1 min-w-0">
+  1268→              <p class="text-xs font-medium truncate" style="color:var(--fg);">${n.name}</p>
+  1269→              <p class="text-xs" style="color:var(--muted);">${n.city}, ${n.country}</p>
+  1270→            </div>
+  1271→            <span class="text-xs flex-shrink-0" style="color:var(--accent);font-family:'JetBrains Mono',monospace;">${distText}</span>
+  1272→          </div>`;
+  1273→        }).join('')}
+  1274→      </div>
+  1275→    </div>
+  1276→    ` : ''}
+  1277→  `;
+  1278→
+  1279→  document.getElementById('detailPanel').classList.add('open');
+  1280→  document.getElementById('detailOverlay').classList.add('open');
+  1281→}
+  1282→
+  1283→function closeDetail() {
+  1284→  document.getElementById('detailPanel').classList.remove('open');
+  1285→  document.getElementById('detailOverlay').classList.remove('open');
+  1286→  selectedHospital = null;
+  1287→  document.querySelectorAll('.hospital-card').forEach(c => c.classList.remove('active'));
+  1288→  showHospitalsOnMap(currentResults);
+  1289→}
+  1290→
+  1291→function copyAddress(text) {
+  1292→  navigator.clipboard.writeText(text).then(() => {
+  1293→    showToast('Address copied to clipboard', 'fa-circle-check', 'var(--accent)');
+  1294→  }).catch(() => {
+  1295→    showToast('Address: ' + text, 'fa-location-dot', 'var(--accent)');
+  1296→  });
+  1297→}
+  1298→
+  1299→// ============================================================
+  1300→// GEOLOCATION
+  1301→// ============================================================
+  1302→function geoLocate() {
+  1303→  const btn = document.getElementById('geoBtn');
+  1304→  btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i><span>Locating...</span>';
+  1305→
+  1306→  if (!navigator.geolocation) {
+  1307→    showToast('Geolocation not supported by your browser', 'fa-triangle-exclamation', 'var(--warning)');
+  1308→    resetGeoBtn();
+  1309→    return;
+  1310→  }
+  1311→
+  1312→  navigator.geolocation.getCurrentPosition(
+  1313→    (pos) => {
+  1314→      const { latitude, longitude } = pos.coords;
+  1315→
+  1316→      // Remove old user marker
+  1317→      if (userMarker) map.removeLayer(userMarker);
+  1318→
+  1319→      // Add user location marker
+  1320→      const userIcon = L.divIcon({
+  1321→        html: '<div style="width:16px;height:16px;background:#47b8ff;border-radius:50%;border:3px solid white;box-shadow:0 0 15px rgba(71,184,255,0.6);"></div>',
+  1322→        className: '',
+  1323→        iconSize: [16, 16],
+  1324→        iconAnchor: [8, 8]
+  1325→      });
+  1326→      userMarker = L.marker([latitude, longitude], { icon: userIcon }).addTo(map);
+  1327→
+  1328→      // Calculate distances and sort
+  1329→      const withDist = hospitals.map(h => ({
+  1330→        ...h,
+  1331→        distance: getDistance(latitude, longitude, h.lat, h.lng)
+  1332→      })).sort((a, b) => a.distance - b.distance);
+  1333→
+  1334→      currentResults = withDist;
+  1335→      renderResults(currentResults);
+  1336→      showHospitalsOnMap(currentResults);
+  1337→
+  1338→      map.setView([latitude, longitude], 10, { animate: true });
+  1339→
+  1340→      const nearest = withDist[0];
+  1341→      const distText = nearest.distance < 1 ? `${Math.round(nearest.distance * 1000)}m` : `${nearest.distance.toFixed(1)}km`;
+  1342→      showAIInsight(`Your location detected. Nearest hospital: ${nearest.name} (${distText} away). Showing ${Math.min(20, withDist.length)} nearest facilities.`);
+  1343→      showToast(`Found your location. ${withDist.length} hospitals ranked by distance.`, 'fa-location-crosshairs', 'var(--info)');
+  1344→      resetGeoBtn();
+  1345→    },
+  1346→    (err) => {
+  1347→      showToast('Unable to get location: ' + err.message, 'fa-triangle-exclamation', 'var(--danger)');
+  1348→      resetGeoBtn();
+  1349→    },
+  1350→    { enableHighAccuracy: true, timeout: 10000 }
+  1351→  );
+  1352→}
+  1353→
+  1354→function resetGeoBtn() {
+  1355→  document.getElementById('geoBtn').innerHTML = '<i class="fa-solid fa-location-crosshairs"></i><span>Near Me</span>';
+  1356→}
+  1357→
+  1358→// Haversine distance in km
+  1359→function getDistance(lat1, lon1, lat2, lon2) {
+  1360→  const R = 6371;
+  1361→  const dLat = (lat2 - lat1) * Math.PI / 180;
+  1362→  const dLon = (lon2 - lon1) * Math.PI / 180;
+  1363→  const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+  1364→    Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+  1365→    Math.sin(dLon/2) * Math.sin(dLon/2);
+  1366→  return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+  1367→}
+  1368→
+  1369→// ============================================================
+  1370→// UI HELPERS
+  1371→// ============================================================
+  1372→function showAIInsight(text) {
+  1373→  const el = document.getElementById('aiInsight');
+  1374→  document.getElementById('aiInsightText').textContent = text;
+  1375→  el.style.display = 'flex';
+  1376→}
+  1377→
+  1378→function hideAIInsight() {
+  1379→  document.getElementById('aiInsight').style.display = 'none';
+  1380→}
+  1381→
+  1382→function showToast(msg, icon, color) {
+  1383→  const toast = document.getElementById('toast');
+  1384→  document.getElementById('toastMsg').textContent = msg;
+  1385→  document.getElementById('toastIcon').className = 'fa-solid ' + icon;
+  1386→  document.getElementById('toastIcon').style.color = color;
+  1387→  toast.classList.add('show');
+  1388→  setTimeout(() => toast.classList.remove('show'), 3500);
+  1389→}
+  1390→
+  1391→// Close suggestions when clicking outside
+  1392→document.addEventListener('click', (e) => {
+  1393→  if (!e.target.closest('#searchInput') && !e.target.closest('#suggestions')) {
+  1394→    document.getElementById('suggestions').classList.remove('visible');
+  1395→  }
+  1396→});
+  1397→
+  1398→// Keyboard shortcut: Escape to close detail
+  1399→document.addEventListener('keydown', (e) => {
+  1400→  if (e.key === 'Escape') closeDetail();
+  1401→});
+  1402→
+  1403→// ============================================================
+  1404→// INITIALIZATION
+  1405→// ============================================================
+  1406→function init() {
+  1407→  // Update header stats
+  1408→  document.getElementById('totalCount').textContent = hospitals.length;
+  1409→  document.getElementById('countryCount').textContent = new Set(hospitals.map(h => h.country)).size;
+  1410→  document.getElementById('typeCount').textContent = new Set(hospitals.map(h => h.type)).size;
+  1411→
+  1412→  // Initialize map
+  1413→  initMap();
+  1414→
+  1415→  // Render all hospitals
+  1416→  renderResults(hospitals);
+  1417→  showHospitalsOnMap(hospitals);
+  1418→}
+  1419→
+  1420→// Start when DOM is ready
+  1421→document.addEventListener('DOMContentLoaded', init);
+  1422→</script>
+  1423→</body>
+  1424→</html>

@@ -1,0 +1,1400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MedGenome Hospitals — PAN India Hospital Finder</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+  :root {
+    --primary: #0052CC;
+    --primary-dark: #003D99;
+    --primary-light: #E8F0FE;
+    --primary-glow: rgba(0, 82, 204, 0.15);
+    --accent: #00C6FF;
+    --accent-dim: #0099CC;
+    --bg: #F5F7FA;
+    --bg-elevated: #FFFFFF;
+    --card: #FFFFFF;
+    --border: #E2E8F0;
+    --border-light: #F1F5F9;
+    --fg: #1E293B;
+    --fg-secondary: #475569;
+    --muted: #94A3B8;
+    --danger: #EF4444;
+    --warning: #F59E0B;
+    --success: #10B981;
+    --info: #0EA5E9;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg);
+    color: var(--fg);
+    overflow-x: hidden;
+    min-height: 100vh;
+  }
+
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--muted); }
+
+  .app-header {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    position: relative;
+    overflow: hidden;
+  }
+  .app-header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    pointer-events: none;
+  }
+
+  .search-input {
+    background: rgba(255,255,255,0.95);
+    border: 2px solid transparent;
+    color: var(--fg);
+    font-family: 'Inter', sans-serif;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+  }
+  .search-input:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 4px rgba(0, 198, 255, 0.15), 0 4px 20px rgba(0,0,0,0.1);
+    background: #fff;
+  }
+  .search-input::placeholder { color: var(--muted); }
+
+  .chip {
+    background: var(--bg-elevated);
+    border: 1.5px solid var(--border);
+    color: var(--fg-secondary);
+    cursor: pointer;
+    transition: all 0.25s ease;
+    font-size: 0.8rem;
+    font-weight: 500;
+    padding: 7px 16px;
+    border-radius: 24px;
+    white-space: nowrap;
+    user-select: none;
+  }
+  .chip:hover { border-color: var(--primary); color: var(--primary); }
+  .chip.active {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: #fff;
+    font-weight: 600;
+    box-shadow: 0 2px 8px var(--primary-glow);
+  }
+
+  .hospital-card {
+    background: var(--card);
+    border: 1.5px solid var(--border);
+    border-radius: 14px;
+    padding: 18px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  .hospital-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 4px; height: 100%;
+    background: var(--primary);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .hospital-card:hover {
+    border-color: var(--primary);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0, 82, 204, 0.1);
+  }
+  .hospital-card:hover::before { opacity: 1; }
+  .hospital-card.active {
+    border-color: var(--primary);
+    background: var(--primary-light);
+    box-shadow: 0 4px 20px var(--primary-glow);
+  }
+  .hospital-card.active::before { opacity: 1; }
+
+  .star-filled { color: var(--warning); }
+  .star-empty { color: var(--border); }
+
+  .type-badge {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.65rem;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  #map {
+    width: 100%;
+    height: 100%;
+    border-radius: 14px;
+    z-index: 1;
+  }
+  .leaflet-control-zoom a {
+    background: var(--card) !important;
+    color: var(--fg) !important;
+    border-color: var(--border) !important;
+    font-weight: 600;
+  }
+  .leaflet-control-zoom a:hover {
+    background: var(--primary-light) !important;
+    color: var(--primary) !important;
+  }
+  .leaflet-control-attribution {
+    font-size: 9px !important;
+    background: rgba(255,255,255,0.8) !important;
+    padding: 2px 6px !important;
+  }
+
+  .custom-marker {
+    width: 36px; height: 36px;
+    background: var(--primary);
+    border-radius: 50% 50% 50% 0;
+    transform: rotate(-45deg);
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 3px 12px rgba(0, 82, 204, 0.4);
+    border: 2.5px solid #fff;
+    transition: all 0.3s;
+  }
+  .custom-marker i {
+    transform: rotate(45deg);
+    color: #fff;
+    font-size: 14px;
+  }
+  .custom-marker.active-marker {
+    background: var(--danger);
+    box-shadow: 0 3px 18px rgba(239, 68, 68, 0.5);
+    width: 44px; height: 44px;
+  }
+  .custom-marker.active-marker i { font-size: 16px; }
+
+  .marker-pulse {
+    position: absolute;
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: rgba(0, 82, 204, 0.25);
+    animation: pulse 2s ease-out infinite;
+    top: 0; left: 0;
+  }
+  @keyframes pulse {
+    0% { transform: scale(1); opacity: 0.6; }
+    100% { transform: scale(3); opacity: 0; }
+  }
+
+  .user-marker-dot {
+    width: 18px; height: 18px;
+    background: var(--accent);
+    border-radius: 50%;
+    border: 3px solid #fff;
+    box-shadow: 0 0 0 3px rgba(0, 198, 255, 0.3), 0 2px 8px rgba(0, 198, 255, 0.4);
+    animation: userPulse 2s ease-in-out infinite;
+  }
+  @keyframes userPulse {
+    0%, 100% { box-shadow: 0 0 0 3px rgba(0, 198, 255, 0.3), 0 2px 8px rgba(0, 198, 255, 0.4); }
+    50% { box-shadow: 0 0 0 8px rgba(0, 198, 255, 0.15), 0 2px 12px rgba(0, 198, 255, 0.6); }
+  }
+
+  .detail-panel {
+    position: fixed;
+    top: 0; right: 0;
+    width: 440px;
+    max-width: 92vw;
+    height: 100vh;
+    background: var(--bg-elevated);
+    border-left: 1px solid var(--border);
+    z-index: 1000;
+    transform: translateX(100%);
+    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    overflow-y: auto;
+    box-shadow: -8px 0 30px rgba(0,0,0,0.08);
+  }
+  .detail-panel.open { transform: translateX(0); }
+  .detail-overlay {
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.3);
+    backdrop-filter: blur(2px);
+    z-index: 999;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+  }
+  .detail-overlay.open { opacity: 1; pointer-events: all; }
+
+  .stat-number {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--primary);
+    line-height: 1;
+  }
+
+  .suggestions {
+    position: absolute;
+    top: 100%;
+    left: 0; right: 0;
+    background: var(--bg-elevated);
+    border: 1.5px solid var(--border);
+    border-radius: 12px;
+    margin-top: 6px;
+    max-height: 280px;
+    overflow-y: auto;
+    z-index: 100;
+    display: none;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+  }
+  .suggestions.visible { display: block; }
+  .suggestion-item {
+    padding: 12px 16px;
+    cursor: pointer;
+    transition: background 0.15s;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 0.9rem;
+  }
+  .suggestion-item:hover { background: var(--primary-light); }
+  .suggestion-item:first-child { border-radius: 12px 12px 0 0; }
+  .suggestion-item:last-child { border-radius: 0 0 12px 12px; }
+
+  .toast {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 14px 20px;
+    z-index: 10000;
+    transform: translateY(100px);
+    opacity: 0;
+    transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+    max-width: 380px;
+  }
+  .toast.show { transform: translateY(0); opacity: 1; }
+
+  .map-overlay-card {
+    background: rgba(255,255,255,0.92);
+    border: 1px solid var(--border);
+    backdrop-filter: blur(12px);
+    border-radius: 10px;
+  }
+
+  .no-results {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--muted);
+  }
+
+  .state-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.7rem;
+    padding: 2px 8px;
+    border-radius: 4px;
+    background: var(--primary-light);
+    color: var(--primary);
+    font-weight: 500;
+  }
+
+  @media (max-width: 1024px) {
+    .main-grid { grid-template-columns: 1fr !important; }
+    .map-section { height: 400px !important; }
+  }
+  @media (max-width: 640px) {
+    .header-stats { display: none !important; }
+    .detail-panel { width: 100vw; max-width: 100vw; }
+  }
+
+  .fade-in { animation: fadeIn 0.5s ease forwards; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+  .logo-img {
+    height: 44px;
+    width: auto;
+    object-fit: contain;
+  }
+
+  .search-container {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    position: relative;
+  }
+  .search-container::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 24px;
+    background: var(--bg);
+    border-radius: 24px 24px 0 0;
+  }
+
+  .hospital-tooltip {
+    background: var(--card) !important;
+    border: 1px solid var(--border) !important;
+    color: var(--fg) !important;
+    font-family: 'Inter', sans-serif !important;
+    font-size: 12px !important;
+    font-weight: 500 !important;
+    padding: 4px 10px !important;
+    border-radius: 6px !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1) !important;
+  }
+  .hospital-tooltip::before {
+    border-top-color: var(--border) !important;
+  }
+</style>
+</head>
+<body>
+
+<!-- Toast -->
+<div id="toast" class="toast">
+  <div class="flex items-center gap-3">
+    <i id="toastIcon" class="fa-solid fa-circle-check" style="color:var(--success)"></i>
+    <span id="toastMsg" class="text-sm" style="color:var(--fg);"></span>
+  </div>
+</div>
+
+<!-- Detail overlay -->
+<div id="detailOverlay" class="detail-overlay" onclick="closeDetail()"></div>
+
+<!-- Detail panel -->
+<div id="detailPanel" class="detail-panel">
+  <div class="p-6">
+    <div class="flex justify-between items-start mb-6">
+      <div class="flex items-center gap-2">
+        <div class="w-8 h-8 rounded-lg flex items-center justify-center" style="background:var(--primary-light);">
+          <i class="fa-solid fa-hospital" style="color:var(--primary);font-size:14px;"></i>
+        </div>
+        <span class="text-xs font-semibold" style="color:var(--primary);font-family:'JetBrains Mono',monospace;">HOSPITAL DETAILS</span>
+      </div>
+      <button onclick="closeDetail()" class="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-gray-100 transition-colors">
+        <i class="fa-solid fa-xmark" style="color:var(--muted)"></i>
+      </button>
+    </div>
+    <div id="detailContent"></div>
+  </div>
+</div>
+
+<!-- Main app -->
+<div class="min-h-screen flex flex-col">
+
+  <!-- Header -->
+  <header class="app-header">
+    <div class="max-w-[1480px] mx-auto px-6 py-4 flex items-center justify-between relative z-10">
+      <div class="flex items-center gap-4">
+        <img src="MedGenome_10_Years_Logo.jpg" alt="MedGenome" class="logo-img rounded">
+        <div class="hidden sm:block" style="border-left: 1.5px solid rgba(255,255,255,0.2); padding-left: 16px;">
+          <h1 class="text-lg font-bold tracking-tight text-white">Hospital Finder</h1>
+          <p class="text-xs text-blue-200" style="font-family:'JetBrains Mono',monospace;">PAN India Network</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-4">
+        <div class="header-stats hidden md:flex items-center gap-5 text-xs text-blue-200" style="font-family:'JetBrains Mono',monospace;">
+          <span><span class="font-bold text-white" id="totalCount">0</span> HOSPITALS</span>
+          <span><span class="font-bold text-white" id="stateCount">0</span> STATES</span>
+          <span><span class="font-bold text-white" id="typeCount">0</span> SPECIALTIES</span>
+        </div>
+        <button id="geoBtn" onclick="geoLocate()" class="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold transition-all hover:scale-105 active:scale-95" style="background:rgba(255,255,255,0.15);border:1.5px solid rgba(255,255,255,0.3);color:#fff;backdrop-filter:blur(10px);">
+          <i class="fa-solid fa-location-crosshairs"></i>
+          <span class="hidden sm:inline">Near Me</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Search section -->
+  <section class="search-container">
+    <div class="max-w-[1480px] mx-auto w-full px-6 pt-5 pb-8 relative z-10">
+      <div class="relative">
+        <div class="flex gap-3">
+          <div class="relative flex-1">
+            <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2" style="color:var(--muted);"></i>
+            <input
+              id="searchInput"
+              type="text"
+              class="search-input w-full pl-11 pr-12 py-4 rounded-xl text-base"
+              placeholder="Search hospitals by name, city, state, or specialty..."
+              autocomplete="off"
+              oninput="handleSearch()"
+              onkeydown="handleKeydown(event)"
+              onfocus="showSuggestions()"
+            >
+            <button id="clearBtn" onclick="clearSearch()" class="absolute right-4 top-1/2 -translate-y-1/2 w-7 h-7 flex items-center justify-center rounded-full hover:bg-gray-100 transition-colors" style="display:none;">
+              <i class="fa-solid fa-xmark text-xs" style="color:var(--muted);"></i>
+            </button>
+            <div id="suggestions" class="suggestions"></div>
+          </div>
+          <button onclick="executeSearch()" class="px-7 py-4 rounded-xl font-semibold text-sm transition-all hover:scale-[1.02] active:scale-[0.98]" style="background:#fff;color:var(--primary);box-shadow:0 4px 15px rgba(0,0,0,0.15);">
+            <i class="fa-solid fa-magnifying-glass mr-2"></i>Search
+          </button>
+        </div>
+
+        <!-- Filter chips -->
+        <div class="flex gap-2 mt-4 overflow-x-auto pb-1" id="filterChips" style="-webkit-overflow-scrolling:touch;">
+          <div class="chip active" data-filter="all" onclick="setFilter('all', this)">All Types</div>
+          <div class="chip" data-filter="general" onclick="setFilter('general', this)"><i class="fa-solid fa-hospital mr-1"></i>General</div>
+          <div class="chip" data-filter="cardiac" onclick="setFilter('cardiac', this)"><i class="fa-solid fa-heart-pulse mr-1"></i>Cardiac</div>
+          <div class="chip" data-filter="pediatric" onclick="setFilter('pediatric', this)"><i class="fa-solid fa-baby mr-1"></i>Pediatric</div>
+          <div class="chip" data-filter="orthopedic" onclick="setFilter('orthopedic', this)"><i class="fa-solid fa-bone mr-1"></i>Orthopedic</div>
+          <div class="chip" data-filter="neuro" onclick="setFilter('neuro', this)"><i class="fa-solid fa-brain mr-1"></i>Neuro</div>
+          <div class="chip" data-filter="oncology" onclick="setFilter('oncology', this)"><i class="fa-solid fa-ribbon mr-1"></i>Oncology</div>
+          <div class="chip" data-filter="trauma" onclick="setFilter('trauma', this)"><i class="fa-solid fa-truck-medical mr-1"></i>Trauma</div>
+          <div class="chip" data-filter="maternity" onclick="setFilter('maternity', this)"><i class="fa-solid fa-person-pregnant mr-1"></i>Maternity</div>
+          <div class="chip" data-filter="eye" onclick="setFilter('eye', this)"><i class="fa-solid fa-eye mr-1"></i>Eye</div>
+          <div class="chip" data-filter="transplant" onclick="setFilter('transplant', this)"><i class="fa-solid fa-hand-holding-medical mr-1"></i>Transplant</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AI insight bar -->
+  <div id="aiInsight" class="max-w-[1480px] mx-auto w-full px-6" style="display:none;">
+    <div class="p-3 rounded-xl flex items-center gap-3 text-sm" style="background:var(--primary-light);border:1px solid rgba(0,82,204,0.12);">
+      <i class="fa-solid fa-circle-info" style="color:var(--primary);"></i>
+      <span id="aiInsightText" style="color:var(--fg-secondary);"></span>
+    </div>
+  </div>
+
+  <!-- Main content grid -->
+  <main class="flex-1 max-w-[1480px] mx-auto w-full px-6 py-5">
+    <div class="main-grid grid gap-5" style="grid-template-columns: 400px 1fr; height: calc(100vh - 290px); min-height: 480px;">
+
+      <!-- Results list -->
+      <div class="flex flex-col overflow-hidden rounded-xl" style="background:var(--bg-elevated);border:1.5px solid var(--border);">
+        <div class="px-4 py-3 flex items-center justify-between" style="border-bottom:1px solid var(--border);">
+          <span class="text-xs font-semibold" style="font-family:'JetBrains Mono',monospace;color:var(--muted);">
+            RESULTS <span id="resultCount" style="color:var(--primary);">0</span>
+          </span>
+          <div class="flex items-center gap-2">
+            <button onclick="sortResults('rating')" class="text-xs px-2.5 py-1 rounded-lg hover:bg-gray-100 transition-colors font-medium" style="color:var(--fg-secondary);">
+              <i class="fa-solid fa-arrow-down-wide-short mr-1"></i>Rating
+            </button>
+            <button onclick="sortResults('name')" class="text-xs px-2.5 py-1 rounded-lg hover:bg-gray-100 transition-colors font-medium" style="color:var(--fg-secondary);">
+              <i class="fa-solid fa-arrow-down-a-z mr-1"></i>Name
+            </button>
+          </div>
+        </div>
+        <div id="resultsList" class="flex-1 overflow-y-auto p-3 flex flex-col gap-3"></div>
+      </div>
+
+      <!-- Map section -->
+      <div class="map-section relative overflow-hidden rounded-xl" style="border:1.5px solid var(--border);">
+        <div id="map"></div>
+        <!-- Map overlay stats -->
+        <div class="absolute top-4 left-4 z-[500] p-3 map-overlay-card">
+          <div class="flex gap-5">
+            <div>
+              <div class="stat-number" id="mapStatShown">0</div>
+              <div class="text-xs mt-1 font-medium" style="color:var(--muted);font-family:'JetBrains Mono',monospace;">ON MAP</div>
+            </div>
+            <div>
+              <div class="stat-number" id="mapStatAvg">0</div>
+              <div class="text-xs mt-1 font-medium" style="color:var(--muted);font-family:'JetBrains Mono',monospace;">AVG RATING</div>
+            </div>
+          </div>
+        </div>
+        <!-- Map legend -->
+        <div class="absolute bottom-4 left-4 z-[500] p-3 map-overlay-card">
+          <div class="text-xs mb-2 font-semibold" style="color:var(--muted);font-family:'JetBrains Mono',monospace;">LEGEND</div>
+          <div class="flex flex-col gap-1.5">
+            <div class="flex items-center gap-2 text-xs" style="color:var(--fg);">
+              <div class="w-3 h-3 rounded-full" style="background:var(--primary);"></div> Hospital
+            </div>
+            <div class="flex items-center gap-2 text-xs" style="color:var(--fg);">
+              <div class="w-3 h-3 rounded-full" style="background:var(--danger);"></div> Selected
+            </div>
+            <div class="flex items-center gap-2 text-xs" style="color:var(--fg);">
+              <div class="w-3 h-3 rounded-full" style="background:var(--accent);"></div> Your Location
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="text-center py-4 text-xs" style="color:var(--muted);border-top:1px solid var(--border);">
+    <span style="font-family:'JetBrains Mono',monospace;">MedGenome Hospitals</span> &mdash; PAN India Hospital Network Finder
+  </footer>
+</div>
+
+<script>
+// ============================================================
+// PAN INDIA HOSPITAL DATABASE - 70+ hospitals across India
+// ============================================================
+const hospitals = [
+  // Delhi / NCR
+  { id:1, name:"All India Institute of Medical Sciences (AIIMS)", address:"Ansari Nagar, Aurobindo Marg", city:"New Delhi", state:"Delhi", country:"India", lat:28.5672, lng:77.2107, type:"general", specialty:"Multi-Specialty Research Institute", phone:"+91 11-2658-8500", rating:4.8, beds:2464, emergency:true, founded:1956 },
+  { id:2, name:"Apollo Hospitals Delhi", address:"Sarita Vihar, Delhi - Mathura Road", city:"New Delhi", state:"Delhi", country:"India", lat:28.5300, lng:77.2900, type:"general", specialty:"Multi-Specialty & Cardiac", phone:"+91 11-2692-5858", rating:4.5, beds:710, emergency:true, founded:1996 },
+  { id:3, name:"Fortis Escorts Heart Institute", address:"Okhla Road, New Friends Colony", city:"New Delhi", state:"Delhi", country:"India", lat:28.5620, lng:77.2750, type:"cardiac", specialty:"Cardiology & Cardiac Surgery", phone:"+91 11-2640-7111", rating:4.6, beds:310, emergency:true, founded:1988 },
+  { id:4, name:"Medanta - The Medicity", address:"Sector 38, Gurugram", city:"Gurugram", state:"Haryana", country:"India", lat:28.4250, lng:77.0550, type:"general", specialty:"Multi-Organ Transplant & Cardiac", phone:"+91 124-414-1414", rating:4.6, beds:1250, emergency:true, founded:2009 },
+  { id:5, name:"Max Super Specialty Hospital", address:"1, 2, Mandakini Enclave, Saket", city:"New Delhi", state:"Delhi", country:"India", lat:28.5270, lng:77.2180, type:"general", specialty:"Neurosciences & Cardiac", phone:"+91 11-2651-5050", rating:4.5, beds:530, emergency:true, founded:2000 },
+  { id:6, name:"Indraprastha Apollo Hospitals", address:"Sarita Vihar, Delhi Mathura Road", city:"New Delhi", state:"Delhi", country:"India", lat:28.5350, lng:77.2950, type:"general", specialty:"Multi-Specialty & Transplant", phone:"+91 11-2692-5858", rating:4.5, beds:710, emergency:true, founded:1996 },
+  { id:7, name:"Sir Ganga Ram Hospital", address:"Rajinder Nagar", city:"New Delhi", state:"Delhi", country:"India", lat:28.6380, lng:77.1890, type:"general", specialty:"Multi-Specialty & Research", phone:"+91 11-2575-0000", rating:4.4, beds:675, emergency:true, founded:1951 },
+  { id:8, name:"BLK Super Specialty Hospital", address:"Pusa Road, Karol Bagh", city:"New Delhi", state:"Delhi", country:"India", lat:28.6450, lng:77.1950, type:"general", specialty:"Bone Marrow Transplant & Oncology", phone:"+91 11-3065-0000", rating:4.4, beds:650, emergency:true, founded:1959 },
+  { id:9, name:"Artemis Hospital", address:"Sector 51, Gurugram", city:"Gurugram", state:"Haryana", country:"India", lat:28.4350, lng:77.0750, type:"general", specialty:"Multi-Specialty & Oncology", phone:"+91 124-677-7999", rating:4.4, beds:400, emergency:true, founded:2007 },
+  { id:10, name:"Rajiv Gandhi Cancer Institute", address:"Sector 5, Rohini", city:"New Delhi", state:"Delhi", country:"India", lat:28.7320, lng:77.1180, type:"oncology", specialty:"Cancer Treatment & Research", phone:"+91 11-2705-1072", rating:4.5, beds:300, emergency:true, founded:1996 },
+
+  // Mumbai / Maharashtra
+  { id:11, name:"Tata Memorial Hospital", address:"Dr. E Borges Road, Parel", city:"Mumbai", state:"Maharashtra", country:"India", lat:18.9680, lng:72.8300, type:"oncology", specialty:"Cancer Treatment & Research Centre", phone:"+91 22-2417-7000", rating:4.8, beds:765, emergency:true, founded:1941 },
+  { id:12, name:"Kokilaben Dhirubhai Ambani Hospital", address:"Rao Saheb Achutrao Patwardhan Marg, Andheri West", city:"Mumbai", state:"Maharashtra", country:"India", lat:19.1370, lng:72.8300, type:"general", specialty:"Multi-Specialty & Transplant", phone:"+91 22-3099-9999", rating:4.5, beds:750, emergency:true, founded:2008 },
+  { id:13, name:"Lilavati Hospital & Research Centre", address:"A-791, Bandra Reclamation, Bandra West", city:"Mumbai", state:"Maharashtra", country:"India", lat:19.0570, lng:72.8390, type:"general", specialty:"Multi-Specialty & Cardiac", phone:"+91 22-2675-1111", rating:4.4, beds:314, emergency:true, founded:1978 },
+  { id:14, name:"P.D. Hinduja Hospital", address:"Veer Savarkar Marg, Mahim", city:"Mumbai", state:"Maharashtra", country:"India", lat:19.0370, lng:72.8410, type:"general", specialty:"Multi-Specialty & Research", phone:"+91 22-2445-2222", rating:4.5, beds:400, emergency:true, founded:1951 },
+  { id:15, name:"Breach Candy Hospital", address:"Breach Candy, Cumballa Hill", city:"Mumbai", state:"Maharashtra", country:"India", lat:18.9750, lng:72.8050, type:"maternity", specialty:"Maternity & Multi-Specialty", phone:"+91 22-2367-4222", rating:4.3, beds:200, emergency:true, founded:1950 },
+  { id:16, name:"H.N. Reliance Foundation Hospital", address:"Prarthana Samaj, Girgaon", city:"Mumbai", state:"Maharashtra", country:"India", lat:18.9610, lng:72.8150, type:"general", specialty:"Multi-Specialty & Advanced Surgery", phone:"+91 22-6780-1111", rating:4.5, beds:345, emergency:true, founded:2014 },
+  { id:17, name:"Ruby Hall Clinic", address:"40, Sassoon Road", city:"Pune", state:"Maharashtra", country:"India", lat:18.5310, lng:73.8840, type:"general", specialty:"Multi-Specialty & Transplant", phone:"+91 20-2605-8111", rating:4.4, beds:600, emergency:true, founded:1959 },
+  { id:18, name:"Deenanath Mangeshkar Hospital", address:"Erandwane, Pune", city:"Pune", state:"Maharashtra", country:"India", lat:18.4970, lng:73.8190, type:"general", specialty:"Multi-Specialty & Cardiac", phone:"+91 20-6601-6601", rating:4.3, beds:500, emergency:true, founded:2001 },
+
+  // Chennai / Tamil Nadu
+  { id:19, name:"Apollo Hospitals Chennai", address:"21 Greams Lane, Thousand Lights", city:"Chennai", state:"Tamil Nadu", country:"India", lat:13.0480, lng:80.2570, type:"cardiac", specialty:"Cardiology & Orthopedics", phone:"+91 44-2829-0200", rating:4.6, beds:710, emergency:true, founded:1983 },
+  { id:20, name:"Christian Medical College (CMC)", address:"Ida Scudder Road, Vellore", city:"Vellore", state:"Tamil Nadu", country:"India", lat:12.9290, lng:79.1150, type:"general", specialty:"Teaching & Multi-Specialty Research", phone:"+91 416-228-1000", rating:4.7, beds:2700, emergency:true, founded:1900 },
+  { id:21, name:"MIOT International", address:"4/112, Mount - Poonamallee Road, Manapakkam", city:"Chennai", state:"Tamil Nadu", country:"India", lat:13.0450, lng:80.1780, type:"orthopedic", specialty:"Orthopedics & Multi-Specialty", phone:"+91 44-2249-2288", rating:4.5, beds:450, emergency:true, founded:1999 },
+  { id:22, name:"Sankara Nethralaya", address:"18, College Road, Nungambakkam", city:"Chennai", state:"Tamil Nadu", country:"India", lat:13.0630, lng:80.2450, type:"eye", specialty:"Ophthalmology & Eye Research", phone:"+91 44-2827-1616", rating:4.7, beds:280, emergency:true, founded:1978 },
+  { id:23, name:"Fortis Malar Hospital", address:"52, 1st Main Road, Gandhi Nagar, Adyar", city:"Chennai", state:"Tamil Nadu", country:"India", lat:13.0080, lng:80.2580, type:"general", specialty:"Cardiac & Multi-Specialty", phone:"+91 44-4289-2222", rating:4.3, beds:180, emergency:true, founded:1992 },
+
+  // Bangalore / Karnataka
+  { id:24, name:"NIMHANS", address:"Hosur Road, Bangalore", city:"Bangalore", state:"Karnataka", country:"India", lat:12.9400, lng:77.5940, type:"neuro", specialty:"Neuroscience & Mental Health", phone:"+91 80-2699-5000", rating:4.7, beds:750, emergency:true, founded:1925 },
+  { id:25, name:"Manipal Hospital", address:"98, HAL Old Airport Road", city:"Bangalore", state:"Karnataka", country:"India", lat:12.9580, lng:77.6450, type:"general", specialty:"Multi-Specialty & Transplant", phone:"+91 80-2502-4444", rating:4.5, beds:600, emergency:true, founded:1991 },
+  { id:26, name:"Narayana Health", address:"258/A, Bommasandra, Hosur Road", city:"Bangalore", state:"Karnataka", country:"India", lat:12.7900, lng:77.6500, type:"cardiac", specialty:"Cardiac & Multi-Specialty", phone:"+91 80-2783-2222", rating:4.5, beds:1000, emergency:true, founded:2000 },
+  { id:27, name:"Apollo Hospitals Bangalore", address:"154/11, Opp IIM, Bannerghatta Road", city:"Bangalore", state:"Karnataka", country:"India", lat:12.9350, lng:77.5990, type:"general", specialty:"Multi-Specialty & Oncology", phone:"+91 80-2630-4050", rating:4.4, beds:250, emergency:true, founded:2007 },
+  { id:28, name:"Sri Sathya Sai Institute of Higher Medical Sciences", address:"EPIP Area, Whitefield", city:"Bangalore", state:"Karnataka", country:"India", lat:12.9690, lng:77.7500, type:"cardiac", specialty:"Cardiac Surgery (Free Treatment)", phone:"+91 80-2844-4000", rating:4.6, beds:333, emergency:true, founded:2001 },
+
+  // Kolkata / West Bengal
+  { id:29, name:"Apollo Gleneagles Hospital", address:"58, Canal Circular Road", city:"Kolkata", state:"West Bengal", country:"India", lat:22.5700, lng:88.3950, type:"general", specialty:"Multi-Specialty & Transplant", phone:"+91 33-2320-2121", rating:4.4, beds:400, emergency:true, founded:2003 },
+  { id:30, name:"AMRI Hospital", address:"Block A, Scheme QM, Salt Lake", city:"Kolkata", state:"West Bengal", country:"India", lat:22.5750, lng:88.4200, type:"general", specialty:"Multi-Specialty & Critical Care", phone:"+91 33-2321-0909", rating:4.3, beds:316, emergency:true, founded:1996 },
+  { id:31, name:"Fortis Hospital Kolkata", address:"730, Anandapur, E.M. Bypass", city:"Kolkata", state:"West Bengal", country:"India", lat:22.5100, lng:88.4100, type:"general", specialty:"Multi-Specialty & Kidney Transplant", phone:"+91 33-6628-4444", rating:4.3, beds:400, emergency:true, founded:2010 },
+  { id:32, name:"IPGMER (SSKM Hospital)", address:"244, A.J.C. Bose Road", city:"Kolkata", state:"West Bengal", country:"India", lat:22.5480, lng:88.3560, type:"general", specialty:"Government Teaching Hospital", phone:"+91 33-2223-5131", rating:4.1, beds:1820, emergency:true, founded:1957 },
+
+  // Hyderabad / Telangana
+  { id:33, name:"Apollo Hospitals Hyderabad", address:"Jubilee Hills", city:"Hyderabad", state:"Telangana", country:"India", lat:17.4300, lng:78.4100, type:"general", specialty:"Multi-Specialty & Advanced Surgery", phone:"+91 40-2360-7777", rating:4.5, beds:550, emergency:true, founded:1988 },
+  { id:34, name:"KIMS Hospital", address:"1-8-31/1, Minister Road, Secunderabad", city:"Hyderabad", state:"Telangana", country:"India", lat:17.4400, lng:78.4950, type:"general", specialty:"Multi-Specialty & Cardiac", phone:"+91 40-4488-5000", rating:4.4, beds:1000, emergency:true, founded:2004 },
+  { id:35, name:"Nizam's Institute of Medical Sciences", address:"Punjagutta", city:"Hyderabad", state:"Telangana", country:"India", lat:17.4220, lng:78.4560, type:"general", specialty:"Government Multi-Specialty Institute", phone:"+91 40-2349-0000", rating:4.3, beds:1100, emergency:true, founded:1980 },
+  { id:36, name:"LV Prasad Eye Institute", address:"LV Prasad Marg, Banjara Hills", city:"Hyderabad", state:"Telangana", country:"India", lat:17.4150, lng:78.4440, type:"eye", specialty:"Ophthalmology & Eye Research", phone:"+91 40-3061-2345", rating:4.7, beds:200, emergency:true, founded:1987 },
+
+  // Ahmedabad / Gujarat
+  { id:37, name:"Apollo Hospitals Ahmedabad", address:"Plot No.1A, Bhat-Gandhinagar Highway", city:"Ahmedabad", state:"Gujarat", country:"India", lat:23.0800, lng:72.5150, type:"general", specialty:"Multi-Specialty & Oncology", phone:"+91 79-6670-1111", rating:4.4, beds:280, emergency:true, founded:2003 },
+  { id:38, name:"Sterling Hospital", address:"Vir Savarkar Marg, Ramnagar", city:"Ahmedabad", state:"Gujarat", country:"India", lat:23.0300, lng:72.5700, type:"general", specialty:"Multi-Specialty & Renal Transplant", phone:"+91 79-2687-0000", rating:4.3, beds:350, emergency:true, founded:1995 },
+  { id:39, name:"CIMS Hospital", address:"Near Shreyas Crossing, Paldi", city:"Ahmedabad", state:"Gujarat", country:"India", lat:23.0200, lng:72.5650, type:"cardiac", specialty:"Cardiac & Multi-Specialty", phone:"+91 79-6677-6677", rating:4.3, beds:250, emergency:true, founded:2006 },
+
+  // Jaipur / Rajasthan
+  { id:40, name:"SMS Hospital (Sawai Man Singh)", address:"Jawahar Lal Nehru Marg", city:"Jaipur", state:"Rajasthan", country:"India", lat:26.8990, lng:75.8070, type:"general", specialty:"Government Multi-Specialty", phone:"+91 141-251-8001", rating:4.2, beds:2500, emergency:true, founded:1947 },
+  { id:41, name:"Fortis Escorts Hospital Jaipur", address:"Shipra Path, Malviya Nagar", city:"Jaipur", state:"Rajasthan", country:"India", lat:26.8540, lng:75.7980, type:"cardiac", specialty:"Cardiac & Multi-Specialty", phone:"+91 141-271-1111", rating:4.4, beds:250, emergency:true, founded:2000 },
+  { id:42, name:"Eternal Hospital", address:"14, JCB Road, Banipark", city:"Jaipur", state:"Rajasthan", country:"India", lat:26.9250, lng:75.7870, type:"cardiac", specialty:"Cardiology & Cardiac Surgery", phone:"+91 141-222-2222", rating:4.3, beds:200, emergency:true, founded:2000 },
+
+  // Lucknow / Uttar Pradesh
+  { id:43, name:"SGPGI (Sanjay Gandhi PG Institute)", address:"Raebareli Road", city:"Lucknow", state:"Uttar Pradesh", country:"India", lat:26.7800, lng:80.9200, type:"general", specialty:"Multi-Specialty & Research Institute", phone:"+91 522-266-8700", rating:4.5, beds:950, emergency:true, founded:1983 },
+  { id:44, name:"King George's Medical University", address:"Chowk, Lucknow", city:"Lucknow", state:"Uttar Pradesh", country:"India", lat:26.8700, lng:80.9100, type:"general", specialty:"Government Teaching Hospital", phone:"+91 522-225-7441", rating:4.3, beds:2500, emergency:true, founded:1911 },
+  { id:45, name:"Medanta Hospital Lucknow", address:"Sector-A, Pocket-9, Vasant Kunj Yojna", city:"Lucknow", state:"Uttar Pradesh", country:"India", lat:26.8200, lng:81.0000, type:"general", specialty:"Multi-Specialty & Transplant", phone:"+91 522-492-0000", rating:4.4, beds:405, emergency:true, founded:2019 },
+
+  // Chandigarh / Punjab
+  { id:46, name:"PGIMER", address:"Sector 12, Chandigarh", city:"Chandigarh", state:"Chandigarh", country:"India", lat:30.7420, lng:76.7670, type:"general", specialty:"Multi-Specialty Research & Teaching", phone:"+91 172-274-7585", rating:4.6, beds:1900, emergency:true, founded:1962 },
+  { id:47, name:"Fortis Hospital Mohali", address:"Sector 62, SAS Nagar, Mohali", city:"Mohali", state:"Punjab", country:"India", lat:30.6720, lng:76.7330, type:"general", specialty:"Multi-Specialty & Cardiac", phone:"+91 172-509-2222", rating:4.4, beds:350, emergency:true, founded:2001 },
+  { id:48, name:"Christian Medical College Ludhiana", address:"Brown Road", city:"Ludhiana", state:"Punjab", country:"India", lat:30.9010, lng:75.8500, type:"general", specialty:"Teaching & Multi-Specialty", phone:"+91 161-211-5001", rating:4.4, beds:850, emergency:true, founded:1894 },
+
+  // Kerala
+  { id:49, name:"Aster Medcity", address:"Kuttisahib Road, South Chittoor, Ernakulam", city:"Kochi", state:"Kerala", country:"India", lat:10.0200, lng:76.2580, type:"general", specialty:"Multi-Specialty & Cardiac", phone:"+91 484-669-9999", rating:4.5, beds:500, emergency:true, founded:2014 },
+  { id:50, name:"Sree Chitra Tirunal Institute", address:"Medical College Campus, Thiruvananthapuram", city:"Thiruvananthapuram", state:"Kerala", country:"India", lat:8.5400, lng:76.8900, type:"cardiac", specialty:"Cardiac & Neuroscience", phone:"+91 471-244-3151", rating:4.6, beds:250, emergency:true, founded:1976 },
+  { id:51, name:"Amrita Institute of Medical Sciences", address:"AIMS Campus, Ponekkara, Edappally", city:"Kochi", state:"Kerala", country:"India", lat:10.0300, lng:76.3000, type:"general", specialty:"Multi-Specialty & Transplant", phone:"+91 484-285-2850", rating:4.5, beds:1300, emergency:true, founded:1998 },
+  { id:52, name:"KIMS Hospital Thiruvananthapuram", address:"Pattom, Thiruvananthapuram", city:"Thiruvananthapuram", state:"Kerala", country:"India", lat:8.5100, lng:76.9500, type:"general", specialty:"Multi-Specialty & Oncology", phone:"+91 471-244-6600", rating:4.3, beds:600, emergency:true, founded:2002 },
+
+  // Bhopal / Madhya Pradesh
+  { id:53, name:"AIIMS Bhopal", address:"Saket Nagar", city:"Bhopal", state:"Madhya Pradesh", country:"India", lat:23.2100, lng:77.4050, type:"general", specialty:"Multi-Specialty Institute", phone:"+91 755-269-6501", rating:4.3, beds:500, emergency:true, founded:2015 },
+  { id:54, name:"Hamidia Hospital", address:"Sultania Road, Royal Market Area", city:"Bhopal", state:"Madhya Pradesh", country:"India", lat:23.2600, lng:77.4100, type:"general", specialty:"Government Hospital", phone:"+91 755-254-0201", rating:4.0, beds:900, emergency:true, founded:1930 },
+
+  // Patna / Bihar
+  { id:55, name:"AIIMS Patna", address:"Phulwari Sharif", city:"Patna", state:"Bihar", country:"India", lat:25.5900, lng:85.1000, type:"general", specialty:"Multi-Specialty Institute", phone:"+91 612-277-5555", rating:4.2, beds:540, emergency:true, founded:2012 },
+  { id:56, name:"Patna Medical College & Hospital", address:"Ashok Rajpath", city:"Patna", state:"Bihar", country:"India", lat:25.6100, lng:85.1400, type:"general", specialty:"Government Teaching Hospital", phone:"+91 612-261-9001", rating:4.0, beds:1750, emergency:true, founded:1925 },
+
+  // Guwahati / Assam / Northeast
+  { id:57, name:"Gauhati Medical College & Hospital", address:"Bhangagarh, Guwahati", city:"Guwahati", state:"Assam", country:"India", lat:26.1400, lng:91.7600, type:"general", specialty:"Government Multi-Specialty", phone:"+91 361-252-8571", rating:4.1, beds:2200, emergency:true, founded:1960 },
+  { id:58, name:"AIIMS Guwahati", address:"Changsari, Kamrup", city:"Guwahati", state:"Assam", country:"India", lat:26.2100, lng:91.6700, type:"general", specialty:"Multi-Specialty Institute", phone:"+91 361-258-7000", rating:4.2, beds:750, emergency:true, founded:2017 },
+
+  // Bhubaneswar / Odisha
+  { id:59, name:"AIIMS Bhubaneswar", address:"Sijua, Patrapada", city:"Bhubaneswar", state:"Odisha", country:"India", lat:20.2600, lng:85.8100, type:"general", specialty:"Multi-Specialty Institute", phone:"+91 674-247-6666", rating:4.3, beds:900, emergency:true, founded:2014 },
+  { id:60, name:"SCB Medical College & Hospital", address:"Mangalabag, Cuttack", city:"Cuttack", state:"Odisha", country:"India", lat:20.4700, lng:85.8800, type:"general", specialty:"Government Teaching Hospital", phone:"+91 671-230-4001", rating:4.1, beds:2000, emergency:true, founded:1944 },
+
+  // JIPMER Puducherry
+  { id:61, name:"JIPMER", address:"Dhanvantari Nagar, Puducherry", city:"Puducherry", state:"Puducherry", country:"India", lat:11.9400, lng:79.8100, type:"general", specialty:"Multi-Specialty Teaching & Research", phone:"+91 413-229-6000", rating:4.5, beds:1800, emergency:true, founded:1956 },
+
+  // Additional notable hospitals
+  { id:62, name:"Kasturba Medical College Manipal", address:"Madhava Nagar, Manipal", city:"Manipal", state:"Karnataka", country:"India", lat:13.3400, lng:74.7900, type:"general", specialty:"Teaching & Multi-Specialty", phone:"+91 820-257-0001", rating:4.4, beds:1700, emergency:true, founded:1953 },
+  { id:63, name:"AIIMS Jodhpur", address:"Basni Phase 2, Jodhpur", city:"Jodhpur", state:"Rajasthan", country:"India", lat:26.2400, lng:73.0100, type:"general", specialty:"Multi-Specialty Institute", phone:"+91 291-274-0000", rating:4.2, beds:750, emergency:true, founded:2012 },
+  { id:64, name:"AIIMS Raipur", address:"G.E. Road, Tatibandh", city:"Raipur", state:"Chhattisgarh", country:"India", lat:21.2400, lng:81.6300, type:"general", specialty:"Multi-Specialty Institute", phone:"+91 771-256-1001", rating:4.2, beds:750, emergency:true, founded:2012 },
+  { id:65, name:"Sri Ramachandra Medical Centre", address:"Porur, Chennai", city:"Chennai", state:"Tamil Nadu", country:"India", lat:13.0300, lng:80.1500, type:"general", specialty:"Multi-Specialty & Research", phone:"+91 44-2476-8033", rating:4.4, beds:700, emergency:true, founded:1985 },
+  { id:66, name:"Moolchand Hospital", address:"Lajpat Nagar III", city:"New Delhi", state:"Delhi", country:"India", lat:28.5680, lng:77.2370, type:"general", specialty:"Multi-Specialty & Maternity", phone:"+91 11-4200-0000", rating:4.2, beds:300, emergency:true, founded:1958 },
+  { id:67, name:"Kalra Hospital", address:"J-2, Kirti Nagar, New Delhi", city:"New Delhi", state:"Delhi", country:"India", lat:28.6480, lng:77.1520, type:"cardiac", specialty:"Cardiac & Multi-Specialty", phone:"+91 11-4500-4500", rating:4.2, beds:200, emergency:true, founded:1995 },
+  { id:68, name:"Rainbow Hospital", address:"Plot 10, Financial District, Nanakramguda", city:"Hyderabad", state:"Telangana", country:"India", lat:17.4250, lng:78.3550, type:"pediatric", specialty:"Pediatric & Neonatal Care", phone:"+91 40-4445-5555", rating:4.5, beds:300, emergency:true, founded:1999 },
+  { id:69, name:"Shankara Eye Hospital", address:"Krishnarajapuram, Bangalore", city:"Bangalore", state:"Karnataka", country:"India", lat:12.9660, lng:77.7100, type:"eye", specialty:"Ophthalmology & Community Eye Care", phone:"+91 80-2561-1666", rating:4.5, beds:250, emergency:true, founded:2004 },
+  { id:70, name:"Sri Venkateswara Institute of Medical Sciences", address:"Tirupati", city:"Tirupati", state:"Andhra Pradesh", country:"India", lat:13.6300, lng:79.4200, type:"general", specialty:"Multi-Specialty & Research", phone:"+91 877-228-9001", rating:4.3, beds:900, emergency:true, founded:1986 },
+];
+
+// ============================================================
+// AI SEARCH ENGINE
+// ============================================================
+const typeKeywords = {
+  general: ['general','hospital','medical','multi','teaching','academic','comprehensive','any','all','government','govt'],
+  cardiac: ['cardiac','heart','cardiology','cardiovascular','coronary','heart surgery','cardiac surgery','bypass'],
+  pediatric: ['pediatric','children','child','kids','infant','neonatal','baby','babies','newborn'],
+  orthopedic: ['orthopedic','orthopaedic','bone','joint','spine','musculoskeletal','sports injury'],
+  neuro: ['neuro','neurology','neuroscience','brain','neurological','neurosurgery','spinal cord','nervous','mental'],
+  oncology: ['cancer','oncology','tumor','chemotherapy','radiation','malignant','leukemia','tumour'],
+  trauma: ['trauma','emergency','accident','injury','burn','critical care','icu','urgent'],
+  maternity: ['maternity','pregnancy','birth','delivery','maternal','obstetrics','gynecology','prenatal'],
+  eye: ['eye','ophthalmology','vision','retina','cataract','lasik','optical'],
+  transplant: ['transplant','organ','kidney transplant','liver transplant','heart transplant','bone marrow','donation']
+};
+
+const stateAliases = {
+  'delhi':'Delhi','ncr':'Delhi','new delhi':'Delhi','gurgaon':'Haryana','gurugram':'Haryana',
+  'mumbai':'Maharashtra','pune':'Maharashtra','maharashtra':'Maharashtra',
+  'chennai':'Tamil Nadu','tamil nadu':'Tamil Nadu','tn':'Tamil Nadu','vellore':'Tamil Nadu',
+  'bangalore':'Karnataka','bengaluru':'Karnataka','karnataka':'Karnataka','manipal':'Karnataka',
+  'kolkata':'West Bengal','west bengal':'West Bengal',
+  'hyderabad':'Telangana','telangana':'Telangana',
+  'ahmedabad':'Gujarat','gujarat':'Gujarat','gandhinagar':'Gujarat',
+  'jaipur':'Rajasthan','rajasthan':'Rajasthan','jodhpur':'Rajasthan',
+  'lucknow':'Uttar Pradesh','up':'Uttar Pradesh','uttar pradesh':'Uttar Pradesh',
+  'chandigarh':'Chandigarh','mohali':'Punjab','punjab':'Punjab','ludhiana':'Punjab',
+  'kochi':'Kerala','kerala':'Kerala','trivandrum':'Kerala','thiruvananthapuram':'Kerala',
+  'bhopal':'Madhya Pradesh','madhya pradesh':'Madhya Pradesh','mp':'Madhya Pradesh',
+  'patna':'Bihar','bihar':'Bihar',
+  'guwahati':'Assam','assam':'Assam','northeast':'Assam',
+  'bhubaneswar':'Odisha','odisha':'Odisha','orissa':'Odisha','cuttack':'Odisha',
+  'puducherry':'Puducherry','pondicherry':'Puducherry',
+  'raipur':'Chhattisgarh','chhattisgarh':'Chhattisgarh',
+  'andhra':'Andhra Pradesh','tirupati':'Andhra Pradesh','andhra pradesh':'Andhra Pradesh',
+};
+
+function levenshtein(a, b) {
+  const m = a.length, n = b.length;
+  const dp = Array.from({length: m+1}, () => Array(n+1).fill(0));
+  for (let i = 0; i <= m; i++) dp[i][0] = i;
+  for (let j = 0; j <= n; j++) dp[0][j] = j;
+  for (let i = 1; i <= m; i++) {
+    for (let j = 1; j <= n; j++) {
+      dp[i][j] = Math.min(
+        dp[i-1][j] + 1,
+        dp[i][j-1] + 1,
+        dp[i-1][j-1] + (a[i-1] !== b[j-1] ? 1 : 0)
+      );
+    }
+  }
+  return dp[m][n];
+}
+
+function fuzzyScore(query, target) {
+  const q = query.toLowerCase();
+  const t = target.toLowerCase();
+  if (t.includes(q)) return 1;
+  if (q.split(' ').every(w => t.includes(w))) return 0.95;
+  const dist = levenshtein(q, t);
+  const maxLen = Math.max(q.length, t.length);
+  return maxLen === 0 ? 1 : Math.max(0, 1 - dist / maxLen);
+}
+
+function parseQuery(query) {
+  const q = query.toLowerCase().trim();
+  let detectedType = null;
+  let detectedCity = null;
+  let detectedState = null;
+  let detectedName = null;
+  let isEmergency = false;
+
+  if (/\b(emergency|urgent|nearest|closest|now|immediate|icu)\b/.test(q)) {
+    isEmergency = true;
+  }
+
+  for (const [type, keywords] of Object.entries(typeKeywords)) {
+    for (const kw of keywords) {
+      if (q.includes(kw)) {
+        detectedType = type;
+        break;
+      }
+    }
+    if (detectedType) break;
+  }
+
+  for (const [alias, state] of Object.entries(stateAliases)) {
+    if (q.includes(alias)) {
+      detectedState = state;
+      break;
+    }
+  }
+
+  if (!detectedCity) {
+    const cities = [...new Set(hospitals.map(h => h.city.toLowerCase()))];
+    for (const c of cities) {
+      if (q.includes(c)) {
+        detectedCity = c;
+        break;
+      }
+    }
+  }
+
+  const nameWords = q.replace(/\b(find|hospital|hospitals|in|near|at|the|a|an|show|get|locate|search|for|me|my|any|all|best|top|good|india|indian)\b/g, '').trim();
+  if (nameWords.length > 3) {
+    for (const h of hospitals) {
+      if (fuzzyScore(nameWords, h.name) > 0.5) {
+        detectedName = h.name;
+        break;
+      }
+    }
+  }
+
+  return { detectedType, detectedCity, detectedState, detectedName, isEmergency };
+}
+
+function scoreHospital(hospital, parsed) {
+  let score = 0;
+
+  if (parsed.detectedName) {
+    score += fuzzyScore(parsed.detectedName, hospital.name) * 100;
+    return score;
+  }
+
+  if (parsed.detectedType && hospital.type === parsed.detectedType) score += 40;
+  if (parsed.detectedCity && hospital.city.toLowerCase() === parsed.detectedCity.toLowerCase()) score += 35;
+  if (parsed.detectedState && hospital.state === parsed.detectedState) score += 30;
+  if (parsed.isEmergency && hospital.emergency) score += 20;
+
+  const terms = document.getElementById('searchInput').value.toLowerCase().split(/\s+/).filter(w => w.length > 2);
+  for (const term of terms) {
+    if (['find','hospital','hospitals','near','in','the','show','best','top','any','all','get','locate','search','for','me','my','india','indian'].includes(term)) continue;
+    score += fuzzyScore(term, hospital.name) * 8;
+    score += fuzzyScore(term, hospital.city) * 6;
+    score += fuzzyScore(term, hospital.state.toLowerCase()) * 5;
+    score += fuzzyScore(term, hospital.specialty.toLowerCase()) * 5;
+    score += fuzzyScore(term, hospital.type) * 4;
+  }
+
+  score += hospital.rating * 2;
+  return score;
+}
+
+// ============================================================
+// APPLICATION STATE
+// ============================================================
+let currentFilter = 'all';
+let currentResults = [];
+let selectedHospital = null;
+let map = null;
+let markers = [];
+let userMarker = null;
+let userCircle = null;
+let sortMode = null;
+
+// ============================================================
+// MAP INITIALIZATION
+// ============================================================
+function initMap() {
+  map = L.map('map', {
+    center: [22.5, 79.0],
+    zoom: 5,
+    minZoom: 4,
+    maxZoom: 18,
+    zoomControl: true
+  });
+
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '&copy; OpenStreetMap contributors'
+  }).addTo(map);
+
+  showAllHospitals();
+}
+
+function createMarkerIcon(isActive) {
+  const div = document.createElement('div');
+  div.style.position = 'relative';
+  const marker = document.createElement('div');
+  marker.className = 'custom-marker' + (isActive ? ' active-marker' : '');
+  marker.innerHTML = '<i class="fa-solid fa-hospital"></i>';
+  div.appendChild(marker);
+  if (!isActive) {
+    const pulse = document.createElement('div');
+    pulse.className = 'marker-pulse';
+    div.appendChild(pulse);
+  }
+  return L.divIcon({
+    html: div.outerHTML,
+    className: '',
+    iconSize: [isActive ? 44 : 36, isActive ? 44 : 36],
+    iconAnchor: [isActive ? 22 : 18, isActive ? 44 : 36],
+    popupAnchor: [0, -40]
+  });
+}
+
+function clearMarkers() {
+  markers.forEach(m => map.removeLayer(m));
+  markers = [];
+}
+
+function showHospitalsOnMap(hospitalsToShow) {
+  clearMarkers();
+  hospitalsToShow.forEach(h => {
+    const isActive = selectedHospital && selectedHospital.id === h.id;
+    const marker = L.marker([h.lat, h.lng], { icon: createMarkerIcon(isActive) })
+      .addTo(map)
+      .on('click', () => selectHospital(h));
+    marker.bindTooltip(h.name, {
+      direction: 'top',
+      offset: [0, -36],
+      className: 'hospital-tooltip'
+    });
+    markers.push(marker);
+  });
+  document.getElementById('mapStatShown').textContent = hospitalsToShow.length;
+  const avgRating = hospitalsToShow.length
+    ? (hospitalsToShow.reduce((s, h) => s + h.rating, 0) / hospitalsToShow.length).toFixed(1)
+    : '0';
+  document.getElementById('mapStatAvg').textContent = avgRating;
+}
+
+function showAllHospitals() {
+  currentResults = [...hospitals];
+  renderResults(currentResults);
+  showHospitalsOnMap(currentResults);
+  fitMapToHospitals(currentResults);
+}
+
+function fitMapToHospitals(list) {
+  if (list.length === 0) return;
+  if (list.length === 1) {
+    map.setView([list[0].lat, list[0].lng], 12);
+    return;
+  }
+  const bounds = L.latLngBounds(list.map(h => [h.lat, h.lng]));
+  map.fitBounds(bounds, { padding: [50, 50], maxZoom: 12 });
+}
+
+// ============================================================
+// SEARCH & FILTER LOGIC
+// ============================================================
+function handleSearch() {
+  const val = document.getElementById('searchInput').value;
+  document.getElementById('clearBtn').style.display = val.length > 0 ? 'flex' : 'none';
+  showSuggestions();
+}
+
+function showSuggestions() {
+  const val = document.getElementById('searchInput').value.toLowerCase().trim();
+  const box = document.getElementById('suggestions');
+  if (val.length < 2) { box.classList.remove('visible'); return; }
+
+  const suggestions = [];
+  const parsed = parseQuery(val);
+
+  hospitals.forEach(h => {
+    const score = fuzzyScore(val, h.name);
+    if (score > 0.35) suggestions.push({ text: h.name, sub: h.city + ', ' + h.state, icon: 'fa-hospital', action: 'name', data: h.name, score });
+  });
+
+  const cities = [...new Set(hospitals.map(h => h.city))];
+  cities.forEach(c => {
+    if (fuzzyScore(val, c) > 0.45 && !suggestions.find(s => s.text === c)) {
+      const count = hospitals.filter(h => h.city === c).length;
+      const st = hospitals.find(h=>h.city===c).state;
+      suggestions.push({ text: c, sub: count + ' hospitals in ' + st, icon: 'fa-city', action: 'city', data: c, score: 0.5 });
+    }
+  });
+
+  const states = [...new Set(hospitals.map(h => h.state))];
+  states.forEach(s => {
+    if (fuzzyScore(val, s) > 0.45 && !suggestions.find(x => x.text === s)) {
+      const count = hospitals.filter(h => h.state === s).length;
+      suggestions.push({ text: s, sub: count + ' hospitals', icon: 'fa-map', action: 'state', data: s, score: 0.45 });
+    }
+  });
+
+  if (!parsed.detectedType) {
+    for (const [type, keywords] of Object.entries(typeKeywords)) {
+      if (keywords.some(k => val.includes(k))) {
+        const count = hospitals.filter(h => h.type === type).length;
+        if (!suggestions.find(s => s.action === 'type' && s.data === type)) {
+          suggestions.push({ text: type.charAt(0).toUpperCase() + type.slice(1) + ' Hospitals', sub: count + ' facilities across India', icon: 'fa-tag', action: 'type', data: type, score: 0.3 });
+        }
+      }
+    }
+  }
+
+  suggestions.sort((a, b) => b.score - a.score);
+  const top = suggestions.slice(0, 6);
+
+  if (top.length === 0) { box.classList.remove('visible'); return; }
+
+  box.innerHTML = top.map(s => {
+    const safeData = s.data.replace(/'/g, "\'");
+    return '<div class="suggestion-item" onclick="applySuggestion(\'' + s.action + '\', \'' + safeData + '\')">' +
+      '<i class="fa-solid ' + s.icon + '" style="color:var(--primary);width:16px;text-align:center;"></i>' +
+      '<div>' +
+      '<div style="color:var(--fg);font-size:0.85rem;font-weight:500;">' + s.text + '</div>' +
+      '<div style="color:var(--muted);font-size:0.7rem;">' + s.sub + '</div>' +
+      '</div></div>';
+  }).join('');
+  box.classList.add('visible');
+}
+
+function applySuggestion(action, data) {
+  const input = document.getElementById('searchInput');
+  document.getElementById('suggestions').classList.remove('visible');
+
+  if (action === 'name') {
+    input.value = data;
+    executeSearch();
+  } else if (action === 'city') {
+    input.value = 'hospitals in ' + data;
+    executeSearch();
+  } else if (action === 'state') {
+    input.value = 'hospitals in ' + data;
+    executeSearch();
+  } else if (action === 'type') {
+    setFilter(data, document.querySelector('.chip[data-filter="' + data + '"]'));
+    input.value = '';
+    executeSearch();
+  }
+}
+
+function handleKeydown(e) {
+  if (e.key === 'Enter') {
+    document.getElementById('suggestions').classList.remove('visible');
+    executeSearch();
+  }
+  if (e.key === 'Escape') {
+    document.getElementById('suggestions').classList.remove('visible');
+    document.getElementById('searchInput').blur();
+  }
+}
+
+function executeSearch() {
+  document.getElementById('suggestions').classList.remove('visible');
+  const query = document.getElementById('searchInput').value.trim();
+
+  if (!query) {
+    showAllHospitals();
+    hideAIInsight();
+    return;
+  }
+
+  showAIInsight('Searching across India for matching hospitals...');
+
+  setTimeout(() => {
+    const parsed = parseQuery(query);
+    let scored = hospitals.map(h => ({ ...h, score: scoreHospital(h, parsed) }));
+    scored = scored.filter(h => h.score > 5);
+    scored.sort((a, b) => b.score - a.score);
+
+    if (currentFilter !== 'all') {
+      scored = scored.filter(h => h.type === currentFilter);
+    }
+
+    currentResults = scored;
+    renderResults(currentResults);
+    showHospitalsOnMap(currentResults);
+
+    if (currentResults.length > 0) {
+      fitMapToHospitals(currentResults);
+      const parts = [];
+      if (parsed.detectedType) parts.push('type: ' + parsed.detectedType);
+      if (parsed.detectedCity) parts.push('city: ' + parsed.detectedCity);
+      if (parsed.detectedState) parts.push('state: ' + parsed.detectedState);
+      if (parsed.isEmergency) parts.push('emergency: yes');
+      const insightMsg = parts.length > 0
+        ? 'Found ' + currentResults.length + ' hospitals matching [' + parts.join(', ') + ']. Top: ' + currentResults[0].name + ' (' + currentResults[0].rating + '\u2B50)'
+        : 'Found ' + currentResults.length + ' hospitals. Best match: ' + currentResults[0].name + '.';
+      showAIInsight(insightMsg);
+    } else {
+      showAIInsight('No hospitals match your query. Try different keywords or remove filters.');
+    }
+  }, 250);
+}
+
+function clearSearch() {
+  document.getElementById('searchInput').value = '';
+  document.getElementById('clearBtn').style.display = 'none';
+  document.getElementById('suggestions').classList.remove('visible');
+  hideAIInsight();
+  showAllHospitals();
+}
+
+function setFilter(filter, el) {
+  currentFilter = filter;
+  document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+  if (el) el.classList.add('active');
+  const query = document.getElementById('searchInput').value.trim();
+  if (query) {
+    executeSearch();
+  } else {
+    const filtered = filter === 'all' ? [...hospitals] : hospitals.filter(h => h.type === filter);
+    currentResults = filtered;
+    renderResults(currentResults);
+    showHospitalsOnMap(currentResults);
+    fitMapToHospitals(currentResults);
+  }
+}
+
+function sortResults(mode) {
+  sortMode = mode;
+  if (mode === 'rating') {
+    currentResults.sort((a, b) => b.rating - a.rating);
+  } else if (mode === 'name') {
+    currentResults.sort((a, b) => a.name.localeCompare(b.name));
+  }
+  renderResults(currentResults);
+}
+
+// ============================================================
+// RENDER RESULTS
+// ============================================================
+function getTypeColor(type) {
+  const colors = {
+    general: { bg: 'rgba(0,82,204,0.1)', fg: '#0052CC' },
+    cardiac: { bg: 'rgba(239,68,68,0.1)', fg: '#EF4444' },
+    pediatric: { bg: 'rgba(245,158,11,0.1)', fg: '#F59E0B' },
+    orthopedic: { bg: 'rgba(139,92,246,0.1)', fg: '#8B5CF6' },
+    neuro: { bg: 'rgba(16,185,129,0.1)', fg: '#10B981' },
+    oncology: { bg: 'rgba(236,72,153,0.1)', fg: '#EC4899' },
+    trauma: { bg: 'rgba(249,115,22,0.1)', fg: '#F97316' },
+    maternity: { bg: 'rgba(236,72,153,0.1)', fg: '#EC4899' },
+    eye: { bg: 'rgba(6,182,212,0.1)', fg: '#06B6D4' },
+    transplant: { bg: 'rgba(34,197,94,0.1)', fg: '#22C55E' }
+  };
+  return colors[type] || colors.general;
+}
+
+function renderStars(rating) {
+  const full = Math.floor(rating);
+  const half = rating - full >= 0.5 ? 1 : 0;
+  const empty = 5 - full - half;
+  let html = '';
+  for (let i = 0; i < full; i++) html += '<i class="fa-solid fa-star star-filled"></i>';
+  if (half) html += '<i class="fa-solid fa-star-half-stroke star-filled"></i>';
+  for (let i = 0; i < empty; i++) html += '<i class="fa-regular fa-star star-empty"></i>';
+  return html;
+}
+
+function renderResults(list) {
+  const container = document.getElementById('resultsList');
+  document.getElementById('resultCount').textContent = list.length;
+
+  if (list.length === 0) {
+    container.innerHTML = '<div class="no-results"><i class="fa-solid fa-magnifying-glass text-4xl mb-4" style="color:var(--border);"></i><p class="text-lg font-medium mb-2" style="color:var(--fg);">No hospitals found</p><p class="text-sm" style="color:var(--muted);">Try different keywords or remove filters</p></div>';
+    return;
+  }
+
+  container.innerHTML = list.map((h, i) => {
+    const tc = getTypeColor(h.type);
+    const isActive = selectedHospital && selectedHospital.id === h.id;
+    return '<div class="hospital-card ' + (isActive ? 'active' : '') + ' fade-in" style="animation-delay:' + Math.min(i * 0.04, 0.4) + 's" onclick="selectHospital(hospitals.find(x=>x.id===' + h.id + '))">' +
+      '<div class="flex items-start justify-between mb-2">' +
+        '<h3 class="font-semibold text-sm leading-tight" style="color:var(--fg);flex:1;margin-right:8px;">' + h.name + '</h3>' +
+        '<span class="type-badge flex-shrink-0" style="background:' + tc.bg + ';color:' + tc.fg + ';">' + h.type + '</span>' +
+      '</div>' +
+      '<div class="flex items-center gap-1 mb-2">' +
+        renderStars(h.rating) +
+        '<span class="text-xs ml-1" style="color:var(--muted);">' + h.rating + '</span>' +
+      '</div>' +
+      '<div class="flex items-start gap-2 mb-1.5">' +
+        '<i class="fa-solid fa-location-dot mt-0.5 text-xs" style="color:var(--primary);"></i>' +
+        '<p class="text-xs leading-relaxed" style="color:var(--fg-secondary);">' + h.city + ', ' + h.state + '</p>' +
+      '</div>' +
+      '<div class="flex items-center gap-3 text-xs flex-wrap" style="color:var(--muted);">' +
+        (h.beds > 0 ? '<span><i class="fa-solid fa-bed mr-1" style="color:var(--primary);"></i>' + h.beds + ' beds</span>' : '') +
+        '<span class="state-badge"><i class="fa-solid fa-map-pin mr-1"></i>' + h.state + '</span>' +
+        (h.emergency ? '<span style="color:var(--danger);font-weight:600;"><i class="fa-solid fa-kit-medical mr-1"></i>24/7 ER</span>' : '') +
+      '</div>' +
+    '</div>';
+  }).join('');
+}
+
+// ============================================================
+// HOSPITAL SELECTION & DETAIL PANEL
+// ============================================================
+function selectHospital(h) {
+  selectedHospital = h;
+  document.querySelectorAll('.hospital-card').forEach(c => c.classList.remove('active'));
+  const cards = document.querySelectorAll('.hospital-card');
+  const idx = currentResults.findIndex(r => r.id === h.id);
+  if (idx >= 0 && cards[idx]) cards[idx].classList.add('active');
+  showHospitalsOnMap(currentResults);
+  map.setView([h.lat, h.lng], 14, { animate: true, duration: 0.8 });
+  openDetail(h);
+}
+
+function openDetail(h) {
+  const tc = getTypeColor(h.type);
+  const age = new Date().getFullYear() - h.founded;
+
+  const insights = [];
+  if (h.rating >= 4.7) insights.push('Top-tier facility with exceptional patient outcomes');
+  if (h.beds > 1000) insights.push('Large-scale facility with extensive bed capacity');
+  if (h.founded < 1960) insights.push('Established institution with ' + age + '+ years of medical excellence');
+  if (h.emergency) insights.push('Equipped with 24/7 emergency and trauma services');
+  if (h.type === 'oncology') insights.push('Specialized cancer treatment with research capabilities');
+  if (h.type === 'cardiac') insights.push('Advanced cardiac care with interventional capabilities');
+  if (h.type === 'pediatric') insights.push('Dedicated pediatric specialists and child-friendly facilities');
+  if (h.type === 'neuro') insights.push('Leading neurological diagnostics and neurosurgery');
+  if (h.type === 'eye') insights.push('Advanced ophthalmology with cutting-edge surgical technology');
+  if (h.type === 'transplant') insights.push('Specialized organ transplant coordination and support');
+
+  const nearby = hospitals
+    .filter(n => n.id !== h.id)
+    .map(n => ({ ...n, distance: getDistance(h.lat, h.lng, n.lat, n.lng) }))
+    .sort((a, b) => a.distance - b.distance)
+    .slice(0, 3);
+
+  let html = '<div class="mb-6">' +
+    '<div class="flex items-center gap-2 mb-3">' +
+      '<span class="type-badge" style="background:' + tc.bg + ';color:' + tc.fg + ';">' + h.type + '</span>' +
+      (h.emergency ? '<span class="type-badge" style="background:rgba(239,68,68,0.1);color:#EF4444;">EMERGENCY</span>' : '') +
+    '</div>' +
+    '<h2 class="text-xl font-bold mb-2" style="color:var(--fg);line-height:1.3;">' + h.name + '</h2>' +
+    '<p class="text-sm" style="color:var(--primary);">' + h.specialty + '</p>' +
+  '</div>';
+
+  html += '<div class="p-4 rounded-xl mb-5" style="background:var(--primary-light);border:1px solid rgba(0,82,204,0.1);">' +
+    '<div class="flex items-center gap-2 mb-3">' +
+      '<i class="fa-solid fa-circle-info" style="color:var(--primary);"></i>' +
+      '<span class="text-xs font-semibold" style="color:var(--primary);font-family:&apos;JetBrains Mono&apos;,monospace;">HOSPITAL INSIGHTS</span>' +
+    '</div>' +
+    '<ul class="space-y-2">' +
+    insights.map(i => '<li class="flex items-start gap-2 text-sm" style="color:var(--fg-secondary);"><i class="fa-solid fa-check-circle mt-0.5" style="color:var(--success);font-size:10px;"></i>' + i + '</li>').join('') +
+    '</ul></div>';
+
+  html += '<div class="mb-5">' +
+    '<div class="text-xs font-semibold mb-3" style="color:var(--muted);font-family:&apos;JetBrains Mono&apos;,monospace;">ADDRESS</div>' +
+    '<div class="p-4 rounded-xl" style="background:var(--bg);border:1px solid var(--border);">' +
+      '<div class="flex items-start gap-3 mb-3">' +
+        '<i class="fa-solid fa-location-dot mt-1" style="color:var(--primary);"></i>' +
+        '<div>' +
+          '<p class="text-sm font-medium" style="color:var(--fg);">' + h.address + '</p>' +
+          '<p class="text-sm" style="color:var(--fg-secondary);">' + h.city + ', ' + h.state + '</p>' +
+          '<p class="text-xs mt-1" style="color:var(--muted);font-family:&apos;JetBrains Mono&apos;,monospace;">' + h.lat.toFixed(4) + '\u00b0N, ' + Math.abs(h.lng).toFixed(4) + '\u00b0' + (h.lng >= 0 ? 'E' : 'W') + '</p>' +
+        '</div>' +
+      '</div>' +
+      '<button onclick="copyAddress(\'' + h.address + ', ' + h.city + ', ' + h.state + '\')" class="w-full py-2.5 rounded-lg text-xs font-semibold transition-all hover:brightness-110 active:scale-[0.98]" style="background:var(--primary);color:#fff;">' +
+        '<i class="fa-solid fa-copy mr-1"></i>Copy Full Address</button>' +
+    '</div></div>';
+
+  html += '<div class="mb-5">' +
+    '<div class="text-xs font-semibold mb-3" style="color:var(--muted);font-family:&apos;JetBrains Mono&apos;,monospace;">CONTACT</div>' +
+    '<div class="space-y-2">' +
+      '<div class="flex items-center gap-3 p-3 rounded-xl" style="background:var(--bg);border:1px solid var(--border);">' +
+        '<i class="fa-solid fa-phone" style="color:var(--primary);width:16px;text-align:center;"></i>' +
+        '<span class="text-sm" style="color:var(--fg);">' + h.phone + '</span>' +
+      '</div>' +
+      '<a href="https://www.google.com/maps/search/?api=1&query=' + h.lat + ',' + h.lng + '" target="_blank" class="flex items-center gap-3 p-3 rounded-xl transition-all hover:brightness-95" style="background:var(--bg);border:1px solid var(--border);text-decoration:none;">' +
+        '<i class="fa-solid fa-diamond-turn-right" style="color:var(--primary);width:16px;text-align:center;"></i>' +
+        '<span class="text-sm" style="color:var(--fg);">Get Directions on Google Maps</span>' +
+      '</a>' +
+    '</div></div>';
+
+  html += '<div class="mb-5">' +
+    '<div class="text-xs font-semibold mb-3" style="color:var(--muted);font-family:&apos;JetBrains Mono&apos;,monospace;">FACILITY DATA</div>' +
+    '<div class="grid grid-cols-2 gap-2">' +
+      '<div class="p-3 rounded-xl text-center" style="background:var(--bg);border:1px solid var(--border);"><div class="text-lg font-bold" style="color:var(--primary);font-family:&apos;JetBrains Mono&apos;,monospace;">' + (h.beds > 0 ? h.beds : 'N/A') + '</div><div class="text-xs" style="color:var(--muted);">Total Beds</div></div>' +
+      '<div class="p-3 rounded-xl text-center" style="background:var(--bg);border:1px solid var(--border);"><div class="text-lg font-bold" style="color:var(--warning);font-family:&apos;JetBrains Mono&apos;,monospace;">' + h.rating + '</div><div class="text-xs" style="color:var(--muted);">Rating / 5.0</div></div>' +
+      '<div class="p-3 rounded-xl text-center" style="background:var(--bg);border:1px solid var(--border);"><div class="text-lg font-bold" style="color:var(--info);font-family:&apos;JetBrains Mono&apos;,monospace;">' + h.founded + '</div><div class="text-xs" style="color:var(--muted);">Founded</div></div>' +
+      '<div class="p-3 rounded-xl text-center" style="background:var(--bg);border:1px solid var(--border);"><div class="text-lg font-bold" style="color:var(--fg);font-family:&apos;JetBrains Mono&apos;,monospace;">' + age + '</div><div class="text-xs" style="color:var(--muted);">Years Active</div></div>' +
+    '</div></div>';
+
+  if (nearby.length > 0) {
+    html += '<div class="mb-5">' +
+      '<div class="text-xs font-semibold mb-3" style="color:var(--muted);font-family:&apos;JetBrains Mono&apos;,monospace;">NEARBY FACILITIES</div>' +
+      '<div class="space-y-2">' +
+      nearby.map(n => {
+        const ntc = getTypeColor(n.type);
+        const distText = n.distance < 1 ? Math.round(n.distance * 1000) + 'm' : n.distance.toFixed(1) + 'km';
+        return '<div class="flex items-center gap-3 p-3 rounded-xl cursor-pointer transition-all hover:bg-gray-50" style="background:var(--bg);border:1px solid var(--border);" onclick="selectHospital(hospitals.find(x=>x.id===' + n.id + '))">' +
+          '<div class="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0" style="background:' + ntc.bg + ';"><i class="fa-solid fa-hospital text-xs" style="color:' + ntc.fg + ';"></i></div>' +
+          '<div class="flex-1 min-w-0"><p class="text-xs font-medium truncate" style="color:var(--fg);">' + n.name + '</p><p class="text-xs" style="color:var(--muted);">' + n.city + ', ' + n.state + '</p></div>' +
+          '<span class="text-xs flex-shrink-0 font-semibold" style="color:var(--primary);font-family:&apos;JetBrains Mono&apos;,monospace;">' + distText + '</span>' +
+        '</div>';
+      }).join('') +
+      '</div></div>';
+  }
+
+  document.getElementById('detailContent').innerHTML = html;
+  document.getElementById('detailPanel').classList.add('open');
+  document.getElementById('detailOverlay').classList.add('open');
+}
+
+function closeDetail() {
+  document.getElementById('detailPanel').classList.remove('open');
+  document.getElementById('detailOverlay').classList.remove('open');
+  selectedHospital = null;
+  document.querySelectorAll('.hospital-card').forEach(c => c.classList.remove('active'));
+  showHospitalsOnMap(currentResults);
+}
+
+function copyAddress(text) {
+  navigator.clipboard.writeText(text).then(() => {
+    showToast('Address copied to clipboard', 'fa-circle-check', 'var(--success)');
+  }).catch(() => {
+    showToast('Address: ' + text, 'fa-location-dot', 'var(--primary)');
+  });
+}
+
+// ============================================================
+// GEOLOCATION
+// ============================================================
+function geoLocate() {
+  const btn = document.getElementById('geoBtn');
+  btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i><span class="hidden sm:inline">Locating...</span>';
+  btn.style.pointerEvents = 'none';
+
+  if (!navigator.geolocation) {
+    showToast('Geolocation is not supported by your browser', 'fa-triangle-exclamation', 'var(--warning)');
+    resetGeoBtn();
+    return;
+  }
+
+  navigator.geolocation.getCurrentPosition(
+    (pos) => {
+      const { latitude, longitude, accuracy } = pos.coords;
+
+      if (userMarker) map.removeLayer(userMarker);
+      if (userCircle) map.removeLayer(userCircle);
+
+      const userIcon = L.divIcon({
+        html: '<div class="user-marker-dot"></div>',
+        className: '',
+        iconSize: [18, 18],
+        iconAnchor: [9, 9]
+      });
+      userMarker = L.marker([latitude, longitude], { icon: userIcon }).addTo(map);
+      userMarker.bindPopup('<b>Your Location</b><br>Accuracy: ' + Math.round(accuracy) + 'm');
+
+      userCircle = L.circle([latitude, longitude], {
+        radius: accuracy,
+        color: '#00C6FF',
+        fillColor: '#00C6FF',
+        fillOpacity: 0.08,
+        weight: 1.5,
+        dashArray: '6 4'
+      }).addTo(map);
+
+      const withDist = hospitals.map(h => ({
+        ...h,
+        distance: getDistance(latitude, longitude, h.lat, h.lng)
+      })).sort((a, b) => a.distance - b.distance);
+
+      currentResults = withDist;
+      renderResults(currentResults);
+      showHospitalsOnMap(currentResults);
+
+      // Re-add user marker on top of hospital markers
+      map.removeLayer(userMarker);
+      map.removeLayer(userCircle);
+      userMarker = L.marker([latitude, longitude], { icon: userIcon }).addTo(map);
+      userCircle = L.circle([latitude, longitude], {
+        radius: accuracy,
+        color: '#00C6FF',
+        fillColor: '#00C6FF',
+        fillOpacity: 0.08,
+        weight: 1.5,
+        dashArray: '6 4'
+      }).addTo(map);
+
+      map.setView([latitude, longitude], 10, { animate: true });
+
+      const nearest = withDist[0];
+      const distText = nearest.distance < 1 ? Math.round(nearest.distance * 1000) + 'm' : nearest.distance.toFixed(1) + 'km';
+      showAIInsight('Your location detected. Nearest hospital: ' + nearest.name + ' (' + distText + ' away). Showing all ' + withDist.length + ' hospitals ranked by distance.');
+      showToast('Found your location. ' + withDist.length + ' hospitals ranked by distance.', 'fa-location-crosshairs', 'var(--info)');
+      resetGeoBtn();
+    },
+    (err) => {
+      let msg = 'Unable to get location';
+      if (err.code === 1) msg = 'Location permission denied. Please enable location access.';
+      else if (err.code === 2) msg = 'Location unavailable. Please check your device settings.';
+      else if (err.code === 3) msg = 'Location request timed out. Please try again.';
+      showToast(msg, 'fa-triangle-exclamation', 'var(--danger)');
+      resetGeoBtn();
+    },
+    { enableHighAccuracy: true, timeout: 15000, maximumAge: 0 }
+  );
+}
+
+function resetGeoBtn() {
+  const btn = document.getElementById('geoBtn');
+  btn.innerHTML = '<i class="fa-solid fa-location-crosshairs"></i><span class="hidden sm:inline">Near Me</span>';
+  btn.style.pointerEvents = 'auto';
+}
+
+function getDistance(lat1, lon1, lat2, lon2) {
+  const R = 6371;
+  const dLat = (lat2 - lat1) * Math.PI / 180;
+  const dLon = (lon2 - lon1) * Math.PI / 180;
+  const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+    Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+    Math.sin(dLon/2) * Math.sin(dLon/2);
+  return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+}
+
+// ============================================================
+// UI HELPERS
+// ============================================================
+function showAIInsight(text) {
+  const el = document.getElementById('aiInsight');
+  document.getElementById('aiInsightText').textContent = text;
+  el.style.display = 'block';
+}
+
+function hideAIInsight() {
+  document.getElementById('aiInsight').style.display = 'none';
+}
+
+function showToast(msg, icon, color) {
+  const toast = document.getElementById('toast');
+  document.getElementById('toastMsg').textContent = msg;
+  document.getElementById('toastIcon').className = 'fa-solid ' + icon;
+  document.getElementById('toastIcon').style.color = color;
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 4000);
+}
+
+document.addEventListener('click', (e) => {
+  if (!e.target.closest('#searchInput') && !e.target.closest('#suggestions')) {
+    document.getElementById('suggestions').classList.remove('visible');
+  }
+});
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeDetail();
+});
+
+// ============================================================
+// INITIALIZATION
+// ============================================================
+function init() {
+  document.getElementById('totalCount').textContent = hospitals.length;
+  document.getElementById('stateCount').textContent = new Set(hospitals.map(h => h.state)).size;
+  document.getElementById('typeCount').textContent = new Set(hospitals.map(h => h.type)).size;
+  initMap();
+  renderResults(hospitals);
+  showHospitalsOnMap(hospitals);
+}
+
+document.addEventListener('DOMContentLoaded', init);
+</script>
+</body>
+</html>

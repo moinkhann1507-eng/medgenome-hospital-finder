@@ -1,0 +1,30 @@
+// This is your Prisma schema file,
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Hospital {
+  id          Int      @id
+  name        String
+  address     String   @default("")
+  city        String   @default("")
+  state       String   @default("")
+  district    String   @default("")
+  pincode     String   @default("")
+  lat         Float?
+  lng         Float?
+  category    String   @default("general")
+  careType    String   @default("")
+  discipline  String   @default("")
+  ownership   String   @default("Unknown")
+  beds        String   @default("0")
+  emergency   Boolean  @default(false)
+  phones      String   @default("[]")
+  specialties String   @default("")
+  facilities  String   @default("")
+}

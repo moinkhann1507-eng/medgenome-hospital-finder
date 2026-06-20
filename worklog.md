@@ -80,3 +80,25 @@ Stage Summary:
 - 4 deployment options documented
 - All TypeScript errors resolved
 - App is ready for deployment
+---
+Task ID: 4
+Agent: Main Agent
+Task: Set up free deployment (Vercel + Supabase)
+
+Work Log:
+- Recommended Vercel + Supabase as best free deployment option
+- Updated Prisma schema to support PostgreSQL (with indexes for performance)
+- Created switch-db.js script to toggle between SQLite (dev) and PostgreSQL (prod)
+- Created import-to-pg.js script to import 30K hospitals to Supabase
+- Updated package.json with new scripts (db:import, db:switch-sqlite, db:switch-pg)
+- Created .env.example with Supabase connection string template
+- Updated .gitignore for proper repo structure
+- Tested production build with both SQLite and PostgreSQL schemas — both pass
+- Created comprehensive DEPLOYMENT.md with step-by-step guide
+- Total cost: $0/month (Vercel free + Supabase free)
+
+Stage Summary:
+- Production build verified with PostgreSQL
+- 5-step deployment guide created
+- All deployment files ready: Dockerfile, railway.toml, scripts
+- App ready for Vercel + Supabase deployment

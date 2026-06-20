@@ -31,7 +31,10 @@ yarn-error.log*
 .pnpm-debug.log*
 
 # env files (can opt-in for committing if needed)
-.env*
+.env
+.env.local
+.env.*.local
+!.env.example
 
 # vercel
 .vercel
@@ -52,3 +55,14 @@ prompt
 server.log
 # Skills directory
 /skills/
+
+# Database (generated, not for repo)
+/db/
+*.db
+
+# Worklog
+worklog.md
+
+# AI server log
+ai-server.log
+next.log

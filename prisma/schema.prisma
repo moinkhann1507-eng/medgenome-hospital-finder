@@ -1,4 +1,6 @@
 // This is your Prisma schema file,
+// Supports both SQLite (dev) and PostgreSQL (Supabase/Vercel)
+
 generator client {
   provider = "prisma-client-js"
 }

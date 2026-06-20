@@ -1,0 +1,10306 @@
+[
+  {
+    "name": "ENT",
+    "count": 313
+  },
+  {
+    "name": "Cardiology",
+    "count": 298
+  },
+  {
+    "name": "Urology",
+    "count": 275
+  },
+  {
+    "name": "Dermatology",
+    "count": 262
+  },
+  {
+    "name": "Neurology",
+    "count": 251
+  },
+  {
+    "name": "General Surgery",
+    "count": 238
+  },
+  {
+    "name": "Gastroenterology",
+    "count": 237
+  },
+  {
+    "name": "Nephrology",
+    "count": 235
+  },
+  {
+    "name": "Ophthalmology",
+    "count": 233
+  },
+  {
+    "name": "Plastic Surgery",
+    "count": 187
+  },
+  {
+    "name": "Psychiatry",
+    "count": 186
+  },
+  {
+    "name": "Endocrinology",
+    "count": 167
+  },
+  {
+    "name": "Physiotherapy",
+    "count": 167
+  },
+  {
+    "name": "General Medicine",
+    "count": 164
+  },
+  {
+    "name": "Radiology",
+    "count": 160
+  },
+  {
+    "name": "Orthopedics",
+    "count": 153
+  },
+  {
+    "name": "Pediatrics",
+    "count": 150
+  },
+  {
+    "name": "Gynaecology",
+    "count": 137
+  },
+  {
+    "name": "Neuro Surgery",
+    "count": 137
+  },
+  {
+    "name": "Obstetrics and Gynaecology",
+    "count": 127
+  },
+  {
+    "name": "Dentistry",
+    "count": 125
+  },
+  {
+    "name": "Orthopaedics",
+    "count": 125
+  },
+  {
+    "name": "Oncology",
+    "count": 124
+  },
+  {
+    "name": "Pulmonology",
+    "count": 122
+  },
+  {
+    "name": "Internal Medicine",
+    "count": 121
+  },
+  {
+    "name": "Critical Care",
+    "count": 107
+  },
+  {
+    "name": "Pathology",
+    "count": 100
+  },
+  {
+    "name": "Anesthesiology",
+    "count": 98
+  },
+  {
+    "name": "Rheumatology",
+    "count": 96
+  },
+  {
+    "name": "Diabetology",
+    "count": 95
+  },
+  {
+    "name": "Paediatrics",
+    "count": 92
+  },
+  {
+    "name": "Surgical Oncology",
+    "count": 75
+  },
+  {
+    "name": "Vascular Surgery",
+    "count": 73
+  },
+  {
+    "name": "Medicine",
+    "count": 71
+  },
+  {
+    "name": "Anaesthesiology",
+    "count": 68
+  },
+  {
+    "name": "Pediatric Surgery",
+    "count": 66
+  },
+  {
+    "name": "Surgery",
+    "count": 63
+  },
+  {
+    "name": "Medical Oncology",
+    "count": 63
+  },
+  {
+    "name": "Cardiothoracic Surgery",
+    "count": 62
+  },
+  {
+    "name": "Eye Care",
+    "count": 61
+  },
+  {
+    "name": "Neonatology",
+    "count": 57
+  },
+  {
+    "name": "Laparoscopic Surgery",
+    "count": 56
+  },
+  {
+    "name": "Paediatric Surgery",
+    "count": 55
+  },
+  {
+    "name": "Dental",
+    "count": 54
+  },
+  {
+    "name": "Nuclear Medicine",
+    "count": 52
+  },
+  {
+    "name": "Bariatric Surgery",
+    "count": 52
+  },
+  {
+    "name": "Obstetricsand Gynaecology",
+    "count": 50
+  },
+  {
+    "name": "Emergency Medicine",
+    "count": 49
+  },
+  {
+    "name": "Paediatric",
+    "count": 48
+  },
+  {
+    "name": "Neurosurgery",
+    "count": 47
+  },
+  {
+    "name": "Gynaecology and Obstetrics",
+    "count": 47
+  },
+  {
+    "name": "haematology",
+    "count": 45
+  },
+  {
+    "name": "Pediatric",
+    "count": 41
+  },
+  {
+    "name": "Spine Surgery",
+    "count": 41
+  },
+  {
+    "name": "Pain Management",
+    "count": 39
+  },
+  {
+    "name": "Dietetics",
+    "count": 38
+  },
+  {
+    "name": "Surgical Gastroenterology",
+    "count": 37
+  },
+  {
+    "name": "Laboratory Medicine",
+    "count": 35
+  },
+  {
+    "name": "Radiation Oncology",
+    "count": 33
+  },
+  {
+    "name": "Orthopedic",
+    "count": 33
+  },
+  {
+    "name": "Glaucoma Services",
+    "count": 32
+  },
+  {
+    "name": "General and Laparoscopic Surgery",
+    "count": 31
+  },
+  {
+    "name": "Plastic and Reconstructive Surgery",
+    "count": 31
+  },
+  {
+    "name": "Chest Physician",
+    "count": 29
+  },
+  {
+    "name": "Endoscopy",
+    "count": 29
+  },
+  {
+    "name": "Interventional Radiology",
+    "count": 29
+  },
+  {
+    "name": "Cosmetic Surgery",
+    "count": 29
+  },
+  {
+    "name": "Joint Replacement Surgery",
+    "count": 29
+  },
+  {
+    "name": "Cataract Services",
+    "count": 27
+  },
+  {
+    "name": "Cosmetology",
+    "count": 26
+  },
+  {
+    "name": "Pediatric Cardiology",
+    "count": 26
+  },
+  {
+    "name": "Maxillofacial Surgery",
+    "count": 26
+  },
+  {
+    "name": "Orthopaedic",
+    "count": 26
+  },
+  {
+    "name": "Cardiovascular Surgery",
+    "count": 25
+  },
+  {
+    "name": "Glaucoma",
+    "count": 25
+  },
+  {
+    "name": "Microbiology",
+    "count": 25
+  },
+  {
+    "name": "Contact Lenses",
+    "count": 24
+  },
+  {
+    "name": "Oculoplasty Services",
+    "count": 24
+  },
+  {
+    "name": "Retina Services",
+    "count": 24
+  },
+  {
+    "name": "Cornea Services",
+    "count": 24
+  },
+  {
+    "name": "Micro-Biology",
+    "count": 23
+  },
+  {
+    "name": "IVF and Infertility",
+    "count": 23
+  },
+  {
+    "name": "Sports Medicine",
+    "count": 22
+  },
+  {
+    "name": "Respiratory Medicine",
+    "count": 22
+  },
+  {
+    "name": "Anaesthesia",
+    "count": 22
+  },
+  {
+    "name": "Cataract",
+    "count": 22
+  },
+  {
+    "name": "Obstetrics and Gynecology",
+    "count": 21
+  },
+  {
+    "name": "Andrology",
+    "count": 21
+  },
+  {
+    "name": "Computer Vision Syndrome Clinic",
+    "count": 20
+  },
+  {
+    "name": "Plastic Surgery and Cosmetic Surgery",
+    "count": 19
+  },
+  {
+    "name": "Psychology",
+    "count": 19
+  },
+  {
+    "name": "Minimal Access Surgery",
+    "count": 19
+  },
+  {
+    "name": "Obstetrics",
+    "count": 19
+  },
+  {
+    "name": "Refractive Surgery",
+    "count": 19
+  },
+  {
+    "name": "Paediatric Ophthalmology and Squint Services",
+    "count": 19
+  },
+  {
+    "name": "UVEITIS",
+    "count": 19
+  },
+  {
+    "name": "Neuro-Ophthalmology",
+    "count": 19
+  },
+  {
+    "name": "Vision Rehabilitation Services",
+    "count": 19
+  },
+  {
+    "name": "Optical Services",
+    "count": 19
+  },
+  {
+    "name": "Bio-Chemistry",
+    "count": 17
+  },
+  {
+    "name": "Geriatrics",
+    "count": 17
+  },
+  {
+    "name": "Cancer",
+    "count": 17
+  },
+  {
+    "name": "Physiotherapy and Rehabilitation",
+    "count": 17
+  },
+  {
+    "name": "Plastic and Cosmetic Surgery",
+    "count": 16
+  },
+  {
+    "name": "Retina",
+    "count": 16
+  },
+  {
+    "name": "Lasik",
+    "count": 16
+  },
+  {
+    "name": "Eye",
+    "count": 16
+  },
+  {
+    "name": "Ent",
+    "count": 16
+  },
+  {
+    "name": "Dentistry and Maxillofacial Surgery",
+    "count": 15
+  },
+  {
+    "name": "Homeopathy",
+    "count": 15
+  },
+  {
+    "name": "Pediatric Neurology",
+    "count": 15
+  },
+  {
+    "name": "Opthalmology",
+    "count": 15
+  },
+  {
+    "name": "Arthroscopy",
+    "count": 15
+  },
+  {
+    "name": "Cataract Surgery",
+    "count": 15
+  },
+  {
+    "name": "Haematology",
+    "count": 15
+  },
+  {
+    "name": "Physiology",
+    "count": 15
+  },
+  {
+    "name": "Hepatology",
+    "count": 14
+  },
+  {
+    "name": "Orthopedic Surgery",
+    "count": 14
+  },
+  {
+    "name": "Orthodontics",
+    "count": 14
+  },
+  {
+    "name": "Gynecology",
+    "count": 14
+  },
+  {
+    "name": "Joint Replacement",
+    "count": 14
+  },
+  {
+    "name": "Orthopaedic Surgery",
+    "count": 14
+  },
+  {
+    "name": "Ayurveda",
+    "count": 14
+  },
+  {
+    "name": "Accident and Emergency",
+    "count": 13
+  },
+  {
+    "name": "Transfusion Medicine",
+    "count": 13
+  },
+  {
+    "name": "Ophthalmology (Eye)",
+    "count": 13
+  },
+  {
+    "name": "Radio-Diagnosis",
+    "count": 12
+  },
+  {
+    "name": "Interventional Cardiology",
+    "count": 12
+  },
+  {
+    "name": "Genetics",
+    "count": 12
+  },
+  {
+    "name": "Pharmacology",
+    "count": 12
+  },
+  {
+    "name": "Anesthesia",
+    "count": 12
+  },
+  {
+    "name": "Pediatric Intensive Care Unit",
+    "count": 12
+  },
+  {
+    "name": "Pediatric Nephrology",
+    "count": 12
+  },
+  {
+    "name": "Ear",
+    "count": 12
+  },
+  {
+    "name": "NeuroSurgery",
+    "count": 12
+  },
+  {
+    "name": "Paediatric Cardiology",
+    "count": 12
+  },
+  {
+    "name": "Infertility",
+    "count": 12
+  },
+  {
+    "name": "Critical Care Medicine",
+    "count": 12
+  },
+  {
+    "name": "Reproductive Medicine",
+    "count": 12
+  },
+  {
+    "name": "Hematology",
+    "count": 12
+  },
+  {
+    "name": "Orthopedics and Traumatology",
+    "count": 11
+  },
+  {
+    "name": "Clinical Psychology",
+    "count": 11
+  },
+  {
+    "name": "Kidney Transplantation",
+    "count": 11
+  },
+  {
+    "name": "Infectious Diseases",
+    "count": 11
+  },
+  {
+    "name": "ENT and Head and Neck Surgery",
+    "count": 11
+  },
+  {
+    "name": "Urology.",
+    "count": 11
+  },
+  {
+    "name": "Surgical",
+    "count": 11
+  },
+  {
+    "name": "Blood Bank",
+    "count": 11
+  },
+  {
+    "name": "Gynaecology Gynaecology and Obstetrics",
+    "count": 11
+  },
+  {
+    "name": "Anatomy",
+    "count": 11
+  },
+  {
+    "name": "Allergy",
+    "count": 11
+  },
+  {
+    "name": "Pediatric Gastroenterology",
+    "count": 10
+  },
+  {
+    "name": "Cardiothoracic and Vascular Surgery",
+    "count": 10
+  },
+  {
+    "name": "Neuro Sciences",
+    "count": 10
+  },
+  {
+    "name": "Dietician",
+    "count": 10
+  },
+  {
+    "name": "Family Medicine",
+    "count": 10
+  },
+  {
+    "name": "Biochemistry",
+    "count": 10
+  },
+  {
+    "name": "Gastrointestinal Surgery",
+    "count": 10
+  },
+  {
+    "name": "Dental Care",
+    "count": 10
+  },
+  {
+    "name": "Neurosciences",
+    "count": 10
+  },
+  {
+    "name": "Plastic",
+    "count": 10
+  },
+  {
+    "name": "Cardiac Surgery",
+    "count": 10
+  },
+  {
+    "name": "Fetal Medicine",
+    "count": 9
+  },
+  {
+    "name": "Dietetics and Nutrition",
+    "count": 9
+  },
+  {
+    "name": "Nephrology and Dialysis",
+    "count": 9
+  },
+  {
+    "name": "Dental Surgery",
+    "count": 9
+  },
+  {
+    "name": "Medical Gastroenterology",
+    "count": 9
+  },
+  {
+    "name": "Pediatric Dentistry",
+    "count": 9
+  },
+  {
+    "name": "Paediatric Neurology",
+    "count": 9
+  },
+  {
+    "name": "Cornea and Refractive",
+    "count": 9
+  },
+  {
+    "name": "Oculoplastic",
+    "count": 9
+  },
+  {
+    "name": "Uvea",
+    "count": 9
+  },
+  {
+    "name": "Thoracic Surgery",
+    "count": 9
+  },
+  {
+    "name": "Lab",
+    "count": 9
+  },
+  {
+    "name": "Physiotheraphy",
+    "count": 9
+  },
+  {
+    "name": "Laboratory",
+    "count": 9
+  },
+  {
+    "name": "Pulmonary Medicine",
+    "count": 9
+  },
+  {
+    "name": "Liver Transplant",
+    "count": 8
+  },
+  {
+    "name": "General Pediatrics",
+    "count": 8
+  },
+  {
+    "name": "Spine",
+    "count": 8
+  },
+  {
+    "name": "Neurology and Neuro Surgery",
+    "count": 8
+  },
+  {
+    "name": "Nutrition and Dietetics",
+    "count": 8
+  },
+  {
+    "name": "Pediatric Ophthalmology",
+    "count": 8
+  },
+  {
+    "name": "Neuro Ophthamology",
+    "count": 8
+  },
+  {
+    "name": "Squint and Pediatric Opthalmology",
+    "count": 8
+  },
+  {
+    "name": "Reconstructive Surgery",
+    "count": 8
+  },
+  {
+    "name": "Gynecology and Obstetrics",
+    "count": 8
+  },
+  {
+    "name": "Paediatrics and Neonatology",
+    "count": 8
+  },
+  {
+    "name": "Cornea",
+    "count": 8
+  },
+  {
+    "name": "Dermatology and Cosmetology",
+    "count": 8
+  },
+  {
+    "name": "Speech Therapy",
+    "count": 8
+  },
+  {
+    "name": "Neurophysiology",
+    "count": 8
+  },
+  {
+    "name": "Skin",
+    "count": 8
+  },
+  {
+    "name": "Obesity",
+    "count": 8
+  },
+  {
+    "name": "Cardiologist",
+    "count": 8
+  },
+  {
+    "name": "Audiology and Speech Therapy",
+    "count": 8
+  },
+  {
+    "name": "Chest Medicine",
+    "count": 8
+  },
+  {
+    "name": "Sonology",
+    "count": 8
+  },
+  {
+    "name": "Neuroradiology",
+    "count": 7
+  },
+  {
+    "name": "Dialysis",
+    "count": 7
+  },
+  {
+    "name": "Heart",
+    "count": 7
+  },
+  {
+    "name": "Paediatric Endocrinology",
+    "count": 7
+  },
+  {
+    "name": "Diet and Nutrition",
+    "count": 7
+  },
+  {
+    "name": "Cardiac Sciences",
+    "count": 7
+  },
+  {
+    "name": "Pediatric Urology",
+    "count": 7
+  },
+  {
+    "name": "Emergency",
+    "count": 7
+  },
+  {
+    "name": "Maternity",
+    "count": 7
+  },
+  {
+    "name": "Dental Sciences",
+    "count": 7
+  },
+  {
+    "name": "Cancer Care",
+    "count": 7
+  },
+  {
+    "name": "Infertility Clinic",
+    "count": 7
+  },
+  {
+    "name": "Gastro Surgery",
+    "count": 7
+  },
+  {
+    "name": "Forensic Medicine",
+    "count": 7
+  },
+  {
+    "name": "E.N.T",
+    "count": 7
+  },
+  {
+    "name": "Pediatrics and Neonatology",
+    "count": 7
+  },
+  {
+    "name": "Histopathology",
+    "count": 7
+  },
+  {
+    "name": "USG",
+    "count": 7
+  },
+  {
+    "name": "X-Ray",
+    "count": 7
+  },
+  {
+    "name": "Oncosurgery",
+    "count": 7
+  },
+  {
+    "name": "Orthopaedics and Traumatology",
+    "count": 7
+  },
+  {
+    "name": "Wellness",
+    "count": 6
+  },
+  {
+    "name": "Respiratory",
+    "count": 6
+  },
+  {
+    "name": "Radiology and Imageology",
+    "count": 6
+  },
+  {
+    "name": "Robotic Surgery",
+    "count": 6
+  },
+  {
+    "name": "Cardiothoracic",
+    "count": 6
+  },
+  {
+    "name": "Otolaryngology",
+    "count": 6
+  },
+  {
+    "name": "Anasthesia and Pain Management",
+    "count": 6
+  },
+  {
+    "name": "Hematology and Oncology",
+    "count": 6
+  },
+  {
+    "name": "Speech and Language Therapy",
+    "count": 6
+  },
+  {
+    "name": "Physiotherapy and Rehabilitation Unit etc",
+    "count": 6
+  },
+  {
+    "name": "Gastro",
+    "count": 6
+  },
+  {
+    "name": "Advanced Laparoscopy",
+    "count": 6
+  },
+  {
+    "name": "Pediatric NeuroSurgery",
+    "count": 6
+  },
+  {
+    "name": "Neonatology and Paediatrics",
+    "count": 6
+  },
+  {
+    "name": "Pediatric Critical Care",
+    "count": 6
+  },
+  {
+    "name": "Paediatric Emergency",
+    "count": 6
+  },
+  {
+    "name": "Glaucoma Clinic",
+    "count": 6
+  },
+  {
+    "name": "Laser Treatment",
+    "count": 6
+  },
+  {
+    "name": "Sleep Medicine",
+    "count": 6
+  },
+  {
+    "name": "Intensive Care",
+    "count": 6
+  },
+  {
+    "name": "Psychiatry and Clinical Psychology",
+    "count": 6
+  },
+  {
+    "name": "Gynaecologist and Obstetrician",
+    "count": 6
+  },
+  {
+    "name": "Anethesia's and Critical Care",
+    "count": 6
+  },
+  {
+    "name": "Radiologist",
+    "count": 6
+  },
+  {
+    "name": "Head and Neck Surgery",
+    "count": 6
+  },
+  {
+    "name": "Minimally Invasive Surgery",
+    "count": 6
+  },
+  {
+    "name": "Gastrology",
+    "count": 6
+  },
+  {
+    "name": "Oculoplasty",
+    "count": 6
+  },
+  {
+    "name": "Eye care",
+    "count": 6
+  },
+  {
+    "name": "E.N.T.",
+    "count": 6
+  },
+  {
+    "name": "Cardiac Care",
+    "count": 6
+  },
+  {
+    "name": "IVF",
+    "count": 6
+  },
+  {
+    "name": "Oral Surgery",
+    "count": 6
+  },
+  {
+    "name": "ECG",
+    "count": 6
+  },
+  {
+    "name": "Routine Dental Checkup",
+    "count": 6
+  },
+  {
+    "name": "RCT",
+    "count": 6
+  },
+  {
+    "name": "Obstetrics and  Gynaecology",
+    "count": 6
+  },
+  {
+    "name": "Physical Medicine and Rehabilitation",
+    "count": 6
+  },
+  {
+    "name": "Hemato Oncology",
+    "count": 6
+  },
+  {
+    "name": "Otorhinolaryngology",
+    "count": 5
+  },
+  {
+    "name": "Clinical",
+    "count": 5
+  },
+  {
+    "name": "Cardio Thoracic Surgery",
+    "count": 5
+  },
+  {
+    "name": "Pediatric Cardiac Surgery",
+    "count": 5
+  },
+  {
+    "name": "Pediatric Endocrinology",
+    "count": 5
+  },
+  {
+    "name": "Pathology and Microbiology",
+    "count": 5
+  },
+  {
+    "name": "Orthopaedics and Joint Replacement",
+    "count": 5
+  },
+  {
+    "name": "Urology and Nephrology",
+    "count": 5
+  },
+  {
+    "name": "Trauma",
+    "count": 5
+  },
+  {
+    "name": "Diagnostics",
+    "count": 5
+  },
+  {
+    "name": "Squint Clinic",
+    "count": 5
+  },
+  {
+    "name": "Lithotripsy",
+    "count": 5
+  },
+  {
+    "name": "Colorectal Surgery",
+    "count": 5
+  },
+  {
+    "name": "Laparoscopy Surgery",
+    "count": 5
+  },
+  {
+    "name": "Opthamology",
+    "count": 5
+  },
+  {
+    "name": "Fertility",
+    "count": 5
+  },
+  {
+    "name": "Clinical Nutrition and Dietetics",
+    "count": 5
+  },
+  {
+    "name": "Cranio-Maxillo Facial Surgery",
+    "count": 5
+  },
+  {
+    "name": "Transplants",
+    "count": 5
+  },
+  {
+    "name": "Embryo Donation",
+    "count": 5
+  },
+  {
+    "name": "Diabetes",
+    "count": 5
+  },
+  {
+    "name": "Traumatology",
+    "count": 5
+  },
+  {
+    "name": "Radiology and Imaging",
+    "count": 5
+  },
+  {
+    "name": "Neurology and Neurosurgery",
+    "count": 5
+  },
+  {
+    "name": "Community Medicine",
+    "count": 5
+  },
+  {
+    "name": "Foetal Medicine",
+    "count": 5
+  },
+  {
+    "name": "Neuro Ophthalmology",
+    "count": 5
+  },
+  {
+    "name": "Cosmetic and Plastic Surgery",
+    "count": 5
+  },
+  {
+    "name": "Nephrology and Urology",
+    "count": 5
+  },
+  {
+    "name": "Urologist",
+    "count": 5
+  },
+  {
+    "name": "Cancer Surgery",
+    "count": 5
+  },
+  {
+    "name": "TMT",
+    "count": 5
+  },
+  {
+    "name": "Anesthetist",
+    "count": 5
+  },
+  {
+    "name": "Chest",
+    "count": 5
+  },
+  {
+    "name": "Ortho",
+    "count": 5
+  },
+  {
+    "name": "Pharmacy",
+    "count": 5
+  },
+  {
+    "name": "Renal Transplant",
+    "count": 5
+  },
+  {
+    "name": "UroSurgery",
+    "count": 5
+  },
+  {
+    "name": "Gastroenterology and Hepatology",
+    "count": 5
+  },
+  {
+    "name": "Spinal Surgery",
+    "count": 5
+  },
+  {
+    "name": "Gastrointestinal Medicine",
+    "count": 4
+  },
+  {
+    "name": "Pediatric and Neonatology",
+    "count": 4
+  },
+  {
+    "name": "Interventional",
+    "count": 4
+  },
+  {
+    "name": "Preventive Medicine",
+    "count": 4
+  },
+  {
+    "name": "Cardiac Anesthesia",
+    "count": 4
+  },
+  {
+    "name": "Emergency and Trauma",
+    "count": 4
+  },
+  {
+    "name": "Emergency  Medicine",
+    "count": 4
+  },
+  {
+    "name": "Cosmetic Dentistry",
+    "count": 4
+  },
+  {
+    "name": "Brain and Nerves",
+    "count": 4
+  },
+  {
+    "name": "Bones and Joints",
+    "count": 4
+  },
+  {
+    "name": "Renal",
+    "count": 4
+  },
+  {
+    "name": "Emergency Services and Trauma Care",
+    "count": 4
+  },
+  {
+    "name": "Pulmonary",
+    "count": 4
+  },
+  {
+    "name": "Home Health Care",
+    "count": 4
+  },
+  {
+    "name": "Anesthisiology",
+    "count": 4
+  },
+  {
+    "name": "Metabolic Surgery",
+    "count": 4
+  },
+  {
+    "name": "Children's Intensive Care Unit",
+    "count": 4
+  },
+  {
+    "name": "Premature Baby and  Newborn Intensive Care Unit",
+    "count": 4
+  },
+  {
+    "name": "Neonatal Intensive Care Unit",
+    "count": 4
+  },
+  {
+    "name": "Neonatology Service",
+    "count": 4
+  },
+  {
+    "name": "Childrens Heart Specialists",
+    "count": 4
+  },
+  {
+    "name": "Childrens Heart Surgery",
+    "count": 4
+  },
+  {
+    "name": "Childrens Brain and Nervous System Surgery",
+    "count": 4
+  },
+  {
+    "name": "Pediatric Neuro Rehabilitation",
+    "count": 4
+  },
+  {
+    "name": "Childrens Gastroenterology",
+    "count": 4
+  },
+  {
+    "name": "Pediatric Hematology and Oncology",
+    "count": 4
+  },
+  {
+    "name": "Nose and Throat Surgery",
+    "count": 4
+  },
+  {
+    "name": "Ophthalmology etc",
+    "count": 4
+  },
+  {
+    "name": "ENT-Head and Neck Surgery",
+    "count": 4
+  },
+  {
+    "name": "General (Internal) Medicine",
+    "count": 4
+  },
+  {
+    "name": "Gastroenterology and Hematology",
+    "count": 4
+  },
+  {
+    "name": "Orthopaedics and Joints Replacement Surgery",
+    "count": 4
+  },
+  {
+    "name": "Knee Replacement",
+    "count": 4
+  },
+  {
+    "name": "Endocrinalogy",
+    "count": 4
+  },
+  {
+    "name": "Opthomology",
+    "count": 4
+  },
+  {
+    "name": "Dental Health",
+    "count": 4
+  },
+  {
+    "name": "Arthroscopy and Sports Medicine",
+    "count": 4
+  },
+  {
+    "name": "Emergency Medicine and Trauma",
+    "count": 4
+  },
+  {
+    "name": "General Surgery and Surgical Gastroenterology",
+    "count": 4
+  },
+  {
+    "name": "Cataract Clinic",
+    "count": 4
+  },
+  {
+    "name": "Cornea Clinic",
+    "count": 4
+  },
+  {
+    "name": "Primary Eye Care",
+    "count": 4
+  },
+  {
+    "name": "Cornea and Refractive Surgery Services",
+    "count": 4
+  },
+  {
+    "name": "Retina and Diabetic Retinopathy",
+    "count": 4
+  },
+  {
+    "name": "Retina and Hypertensive Retinopathy",
+    "count": 4
+  },
+  {
+    "name": "Contact Lens Services",
+    "count": 4
+  },
+  {
+    "name": "Pediatric Service",
+    "count": 4
+  },
+  {
+    "name": "Laser",
+    "count": 4
+  },
+  {
+    "name": "Laparoscopy",
+    "count": 4
+  },
+  {
+    "name": "Breast Surgery",
+    "count": 4
+  },
+  {
+    "name": "Oral and Maxillofacial Surgery",
+    "count": 4
+  },
+  {
+    "name": "General Medicine and family Medicine",
+    "count": 4
+  },
+  {
+    "name": "Dental Clinic",
+    "count": 4
+  },
+  {
+    "name": "Refractive",
+    "count": 4
+  },
+  {
+    "name": "Fetal Care",
+    "count": 4
+  },
+  {
+    "name": "Casuality",
+    "count": 4
+  },
+  {
+    "name": "Paediatrics Surgery",
+    "count": 4
+  },
+  {
+    "name": "Ultrasound Workup",
+    "count": 4
+  },
+  {
+    "name": "Human Embryo Biopsy",
+    "count": 4
+  },
+  {
+    "name": "Intraterine Insemination (IUI)",
+    "count": 4
+  },
+  {
+    "name": "In Vitro Fertilization (IVF)",
+    "count": 4
+  },
+  {
+    "name": "Sperm Retrieval Assisted Hatching",
+    "count": 4
+  },
+  {
+    "name": "Blastocyst Culture",
+    "count": 4
+  },
+  {
+    "name": "Egg Donation",
+    "count": 4
+  },
+  {
+    "name": "Contact Lens Clinic",
+    "count": 4
+  },
+  {
+    "name": "Paediatric Urology",
+    "count": 4
+  },
+  {
+    "name": "Trauma surgeries",
+    "count": 4
+  },
+  {
+    "name": "Trauma Care",
+    "count": 4
+  },
+  {
+    "name": "Neuro Psychiatry",
+    "count": 4
+  },
+  {
+    "name": "Neuro-Surgery",
+    "count": 4
+  },
+  {
+    "name": "EYE",
+    "count": 4
+  },
+  {
+    "name": "Casualty",
+    "count": 4
+  },
+  {
+    "name": "Rehabilitation",
+    "count": 4
+  },
+  {
+    "name": "Retina Clinic",
+    "count": 4
+  },
+  {
+    "name": "Orthopedic and Joint Replacement",
+    "count": 4
+  },
+  {
+    "name": "Neuro surgery",
+    "count": 4
+  },
+  {
+    "name": "Plastic surgery",
+    "count": 4
+  },
+  {
+    "name": "Bone Marrow Transplant",
+    "count": 4
+  },
+  {
+    "name": "Cosmetic",
+    "count": 4
+  },
+  {
+    "name": "General Surgeon",
+    "count": 4
+  },
+  {
+    "name": "Ultrasound",
+    "count": 4
+  },
+  {
+    "name": "Nose",
+    "count": 4
+  },
+  {
+    "name": "Dentist",
+    "count": 4
+  },
+  {
+    "name": "Cardiothoracic and Vascular Surgery (CTVS)",
+    "count": 4
+  },
+  {
+    "name": "Radiotherapy",
+    "count": 4
+  },
+  {
+    "name": "Dental extraction and X-Ray of Teeth",
+    "count": 4
+  },
+  {
+    "name": "Immunology",
+    "count": 4
+  },
+  {
+    "name": "MRI",
+    "count": 4
+  },
+  {
+    "name": "Trauma Surgery",
+    "count": 4
+  },
+  {
+    "name": "Uro Surgery",
+    "count": 4
+  },
+  {
+    "name": "Paediatric Ophthalmology and Squint",
+    "count": 4
+  },
+  {
+    "name": "Spine Care",
+    "count": 4
+  },
+  {
+    "name": "Nephrologist",
+    "count": 4
+  },
+  {
+    "name": "Squint",
+    "count": 4
+  },
+  {
+    "name": "Skin Specialist",
+    "count": 4
+  },
+  {
+    "name": "Ophthalmologist",
+    "count": 4
+  },
+  {
+    "name": "Gynaecologist",
+    "count": 4
+  },
+  {
+    "name": "Anaesthesiology and Critical Care",
+    "count": 4
+  },
+  {
+    "name": "Paediatric and Neonatology",
+    "count": 4
+  },
+  {
+    "name": "Preventive",
+    "count": 3
+  },
+  {
+    "name": "Micro Surgery",
+    "count": 3
+  },
+  {
+    "name": "Nephrology.",
+    "count": 3
+  },
+  {
+    "name": "Maxillofacial  Surgery",
+    "count": 3
+  },
+  {
+    "name": "Sports Injuries",
+    "count": 3
+  },
+  {
+    "name": "Clinical Pathology",
+    "count": 3
+  },
+  {
+    "name": "Electrophysiology",
+    "count": 3
+  },
+  {
+    "name": "Pediatrics Surgery",
+    "count": 3
+  },
+  {
+    "name": "Foot and Ankle Surgery",
+    "count": 3
+  },
+  {
+    "name": "Paediatric Orthopedic",
+    "count": 3
+  },
+  {
+    "name": "Minimal Invasive Surgery",
+    "count": 3
+  },
+  {
+    "name": "Opticals",
+    "count": 3
+  },
+  {
+    "name": "Female Urology",
+    "count": 3
+  },
+  {
+    "name": "Sexual Medicine",
+    "count": 3
+  },
+  {
+    "name": "Vascular Medicine",
+    "count": 3
+  },
+  {
+    "name": "Diabetic Retinopathy",
+    "count": 3
+  },
+  {
+    "name": "Oculoplastic Clinic",
+    "count": 3
+  },
+  {
+    "name": "Laproscopic Surgeries",
+    "count": 3
+  },
+  {
+    "name": "Pediatric and Neonatal Surgery",
+    "count": 3
+  },
+  {
+    "name": "Skin and Cosmetology",
+    "count": 3
+  },
+  {
+    "name": "Counselling",
+    "count": 3
+  },
+  {
+    "name": "Optical Coherence Tomography (OCT)",
+    "count": 3
+  },
+  {
+    "name": "Anaesthesia and Critical Care",
+    "count": 3
+  },
+  {
+    "name": "Speech and Swallow Rehabilitation",
+    "count": 3
+  },
+  {
+    "name": "General Paediatrics",
+    "count": 3
+  },
+  {
+    "name": "Neonatal Surgery",
+    "count": 3
+  },
+  {
+    "name": "Nose and Throat",
+    "count": 3
+  },
+  {
+    "name": "Nutrition",
+    "count": 3
+  },
+  {
+    "name": "Medical",
+    "count": 3
+  },
+  {
+    "name": "Pulmonologist",
+    "count": 3
+  },
+  {
+    "name": "Audiology",
+    "count": 3
+  },
+  {
+    "name": "Dietary Services",
+    "count": 3
+  },
+  {
+    "name": "Thoracic Vascular Surgery",
+    "count": 3
+  },
+  {
+    "name": "Orthopedic and Trauma",
+    "count": 3
+  },
+  {
+    "name": "Nephrology - Paediatric",
+    "count": 3
+  },
+  {
+    "name": "Radiodiagnosis",
+    "count": 3
+  },
+  {
+    "name": "Sexology",
+    "count": 3
+  },
+  {
+    "name": "Diabetes and Endocrinology",
+    "count": 3
+  },
+  {
+    "name": "Bariatric and Metabolic Surgery",
+    "count": 3
+  },
+  {
+    "name": "Cardiology and Cardiac Surgery",
+    "count": 3
+  },
+  {
+    "name": "Pediatric  Ophthalmology",
+    "count": 3
+  },
+  {
+    "name": "Plastic and Reconstructive",
+    "count": 3
+  },
+  {
+    "name": "Laparoscopic surgery",
+    "count": 3
+  },
+  {
+    "name": "ENT and Head Neck Surgery",
+    "count": 3
+  },
+  {
+    "name": "Aesthetic and Reconstructive Surgery",
+    "count": 3
+  },
+  {
+    "name": "General",
+    "count": 3
+  },
+  {
+    "name": "Dental Services",
+    "count": 3
+  },
+  {
+    "name": "Physician",
+    "count": 3
+  },
+  {
+    "name": "Cancer Screening",
+    "count": 3
+  },
+  {
+    "name": "Arthroscopic Surgery",
+    "count": 3
+  },
+  {
+    "name": "Endoscopic Surgery",
+    "count": 3
+  },
+  {
+    "name": "GI Surgery",
+    "count": 3
+  },
+  {
+    "name": "PFT",
+    "count": 3
+  },
+  {
+    "name": "Intensive Care Unit",
+    "count": 3
+  },
+  {
+    "name": "Neuro-surgery",
+    "count": 3
+  },
+  {
+    "name": "gynaecology and Obstetrics",
+    "count": 3
+  },
+  {
+    "name": "Neuro - Surgery",
+    "count": 3
+  },
+  {
+    "name": "Eye Surgery",
+    "count": 3
+  },
+  {
+    "name": "Clinical Biochemistry",
+    "count": 3
+  },
+  {
+    "name": "General surgery",
+    "count": 3
+  },
+  {
+    "name": "X-Rays",
+    "count": 3
+  },
+  {
+    "name": "Plastic Surgery.",
+    "count": 3
+  },
+  {
+    "name": "Pain and Palliative Care",
+    "count": 3
+  },
+  {
+    "name": "Pediatric surgery",
+    "count": 3
+  },
+  {
+    "name": "Holistic Medicine",
+    "count": 3
+  },
+  {
+    "name": "Physiotherapy and  Rehabilitation",
+    "count": 3
+  },
+  {
+    "name": "Uveitis",
+    "count": 3
+  },
+  {
+    "name": "Yoga",
+    "count": 3
+  },
+  {
+    "name": "Hysteroscopy",
+    "count": 3
+  },
+  {
+    "name": "Spine Related Disorders",
+    "count": 3
+  },
+  {
+    "name": "Uro Oncology",
+    "count": 3
+  },
+  {
+    "name": "Physical Medicine",
+    "count": 3
+  },
+  {
+    "name": "Knee Surgery",
+    "count": 3
+  },
+  {
+    "name": "Hip Surgery",
+    "count": 3
+  },
+  {
+    "name": "Palliative Care",
+    "count": 3
+  },
+  {
+    "name": "Acupuncture",
+    "count": 3
+  },
+  {
+    "name": "Oculoplastic Surgery",
+    "count": 3
+  },
+  {
+    "name": "Diabetology and Endocrinology",
+    "count": 3
+  },
+  {
+    "name": "Hepatobillary Surgery",
+    "count": 3
+  },
+  {
+    "name": "Advance Orthopedic Care",
+    "count": 3
+  },
+  {
+    "name": "General and Minimal Invasive Surgery",
+    "count": 3
+  },
+  {
+    "name": "Mother and Baby Care",
+    "count": 3
+  },
+  {
+    "name": "Pulmonary Medicine and Sleep Study",
+    "count": 3
+  },
+  {
+    "name": "Trauma and Critical Care",
+    "count": 3
+  },
+  {
+    "name": "Clinical Immunology and Rheumatology",
+    "count": 3
+  },
+  {
+    "name": "Plastic Surgeon",
+    "count": 3
+  },
+  {
+    "name": "Obstertics And Gynaecology",
+    "count": 3
+  },
+  {
+    "name": "Hysterectomy",
+    "count": 3
+  },
+  {
+    "name": "Ear Surgery",
+    "count": 3
+  },
+  {
+    "name": "Nose and Sinus Surgery",
+    "count": 3
+  },
+  {
+    "name": "Laparoscopic  Surgery",
+    "count": 3
+  },
+  {
+    "name": "Gastro Wing",
+    "count": 3
+  },
+  {
+    "name": "Paediatric Wing",
+    "count": 3
+  },
+  {
+    "name": "Ortho Wing",
+    "count": 3
+  },
+  {
+    "name": "Neuro Wing",
+    "count": 3
+  },
+  {
+    "name": "Nephro Wing",
+    "count": 3
+  },
+  {
+    "name": "Heart Command",
+    "count": 3
+  },
+  {
+    "name": "Gynaecology Wing",
+    "count": 3
+  },
+  {
+    "name": "Neuro",
+    "count": 3
+  },
+  {
+    "name": "Paediatric surgery",
+    "count": 3
+  },
+  {
+    "name": "Psychiatry and Psychology",
+    "count": 3
+  },
+  {
+    "name": "Squint and Oculoplasty Clinic",
+    "count": 3
+  },
+  {
+    "name": "Cardiac Yoga",
+    "count": 2
+  },
+  {
+    "name": "Laboratory Medicine.",
+    "count": 2
+  },
+  {
+    "name": "Neuro Surgery.",
+    "count": 2
+  },
+  {
+    "name": "Neurology.",
+    "count": 2
+  },
+  {
+    "name": "Bone Marrow",
+    "count": 2
+  },
+  {
+    "name": "Transplant",
+    "count": 2
+  },
+  {
+    "name": "Hair Transplantation",
+    "count": 2
+  },
+  {
+    "name": "Critical Care and Pain Management",
+    "count": 2
+  },
+  {
+    "name": "Radiology Rheumatology",
+    "count": 2
+  },
+  {
+    "name": "Shoulder and Sports",
+    "count": 2
+  },
+  {
+    "name": "Injury Clinic",
+    "count": 2
+  },
+  {
+    "name": "Cardiac Rehab Yoga",
+    "count": 2
+  },
+  {
+    "name": "Cancer Subspecialities",
+    "count": 2
+  },
+  {
+    "name": "General Health Institute",
+    "count": 2
+  },
+  {
+    "name": "Womens Wellcare Institute",
+    "count": 2
+  },
+  {
+    "name": "ENT Institute",
+    "count": 2
+  },
+  {
+    "name": "Orthopaedic Outreach Institute",
+    "count": 2
+  },
+  {
+    "name": "Omega Cosmetic Surgery Center",
+    "count": 2
+  },
+  {
+    "name": "24 hours Trauma and Critical Care",
+    "count": 2
+  },
+  {
+    "name": "Hand and Elbow Surgery",
+    "count": 2
+  },
+  {
+    "name": "Spondilytis",
+    "count": 2
+  },
+  {
+    "name": "Spine Surger",
+    "count": 2
+  },
+  {
+    "name": "Hip Fractures and Replacement",
+    "count": 2
+  },
+  {
+    "name": "24 hrs Trauma and Critical Care",
+    "count": 2
+  },
+  {
+    "name": "Heart Centre",
+    "count": 2
+  },
+  {
+    "name": "Continental Institute of Gastroenterology and Liver Diseases",
+    "count": 2
+  },
+  {
+    "name": "Continental Cancer Institute and Radiation Centre",
+    "count": 2
+  },
+  {
+    "name": "Continental Institute of Neurosciences and Rehabilitation",
+    "count": 2
+  },
+  {
+    "name": "Continental Institute of Orthopedics",
+    "count": 2
+  },
+  {
+    "name": "Spine and Joint Reconstruction",
+    "count": 2
+  },
+  {
+    "name": "Continental Womens Centre",
+    "count": 2
+  },
+  {
+    "name": "Department of Emergency",
+    "count": 2
+  },
+  {
+    "name": "Trauma Services and Critical Care Medicine",
+    "count": 2
+  },
+  {
+    "name": "All Kidney Related Diseases",
+    "count": 2
+  },
+  {
+    "name": "Accident Trauma Emergency",
+    "count": 2
+  },
+  {
+    "name": "General and  Laparoscopic Surgery",
+    "count": 2
+  },
+  {
+    "name": "Clinical Pshycology",
+    "count": 2
+  },
+  {
+    "name": "General  Internal Medicine",
+    "count": 2
+  },
+  {
+    "name": "General Medice",
+    "count": 2
+  },
+  {
+    "name": "Asha Alcohol and Drug De Addiction Centre",
+    "count": 2
+  },
+  {
+    "name": "Asha Schizophrenia Clinic",
+    "count": 2
+  },
+  {
+    "name": "Asha Jyoti Rehabilitation Centre (AJRC)",
+    "count": 2
+  },
+  {
+    "name": "Bone Marrow Transplantation",
+    "count": 2
+  },
+  {
+    "name": "Pediatrics and Neo Natology",
+    "count": 2
+  },
+  {
+    "name": "Endocrine",
+    "count": 2
+  },
+  {
+    "name": "Skin and Aesthetics",
+    "count": 2
+  },
+  {
+    "name": "Bladeless LASIK Surgery",
+    "count": 2
+  },
+  {
+    "name": "ICL",
+    "count": 2
+  },
+  {
+    "name": "Glaucoma Eye Specialist",
+    "count": 2
+  },
+  {
+    "name": "Squints Surgery",
+    "count": 2
+  },
+  {
+    "name": "Pterygium Surgery",
+    "count": 2
+  },
+  {
+    "name": "Speech and Hearing Services",
+    "count": 2
+  },
+  {
+    "name": "Comprehensive Eye Check-up",
+    "count": 2
+  },
+  {
+    "name": "Lasik and Laser Clinic",
+    "count": 2
+  },
+  {
+    "name": "Blade Free Lasik Surgery",
+    "count": 2
+  },
+  {
+    "name": "Retinal Clinic",
+    "count": 2
+  },
+  {
+    "name": "Oculoplasty Clinic",
+    "count": 2
+  },
+  {
+    "name": "Opticals and Contact Lens",
+    "count": 2
+  },
+  {
+    "name": "LASIK Services",
+    "count": 2
+  },
+  {
+    "name": "LASER Treatment for Prostate",
+    "count": 2
+  },
+  {
+    "name": "LASER Treatment for Stone",
+    "count": 2
+  },
+  {
+    "name": "RIRS with Laser",
+    "count": 2
+  },
+  {
+    "name": "Mini and Micro PCNL with LASER",
+    "count": 2
+  },
+  {
+    "name": "Uro-Dynamics",
+    "count": 2
+  },
+  {
+    "name": "Neuro Urology",
+    "count": 2
+  },
+  {
+    "name": "Laparoscopic Urology",
+    "count": 2
+  },
+  {
+    "name": "Reconstructive Urology",
+    "count": 2
+  },
+  {
+    "name": "Uro-Oncology",
+    "count": 2
+  },
+  {
+    "name": "Male infertility",
+    "count": 2
+  },
+  {
+    "name": "Impotence",
+    "count": 2
+  },
+  {
+    "name": "Storz Tricam",
+    "count": 2
+  },
+  {
+    "name": "Storz Endoscopes",
+    "count": 2
+  },
+  {
+    "name": "Storz Headcam",
+    "count": 2
+  },
+  {
+    "name": "Storz Xenon Cold Light Sources",
+    "count": 2
+  },
+  {
+    "name": "Xomed Micro Debrider",
+    "count": 2
+  },
+  {
+    "name": "Xomed Skeeter Drill",
+    "count": 2
+  },
+  {
+    "name": "Olyumpus Flexible Pharyngolaryngobronchoscope",
+    "count": 2
+  },
+  {
+    "name": "Ventilating Bronchoscopes with Optical Forceps",
+    "count": 2
+  },
+  {
+    "name": "Temporal Bone Dissection Laboratory",
+    "count": 2
+  },
+  {
+    "name": "Spectacle and Contact Lens Correction",
+    "count": 2
+  },
+  {
+    "name": "Glaucoma- Detection and Treatment",
+    "count": 2
+  },
+  {
+    "name": "Retinal Diseases",
+    "count": 2
+  },
+  {
+    "name": "ROP Screening",
+    "count": 2
+  },
+  {
+    "name": "Uveitis Treatment",
+    "count": 2
+  },
+  {
+    "name": "Comprehensive Eye Check Up",
+    "count": 2
+  },
+  {
+    "name": "Interventional Neurology",
+    "count": 2
+  },
+  {
+    "name": "Travel Medicine",
+    "count": 2
+  },
+  {
+    "name": "Clinical Neurophysiology",
+    "count": 2
+  },
+  {
+    "name": "Public Health and Community Medicine",
+    "count": 2
+  },
+  {
+    "name": "Vascular and Interventional Radiology",
+    "count": 2
+  },
+  {
+    "name": "Hand Surgery",
+    "count": 2
+  },
+  {
+    "name": "Vascular Neurology",
+    "count": 2
+  },
+  {
+    "name": "Orthopedic Trauma",
+    "count": 2
+  },
+  {
+    "name": "Pain Medicine",
+    "count": 2
+  },
+  {
+    "name": "Skin Surgery",
+    "count": 2
+  },
+  {
+    "name": "Diagnostic Radiology",
+    "count": 2
+  },
+  {
+    "name": "Health Informatics",
+    "count": 2
+  },
+  {
+    "name": "Hospital Medicine",
+    "count": 2
+  },
+  {
+    "name": "Endocrine Surgery",
+    "count": 2
+  },
+  {
+    "name": "Clinical Cardiac Electrophysiology",
+    "count": 2
+  },
+  {
+    "name": "Angiology",
+    "count": 2
+  },
+  {
+    "name": "Lasik Services",
+    "count": 2
+  },
+  {
+    "name": "Nephrology and Other Surgical Procedures",
+    "count": 2
+  },
+  {
+    "name": "Face Lift Surgery",
+    "count": 2
+  },
+  {
+    "name": "Bbreast Lift Surgeory",
+    "count": 2
+  },
+  {
+    "name": "Abdominoplasty Surgery",
+    "count": 2
+  },
+  {
+    "name": "Cosmetic Reconstructive Surgery",
+    "count": 2
+  },
+  {
+    "name": "Liposuction",
+    "count": 2
+  },
+  {
+    "name": "Gynecology Specialist",
+    "count": 2
+  },
+  {
+    "name": "24 hours Trauma Care Services",
+    "count": 2
+  },
+  {
+    "name": "Excelusive Burn Care Unit",
+    "count": 2
+  },
+  {
+    "name": "Plastic and Cosmetic Surgery Center",
+    "count": 2
+  },
+  {
+    "name": "Hand Trauma and maxillofacial Trauma Units",
+    "count": 2
+  },
+  {
+    "name": "Lab Services with Inhouse Pathologist",
+    "count": 2
+  },
+  {
+    "name": "Day Care Services",
+    "count": 2
+  },
+  {
+    "name": "Medical gastroenterology",
+    "count": 2
+  },
+  {
+    "name": "Nutrition and dietician",
+    "count": 2
+  },
+  {
+    "name": "Pediatrics and neonatology",
+    "count": 2
+  },
+  {
+    "name": "Physiotherapy and rehabilitation",
+    "count": 2
+  },
+  {
+    "name": "Trauma and Accident Care",
+    "count": 2
+  },
+  {
+    "name": "Gynaecology and obstetric",
+    "count": 2
+  },
+  {
+    "name": "Maxillo facial Surgery",
+    "count": 2
+  },
+  {
+    "name": "Surgical gastroenterology",
+    "count": 2
+  },
+  {
+    "name": "Pediatric Super Specialities",
+    "count": 2
+  },
+  {
+    "name": "Pediatric Surgeries",
+    "count": 2
+  },
+  {
+    "name": "Department of Nutrition",
+    "count": 2
+  },
+  {
+    "name": "Phacoemulsification Catract Surgery",
+    "count": 2
+  },
+  {
+    "name": "LASIK Surgery",
+    "count": 2
+  },
+  {
+    "name": "Age Related Macular Degenraration",
+    "count": 2
+  },
+  {
+    "name": "Squint Correction",
+    "count": 2
+  },
+  {
+    "name": "Aesthetic Surgeries",
+    "count": 2
+  },
+  {
+    "name": "Gynecology and Obsteric",
+    "count": 2
+  },
+  {
+    "name": "Neurology and Neuro Development",
+    "count": 2
+  },
+  {
+    "name": "Psychiatry and Child Psychatry",
+    "count": 2
+  },
+  {
+    "name": "Laparoscopic Surgery and General Surgery",
+    "count": 2
+  },
+  {
+    "name": "Diabetes Care",
+    "count": 2
+  },
+  {
+    "name": "Orthopadics and Trauma",
+    "count": 2
+  },
+  {
+    "name": "Physician Care",
+    "count": 2
+  },
+  {
+    "name": "Cancer Centre",
+    "count": 2
+  },
+  {
+    "name": "Assisted Reproductive Technology",
+    "count": 2
+  },
+  {
+    "name": "Cryopreservation(Freezing)",
+    "count": 2
+  },
+  {
+    "name": "Pre Implantation Genetic Diagnostics",
+    "count": 2
+  },
+  {
+    "name": "Surgical Procedures",
+    "count": 2
+  },
+  {
+    "name": "Plastic Surgery and Cosmetology and Cosmetic Surgery",
+    "count": 2
+  },
+  {
+    "name": "Anaesthesia and Pain Management",
+    "count": 2
+  },
+  {
+    "name": "Urology and Neurology and Nephrology",
+    "count": 2
+  },
+  {
+    "name": "Infertility Center",
+    "count": 2
+  },
+  {
+    "name": "Fertility Centre",
+    "count": 2
+  },
+  {
+    "name": "Cataract and IOL Surgery Including Phaco Surgical Facilities",
+    "count": 2
+  },
+  {
+    "name": "Vitreo Retinal Services",
+    "count": 2
+  },
+  {
+    "name": "Occuloplasty Services Squint and Orthoptic Services",
+    "count": 2
+  },
+  {
+    "name": "Corneal Services",
+    "count": 2
+  },
+  {
+    "name": "Contact Lenses Services",
+    "count": 2
+  },
+  {
+    "name": "A  and B Scan Facilities",
+    "count": 2
+  },
+  {
+    "name": "Automated Visual Field Analyzer",
+    "count": 2
+  },
+  {
+    "name": "Maxillo Facial Surgery",
+    "count": 2
+  },
+  {
+    "name": "Hormone Clinic",
+    "count": 2
+  },
+  {
+    "name": "Medical Specialities",
+    "count": 2
+  },
+  {
+    "name": "Surgical Specialities",
+    "count": 2
+  },
+  {
+    "name": "Dietitics",
+    "count": 2
+  },
+  {
+    "name": "Urology etc",
+    "count": 2
+  },
+  {
+    "name": "Cardiac Surgery Adult And Paediatric",
+    "count": 2
+  },
+  {
+    "name": "Gastroenterology Medical",
+    "count": 2
+  },
+  {
+    "name": "Gastroenterology Surgical",
+    "count": 2
+  },
+  {
+    "name": "Nephrolog",
+    "count": 2
+  },
+  {
+    "name": "Pediatric Intensive Care Services",
+    "count": 2
+  },
+  {
+    "name": "Neonatal Intensive Care Services",
+    "count": 2
+  },
+  {
+    "name": "Pediatric Surgical Services",
+    "count": 2
+  },
+  {
+    "name": "Pediatric ICU",
+    "count": 2
+  },
+  {
+    "name": "Pediatric Neonatology",
+    "count": 2
+  },
+  {
+    "name": "Pediatric Dermatology",
+    "count": 2
+  },
+  {
+    "name": "Pediatric Audiology",
+    "count": 2
+  },
+  {
+    "name": "Trauma and Orthopaedics",
+    "count": 2
+  },
+  {
+    "name": "Emergency Services and Trauma Care Unit",
+    "count": 2
+  },
+  {
+    "name": "Surgeries",
+    "count": 2
+  },
+  {
+    "name": "Gynecology and Obstretrics",
+    "count": 2
+  },
+  {
+    "name": "Gynaecilogy",
+    "count": 2
+  },
+  {
+    "name": "Physiootheraphy",
+    "count": 2
+  },
+  {
+    "name": "Rediology",
+    "count": 2
+  },
+  {
+    "name": "Fetal Surgery",
+    "count": 2
+  },
+  {
+    "name": "Separation of Conjoined Twins",
+    "count": 2
+  },
+  {
+    "name": "Tumors",
+    "count": 2
+  },
+  {
+    "name": "Malformations",
+    "count": 2
+  },
+  {
+    "name": "Pediatric cardiothoracic Surgery",
+    "count": 2
+  },
+  {
+    "name": "Pediatric nephrology",
+    "count": 2
+  },
+  {
+    "name": "Pediatric Urological Surgery",
+    "count": 2
+  },
+  {
+    "name": "Strabismus and Neurophthalmology Services",
+    "count": 2
+  },
+  {
+    "name": "Low Visual Aid Clinic",
+    "count": 2
+  },
+  {
+    "name": "Radio Frequency Surgery",
+    "count": 2
+  },
+  {
+    "name": "Micro Ear Surgery",
+    "count": 2
+  },
+  {
+    "name": "Endoscopic Sinus Surgery",
+    "count": 2
+  },
+  {
+    "name": "Micro Laryngeal Surgery",
+    "count": 2
+  },
+  {
+    "name": "Phono Surgery for Voice Disorders",
+    "count": 2
+  },
+  {
+    "name": "Surgery for Snoring",
+    "count": 2
+  },
+  {
+    "name": "Joint Replacement Sugery",
+    "count": 2
+  },
+  {
+    "name": "Infertility Cente",
+    "count": 2
+  },
+  {
+    "name": "Retinal",
+    "count": 2
+  },
+  {
+    "name": "Cataract and Glaucoma Services",
+    "count": 2
+  },
+  {
+    "name": "Meditrina",
+    "count": 2
+  },
+  {
+    "name": "Metabolic and Genetics",
+    "count": 2
+  },
+  {
+    "name": "General Surgery and Laproscopy",
+    "count": 2
+  },
+  {
+    "name": "Plastic Cosmetic Surgery",
+    "count": 2
+  },
+  {
+    "name": "Rheumatology Arthritis",
+    "count": 2
+  },
+  {
+    "name": "Neonatical Intensive Care Unit",
+    "count": 2
+  },
+  {
+    "name": "Paediatrics Urology",
+    "count": 2
+  },
+  {
+    "name": "Immunization Clinic",
+    "count": 2
+  },
+  {
+    "name": "Obestrics and Gynecology",
+    "count": 2
+  },
+  {
+    "name": "C T Surgery",
+    "count": 2
+  },
+  {
+    "name": "Gastro Enterology",
+    "count": 2
+  },
+  {
+    "name": "Laproscopic Surgery",
+    "count": 2
+  },
+  {
+    "name": "Psychiatary",
+    "count": 2
+  },
+  {
+    "name": "Cytology Laboratory",
+    "count": 2
+  },
+  {
+    "name": "Dental Medicine",
+    "count": 2
+  },
+  {
+    "name": "haematology Oncology",
+    "count": 2
+  },
+  {
+    "name": "In-Vitro Fertilization",
+    "count": 2
+  },
+  {
+    "name": "(IVF)",
+    "count": 2
+  },
+  {
+    "name": "Pathology Laboratory",
+    "count": 2
+  },
+  {
+    "name": "TBRD",
+    "count": 2
+  },
+  {
+    "name": "Surgery and Orthopaedic",
+    "count": 2
+  },
+  {
+    "name": "Radio Diagnosis",
+    "count": 2
+  },
+  {
+    "name": "TB and Chest",
+    "count": 2
+  },
+  {
+    "name": "Venereology and Leprosy",
+    "count": 2
+  },
+  {
+    "name": "Hip Replacement",
+    "count": 2
+  },
+  {
+    "name": "Pain Clinic",
+    "count": 2
+  },
+  {
+    "name": "Laparoscopic Gynaecology",
+    "count": 2
+  },
+  {
+    "name": "Chest and TB",
+    "count": 2
+  },
+  {
+    "name": "Bone and Joints",
+    "count": 2
+  },
+  {
+    "name": "Blood Transfusion Services",
+    "count": 2
+  },
+  {
+    "name": "Artemis Artificial Limb Centre",
+    "count": 2
+  },
+  {
+    "name": "Brain and Spine",
+    "count": 2
+  },
+  {
+    "name": "Aesthetic And Reconstructive Surgery",
+    "count": 2
+  },
+  {
+    "name": "Endocrinology and Diabetes",
+    "count": 2
+  },
+  {
+    "name": "Laparoscopic",
+    "count": 2
+  },
+  {
+    "name": "Physiotherapy And Rehabilitation",
+    "count": 2
+  },
+  {
+    "name": "Vascular and Endovascular Surgery",
+    "count": 2
+  },
+  {
+    "name": "Chest and Respiratory Medicine",
+    "count": 2
+  },
+  {
+    "name": "Physiotherapist",
+    "count": 2
+  },
+  {
+    "name": "Eye Specialist",
+    "count": 2
+  },
+  {
+    "name": "Emergency and Critical Care",
+    "count": 2
+  },
+  {
+    "name": "Adolescent Gyne Clinic",
+    "count": 2
+  },
+  {
+    "name": "Adolescent Behavioral Problems",
+    "count": 2
+  },
+  {
+    "name": "Adolescent Vaccination",
+    "count": 2
+  },
+  {
+    "name": "Endocrinological Clinic",
+    "count": 2
+  },
+  {
+    "name": "Menopause Clinic",
+    "count": 2
+  },
+  {
+    "name": "Male and Female Infertility",
+    "count": 2
+  },
+  {
+    "name": "Recurrent Pregnancy Loss Management",
+    "count": 2
+  },
+  {
+    "name": "High Risk Pregnancy Management",
+    "count": 2
+  },
+  {
+    "name": "Skin Care Services",
+    "count": 2
+  },
+  {
+    "name": "Nephrology and Renal Transplant",
+    "count": 2
+  },
+  {
+    "name": "ICU",
+    "count": 2
+  },
+  {
+    "name": "Doppler",
+    "count": 2
+  },
+  {
+    "name": "Cardio Thoracic and Vascular Surgery",
+    "count": 2
+  },
+  {
+    "name": "Unani",
+    "count": 2
+  },
+  {
+    "name": "Panchkarma",
+    "count": 2
+  },
+  {
+    "name": "Kidney Stone",
+    "count": 2
+  },
+  {
+    "name": "Internal medicine",
+    "count": 2
+  },
+  {
+    "name": "Emergency and Trauma Care",
+    "count": 2
+  },
+  {
+    "name": "Cosmetic and Reconstructive Surgery",
+    "count": 2
+  },
+  {
+    "name": "Obstetrics  and Gynaecology",
+    "count": 2
+  },
+  {
+    "name": "Infertility Centre",
+    "count": 2
+  },
+  {
+    "name": "Pediatrician",
+    "count": 2
+  },
+  {
+    "name": "Ophtholmology (Day care procedures only)",
+    "count": 2
+  },
+  {
+    "name": "gynaecologycology and Obstetrics",
+    "count": 2
+  },
+  {
+    "name": "Oral",
+    "count": 2
+  },
+  {
+    "name": "Pedodontics",
+    "count": 2
+  },
+  {
+    "name": "Prosthodontics",
+    "count": 2
+  },
+  {
+    "name": "Periodontics",
+    "count": 2
+  },
+  {
+    "name": "Conservative Dentistry",
+    "count": 2
+  },
+  {
+    "name": "gynaecology and Obst.",
+    "count": 2
+  },
+  {
+    "name": "Specialized Laboratory services in respect of",
+    "count": 2
+  },
+  {
+    "name": "Clinical Pathology including specialized",
+    "count": 2
+  },
+  {
+    "name": "biochemistry",
+    "count": 2
+  },
+  {
+    "name": "and cytology with immunohistochemistry and",
+    "count": 2
+  },
+  {
+    "name": "other molecular techniques",
+    "count": 2
+  },
+  {
+    "name": "Physiotherapy.",
+    "count": 2
+  },
+  {
+    "name": "Simple Dental procedure",
+    "count": 2
+  },
+  {
+    "name": "Gyane and  Obstetrics  Procedure",
+    "count": 2
+  },
+  {
+    "name": "USG and",
+    "count": 2
+  },
+  {
+    "name": "Only Periodontics specialty (no other Dental",
+    "count": 2
+  },
+  {
+    "name": "procedure)",
+    "count": 2
+  },
+  {
+    "name": "All Clinic Tests",
+    "count": 2
+  },
+  {
+    "name": "CT Scan",
+    "count": 2
+  },
+  {
+    "name": "Diagnostic Lab",
+    "count": 2
+  },
+  {
+    "name": "Lab tests",
+    "count": 2
+  },
+  {
+    "name": "Lab Tests",
+    "count": 2
+  },
+  {
+    "name": "Dental Extraction and X-Ray of Teeth",
+    "count": 2
+  },
+  {
+    "name": "General OPD",
+    "count": 2
+  },
+  {
+    "name": "Pathalogy",
+    "count": 2
+  },
+  {
+    "name": "Echo",
+    "count": 2
+  },
+  {
+    "name": "Echocardiography",
+    "count": 2
+  },
+  {
+    "name": "Urology Surgery",
+    "count": 2
+  },
+  {
+    "name": "Opthamalogy (Eye)",
+    "count": 2
+  },
+  {
+    "name": "Radio Therapy",
+    "count": 2
+  },
+  {
+    "name": "Urology Surgery Cardio",
+    "count": 2
+  },
+  {
+    "name": "Coronary Angiography",
+    "count": 2
+  },
+  {
+    "name": "Neuro and Spine Surgery",
+    "count": 2
+  },
+  {
+    "name": "Department of Medicine",
+    "count": 2
+  },
+  {
+    "name": "Sleep Clinic",
+    "count": 2
+  },
+  {
+    "name": "Head and Neck Cancer",
+    "count": 2
+  },
+  {
+    "name": "Geriatric Medicine",
+    "count": 2
+  },
+  {
+    "name": "Clinical Nutrition",
+    "count": 2
+  },
+  {
+    "name": "Headache Clinic",
+    "count": 2
+  },
+  {
+    "name": "Anaesthesia and  Critical Care",
+    "count": 2
+  },
+  {
+    "name": "Cardiac Surgery  Adult",
+    "count": 2
+  },
+  {
+    "name": "Cardiac Surgery  Paediatric",
+    "count": 2
+  },
+  {
+    "name": "Cardiology  Adult",
+    "count": 2
+  },
+  {
+    "name": "Cardiology  Paediatric",
+    "count": 2
+  },
+  {
+    "name": "Clinical Nutrition and  Dietetics",
+    "count": 2
+  },
+  {
+    "name": "Dermatology and  Cosmetology",
+    "count": 2
+  },
+  {
+    "name": "Gastroenterology  Medical and Surgical",
+    "count": 2
+  },
+  {
+    "name": "Nephrology  Adult",
+    "count": 2
+  },
+  {
+    "name": "Psychiatry and  Clinical Psychology",
+    "count": 2
+  },
+  {
+    "name": "Speech And Swallow Rehabilitation",
+    "count": 2
+  },
+  {
+    "name": "Physicians",
+    "count": 2
+  },
+  {
+    "name": "Opthalmologist",
+    "count": 2
+  },
+  {
+    "name": "Nephrologists",
+    "count": 2
+  },
+  {
+    "name": "Urologists",
+    "count": 2
+  },
+  {
+    "name": "Orthopaedician",
+    "count": 2
+  },
+  {
+    "name": "Piles",
+    "count": 2
+  },
+  {
+    "name": "Trauma care",
+    "count": 2
+  },
+  {
+    "name": "Gastro-enterology",
+    "count": 2
+  },
+  {
+    "name": "Clinical Labs",
+    "count": 2
+  },
+  {
+    "name": "Diagnosis",
+    "count": 2
+  },
+  {
+    "name": "Radiation oncology",
+    "count": 2
+  },
+  {
+    "name": "Dornier AlphaLithotripsy Treatment",
+    "count": 2
+  },
+  {
+    "name": "US Scan",
+    "count": 2
+  },
+  {
+    "name": "Urologist Consultation",
+    "count": 2
+  },
+  {
+    "name": "Ambulance",
+    "count": 2
+  },
+  {
+    "name": "Critical care",
+    "count": 2
+  },
+  {
+    "name": "Cosmetic surgery",
+    "count": 2
+  },
+  {
+    "name": "Obstetrics And Gynaecology",
+    "count": 2
+  },
+  {
+    "name": "Neuro Psychology",
+    "count": 2
+  },
+  {
+    "name": "Minimally Invasive",
+    "count": 2
+  },
+  {
+    "name": "Gyneac Oncology",
+    "count": 2
+  },
+  {
+    "name": "Preventive Oncology",
+    "count": 2
+  },
+  {
+    "name": "Emergency Services",
+    "count": 2
+  },
+  {
+    "name": "Diabetic Foot Surgery",
+    "count": 2
+  },
+  {
+    "name": "Pediatric Orthopedics",
+    "count": 2
+  },
+  {
+    "name": "Respiratory  Medicine",
+    "count": 2
+  },
+  {
+    "name": "Paediatrician",
+    "count": 2
+  },
+  {
+    "name": "Imaging",
+    "count": 2
+  },
+  {
+    "name": "ENT.",
+    "count": 2
+  },
+  {
+    "name": "Headache and Migraine Clinic",
+    "count": 2
+  },
+  {
+    "name": "Infectious diseases",
+    "count": 2
+  },
+  {
+    "name": "Neuropsychology",
+    "count": 2
+  },
+  {
+    "name": "Dentistry and Maxillo-Facial Surgery",
+    "count": 2
+  },
+  {
+    "name": "Gastrointestinal and Hepatobilliary Surgery",
+    "count": 2
+  },
+  {
+    "name": "Mental Health and Behavioural Sciences",
+    "count": 2
+  },
+  {
+    "name": "Organ Transplantation",
+    "count": 2
+  },
+  {
+    "name": "Orthopaedics and joint replacement",
+    "count": 2
+  },
+  {
+    "name": "Arthoscopy and Joint Surgery",
+    "count": 2
+  },
+  {
+    "name": "Chest Diseases",
+    "count": 2
+  },
+  {
+    "name": "Colorectal",
+    "count": 2
+  },
+  {
+    "name": "Ophthalmology.",
+    "count": 2
+  },
+  {
+    "name": "Oncology.",
+    "count": 2
+  },
+  {
+    "name": "Lasik Clinic",
+    "count": 2
+  },
+  {
+    "name": "Neonatalogy",
+    "count": 2
+  },
+  {
+    "name": "Critical Care Medicine and Intensive Care",
+    "count": 2
+  },
+  {
+    "name": "cardiology and Cardiac surgery.",
+    "count": 2
+  },
+  {
+    "name": "Cardiac Anesthesiology",
+    "count": 2
+  },
+  {
+    "name": "Interventional Neuro-radiology",
+    "count": 2
+  },
+  {
+    "name": "General Surgery and Minimally Invasive Surgery",
+    "count": 2
+  },
+  {
+    "name": "Pathology and Lab Medicine",
+    "count": 2
+  },
+  {
+    "name": "Diagnostic Radiology and Imaging",
+    "count": 2
+  },
+  {
+    "name": "Obstetrics and Fetal Medicine",
+    "count": 2
+  },
+  {
+    "name": "cardiology",
+    "count": 2
+  },
+  {
+    "name": "Liver Transplantation",
+    "count": 2
+  },
+  {
+    "name": "Neurologist",
+    "count": 2
+  },
+  {
+    "name": "OGD Scopy",
+    "count": 2
+  },
+  {
+    "name": "Gall Bladder",
+    "count": 2
+  },
+  {
+    "name": "Oncology and Onco Surgery",
+    "count": 2
+  },
+  {
+    "name": "Paediatric Orthopaedics",
+    "count": 2
+  },
+  {
+    "name": "Paediatric Orthopaedic",
+    "count": 2
+  },
+  {
+    "name": "General and Laproscopic",
+    "count": 2
+  },
+  {
+    "name": "Arthoscopist",
+    "count": 2
+  },
+  {
+    "name": "Cosmetologist and Skin Specialist",
+    "count": 2
+  },
+  {
+    "name": "Homeopath",
+    "count": 2
+  },
+  {
+    "name": "Weight Managemnent",
+    "count": 2
+  },
+  {
+    "name": "Dermatologists",
+    "count": 2
+  },
+  {
+    "name": "Radiologist and Sonologist",
+    "count": 2
+  },
+  {
+    "name": "Gastri-Intestinal",
+    "count": 2
+  },
+  {
+    "name": "Endoscopists",
+    "count": 2
+  },
+  {
+    "name": "Cardio-Vascular Thoraic",
+    "count": 2
+  },
+  {
+    "name": "Naturopaths",
+    "count": 2
+  },
+  {
+    "name": "Opthalmologists",
+    "count": 2
+  },
+  {
+    "name": "Pathologists",
+    "count": 2
+  },
+  {
+    "name": "DM Cardiologist",
+    "count": 2
+  },
+  {
+    "name": "Neuro-Spinal",
+    "count": 2
+  },
+  {
+    "name": "Neurologists",
+    "count": 2
+  },
+  {
+    "name": "Child Health",
+    "count": 2
+  },
+  {
+    "name": "Neuro Physician",
+    "count": 2
+  },
+  {
+    "name": "Anaesthesiology and Pain Management",
+    "count": 2
+  },
+  {
+    "name": "Anesthesiologist",
+    "count": 2
+  },
+  {
+    "name": "General and Minimal Access Surgery",
+    "count": 2
+  },
+  {
+    "name": "Neurosergery",
+    "count": 2
+  },
+  {
+    "name": "Onco Surgery",
+    "count": 2
+  },
+  {
+    "name": "HIV",
+    "count": 2
+  },
+  {
+    "name": "Reconstructive and Cosmetic Surgery",
+    "count": 2
+  },
+  {
+    "name": "Wertheims Hysterectomy",
+    "count": 2
+  },
+  {
+    "name": "Psychiatric",
+    "count": 2
+  },
+  {
+    "name": "Heart Care",
+    "count": 2
+  },
+  {
+    "name": "Diabetic",
+    "count": 2
+  },
+  {
+    "name": "Painless Delivery",
+    "count": 2
+  },
+  {
+    "name": "Throat",
+    "count": 2
+  },
+  {
+    "name": "Larynx Surgery",
+    "count": 2
+  },
+  {
+    "name": "Cochlear Implant Surgery",
+    "count": 2
+  },
+  {
+    "name": "Plastic and Micro vascular Surgery",
+    "count": 2
+  },
+  {
+    "name": "Paediatric  Surgery",
+    "count": 2
+  },
+  {
+    "name": "Paediatric Medicine",
+    "count": 2
+  },
+  {
+    "name": "Kidney",
+    "count": 2
+  },
+  {
+    "name": "Radio diagnosis",
+    "count": 2
+  },
+  {
+    "name": "C3R",
+    "count": 2
+  },
+  {
+    "name": "Advanced Laparoscopic Surgery",
+    "count": 2
+  },
+  {
+    "name": "Uterine Fibroids",
+    "count": 2
+  },
+  {
+    "name": "Radiology and Imaging Sciences",
+    "count": 2
+  },
+  {
+    "name": "Clinical haematology",
+    "count": 2
+  },
+  {
+    "name": "Orthopaedic and Joint Replacement",
+    "count": 2
+  },
+  {
+    "name": "Internal Medicine and Critical Care",
+    "count": 2
+  },
+  {
+    "name": "Community",
+    "count": 2
+  },
+  {
+    "name": "Asthma",
+    "count": 2
+  },
+  {
+    "name": "Alcoho abuse Clinic",
+    "count": 2
+  },
+  {
+    "name": "Ophthalmology Department",
+    "count": 2
+  },
+  {
+    "name": "Surgical Center",
+    "count": 2
+  },
+  {
+    "name": "Contact Lens",
+    "count": 2
+  },
+  {
+    "name": "Endometriosis",
+    "count": 2
+  },
+  {
+    "name": "Sterilization",
+    "count": 2
+  },
+  {
+    "name": "Dermatology (Skin)",
+    "count": 2
+  },
+  {
+    "name": "Gastro Sciences",
+    "count": 2
+  },
+  {
+    "name": "General Ophthalmologist",
+    "count": 2
+  },
+  {
+    "name": "Lasik-Corneal Laser Surgery",
+    "count": 2
+  },
+  {
+    "name": "Vitreo-Retinal Services",
+    "count": 2
+  },
+  {
+    "name": "Uvea Service",
+    "count": 2
+  },
+  {
+    "name": "ICARE Eye Hospital and Postgraduate Institute",
+    "count": 2
+  },
+  {
+    "name": "Low Vision",
+    "count": 2
+  },
+  {
+    "name": "Paediatric Ophthalmology Department",
+    "count": 2
+  },
+  {
+    "name": "Vision Therapy",
+    "count": 2
+  },
+  {
+    "name": "Eye Bank Services",
+    "count": 2
+  },
+  {
+    "name": "Laboratory Services",
+    "count": 2
+  },
+  {
+    "name": "Urology Critical Care  Medicine",
+    "count": 2
+  },
+  {
+    "name": "Cardiology and CTVS",
+    "count": 2
+  },
+  {
+    "name": "Radiology Sciences",
+    "count": 2
+  },
+  {
+    "name": "Minimal Access and General Surgery",
+    "count": 2
+  },
+  {
+    "name": "Nuclear  Medicine",
+    "count": 2
+  },
+  {
+    "name": "Pathology and Ophthalmology",
+    "count": 1
+  },
+  {
+    "name": "Pediatrics Urology",
+    "count": 1
+  },
+  {
+    "name": "Marital counseling",
+    "count": 1
+  },
+  {
+    "name": "Alcohol and other substance deaddiction treatment",
+    "count": 1
+  },
+  {
+    "name": "Counseling for childhood and adolescent behavioural problems",
+    "count": 1
+  },
+  {
+    "name": "academic difficulties and relationship problems",
+    "count": 1
+  },
+  {
+    "name": "Counseling and treatment for suicide prevention",
+    "count": 1
+  },
+  {
+    "name": "Laboratory  Medicine",
+    "count": 1
+  },
+  {
+    "name": "Gastroentology and Hepatology",
+    "count": 1
+  },
+  {
+    "name": "radiology",
+    "count": 1
+  },
+  {
+    "name": "Gastro Intestinal  Surgery",
+    "count": 1
+  },
+  {
+    "name": "Renal Transplant  Surgery",
+    "count": 1
+  },
+  {
+    "name": "Trauma Center",
+    "count": 1
+  },
+  {
+    "name": "General and Laproscopic  Surgery",
+    "count": 1
+  },
+  {
+    "name": "Oro-Maxillary Surgeon",
+    "count": 1
+  },
+  {
+    "name": "Cardio thoracic",
+    "count": 1
+  },
+  {
+    "name": "Chest and Allergy",
+    "count": 1
+  },
+  {
+    "name": "ENT head Neck",
+    "count": 1
+  },
+  {
+    "name": "Oncology Surgery",
+    "count": 1
+  },
+  {
+    "name": "Surgical Oncology Telemedicine",
+    "count": 1
+  },
+  {
+    "name": "Spectacle Removal",
+    "count": 1
+  },
+  {
+    "name": "Visual Aid.",
+    "count": 1
+  },
+  {
+    "name": "Community Medicine (PSM)",
+    "count": 1
+  },
+  {
+    "name": "Venereology and Leprosy (D.V.L)",
+    "count": 1
+  },
+  {
+    "name": "Gastrointestinal and Hepotobilliary Surgery",
+    "count": 1
+  },
+  {
+    "name": "Laproscopy and Endoscopy Surgery",
+    "count": 1
+  },
+  {
+    "name": "Spine and Arthroscopy Surgery",
+    "count": 1
+  },
+  {
+    "name": "Radiology and Pathology",
+    "count": 1
+  },
+  {
+    "name": "Urology - Stone Clinic",
+    "count": 1
+  },
+  {
+    "name": "Internal",
+    "count": 1
+  },
+  {
+    "name": "Emergency and Critical Medicine",
+    "count": 1
+  },
+  {
+    "name": "Preventive Health Check",
+    "count": 1
+  },
+  {
+    "name": "Obstretic",
+    "count": 1
+  },
+  {
+    "name": "Gynecology and Infertility",
+    "count": 1
+  },
+  {
+    "name": "Plastic Surgery - Cosmetology",
+    "count": 1
+  },
+  {
+    "name": "Anesthesia and Pain Clinic",
+    "count": 1
+  },
+  {
+    "name": "Obstetrics (Maternity)",
+    "count": 1
+  },
+  {
+    "name": "Endoscopy (Laparoscopy) Surgery",
+    "count": 1
+  },
+  {
+    "name": "Infertility (Male and Female) IVF (Test-Tube Baby)",
+    "count": 1
+  },
+  {
+    "name": "Paediatrics and Neonatal care",
+    "count": 1
+  },
+  {
+    "name": "Fetal Medicine Unit",
+    "count": 1
+  },
+  {
+    "name": "Cardiac Surgery - Adult",
+    "count": 1
+  },
+  {
+    "name": "Cardiac Surgery - Paediatric",
+    "count": 1
+  },
+  {
+    "name": "Cardiology - Adult",
+    "count": 1
+  },
+  {
+    "name": "Cardiology - Paediatric",
+    "count": 1
+  },
+  {
+    "name": "Gastroenterology - Medical",
+    "count": 1
+  },
+  {
+    "name": "Gastroenterology - Surgical",
+    "count": 1
+  },
+  {
+    "name": "Nephrology - Adult",
+    "count": 1
+  },
+  {
+    "name": "P.S.M.",
+    "count": 1
+  },
+  {
+    "name": "Burns And Plastic Surgery",
+    "count": 1
+  },
+  {
+    "name": "Rediotherapy",
+    "count": 1
+  },
+  {
+    "name": "Forensic Medicine and Toxicology",
+    "count": 1
+  },
+  {
+    "name": "Preventive and Social Medicine",
+    "count": 1
+  },
+  {
+    "name": "T.B.and Chest",
+    "count": 1
+  },
+  {
+    "name": "Skin and V.D.",
+    "count": 1
+  },
+  {
+    "name": "Peadiatric",
+    "count": 1
+  },
+  {
+    "name": "Gynae Department",
+    "count": 1
+  },
+  {
+    "name": "Homeopathy Dispensary:",
+    "count": 1
+  },
+  {
+    "name": "Acupressure and Acupuncture",
+    "count": 1
+  },
+  {
+    "name": "Neurotherapy",
+    "count": 1
+  },
+  {
+    "name": "Eye Pledges and Donation",
+    "count": 1
+  },
+  {
+    "name": "Drug deaddiction and rehabilitation Center",
+    "count": 1
+  },
+  {
+    "name": "General Ophthalmology",
+    "count": 1
+  },
+  {
+    "name": "Pediatetric and Neonatal Care",
+    "count": 1
+  },
+  {
+    "name": "Laparoscopic and General Surgery",
+    "count": 1
+  },
+  {
+    "name": "Trauma(Accidents",
+    "count": 1
+  },
+  {
+    "name": "Emergency)",
+    "count": 1
+  },
+  {
+    "name": "Sport Injuries",
+    "count": 1
+  },
+  {
+    "name": "Arthritis Clinic",
+    "count": 1
+  },
+  {
+    "name": "Eye and Maternity",
+    "count": 1
+  },
+  {
+    "name": "GI and Minimally Invasive Surgery",
+    "count": 1
+  },
+  {
+    "name": "Nephrology and Renal Care",
+    "count": 1
+  },
+  {
+    "name": "Lasik Counselling Clinic",
+    "count": 1
+  },
+  {
+    "name": "Computerized Eye Check up",
+    "count": 1
+  },
+  {
+    "name": "Endocrinology and Laser Centre",
+    "count": 1
+  },
+  {
+    "name": "Gastro and Hepatology",
+    "count": 1
+  },
+  {
+    "name": "Crowns and Bridges",
+    "count": 1
+  },
+  {
+    "name": "Root Canal Treatment",
+    "count": 1
+  },
+  {
+    "name": "Teeth Whitening",
+    "count": 1
+  },
+  {
+    "name": "Smile Designing",
+    "count": 1
+  },
+  {
+    "name": "Implant Dentistry",
+    "count": 1
+  },
+  {
+    "name": "General Pediatrics and Neonatology",
+    "count": 1
+  },
+  {
+    "name": "Mother and Child care",
+    "count": 1
+  },
+  {
+    "name": "Advanced Surgery",
+    "count": 1
+  },
+  {
+    "name": "Orchid Fertility and IVF Centre",
+    "count": 1
+  },
+  {
+    "name": "CCU",
+    "count": 1
+  },
+  {
+    "name": "OBS and Gynaecology",
+    "count": 1
+  },
+  {
+    "name": "Intervention and Non Intervention Cardiology",
+    "count": 1
+  },
+  {
+    "name": "General Surgery Center and Advanced Laparoscopy",
+    "count": 1
+  },
+  {
+    "name": "Cardio Thoracic",
+    "count": 1
+  },
+  {
+    "name": "Bone and Joints    Skin and Cosmetic",
+    "count": 1
+  },
+  {
+    "name": "Urology Physiotherapy",
+    "count": 1
+  },
+  {
+    "name": "Mother and Child Ophthalmology",
+    "count": 1
+  },
+  {
+    "name": "Dialysis Radiology",
+    "count": 1
+  },
+  {
+    "name": "Medical and Surgical",
+    "count": 1
+  },
+  {
+    "name": "Endocrinology and Endocrine Surgery",
+    "count": 1
+  },
+  {
+    "name": "Neurosurgery Orthopedic",
+    "count": 1
+  },
+  {
+    "name": "Pediatrics and Neonatology Urology",
+    "count": 1
+  },
+  {
+    "name": "Diabetes and related Ailments",
+    "count": 1
+  },
+  {
+    "name": "Urology and Laparoscopy",
+    "count": 1
+  },
+  {
+    "name": "Dental clinic",
+    "count": 1
+  },
+  {
+    "name": "Endoscopic procedure",
+    "count": 1
+  },
+  {
+    "name": "Endoscopic and urology surgery Gyne",
+    "count": 1
+  },
+  {
+    "name": "V.D.Ortho",
+    "count": 1
+  },
+  {
+    "name": "Pathology and Laboratory Medicine",
+    "count": 1
+  },
+  {
+    "name": "Radiology and Nuclear Medicine",
+    "count": 1
+  },
+  {
+    "name": "Ayurveda Medicine",
+    "count": 1
+  },
+  {
+    "name": "Head And Neck Oncosurgery",
+    "count": 1
+  },
+  {
+    "name": "Gastrointestinal And Bariatric Surgery",
+    "count": 1
+  },
+  {
+    "name": "Mother And ChildNeuro SciencesNeuro",
+    "count": 1
+  },
+  {
+    "name": "Vascular And Non Vascular Interventional Radiology",
+    "count": 1
+  },
+  {
+    "name": "Orthopedics And Joint Replacement",
+    "count": 1
+  },
+  {
+    "name": "Plastic And Reconstructive Surgery",
+    "count": 1
+  },
+  {
+    "name": "Preventive Health Check-ups",
+    "count": 1
+  },
+  {
+    "name": "Psychiatry And Psychology",
+    "count": 1
+  },
+  {
+    "name": "Pulmonary And Critical Care",
+    "count": 1
+  },
+  {
+    "name": "Radiology Renal Sciences And Urology",
+    "count": 1
+  },
+  {
+    "name": "Minimally invasive surgery",
+    "count": 1
+  },
+  {
+    "name": "Blood Bank Services",
+    "count": 1
+  },
+  {
+    "name": "Park Mother`s Nest",
+    "count": 1
+  },
+  {
+    "name": "Gastroenterology  Dental Care",
+    "count": 1
+  },
+  {
+    "name": "Alternative Medicine",
+    "count": 1
+  },
+  {
+    "name": "Cardio Thoracis and Vascular Surgery",
+    "count": 1
+  },
+  {
+    "name": "Maxillofacial and Oral surgery",
+    "count": 1
+  },
+  {
+    "name": "Restoration",
+    "count": 1
+  },
+  {
+    "name": "PediatricDentistry",
+    "count": 1
+  },
+  {
+    "name": "Aesthetics",
+    "count": 1
+  },
+  {
+    "name": "Infertility Clinic (For Both Male And Female",
+    "count": 1
+  },
+  {
+    "name": "Joint Replacement and Orthopedic",
+    "count": 1
+  },
+  {
+    "name": "Advanced Laboratory Services",
+    "count": 1
+  },
+  {
+    "name": "Eye (Ophthalmology)",
+    "count": 1
+  },
+  {
+    "name": "Lap.Surgery",
+    "count": 1
+  },
+  {
+    "name": "Orthopedic and Joints",
+    "count": 1
+  },
+  {
+    "name": "Mother and Child",
+    "count": 1
+  },
+  {
+    "name": "Skin and Cosmetic",
+    "count": 1
+  },
+  {
+    "name": "Psychiatry Eye",
+    "count": 1
+  },
+  {
+    "name": "Neurosurgeon",
+    "count": 1
+  },
+  {
+    "name": "ObstetricsAnd Gynaecology",
+    "count": 1
+  },
+  {
+    "name": "Mental Health And Behavioural Sciences",
+    "count": 1
+  },
+  {
+    "name": "Stem Cell Therapy and Regenerative Medicine",
+    "count": 1
+  },
+  {
+    "name": "Laproscopic Key Hole Surgery",
+    "count": 1
+  },
+  {
+    "name": "Dermatology and Cosmetic Dermatosurgery",
+    "count": 1
+  },
+  {
+    "name": "Imaging and Diagnostics",
+    "count": 1
+  },
+  {
+    "name": "Anaesthesiology and Pain Medicine",
+    "count": 1
+  },
+  {
+    "name": "General and Laparoscopic surgery",
+    "count": 1
+  },
+  {
+    "name": "Aesthetic",
+    "count": 1
+  },
+  {
+    "name": "General and Family Practice",
+    "count": 1
+  },
+  {
+    "name": "General Laparoscopy",
+    "count": 1
+  },
+  {
+    "name": "Uro Laparoscopy",
+    "count": 1
+  },
+  {
+    "name": "Care Unit",
+    "count": 1
+  },
+  {
+    "name": "Labour Room",
+    "count": 1
+  },
+  {
+    "name": "Telemedicine",
+    "count": 1
+  },
+  {
+    "name": "Bronchoscopy",
+    "count": 1
+  },
+  {
+    "name": "Dialysis unit Arthroscopy",
+    "count": 1
+  },
+  {
+    "name": "Colposcopy Routine and Specialized X-Rays",
+    "count": 1
+  },
+  {
+    "name": "Uroflometry",
+    "count": 1
+  },
+  {
+    "name": "Operating",
+    "count": 1
+  },
+  {
+    "name": "Microscope",
+    "count": 1
+  },
+  {
+    "name": "ECHO",
+    "count": 1
+  },
+  {
+    "name": "Cardiogram",
+    "count": 1
+  },
+  {
+    "name": "CT scan",
+    "count": 1
+  },
+  {
+    "name": "Mammography",
+    "count": 1
+  },
+  {
+    "name": "Neonatal intensive care unit",
+    "count": 1
+  },
+  {
+    "name": "Vaccinations",
+    "count": 1
+  },
+  {
+    "name": "Nutritional Advice",
+    "count": 1
+  },
+  {
+    "name": "Gen.Surgery and Bariatric Surgery",
+    "count": 1
+  },
+  {
+    "name": "Pshychaitry",
+    "count": 1
+  },
+  {
+    "name": "Critical Care and Pain",
+    "count": 1
+  },
+  {
+    "name": "Radio diagnosis and Internevtional Neuro Radiology",
+    "count": 1
+  },
+  {
+    "name": "Ophthalmic",
+    "count": 1
+  },
+  {
+    "name": "Ano- Rectal",
+    "count": 1
+  },
+  {
+    "name": "Trauma Care Centre",
+    "count": 1
+  },
+  {
+    "name": "Infertility and IVF",
+    "count": 1
+  },
+  {
+    "name": "ENT and Cochlear Implants",
+    "count": 1
+  },
+  {
+    "name": "Anesthesiology and Pain Management",
+    "count": 1
+  },
+  {
+    "name": "Imaging and Radiology",
+    "count": 1
+  },
+  {
+    "name": "Laboratory Diagnostics",
+    "count": 1
+  },
+  {
+    "name": "Maternity Care",
+    "count": 1
+  },
+  {
+    "name": "Gastroenterology and GI surgery",
+    "count": 1
+  },
+  {
+    "name": "Plastic Surgery and Dermatology",
+    "count": 1
+  },
+  {
+    "name": "and Throat (ENT)",
+    "count": 1
+  },
+  {
+    "name": "Nose and Throat (ENT)",
+    "count": 1
+  },
+  {
+    "name": "Ayurvedic and Naturopathy",
+    "count": 1
+  },
+  {
+    "name": "Chiropractics",
+    "count": 1
+  },
+  {
+    "name": "Neuro- Psychiatry",
+    "count": 1
+  },
+  {
+    "name": "Burns and General Surgery",
+    "count": 1
+  },
+  {
+    "name": "Emergency Medicine and Critical Care",
+    "count": 1
+  },
+  {
+    "name": "Anesthesia and Intensive Care",
+    "count": 1
+  },
+  {
+    "name": "Medical Education",
+    "count": 1
+  },
+  {
+    "name": "C.T.V.S",
+    "count": 1
+  },
+  {
+    "name": "Drugs and Alcohol",
+    "count": 1
+  },
+  {
+    "name": "De-Addiction",
+    "count": 1
+  },
+  {
+    "name": "Sexual Debility",
+    "count": 1
+  },
+  {
+    "name": "Urosurgery",
+    "count": 1
+  },
+  {
+    "name": "Burn",
+    "count": 1
+  },
+  {
+    "name": "Pediatric Surgeon",
+    "count": 1
+  },
+  {
+    "name": "Pathologist",
+    "count": 1
+  },
+  {
+    "name": "ENT and Maternity Hospital",
+    "count": 1
+  },
+  {
+    "name": "Dentistrym",
+    "count": 1
+  },
+  {
+    "name": "Joint Replacement and Reconstructive Surgery",
+    "count": 1
+  },
+  {
+    "name": "Speech therapy",
+    "count": 1
+  },
+  {
+    "name": "High Risk Obs",
+    "count": 1
+  },
+  {
+    "name": "Endogyne",
+    "count": 1
+  },
+  {
+    "name": "Test Tube Baby",
+    "count": 1
+  },
+  {
+    "name": "Physiotherapy Services",
+    "count": 1
+  },
+  {
+    "name": "General Physician",
+    "count": 1
+  },
+  {
+    "name": "Kshara-Sutra",
+    "count": 1
+  },
+  {
+    "name": "Surgical oncology",
+    "count": 1
+  },
+  {
+    "name": "Diagnostics Laboratory",
+    "count": 1
+  },
+  {
+    "name": "Slimming Center",
+    "count": 1
+  },
+  {
+    "name": "Life Style and Diet advice",
+    "count": 1
+  },
+  {
+    "name": "Paediatrics and  gynaecologycology and General",
+    "count": 1
+  },
+  {
+    "name": "Surgery.",
+    "count": 1
+  },
+  {
+    "name": "Laparoscopic surgery and ortho surgery.",
+    "count": 1
+  },
+  {
+    "name": "Facio Maxillary surgery",
+    "count": 1
+  },
+  {
+    "name": "Bio- Chemistry",
+    "count": 1
+  },
+  {
+    "name": "Bio-Physics",
+    "count": 1
+  },
+  {
+    "name": "Pulm Medicine",
+    "count": 1
+  },
+  {
+    "name": "Gen.Medicine",
+    "count": 1
+  },
+  {
+    "name": "Gen.Surgery",
+    "count": 1
+  },
+  {
+    "name": "Obst.and  gynaecology",
+    "count": 1
+  },
+  {
+    "name": "Laboratory Services and Dialysis.",
+    "count": 1
+  },
+  {
+    "name": "Gerneral Surgery",
+    "count": 1
+  },
+  {
+    "name": "Diagnostic service.",
+    "count": 1
+  },
+  {
+    "name": "Conservative Dentistry and Endodontics",
+    "count": 1
+  },
+  {
+    "name": "and Maxillofacaial Pathology.",
+    "count": 1
+  },
+  {
+    "name": "Only Oral Medicine specialty (No other",
+    "count": 1
+  },
+  {
+    "name": "procedures",
+    "count": 1
+  },
+  {
+    "name": "Oral and",
+    "count": 1
+  },
+  {
+    "name": "Maxillofacial",
+    "count": 1
+  },
+  {
+    "name": "Oral Diagnosis",
+    "count": 1
+  },
+  {
+    "name": "Preventive and",
+    "count": 1
+  },
+  {
+    "name": "Community Dentistry",
+    "count": 1
+  },
+  {
+    "name": "Oral Pathology.",
+    "count": 1
+  },
+  {
+    "name": "Immunopathology.",
+    "count": 1
+  },
+  {
+    "name": "Cardiothrocic Surgery",
+    "count": 1
+  },
+  {
+    "name": "Neo - Natology",
+    "count": 1
+  },
+  {
+    "name": "Eye Clinic",
+    "count": 1
+  },
+  {
+    "name": "Ophthalmology (Day Care Procedures only)",
+    "count": 1
+  },
+  {
+    "name": "Colornoscopy",
+    "count": 1
+  },
+  {
+    "name": "Plain X-ray",
+    "count": 1
+  },
+  {
+    "name": "Contrast X-ray on 500 m A machine with image intensifier",
+    "count": 1
+  },
+  {
+    "name": "Laboratory.",
+    "count": 1
+  },
+  {
+    "name": "Dental Procedures",
+    "count": 1
+  },
+  {
+    "name": "Periodontics only",
+    "count": 1
+  },
+  {
+    "name": "Dental Procedures.",
+    "count": 1
+  },
+  {
+    "name": "Medical and Surgical intervention",
+    "count": 1
+  },
+  {
+    "name": "EEG",
+    "count": 1
+  },
+  {
+    "name": "Lab.",
+    "count": 1
+  },
+  {
+    "name": "General surgery.",
+    "count": 1
+  },
+  {
+    "name": "Clinic. gynaecologycology and Obstetrics  Procedures.USG.",
+    "count": 1
+  },
+  {
+    "name": "gynaecology",
+    "count": 1
+  },
+  {
+    "name": "Lab and ECG",
+    "count": 1
+  },
+  {
+    "name": "Consultation.",
+    "count": 1
+  },
+  {
+    "name": "USG.",
+    "count": 1
+  },
+  {
+    "name": "All Eye Procedure",
+    "count": 1
+  },
+  {
+    "name": "Ophthalmology (Day care procedures only)",
+    "count": 1
+  },
+  {
+    "name": "Immunology.",
+    "count": 1
+  },
+  {
+    "name": "Immunopthology.",
+    "count": 1
+  },
+  {
+    "name": "Ophthalmology and Dermatology",
+    "count": 1
+  },
+  {
+    "name": "Radiology and Medicine.",
+    "count": 1
+  },
+  {
+    "name": "Lab services",
+    "count": 1
+  },
+  {
+    "name": "Paediatrics and Obstetrics and Gynaecology",
+    "count": 1
+  },
+  {
+    "name": "Routine Lab and X-Ray",
+    "count": 1
+  },
+  {
+    "name": "ECG and X-Rays medicines and Gynea services.",
+    "count": 1
+  },
+  {
+    "name": "ECG and X-Ray.",
+    "count": 1
+  },
+  {
+    "name": "Consultation",
+    "count": 1
+  },
+  {
+    "name": "Diagnostic and Therapeutic",
+    "count": 1
+  },
+  {
+    "name": "GI Endoscopy and Colornoscopy.",
+    "count": 1
+  },
+  {
+    "name": "Orthopaedics and",
+    "count": 1
+  },
+  {
+    "name": "Pathology tests.",
+    "count": 1
+  },
+  {
+    "name": "General Surgery and Gyneacology",
+    "count": 1
+  },
+  {
+    "name": "Oral Pathology",
+    "count": 1
+  },
+  {
+    "name": "Conservative dentistry and Endodontics",
+    "count": 1
+  },
+  {
+    "name": "Medicine and Radiology",
+    "count": 1
+  },
+  {
+    "name": "Surgery and  gynaecologycology",
+    "count": 1
+  },
+  {
+    "name": "Obstetrics  and gynaecologycology",
+    "count": 1
+  },
+  {
+    "name": "General Surgery and Urology",
+    "count": 1
+  },
+  {
+    "name": "Diagnostic Centre (Laboratory",
+    "count": 1
+  },
+  {
+    "name": "Diagnostic",
+    "count": 1
+  },
+  {
+    "name": "Centre",
+    "count": 1
+  },
+  {
+    "name": "USG Centre and X-Ray Centre only)",
+    "count": 1
+  },
+  {
+    "name": "General Medicine and Diagnostic Centre (Lab.",
+    "count": 1
+  },
+  {
+    "name": "Diag.Centre and X-Ray Centre only)",
+    "count": 1
+  },
+  {
+    "name": "Gynea  Obstetrics  and Lab",
+    "count": 1
+  },
+  {
+    "name": "Diagnostic Centre.",
+    "count": 1
+  },
+  {
+    "name": "X-Ray Centre andCT Scan Centre only.",
+    "count": 1
+  },
+  {
+    "name": "USG Center only",
+    "count": 1
+  },
+  {
+    "name": "gynaecology Obstetrics and Fertility Services",
+    "count": 1
+  },
+  {
+    "name": "services and Physiotherapy",
+    "count": 1
+  },
+  {
+    "name": "Paediatarics",
+    "count": 1
+  },
+  {
+    "name": "Ophtholmology",
+    "count": 1
+  },
+  {
+    "name": "gynaecology.",
+    "count": 1
+  },
+  {
+    "name": "Orthopaedic service only",
+    "count": 1
+  },
+  {
+    "name": "E.N.T only",
+    "count": 1
+  },
+  {
+    "name": "Paediatrics only",
+    "count": 1
+  },
+  {
+    "name": "General Surgery and Leproscopic Surgery",
+    "count": 1
+  },
+  {
+    "name": "Obstetrics  and Gynecology",
+    "count": 1
+  },
+  {
+    "name": "Dental (General Dentistry and Maxilofacial surgery)",
+    "count": 1
+  },
+  {
+    "name": "ENT (Day care procedures only) and Dermotology",
+    "count": 1
+  },
+  {
+    "name": "Ophthalmology (Day Care procedures only)",
+    "count": 1
+  },
+  {
+    "name": "Medicine only.",
+    "count": 1
+  },
+  {
+    "name": "Eye Care Facility",
+    "count": 1
+  },
+  {
+    "name": "CT-Scan",
+    "count": 1
+  },
+  {
+    "name": "MRI and  Routine Lab Tests",
+    "count": 1
+  },
+  {
+    "name": "General Surgery with Supportive Services",
+    "count": 1
+  },
+  {
+    "name": "General Medicine and General Surgery and Gynaecology and Obstetrics",
+    "count": 1
+  },
+  {
+    "name": "Anesthesia diagnostic facilitie savailable",
+    "count": 1
+  },
+  {
+    "name": "General Practice and  General Surgery",
+    "count": 1
+  },
+  {
+    "name": "Haemodylsis",
+    "count": 1
+  },
+  {
+    "name": "Pesitoriol Dylsis and Ultrasonography",
+    "count": 1
+  },
+  {
+    "name": "Upper GI Endoscopy",
+    "count": 1
+  },
+  {
+    "name": "Orthopedic Surgery (ORIF of Fracture and Dislocation",
+    "count": 1
+  },
+  {
+    "name": "CR of Fracture and Dislocation",
+    "count": 1
+  },
+  {
+    "name": "Routine surgeries regarding ortho problems",
+    "count": 1
+  },
+  {
+    "name": "Orthopedic OPD",
+    "count": 1
+  },
+  {
+    "name": "ORIF",
+    "count": 1
+  },
+  {
+    "name": "Gynae (OPD services  Gynaecology and Obstetrics and Ortho",
+    "count": 1
+  },
+  {
+    "name": "Normal delivery",
+    "count": 1
+  },
+  {
+    "name": "Caesarian Section",
+    "count": 1
+  },
+  {
+    "name": "Gynae surgery)",
+    "count": 1
+  },
+  {
+    "name": "Gastroenetrology",
+    "count": 1
+  },
+  {
+    "name": "Obstretics",
+    "count": 1
+  },
+  {
+    "name": "Radiological Services: X-Ray",
+    "count": 1
+  },
+  {
+    "name": "Dylisis",
+    "count": 1
+  },
+  {
+    "name": "Endoscopy (Day Care)",
+    "count": 1
+  },
+  {
+    "name": "Ophthalmology and  Surgical Procedures",
+    "count": 1
+  },
+  {
+    "name": "Ultrasound  and X-Ray",
+    "count": 1
+  },
+  {
+    "name": "(Lab Tests) and General OPD Clinic",
+    "count": 1
+  },
+  {
+    "name": "Medicine OPD and Medical emergencies and Lab tests",
+    "count": 1
+  },
+  {
+    "name": "X-Ray and Ultrasound",
+    "count": 1
+  },
+  {
+    "name": "X-Ray services",
+    "count": 1
+  },
+  {
+    "name": "ENT Surgery and Audiometry tests",
+    "count": 1
+  },
+  {
+    "name": "Lab Tests and X-Ray",
+    "count": 1
+  },
+  {
+    "name": "NICU",
+    "count": 1
+  },
+  {
+    "name": "XRay and Ultrasound",
+    "count": 1
+  },
+  {
+    "name": "Diagnostic Clinic",
+    "count": 1
+  },
+  {
+    "name": "CT-Scan and Ultrasound",
+    "count": 1
+  },
+  {
+    "name": "Lab test",
+    "count": 1
+  },
+  {
+    "name": "Ultrasound and Xray",
+    "count": 1
+  },
+  {
+    "name": "Endoscopy  and Lithotripsy",
+    "count": 1
+  },
+  {
+    "name": "Lab Tests ECG",
+    "count": 1
+  },
+  {
+    "name": "X-Ray and Ultrasound and Routine Dental Checkup",
+    "count": 1
+  },
+  {
+    "name": "Lab tests and X-Ray",
+    "count": 1
+  },
+  {
+    "name": "All Type of Cataract Surgery and All Type of Eye Diseases",
+    "count": 1
+  },
+  {
+    "name": "OPD",
+    "count": 1
+  },
+  {
+    "name": "Indoor",
+    "count": 1
+  },
+  {
+    "name": "Medical emergencies",
+    "count": 1
+  },
+  {
+    "name": "X-ray",
+    "count": 1
+  },
+  {
+    "name": "ECG and Cardiac Monitoring",
+    "count": 1
+  },
+  {
+    "name": "Obstetrics and  Gynaecology (Surgery)",
+    "count": 1
+  },
+  {
+    "name": "Orthopaedics (Surgery)",
+    "count": 1
+  },
+  {
+    "name": "Diagnostic Services",
+    "count": 1
+  },
+  {
+    "name": "(Lab",
+    "count": 1
+  },
+  {
+    "name": "USG and Radiology)",
+    "count": 1
+  },
+  {
+    "name": "Lab Tests and General OPD Clinic",
+    "count": 1
+  },
+  {
+    "name": "Radiology including X-Ray",
+    "count": 1
+  },
+  {
+    "name": "CT Scan and  MRI Radiology",
+    "count": 1
+  },
+  {
+    "name": "Endoscopy and Specialized laboratory services",
+    "count": 1
+  },
+  {
+    "name": "Ophthalmology and Radiology",
+    "count": 1
+  },
+  {
+    "name": "Anaesthetist",
+    "count": 1
+  },
+  {
+    "name": "Orthopaedics and Radiology",
+    "count": 1
+  },
+  {
+    "name": "OPD Consultant",
+    "count": 1
+  },
+  {
+    "name": "Laboratory tests",
+    "count": 1
+  },
+  {
+    "name": "Immunization",
+    "count": 1
+  },
+  {
+    "name": "Nebulizaton",
+    "count": 1
+  },
+  {
+    "name": "CT Scan Spiral and Mammography",
+    "count": 1
+  },
+  {
+    "name": "Throat Specialist",
+    "count": 1
+  },
+  {
+    "name": "Diagnostic Centre (X-Ray",
+    "count": 1
+  },
+  {
+    "name": "Digital X-Ray",
+    "count": 1
+  },
+  {
+    "name": "PTA",
+    "count": 1
+  },
+  {
+    "name": "ECG and EEG",
+    "count": 1
+  },
+  {
+    "name": "Orthodontic Treatment",
+    "count": 1
+  },
+  {
+    "name": "Implants Endodontic Treatment",
+    "count": 1
+  },
+  {
+    "name": "Gynecologyand Obstetrics",
+    "count": 1
+  },
+  {
+    "name": "Ophthalmology Surgeries",
+    "count": 1
+  },
+  {
+    "name": "Oral with Maxiliofacial Surgery",
+    "count": 1
+  },
+  {
+    "name": "Prosthodentics",
+    "count": 1
+  },
+  {
+    "name": "Periodentics",
+    "count": 1
+  },
+  {
+    "name": "Pedodentics",
+    "count": 1
+  },
+  {
+    "name": "Obstetrics and Gynaecology and Orthopedics",
+    "count": 1
+  },
+  {
+    "name": "Color Doppler",
+    "count": 1
+  },
+  {
+    "name": "Cardiogram Peripheral",
+    "count": 1
+  },
+  {
+    "name": "studies Urine Examination TFT",
+    "count": 1
+  },
+  {
+    "name": "Cardio Doppler",
+    "count": 1
+  },
+  {
+    "name": "Radiology Cardial Cath Laboratoy",
+    "count": 1
+  },
+  {
+    "name": "Internal medicines",
+    "count": 1
+  },
+  {
+    "name": "Medicines",
+    "count": 1
+  },
+  {
+    "name": "Urology available diagnostic facility",
+    "count": 1
+  },
+  {
+    "name": "Catract with IOL",
+    "count": 1
+  },
+  {
+    "name": "Phaco cataract surgery with IOL",
+    "count": 1
+  },
+  {
+    "name": "Injury and Trauma Surgery",
+    "count": 1
+  },
+  {
+    "name": "Glucoma Surgery",
+    "count": 1
+  },
+  {
+    "name": "Eye Fitting",
+    "count": 1
+  },
+  {
+    "name": "Reconstructive Surgery etc",
+    "count": 1
+  },
+  {
+    "name": "Multispeciality General Purpose",
+    "count": 1
+  },
+  {
+    "name": "Radiological Services including USG",
+    "count": 1
+  },
+  {
+    "name": "CT Scan and Radilogical investigation",
+    "count": 1
+  },
+  {
+    "name": "ESWL for Renal stone",
+    "count": 1
+  },
+  {
+    "name": "Eye and ENT",
+    "count": 1
+  },
+  {
+    "name": "Paediatrics and General Services",
+    "count": 1
+  },
+  {
+    "name": "Urological surgery",
+    "count": 1
+  },
+  {
+    "name": "General Medical Services",
+    "count": 1
+  },
+  {
+    "name": "STD",
+    "count": 1
+  },
+  {
+    "name": "Heart Care Centre",
+    "count": 1
+  },
+  {
+    "name": "By-Pass surgery",
+    "count": 1
+  },
+  {
+    "name": "Valve Replacement",
+    "count": 1
+  },
+  {
+    "name": "Vascular and Throacic surgery",
+    "count": 1
+  },
+  {
+    "name": "Brain and Spine Centre",
+    "count": 1
+  },
+  {
+    "name": "Dermatology.",
+    "count": 1
+  },
+  {
+    "name": "Pleural aspiration",
+    "count": 1
+  },
+  {
+    "name": "Intercostal Intubations",
+    "count": 1
+  },
+  {
+    "name": "Pleural Biopsies and FNAC",
+    "count": 1
+  },
+  {
+    "name": "Pediatrics and Paediatric",
+    "count": 1
+  },
+  {
+    "name": "Cardiac",
+    "count": 1
+  },
+  {
+    "name": "Vascular and Thoracic Surgery (CVTS)",
+    "count": 1
+  },
+  {
+    "name": "Clinical Haematology",
+    "count": 1
+  },
+  {
+    "name": "Infectious Disease",
+    "count": 1
+  },
+  {
+    "name": "Dietitics and Therapeutics",
+    "count": 1
+  },
+  {
+    "name": "Dressing",
+    "count": 1
+  },
+  {
+    "name": "Transplant Patients",
+    "count": 1
+  },
+  {
+    "name": "FMT",
+    "count": 1
+  },
+  {
+    "name": "PC Medicine",
+    "count": 1
+  },
+  {
+    "name": "Skin and VD",
+    "count": 1
+  },
+  {
+    "name": "Dialysis Unit",
+    "count": 1
+  },
+  {
+    "name": "ICU-ICCU",
+    "count": 1
+  },
+  {
+    "name": "Otorinolaryngology (ENT)",
+    "count": 1
+  },
+  {
+    "name": "Cardiac Thoracic surgery",
+    "count": 1
+  },
+  {
+    "name": "Gynaecologic Oncology",
+    "count": 1
+  },
+  {
+    "name": "Pain and Palliative Care Unit",
+    "count": 1
+  },
+  {
+    "name": "Plastic Reconstructive Surgery and Burns",
+    "count": 1
+  },
+  {
+    "name": "Urology including Endourology",
+    "count": 1
+  },
+  {
+    "name": "Renal transplantation and Treatment of Erectile Dysfunction",
+    "count": 1
+  },
+  {
+    "name": "Joint Replacements",
+    "count": 1
+  },
+  {
+    "name": "Refractive Surgery services",
+    "count": 1
+  },
+  {
+    "name": "Diabetic Eye Care Services",
+    "count": 1
+  },
+  {
+    "name": "Peadiatric Services",
+    "count": 1
+  },
+  {
+    "name": "Uveitis Services",
+    "count": 1
+  },
+  {
+    "name": "Low Vision Aid",
+    "count": 1
+  },
+  {
+    "name": "Outpatient Department",
+    "count": 1
+  },
+  {
+    "name": "Cataract surgery",
+    "count": 1
+  },
+  {
+    "name": "Glaucoma care",
+    "count": 1
+  },
+  {
+    "name": "Diabetic retinopathy",
+    "count": 1
+  },
+  {
+    "name": "Age related macular degeneration",
+    "count": 1
+  },
+  {
+    "name": "Paediatric ophthalmology",
+    "count": 1
+  },
+  {
+    "name": "Refractive surgery services",
+    "count": 1
+  },
+  {
+    "name": "Contact lenses",
+    "count": 1
+  },
+  {
+    "name": "Botox clinic",
+    "count": 1
+  },
+  {
+    "name": "Maternity Services",
+    "count": 1
+  },
+  {
+    "name": "Birthing",
+    "count": 1
+  },
+  {
+    "name": "Fertility  and IVF",
+    "count": 1
+  },
+  {
+    "name": "Woman's Health",
+    "count": 1
+  },
+  {
+    "name": "Women Health Checks",
+    "count": 1
+  },
+  {
+    "name": "Procedures",
+    "count": 1
+  },
+  {
+    "name": "Cancer Evaluation",
+    "count": 1
+  },
+  {
+    "name": "Children's Health",
+    "count": 1
+  },
+  {
+    "name": "New Born Screening",
+    "count": 1
+  },
+  {
+    "name": "Vaccination",
+    "count": 1
+  },
+  {
+    "name": "Cardiac surgery",
+    "count": 1
+  },
+  {
+    "name": "General and  Gastro-intestinal surgery",
+    "count": 1
+  },
+  {
+    "name": "Thoracic surgery",
+    "count": 1
+  },
+  {
+    "name": "Colorectal surgery",
+    "count": 1
+  },
+  {
+    "name": "Cancer surgery",
+    "count": 1
+  },
+  {
+    "name": "Neurosurgery and Ear",
+    "count": 1
+  },
+  {
+    "name": "Nose and Throat surgery",
+    "count": 1
+  },
+  {
+    "name": "Paediatrics and  Neonatology",
+    "count": 1
+  },
+  {
+    "name": "General Surgery and Laparoscopy",
+    "count": 1
+  },
+  {
+    "name": "Emergency and  Accident Trauma Care (with Free Ambulance)",
+    "count": 1
+  },
+  {
+    "name": "ICU (For Accident victims with highest quality anesthetic facilities)",
+    "count": 1
+  },
+  {
+    "name": "CT Scan Centre",
+    "count": 1
+  },
+  {
+    "name": "Ambulance Services",
+    "count": 1
+  },
+  {
+    "name": "X-ray Centre",
+    "count": 1
+  },
+  {
+    "name": "Rheumatology and immunology",
+    "count": 1
+  },
+  {
+    "name": "Immunodeficiency",
+    "count": 1
+  },
+  {
+    "name": "Advanced arthritis Clinic",
+    "count": 1
+  },
+  {
+    "name": "OB and  G Laparoscopic Surgery",
+    "count": 1
+  },
+  {
+    "name": "General Surgery Urology Paediatric Surgery",
+    "count": 1
+  },
+  {
+    "name": "Orthopedics with superspecialities Neurology Surgical Gastro-Enterology",
+    "count": 1
+  },
+  {
+    "name": "Paediatrics Psychiatry Plastic Surgery",
+    "count": 1
+  },
+  {
+    "name": "Cardiology Neurosurgery Oral-Maxillofacial Surgery",
+    "count": 1
+  },
+  {
+    "name": "Ophthalmology Vascular Surgery Pulmonolgy",
+    "count": 1
+  },
+  {
+    "name": "E.N.T.Pathology Endocrinology",
+    "count": 1
+  },
+  {
+    "name": "Dermatology Gastro-enterology Radiology and  Sonology",
+    "count": 1
+  },
+  {
+    "name": "Dentistry with superspecialities Oncology Diabetology",
+    "count": 1
+  },
+  {
+    "name": "Anaesthesiology Nephrology Dietetics",
+    "count": 1
+  },
+  {
+    "name": "General Surgeons",
+    "count": 1
+  },
+  {
+    "name": "Anaesthesiologists",
+    "count": 1
+  },
+  {
+    "name": "Nose And Throat",
+    "count": 1
+  },
+  {
+    "name": "Maxillary Surgeon",
+    "count": 1
+  },
+  {
+    "name": "Obstetricians and  Gynaecologists",
+    "count": 1
+  },
+  {
+    "name": "Orthopaedicians",
+    "count": 1
+  },
+  {
+    "name": "Paediatricians",
+    "count": 1
+  },
+  {
+    "name": "Psychiatrist",
+    "count": 1
+  },
+  {
+    "name": "Radiologists",
+    "count": 1
+  },
+  {
+    "name": "Neuro-Physician",
+    "count": 1
+  },
+  {
+    "name": "Oncologist",
+    "count": 1
+  },
+  {
+    "name": "Vascular Surgeon",
+    "count": 1
+  },
+  {
+    "name": "Paediatric (Surgeon",
+    "count": 1
+  },
+  {
+    "name": "Oncosurgeo",
+    "count": 1
+  },
+  {
+    "name": "Neonatologist",
+    "count": 1
+  },
+  {
+    "name": "Endocrinologist)",
+    "count": 1
+  },
+  {
+    "name": "Cryonine",
+    "count": 1
+  },
+  {
+    "name": "Gyanecology",
+    "count": 1
+  },
+  {
+    "name": "Immunisation Facility",
+    "count": 1
+  },
+  {
+    "name": "Laprascopic Surgery",
+    "count": 1
+  },
+  {
+    "name": "Child Health Care",
+    "count": 1
+  },
+  {
+    "name": "OPTHALMOLOGY",
+    "count": 1
+  },
+  {
+    "name": "Ultrasound Scan",
+    "count": 1
+  },
+  {
+    "name": "X- Ray",
+    "count": 1
+  },
+  {
+    "name": "Health Check up",
+    "count": 1
+  },
+  {
+    "name": "i design laser vision correction",
+    "count": 1
+  },
+  {
+    "name": "Phaco Emulsification with Foldable Lens (Cataract with IOL)",
+    "count": 1
+  },
+  {
+    "name": "Topography",
+    "count": 1
+  },
+  {
+    "name": "Retinal Detachment Surgery",
+    "count": 1
+  },
+  {
+    "name": "Laser Treatment for Diabetic Disorders",
+    "count": 1
+  },
+  {
+    "name": "Retinal Fluorescein Angiography",
+    "count": 1
+  },
+  {
+    "name": "OCT",
+    "count": 1
+  },
+  {
+    "name": "Anti Glaucoma Surgery",
+    "count": 1
+  },
+  {
+    "name": "Computerised Visual Field Analysis (Glaucoma)",
+    "count": 1
+  },
+  {
+    "name": "Pediatric Ophthalmology and  Squint Correction",
+    "count": 1
+  },
+  {
+    "name": "Contact Lens Fittings",
+    "count": 1
+  },
+  {
+    "name": "General Gynecology",
+    "count": 1
+  },
+  {
+    "name": "Prenatal Care",
+    "count": 1
+  },
+  {
+    "name": "nulife clinic",
+    "count": 1
+  },
+  {
+    "name": "Laboratory Testing and  In-Office Surgery",
+    "count": 1
+  },
+  {
+    "name": "Medical Spa for Women",
+    "count": 1
+  },
+  {
+    "name": "Cataract Treatment",
+    "count": 1
+  },
+  {
+    "name": "Hypertension",
+    "count": 1
+  },
+  {
+    "name": "Tuberculosis and  Chest Diseases",
+    "count": 1
+  },
+  {
+    "name": "Skin and  Venereal Diseases",
+    "count": 1
+  },
+  {
+    "name": "General Surgery including Paediatric surgery",
+    "count": 1
+  },
+  {
+    "name": "Throat Diseases",
+    "count": 1
+  },
+  {
+    "name": "Ophthalmology with eye bank",
+    "count": 1
+  },
+  {
+    "name": "Cardiology and Cardiothoracic",
+    "count": 1
+  },
+  {
+    "name": "Radiology and  Imaging",
+    "count": 1
+  },
+  {
+    "name": "Colour Doppler",
+    "count": 1
+  },
+  {
+    "name": "Ultra sonography",
+    "count": 1
+  },
+  {
+    "name": "fistula",
+    "count": 1
+  },
+  {
+    "name": "fissure",
+    "count": 1
+  },
+  {
+    "name": "24 hours emergency care",
+    "count": 1
+  },
+  {
+    "name": "Cosmetic and plastic surgery",
+    "count": 1
+  },
+  {
+    "name": "Accupuncture",
+    "count": 1
+  },
+  {
+    "name": "Marma Massage",
+    "count": 1
+  },
+  {
+    "name": "Punarjeevan",
+    "count": 1
+  },
+  {
+    "name": "Diagnostics and Radiology",
+    "count": 1
+  },
+  {
+    "name": "BPMT",
+    "count": 1
+  },
+  {
+    "name": "Online Consultancy",
+    "count": 1
+  },
+  {
+    "name": "Accident",
+    "count": 1
+  },
+  {
+    "name": "Ayurvedic Spa",
+    "count": 1
+  },
+  {
+    "name": "Complete lab",
+    "count": 1
+  },
+  {
+    "name": "speciality lab",
+    "count": 1
+  },
+  {
+    "name": "Yogic Science",
+    "count": 1
+  },
+  {
+    "name": "Electrocardiogram (ECG)",
+    "count": 1
+  },
+  {
+    "name": "Major OT equipped with C-Arm",
+    "count": 1
+  },
+  {
+    "name": "capable of handling",
+    "count": 1
+  },
+  {
+    "name": "Endoscopic Surgeries",
+    "count": 1
+  },
+  {
+    "name": "Urotroscopic Surgery",
+    "count": 1
+  },
+  {
+    "name": "Knee Joint",
+    "count": 1
+  },
+  {
+    "name": "Hip Joint",
+    "count": 1
+  },
+  {
+    "name": "Minor OT capable of handling",
+    "count": 1
+  },
+  {
+    "name": "All septic cases",
+    "count": 1
+  },
+  {
+    "name": "All interventional procedures",
+    "count": 1
+  },
+  {
+    "name": "Neurology and Endocrinology",
+    "count": 1
+  },
+  {
+    "name": "Urology and Vascular surgery",
+    "count": 1
+  },
+  {
+    "name": "cardiologist",
+    "count": 1
+  },
+  {
+    "name": "gastroenterologist",
+    "count": 1
+  },
+  {
+    "name": "anesthesiologists",
+    "count": 1
+  },
+  {
+    "name": "intensivists",
+    "count": 1
+  },
+  {
+    "name": "neurologist",
+    "count": 1
+  },
+  {
+    "name": "pulmonologist",
+    "count": 1
+  },
+  {
+    "name": "diabetologist",
+    "count": 1
+  },
+  {
+    "name": "dermatologist",
+    "count": 1
+  },
+  {
+    "name": "orthopedic surgeon",
+    "count": 1
+  },
+  {
+    "name": "plastic surgeon",
+    "count": 1
+  },
+  {
+    "name": "neurosurgeon",
+    "count": 1
+  },
+  {
+    "name": "dentist",
+    "count": 1
+  },
+  {
+    "name": "urologists",
+    "count": 1
+  },
+  {
+    "name": "general surgeons",
+    "count": 1
+  },
+  {
+    "name": "Pediatrics  and Neonatology",
+    "count": 1
+  },
+  {
+    "name": "OBG and Infertility",
+    "count": 1
+  },
+  {
+    "name": "Diabetology and Thyroid disorders",
+    "count": 1
+  },
+  {
+    "name": "HIV Medicine",
+    "count": 1
+  },
+  {
+    "name": "Medicine and Critical Care",
+    "count": 1
+  },
+  {
+    "name": "Gynaec laproscopy",
+    "count": 1
+  },
+  {
+    "name": "Hip and Knee Replacement",
+    "count": 1
+  },
+  {
+    "name": "Lab And Radiology Services",
+    "count": 1
+  },
+  {
+    "name": "Diabetes And Metabolic Disorders",
+    "count": 1
+  },
+  {
+    "name": "Orthopaedics And Joint Replacement",
+    "count": 1
+  },
+  {
+    "name": "urology",
+    "count": 1
+  },
+  {
+    "name": "+J681 Minimally Invasive",
+    "count": 1
+  },
+  {
+    "name": "Rheumatic Disorders",
+    "count": 1
+  },
+  {
+    "name": "Clinical Oncology",
+    "count": 1
+  },
+  {
+    "name": "Integrative Oncology",
+    "count": 1
+  },
+  {
+    "name": "Molecular Oncology",
+    "count": 1
+  },
+  {
+    "name": "Pediatric haematology and Oncology",
+    "count": 1
+  },
+  {
+    "name": "Pediatric Oncology",
+    "count": 1
+  },
+  {
+    "name": "General Medicines",
+    "count": 1
+  },
+  {
+    "name": "Diabetics and Endocrinology",
+    "count": 1
+  },
+  {
+    "name": "Paediatric Radiology",
+    "count": 1
+  },
+  {
+    "name": "Peripheral Vascular and Endovascular Sciences",
+    "count": 1
+  },
+  {
+    "name": "Dental and Maxillo-facial surgery",
+    "count": 1
+  },
+  {
+    "name": "Gastrointestinal",
+    "count": 1
+  },
+  {
+    "name": "Cancer care",
+    "count": 1
+  },
+  {
+    "name": "Antinatal care",
+    "count": 1
+  },
+  {
+    "name": "Immunisation",
+    "count": 1
+  },
+  {
+    "name": "Intra uterine",
+    "count": 1
+  },
+  {
+    "name": "contraceptive",
+    "count": 1
+  },
+  {
+    "name": "Medical termination",
+    "count": 1
+  },
+  {
+    "name": "of pregnancy",
+    "count": 1
+  },
+  {
+    "name": "Tb diagnosis",
+    "count": 1
+  },
+  {
+    "name": "Tb treatment",
+    "count": 1
+  },
+  {
+    "name": "Dental Surgery General",
+    "count": 1
+  },
+  {
+    "name": "Medicine General",
+    "count": 1
+  },
+  {
+    "name": "Cardiology Urology",
+    "count": 1
+  },
+  {
+    "name": "Cardiac Surgery Cancer",
+    "count": 1
+  },
+  {
+    "name": "Neurosurgery Surgical",
+    "count": 1
+  },
+  {
+    "name": "Gastro-enterologist",
+    "count": 1
+  },
+  {
+    "name": "General Medicine  ENT",
+    "count": 1
+  },
+  {
+    "name": "General Surgery  ICU",
+    "count": 1
+  },
+  {
+    "name": "Gastro Enterologist CT",
+    "count": 1
+  },
+  {
+    "name": "Nephrology  Pathology",
+    "count": 1
+  },
+  {
+    "name": "Orthopedics  Radiology",
+    "count": 1
+  },
+  {
+    "name": "Gynaecology and Obstratics",
+    "count": 1
+  },
+  {
+    "name": "Plastic and Cosmetic surgery",
+    "count": 1
+  },
+  {
+    "name": "Bariatric",
+    "count": 1
+  },
+  {
+    "name": "Diabetes Surgeries",
+    "count": 1
+  },
+  {
+    "name": "Obstetrics  Emergency",
+    "count": 1
+  },
+  {
+    "name": "Laboratory Medicines",
+    "count": 1
+  },
+  {
+    "name": "Minimally Invasive  Surgery",
+    "count": 1
+  },
+  {
+    "name": "Oncology Laparoscopic Surgery",
+    "count": 1
+  },
+  {
+    "name": "Orthopedic Pediatrics",
+    "count": 1
+  },
+  {
+    "name": "Psychotherapy Clinic",
+    "count": 1
+  },
+  {
+    "name": "Trauma Centre Urology",
+    "count": 1
+  },
+  {
+    "name": "Cosmetic Dermatology",
+    "count": 1
+  },
+  {
+    "name": "Pediatric Neuro",
+    "count": 1
+  },
+  {
+    "name": "Vulvology",
+    "count": 1
+  },
+  {
+    "name": "Endoscopic",
+    "count": 1
+  },
+  {
+    "name": "Neurointensive care",
+    "count": 1
+  },
+  {
+    "name": "Pediatric  Cardiology",
+    "count": 1
+  },
+  {
+    "name": "Pediatric Cardiothoracic Surgery",
+    "count": 1
+  },
+  {
+    "name": "Reproductive  Medicine",
+    "count": 1
+  },
+  {
+    "name": "Corneal Disorders",
+    "count": 1
+  },
+  {
+    "name": "Surgeon and Urologist",
+    "count": 1
+  },
+  {
+    "name": "Consulting Dental Surgeon",
+    "count": 1
+  },
+  {
+    "name": "Consulting Physician",
+    "count": 1
+  },
+  {
+    "name": "Orthopadic Surgeon",
+    "count": 1
+  },
+  {
+    "name": "Psychiatrist and Sexologist",
+    "count": 1
+  },
+  {
+    "name": "Homeopathic Physician",
+    "count": 1
+  },
+  {
+    "name": "Lithotripsy For Kidney Stone",
+    "count": 1
+  },
+  {
+    "name": "Laser treatment For Ureteric Stones",
+    "count": 1
+  },
+  {
+    "name": "KTP (Green Light) Laser for Prostate",
+    "count": 1
+  },
+  {
+    "name": "Endoscopy Treatment For Kidney Stones",
+    "count": 1
+  },
+  {
+    "name": "Radical Prostatectomy For Cancer Prostate.",
+    "count": 1
+  },
+  {
+    "name": "Oculoplasty and Orbital diseases",
+    "count": 1
+  },
+  {
+    "name": "Laser Service",
+    "count": 1
+  },
+  {
+    "name": "Vitreo Retina",
+    "count": 1
+  },
+  {
+    "name": "Glaucoma.",
+    "count": 1
+  },
+  {
+    "name": "such as Plastic surgery",
+    "count": 1
+  },
+  {
+    "name": "Urology related surgeries",
+    "count": 1
+  },
+  {
+    "name": "Gynaecological operations",
+    "count": 1
+  },
+  {
+    "name": "such as family planning (tubectomy)",
+    "count": 1
+  },
+  {
+    "name": "Hysterectomy (removal of Uterus)",
+    "count": 1
+  },
+  {
+    "name": "Urological problems in women and children",
+    "count": 1
+  },
+  {
+    "name": "General surgeries for Appendix",
+    "count": 1
+  },
+  {
+    "name": "Hernia",
+    "count": 1
+  },
+  {
+    "name": "Hydrocele",
+    "count": 1
+  },
+  {
+    "name": "Piles and Fistula",
+    "count": 1
+  },
+  {
+    "name": "Minimally invasive endoscopic surgery (key hole surgery)",
+    "count": 1
+  },
+  {
+    "name": "Male and Female infertility treatments",
+    "count": 1
+  },
+  {
+    "name": "Treatment for kidney stones",
+    "count": 1
+  },
+  {
+    "name": "prostate and all urinary problems",
+    "count": 1
+  },
+  {
+    "name": "Family planning center and pre-marital counseling",
+    "count": 1
+  },
+  {
+    "name": "Pre- Marital Counselling.",
+    "count": 1
+  },
+  {
+    "name": "diabetology And endocrinology",
+    "count": 1
+  },
+  {
+    "name": "Radiologist And Sonologist",
+    "count": 1
+  },
+  {
+    "name": "Physiotherapists",
+    "count": 1
+  },
+  {
+    "name": "DermoCosmetology",
+    "count": 1
+  },
+  {
+    "name": "Liver Transplant And Surgery",
+    "count": 1
+  },
+  {
+    "name": "Minimally Invasive and General Surgery",
+    "count": 1
+  },
+  {
+    "name": "Advanced Orthopaedics - Joint Replacement",
+    "count": 1
+  },
+  {
+    "name": "Spine Surgery And Pediatric Orthopaedics",
+    "count": 1
+  },
+  {
+    "name": "Cardiovascular Thoraic Surgery",
+    "count": 1
+  },
+  {
+    "name": "Hair Restoration And Transplant.",
+    "count": 1
+  },
+  {
+    "name": "Cancer Chemotherapy",
+    "count": 1
+  },
+  {
+    "name": "Cancer Radiation Therapy",
+    "count": 1
+  },
+  {
+    "name": "Cancer Urology",
+    "count": 1
+  },
+  {
+    "name": "Cardiovascular and Thoracic Surgery",
+    "count": 1
+  },
+  {
+    "name": "Clinical Genetics",
+    "count": 1
+  },
+  {
+    "name": "Clinical Haematology and BMT",
+    "count": 1
+  },
+  {
+    "name": "Dental Implant Clinic",
+    "count": 1
+  },
+  {
+    "name": "Gastroenterology Surgery",
+    "count": 1
+  },
+  {
+    "name": "Lab Medicine",
+    "count": 1
+  },
+  {
+    "name": "Mindful Eating Workshop",
+    "count": 1
+  },
+  {
+    "name": "Pediatric Neuro-Rehabilitation",
+    "count": 1
+  },
+  {
+    "name": "Tobacco Cessation Clinic",
+    "count": 1
+  },
+  {
+    "name": "Vulva Clinic.",
+    "count": 1
+  },
+  {
+    "name": "Prosthodontist",
+    "count": 1
+  },
+  {
+    "name": "Periodontist",
+    "count": 1
+  },
+  {
+    "name": "Orthodontist",
+    "count": 1
+  },
+  {
+    "name": "Maxillo-facial Surgeon.",
+    "count": 1
+  },
+  {
+    "name": "Clinical Psychologist",
+    "count": 1
+  },
+  {
+    "name": "Orthopedic and Arthroscopy",
+    "count": 1
+  },
+  {
+    "name": "eneral Surgery",
+    "count": 1
+  },
+  {
+    "name": "Cardio-Vascular Surgery",
+    "count": 1
+  },
+  {
+    "name": "Vitreo Retinal Surgery",
+    "count": 1
+  },
+  {
+    "name": "Onco  Medicine",
+    "count": 1
+  },
+  {
+    "name": "Onco - Surgery",
+    "count": 1
+  },
+  {
+    "name": "Onco - Radiation",
+    "count": 1
+  },
+  {
+    "name": "Pastoral Care.",
+    "count": 1
+  },
+  {
+    "name": "Hybrid Cath Lab",
+    "count": 1
+  },
+  {
+    "name": "Audiology and Speech therapy",
+    "count": 1
+  },
+  {
+    "name": "Chronic Pain Management",
+    "count": 1
+  },
+  {
+    "name": "Dermo Cosmetology",
+    "count": 1
+  },
+  {
+    "name": "Hair Transplant.",
+    "count": 1
+  },
+  {
+    "name": "A.K.D",
+    "count": 1
+  },
+  {
+    "name": "K.T.R",
+    "count": 1
+  },
+  {
+    "name": "Accupressure",
+    "count": 1
+  },
+  {
+    "name": "Assisted Reproduction and Genetics (IVF)",
+    "count": 1
+  },
+  {
+    "name": "C.T.SCAN",
+    "count": 1
+  },
+  {
+    "name": "Cardiovascular and thoracic surgery",
+    "count": 1
+  },
+  {
+    "name": "Clinical Neurophy",
+    "count": 1
+  },
+  {
+    "name": "Electromyography (EMG)",
+    "count": 1
+  },
+  {
+    "name": "Electroencephalography (EEG)",
+    "count": 1
+  },
+  {
+    "name": "Colposcopy",
+    "count": 1
+  },
+  {
+    "name": "DSA (DIGITAL SUBSTRACTION ANGI",
+    "count": 1
+  },
+  {
+    "name": "Gynaecologicale Endoscopy",
+    "count": 1
+  },
+  {
+    "name": "Hyperbaric (HBOT)",
+    "count": 1
+  },
+  {
+    "name": "I.C.U",
+    "count": 1
+  },
+  {
+    "name": "Imaging Intervention and Radiology",
+    "count": 1
+  },
+  {
+    "name": "Interventional Pulmonology",
+    "count": 1
+  },
+  {
+    "name": "Molecular Medicine and Biology",
+    "count": 1
+  },
+  {
+    "name": "Paed",
+    "count": 1
+  },
+  {
+    "name": "Epileptolog",
+    "count": 1
+  },
+  {
+    "name": "Obstretrics and  Gynaecology",
+    "count": 1
+  },
+  {
+    "name": "Onco-Haematology Dept.",
+    "count": 1
+  },
+  {
+    "name": "Paediatrics Surgical",
+    "count": 1
+  },
+  {
+    "name": "Psychologist",
+    "count": 1
+  },
+  {
+    "name": "Radioimmumoassay (RIA)",
+    "count": 1
+  },
+  {
+    "name": "Rheumatology and Arthiritis",
+    "count": 1
+  },
+  {
+    "name": "Speech Audio Therapy",
+    "count": 1
+  },
+  {
+    "name": "Stereotactic and Functional Neurosurgery Department",
+    "count": 1
+  },
+  {
+    "name": "STRES MGT",
+    "count": 1
+  },
+  {
+    "name": "MOTIV-CSLG",
+    "count": 1
+  },
+  {
+    "name": "YOG THP",
+    "count": 1
+  },
+  {
+    "name": "Surgical Gastroentrology",
+    "count": 1
+  },
+  {
+    "name": "Urology And Renal Transplantation",
+    "count": 1
+  },
+  {
+    "name": "X-Ray Radiology.",
+    "count": 1
+  },
+  {
+    "name": "Super Specialty ENT Care and Research Centre",
+    "count": 1
+  },
+  {
+    "name": "critical care",
+    "count": 1
+  },
+  {
+    "name": "Obstetrics and Gynecology.",
+    "count": 1
+  },
+  {
+    "name": "Vascular Center",
+    "count": 1
+  },
+  {
+    "name": "Heart Vessels",
+    "count": 1
+  },
+  {
+    "name": "Chest Physicians",
+    "count": 1
+  },
+  {
+    "name": "urologist",
+    "count": 1
+  },
+  {
+    "name": "orthopaedics",
+    "count": 1
+  },
+  {
+    "name": "spine surgeon",
+    "count": 1
+  },
+  {
+    "name": "arthroscopist",
+    "count": 1
+  },
+  {
+    "name": "general and laparoscopic",
+    "count": 1
+  },
+  {
+    "name": "onco surgeon",
+    "count": 1
+  },
+  {
+    "name": "cardiovascular thoracic surgery",
+    "count": 1
+  },
+  {
+    "name": "plastic cosmetic",
+    "count": 1
+  },
+  {
+    "name": "dermatologists",
+    "count": 1
+  },
+  {
+    "name": "gynaecologists",
+    "count": 1
+  },
+  {
+    "name": "pediatrician",
+    "count": 1
+  },
+  {
+    "name": "gastroenterologist.",
+    "count": 1
+  },
+  {
+    "name": "Retina Vitreous",
+    "count": 1
+  },
+  {
+    "name": "Cornea and Lasik",
+    "count": 1
+  },
+  {
+    "name": "Low Vision and Rehabilitation",
+    "count": 1
+  },
+  {
+    "name": "Amblyopia management",
+    "count": 1
+  },
+  {
+    "name": "ROP screening",
+    "count": 1
+  },
+  {
+    "name": "Ocular Tumours",
+    "count": 1
+  },
+  {
+    "name": "Pediatric and Neuro",
+    "count": 1
+  },
+  {
+    "name": "Super Speciality ENT Care and Research centre",
+    "count": 1
+  },
+  {
+    "name": "Regular Eye Care",
+    "count": 1
+  },
+  {
+    "name": "Comprehensive Eye Care",
+    "count": 1
+  },
+  {
+    "name": "Cataract Speciality Clinic",
+    "count": 1
+  },
+  {
+    "name": "Diabetes Speciality Clinic",
+    "count": 1
+  },
+  {
+    "name": "Contact lens Clinic",
+    "count": 1
+  },
+  {
+    "name": "Computer Professionals",
+    "count": 1
+  },
+  {
+    "name": "Speciality Clinic",
+    "count": 1
+  },
+  {
+    "name": "Children Eye Care Clinic",
+    "count": 1
+  },
+  {
+    "name": "Retinal and Vitreous Clinic",
+    "count": 1
+  },
+  {
+    "name": "Galucoma Speciality Clinic",
+    "count": 1
+  },
+  {
+    "name": "Senior Citizen Clinic",
+    "count": 1
+  },
+  {
+    "name": "Squint Correction Clinic",
+    "count": 1
+  },
+  {
+    "name": "Eye Trauma Centre",
+    "count": 1
+  },
+  {
+    "name": "Complex Eye Problem Clinic",
+    "count": 1
+  },
+  {
+    "name": "Low Vision Aid (LVA) Clinic.",
+    "count": 1
+  },
+  {
+    "name": "Comprehensive Eye Checkup",
+    "count": 1
+  },
+  {
+    "name": "Cataract - 2.2 MICS",
+    "count": 1
+  },
+  {
+    "name": "Retina and Diabetic Eye Care",
+    "count": 1
+  },
+  {
+    "name": "Cornea and Oculoplasty",
+    "count": 1
+  },
+  {
+    "name": "Optical Services (Glasses)",
+    "count": 1
+  },
+  {
+    "name": "Reimburse Mediclaim",
+    "count": 1
+  },
+  {
+    "name": "Hemorrhoids - Piles",
+    "count": 1
+  },
+  {
+    "name": "Anal Fissure",
+    "count": 1
+  },
+  {
+    "name": "Anal Fistula",
+    "count": 1
+  },
+  {
+    "name": "Urinary Stones",
+    "count": 1
+  },
+  {
+    "name": "Nephrectomy",
+    "count": 1
+  },
+  {
+    "name": "Cholelithiasis - Gall Bladder Stone",
+    "count": 1
+  },
+  {
+    "name": "Breast Disorders",
+    "count": 1
+  },
+  {
+    "name": "Thyroid Swellings",
+    "count": 1
+  },
+  {
+    "name": "Rectal Prolapse",
+    "count": 1
+  },
+  {
+    "name": "Orchidectomy.",
+    "count": 1
+  },
+  {
+    "name": "Physician Cardiologist Diabitologist",
+    "count": 1
+  },
+  {
+    "name": "Intraocular Lenses (IOL)",
+    "count": 1
+  },
+  {
+    "name": "Cardiology and Interventional Cardiology",
+    "count": 1
+  },
+  {
+    "name": "Cardiovascular Thoracic Surgery",
+    "count": 1
+  },
+  {
+    "name": "Foetal Medicine and Clinical Genetics",
+    "count": 1
+  },
+  {
+    "name": "Hematology and Hemato Oncology",
+    "count": 1
+  },
+  {
+    "name": "Lactation",
+    "count": 1
+  },
+  {
+    "name": "Kidney Dialysis",
+    "count": 1
+  },
+  {
+    "name": "Endoscopy and Gastroneterology",
+    "count": 1
+  },
+  {
+    "name": "Hip and Knee Joint Replacement Surgery",
+    "count": 1
+  },
+  {
+    "name": "Non invasive cardiologist",
+    "count": 1
+  },
+  {
+    "name": "Breast Cancer",
+    "count": 1
+  },
+  {
+    "name": "Bone Cancer",
+    "count": 1
+  },
+  {
+    "name": "(Audiometry is Under E.N.T.)",
+    "count": 1
+  },
+  {
+    "name": "Cosmetic Surgery (Plastic surgery)",
+    "count": 1
+  },
+  {
+    "name": "Surgery for Gastroenterology.",
+    "count": 1
+  },
+  {
+    "name": "Obstretrics and Gynaecology",
+    "count": 1
+  },
+  {
+    "name": "Appendix Procedure",
+    "count": 1
+  },
+  {
+    "name": "ERCP",
+    "count": 1
+  },
+  {
+    "name": "Colonoscopy",
+    "count": 1
+  },
+  {
+    "name": "Gastrointestinal and Laparoscopic",
+    "count": 1
+  },
+  {
+    "name": "Orthopaedics (Bones and Joints)",
+    "count": 1
+  },
+  {
+    "name": "Neurology (Brain)",
+    "count": 1
+  },
+  {
+    "name": "Nephrology (Kidney)",
+    "count": 1
+  },
+  {
+    "name": "Immunisation.",
+    "count": 1
+  },
+  {
+    "name": "Diet counselling",
+    "count": 1
+  },
+  {
+    "name": "Gynaec.ology",
+    "count": 1
+  },
+  {
+    "name": "Rheumatology.",
+    "count": 1
+  },
+  {
+    "name": "Urological Surgery",
+    "count": 1
+  },
+  {
+    "name": "Diabetology and Diabetic foot Care",
+    "count": 1
+  },
+  {
+    "name": "Burns Management.",
+    "count": 1
+  },
+  {
+    "name": "Sports Orthopaedics",
+    "count": 1
+  },
+  {
+    "name": "Alzheimer's Disease",
+    "count": 1
+  },
+  {
+    "name": "Brain Tumour Management",
+    "count": 1
+  },
+  {
+    "name": "Brain and Nervous System",
+    "count": 1
+  },
+  {
+    "name": "Cardiologists",
+    "count": 1
+  },
+  {
+    "name": "Cardiac Electrophysiologists.",
+    "count": 1
+  },
+  {
+    "name": "Cardiac syndrome X",
+    "count": 1
+  },
+  {
+    "name": "Acute Coronary Syndrome",
+    "count": 1
+  },
+  {
+    "name": "Cardiac Catheterization",
+    "count": 1
+  },
+  {
+    "name": "Balloon Angioplasty",
+    "count": 1
+  },
+  {
+    "name": "Vitreo-retinal",
+    "count": 1
+  },
+  {
+    "name": "Different Types of Lasers",
+    "count": 1
+  },
+  {
+    "name": "UveitisPaediatric Ophthalmology and Squint.",
+    "count": 1
+  },
+  {
+    "name": "Sinus Endoscopy",
+    "count": 1
+  },
+  {
+    "name": "Ear and Larynx Microsurgery",
+    "count": 1
+  },
+  {
+    "name": "Thyroid and Neck",
+    "count": 1
+  },
+  {
+    "name": "Laser ENT Surgery",
+    "count": 1
+  },
+  {
+    "name": "Vertigo and Giddiness",
+    "count": 1
+  },
+  {
+    "name": "Nose Plastic Surgery",
+    "count": 1
+  },
+  {
+    "name": "Advanced Ear Micro-surgery For Deaf Ears",
+    "count": 1
+  },
+  {
+    "name": "Computerised Voice Lab and Videoscopy For Hoarse Voice and Larynx Micro-surgery",
+    "count": 1
+  },
+  {
+    "name": "Endoscopic Sinus Surgery For Sinusitis and Nose Polyps",
+    "count": 1
+  },
+  {
+    "name": "Vertigo and Giddiness Clinic with Electronystagmography",
+    "count": 1
+  },
+  {
+    "name": "Laser Surgery For Snoring",
+    "count": 1
+  },
+  {
+    "name": "Laser Surgery For Mouth Cancers",
+    "count": 1
+  },
+  {
+    "name": "Rhinoplasty.",
+    "count": 1
+  },
+  {
+    "name": "Eye Doctor",
+    "count": 1
+  },
+  {
+    "name": "Laser Eye Surgery",
+    "count": 1
+  },
+  {
+    "name": "Maternity Hospital",
+    "count": 1
+  },
+  {
+    "name": "Eye Surgeon",
+    "count": 1
+  },
+  {
+    "name": "Dermatologist and a Pathologist",
+    "count": 1
+  },
+  {
+    "name": "Surgery and Urology",
+    "count": 1
+  },
+  {
+    "name": "Bone and Joint care (Orthopaedics)",
+    "count": 1
+  },
+  {
+    "name": "Dermatology and cosmetology",
+    "count": 1
+  },
+  {
+    "name": "Ear Nose and Throat diseases",
+    "count": 1
+  },
+  {
+    "name": "Physiotherapy and Occupational therapy.",
+    "count": 1
+  },
+  {
+    "name": "Respiratory Disease",
+    "count": 1
+  },
+  {
+    "name": "Cardiologist (2D Echo)",
+    "count": 1
+  },
+  {
+    "name": "Ophthalmolog (Eye)",
+    "count": 1
+  },
+  {
+    "name": "Dermatology (skin)  E.N.T.",
+    "count": 1
+  },
+  {
+    "name": "Bariatrics (Obesity Surgery)",
+    "count": 1
+  },
+  {
+    "name": "Complementary Medicine",
+    "count": 1
+  },
+  {
+    "name": "Hand and Micro Surgery",
+    "count": 1
+  },
+  {
+    "name": "Heart Institute (Cardiology",
+    "count": 1
+  },
+  {
+    "name": "Cardiovascular and Thor",
+    "count": 1
+  },
+  {
+    "name": "Otorhinolaryngology (ENT - Ear",
+    "count": 1
+  },
+  {
+    "name": "Throat)",
+    "count": 1
+  },
+  {
+    "name": "Paediatric Intensive Care",
+    "count": 1
+  },
+  {
+    "name": "Paediatric Interventional Cardiology",
+    "count": 1
+  },
+  {
+    "name": "Paediatric Rheumatology",
+    "count": 1
+  },
+  {
+    "name": "Paediatric Psychiatry",
+    "count": 1
+  },
+  {
+    "name": "Transfusion Medicine (Blood Bank)",
+    "count": 1
+  },
+  {
+    "name": "Renal and Urological Sciences",
+    "count": 1
+  },
+  {
+    "name": "Gynaecology and Obstetrics.",
+    "count": 1
+  },
+  {
+    "name": "Orthopedic and Joint Replacement Surgery",
+    "count": 1
+  },
+  {
+    "name": "Maternity and Gynaecology Services",
+    "count": 1
+  },
+  {
+    "name": "Ophthal",
+    "count": 1
+  },
+  {
+    "name": "Neuro Sergery",
+    "count": 1
+  },
+  {
+    "name": "Orthopedics.",
+    "count": 1
+  },
+  {
+    "name": "Eye Cancer",
+    "count": 1
+  },
+  {
+    "name": "Cornea Transplant",
+    "count": 1
+  },
+  {
+    "name": "Blocked Tear Duct",
+    "count": 1
+  },
+  {
+    "name": "Intra vitreal injections",
+    "count": 1
+  },
+  {
+    "name": "Age Related Macular Degeneration",
+    "count": 1
+  },
+  {
+    "name": "Botox and Fillers",
+    "count": 1
+  },
+  {
+    "name": "Ptosis",
+    "count": 1
+  },
+  {
+    "name": "Enucleation and Evisceration",
+    "count": 1
+  },
+  {
+    "name": "Entropion and Ectropion",
+    "count": 1
+  },
+  {
+    "name": "Socket reconstruction",
+    "count": 1
+  },
+  {
+    "name": "Cosmetic blepharoplasties",
+    "count": 1
+  },
+  {
+    "name": "Blepharospasm",
+    "count": 1
+  },
+  {
+    "name": "Retinal detachment",
+    "count": 1
+  },
+  {
+    "name": "Keratoconus",
+    "count": 1
+  },
+  {
+    "name": "Refractive error",
+    "count": 1
+  },
+  {
+    "name": "ENT Surgery",
+    "count": 1
+  },
+  {
+    "name": "Angiography with Angioplasty (PCI)",
+    "count": 1
+  },
+  {
+    "name": "Angiography with Off pump Bypass Surgery (CABG)",
+    "count": 1
+  },
+  {
+    "name": "Congenital disorders (ASD",
+    "count": 1
+  },
+  {
+    "name": "VSD",
+    "count": 1
+  },
+  {
+    "name": "PDA Closure)",
+    "count": 1
+  },
+  {
+    "name": "Valve Repairs",
+    "count": 1
+  },
+  {
+    "name": "Replacements",
+    "count": 1
+  },
+  {
+    "name": "Knee and Hip Replacement",
+    "count": 1
+  },
+  {
+    "name": "Breast cancer Mastectomy",
+    "count": 1
+  },
+  {
+    "name": "Hysterectomy and Uterine Fibroid surgeries",
+    "count": 1
+  },
+  {
+    "name": "Breast Shaping Surgery",
+    "count": 1
+  },
+  {
+    "name": "Body Contouring SurgeryCataract",
+    "count": 1
+  },
+  {
+    "name": "Squint.",
+    "count": 1
+  },
+  {
+    "name": "ENT [including Audiometry]",
+    "count": 1
+  },
+  {
+    "name": "Gastro-Enterology",
+    "count": 1
+  },
+  {
+    "name": "Intensive Care [General and Cardiac]",
+    "count": 1
+  },
+  {
+    "name": "Intensive Care [Neonatal and Pediatric]",
+    "count": 1
+  },
+  {
+    "name": "Nephrology [Adult and Pediatric]",
+    "count": 1
+  },
+  {
+    "name": "Oncology [Surgical and Medical Oncology]",
+    "count": 1
+  },
+  {
+    "name": "Ophthalmology [including Glaucoma and Vitreo-retinal surgery]",
+    "count": 1
+  },
+  {
+    "name": "Orthopedics [including Joint Replacement and Spine Surgery]",
+    "count": 1
+  },
+  {
+    "name": "Transfusion Medicine and Blood Bank",
+    "count": 1
+  },
+  {
+    "name": "General Practitioner",
+    "count": 1
+  },
+  {
+    "name": "Arthroscopy Surgery",
+    "count": 1
+  },
+  {
+    "name": "Trauma Management",
+    "count": 1
+  },
+  {
+    "name": "Arthritis Management",
+    "count": 1
+  },
+  {
+    "name": "Hip Knee and Spine surgeries.",
+    "count": 1
+  },
+  {
+    "name": "Stem Cell Therapy",
+    "count": 1
+  },
+  {
+    "name": "Thyroid Medicine",
+    "count": 1
+  },
+  {
+    "name": "Orthopaedics and Spine Surgery",
+    "count": 1
+  },
+  {
+    "name": "Pulmonology (Chest Medicine)",
+    "count": 1
+  },
+  {
+    "name": "Accident and Trauma",
+    "count": 1
+  },
+  {
+    "name": "Physiotheraphy.",
+    "count": 1
+  },
+  {
+    "name": "Cataract Eye  Surgery",
+    "count": 1
+  },
+  {
+    "name": "Diabetic eye care and Contact lenses.",
+    "count": 1
+  },
+  {
+    "name": "Cardiac-Surgery",
+    "count": 1
+  },
+  {
+    "name": "Gastroenterologyle",
+    "count": 1
+  },
+  {
+    "name": "Gynaecology and Ostetrics",
+    "count": 1
+  },
+  {
+    "name": "Nephorologist",
+    "count": 1
+  },
+  {
+    "name": "Oral and Maxillo Facial Surgery",
+    "count": 1
+  },
+  {
+    "name": "Renal Surgery",
+    "count": 1
+  },
+  {
+    "name": "Hyperbaric Oxygen Therapy Clinic",
+    "count": 1
+  },
+  {
+    "name": "Diabetic Foot Clinic",
+    "count": 1
+  },
+  {
+    "name": "Medical Insurance Clinic",
+    "count": 1
+  },
+  {
+    "name": "Gynaecology and Maternity",
+    "count": 1
+  },
+  {
+    "name": "Heart Surgery",
+    "count": 1
+  },
+  {
+    "name": "Bypass Surgery",
+    "count": 1
+  },
+  {
+    "name": "All minor and major Surgery",
+    "count": 1
+  },
+  {
+    "name": "Thyroid",
+    "count": 1
+  },
+  {
+    "name": "Appendix",
+    "count": 1
+  },
+  {
+    "name": "Adhesiolysis",
+    "count": 1
+  },
+  {
+    "name": "Laser Treatment of piles",
+    "count": 1
+  },
+  {
+    "name": "Stappler Surgery for bigger piles",
+    "count": 1
+  },
+  {
+    "name": "Urological Surgeries",
+    "count": 1
+  },
+  {
+    "name": "TURP for Prostate",
+    "count": 1
+  },
+  {
+    "name": "Kidney and Bladder Stones",
+    "count": 1
+  },
+  {
+    "name": "Stricture Utrethra",
+    "count": 1
+  },
+  {
+    "name": "Gynecology Surgery",
+    "count": 1
+  },
+  {
+    "name": "Ovarium Cyst",
+    "count": 1
+  },
+  {
+    "name": "Spine and Joint Replacement Surgeries",
+    "count": 1
+  },
+  {
+    "name": "Plastic SurgeryManagement of Trauma",
+    "count": 1
+  },
+  {
+    "name": "Head injury and Burns.",
+    "count": 1
+  },
+  {
+    "name": "Dietician and Physiotherapist.",
+    "count": 1
+  },
+  {
+    "name": "Speciality ENT Hospital",
+    "count": 1
+  },
+  {
+    "name": "Tongue Surgery",
+    "count": 1
+  },
+  {
+    "name": "Bloodless Tonsil and Adenoids Surgery",
+    "count": 1
+  },
+  {
+    "name": "Head and Neck Surgery.",
+    "count": 1
+  },
+  {
+    "name": "Sports Medicine.",
+    "count": 1
+  },
+  {
+    "name": "Treatment.",
+    "count": 1
+  },
+  {
+    "name": "Eye Treatment",
+    "count": 1
+  },
+  {
+    "name": "Eye Test",
+    "count": 1
+  },
+  {
+    "name": "Eye Surgeons",
+    "count": 1
+  },
+  {
+    "name": "Eye Laser Treatment",
+    "count": 1
+  },
+  {
+    "name": "Glaucoma Treatment",
+    "count": 1
+  },
+  {
+    "name": "Corneal Transplantation",
+    "count": 1
+  },
+  {
+    "name": "Laser Vision Correction",
+    "count": 1
+  },
+  {
+    "name": "General and Pediatric Laparoscopic",
+    "count": 1
+  },
+  {
+    "name": "Head-neck Surgery",
+    "count": 1
+  },
+  {
+    "name": "Psychiatric.",
+    "count": 1
+  },
+  {
+    "name": "Interventional  Radiology",
+    "count": 1
+  },
+  {
+    "name": "haematology and Oncology",
+    "count": 1
+  },
+  {
+    "name": "Kidney  Transplantation",
+    "count": 1
+  },
+  {
+    "name": "Bone Marrow  Transplant",
+    "count": 1
+  },
+  {
+    "name": "Arthroscopy and Sport Injuries",
+    "count": 1
+  },
+  {
+    "name": "Shoulder Surgery",
+    "count": 1
+  },
+  {
+    "name": "Orthopaedic Oncology",
+    "count": 1
+  },
+  {
+    "name": "Rheumatology and Arthritis Clinic",
+    "count": 1
+  },
+  {
+    "name": "Hand and Microvascular Surgery",
+    "count": 1
+  },
+  {
+    "name": "Faciomaxillary and Dental Surgery",
+    "count": 1
+  },
+  {
+    "name": "General Orthopedics",
+    "count": 1
+  },
+  {
+    "name": "Diabetes Clinic",
+    "count": 1
+  },
+  {
+    "name": "Anaesthesiology.",
+    "count": 1
+  },
+  {
+    "name": "Pediatric Neuro Surgery",
+    "count": 1
+  },
+  {
+    "name": "Pediatric  Orthopedics",
+    "count": 1
+  },
+  {
+    "name": "Medicine Physician",
+    "count": 1
+  },
+  {
+    "name": "Audiometry",
+    "count": 1
+  },
+  {
+    "name": "Endocrinolgy",
+    "count": 1
+  },
+  {
+    "name": "Dental.",
+    "count": 1
+  },
+  {
+    "name": "Bone and joint",
+    "count": 1
+  },
+  {
+    "name": "Aesthetic surgery",
+    "count": 1
+  },
+  {
+    "name": "Phakic lens (Star)",
+    "count": 1
+  },
+  {
+    "name": "IPCL",
+    "count": 1
+  },
+  {
+    "name": "Cataract with TRAB (Phaco + TRAB)",
+    "count": 1
+  },
+  {
+    "name": "Glaucoma (Trabeculectomy)",
+    "count": 1
+  },
+  {
+    "name": "Squint surgery",
+    "count": 1
+  },
+  {
+    "name": "Lid Surgery",
+    "count": 1
+  },
+  {
+    "name": "Aqueous taping.Paediatric Ophthalmologist",
+    "count": 1
+  },
+  {
+    "name": "Occuloplasty",
+    "count": 1
+  },
+  {
+    "name": "We have 24hours care for critical care",
+    "count": 1
+  },
+  {
+    "name": "physician and neorophysician",
+    "count": 1
+  },
+  {
+    "name": "Our ICU staff caring for you",
+    "count": 1
+  },
+  {
+    "name": "We also having oxygen concentrator",
+    "count": 1
+  },
+  {
+    "name": "to avoid facility at home",
+    "count": 1
+  },
+  {
+    "name": "Xray facility for bed site in also available.",
+    "count": 1
+  },
+  {
+    "name": "Pulmonology.",
+    "count": 1
+  },
+  {
+    "name": "gynecologist and obstetrician",
+    "count": 1
+  },
+  {
+    "name": "Gastroenterologist",
+    "count": 1
+  },
+  {
+    "name": "Oncosurgeon",
+    "count": 1
+  },
+  {
+    "name": "Physician and Diabetes Specialist.",
+    "count": 1
+  },
+  {
+    "name": "spine and limbs",
+    "count": 1
+  },
+  {
+    "name": "Orthopedics and Trauma",
+    "count": 1
+  },
+  {
+    "name": "Radiotherapy and Oncology",
+    "count": 1
+  },
+  {
+    "name": "Skin and Leprosy",
+    "count": 1
+  },
+  {
+    "name": "Aneasthecialogy",
+    "count": 1
+  },
+  {
+    "name": "ART",
+    "count": 1
+  },
+  {
+    "name": "DTC",
+    "count": 1
+  },
+  {
+    "name": "Radiolory",
+    "count": 1
+  },
+  {
+    "name": "Ultrasonography",
+    "count": 1
+  },
+  {
+    "name": "Sport Medicine",
+    "count": 1
+  },
+  {
+    "name": "Telemidicine",
+    "count": 1
+  },
+  {
+    "name": "OrthoOrthopaedics",
+    "count": 1
+  },
+  {
+    "name": "Microbiology.",
+    "count": 1
+  },
+  {
+    "name": "General medicine",
+    "count": 1
+  },
+  {
+    "name": "Otorhinolaryngology (ENT)",
+    "count": 1
+  },
+  {
+    "name": "Dental surgery",
+    "count": 1
+  },
+  {
+    "name": "Skin and vd",
+    "count": 1
+  },
+  {
+    "name": "Tb and chest diseases",
+    "count": 1
+  },
+  {
+    "name": "Cardio thoracic vascular surgery",
+    "count": 1
+  },
+  {
+    "name": "Radio-diagnosis",
+    "count": 1
+  },
+  {
+    "name": "Genito urinary surgery",
+    "count": 1
+  },
+  {
+    "name": "Physical medicine and rehabilitation",
+    "count": 1
+  },
+  {
+    "name": "Gastronterology",
+    "count": 1
+  },
+  {
+    "name": "Special Hematology",
+    "count": 1
+  },
+  {
+    "name": "Center For Human Reproduction",
+    "count": 1
+  },
+  {
+    "name": "Neuro and Trauma Care",
+    "count": 1
+  },
+  {
+    "name": "Gastroenterology and G.I surgery",
+    "count": 1
+  },
+  {
+    "name": "Critical care services",
+    "count": 1
+  },
+  {
+    "name": "General medicine and Cardiology",
+    "count": 1
+  },
+  {
+    "name": "Pathologists and Laboratory services",
+    "count": 1
+  },
+  {
+    "name": "Diet",
+    "count": 1
+  },
+  {
+    "name": "Ilizarov",
+    "count": 1
+  },
+  {
+    "name": "Paediatrics and Paediatric haematology",
+    "count": 1
+  },
+  {
+    "name": "Trauma Management Centre",
+    "count": 1
+  },
+  {
+    "name": "Ear Nose and Throat",
+    "count": 1
+  },
+  {
+    "name": "Cardiology and Physician",
+    "count": 1
+  },
+  {
+    "name": "Normal Delivery",
+    "count": 1
+  },
+  {
+    "name": "Caesarean Section",
+    "count": 1
+  },
+  {
+    "name": "Cochlear Implant",
+    "count": 1
+  },
+  {
+    "name": "Microscopic Ear Surgeries",
+    "count": 1
+  },
+  {
+    "name": "Myringotomy (Placement Of Ear Tubes)",
+    "count": 1
+  },
+  {
+    "name": "Ear Lobule Repair",
+    "count": 1
+  },
+  {
+    "name": "Management Of Nasal Bleading",
+    "count": 1
+  },
+  {
+    "name": "Septoplasty For Dns",
+    "count": 1
+  },
+  {
+    "name": "Tonsillectomy",
+    "count": 1
+  },
+  {
+    "name": "Adenoidectomy",
+    "count": 1
+  },
+  {
+    "name": "Surgery For Snoring",
+    "count": 1
+  },
+  {
+    "name": "Sleep Aphoer",
+    "count": 1
+  },
+  {
+    "name": "Head And Neck Surgery",
+    "count": 1
+  },
+  {
+    "name": "Button Hole Treatment",
+    "count": 1
+  },
+  {
+    "name": "General Treatment",
+    "count": 1
+  },
+  {
+    "name": "Oncology Treatment",
+    "count": 1
+  },
+  {
+    "name": "Internal Medicine and Cardiology",
+    "count": 1
+  },
+  {
+    "name": "Complete Dental Care",
+    "count": 1
+  },
+  {
+    "name": "Plastic and Micro-vascular",
+    "count": 1
+  },
+  {
+    "name": "Computerized Eye Testing",
+    "count": 1
+  },
+  {
+    "name": "Contact Lenses Clinic",
+    "count": 1
+  },
+  {
+    "name": "Paediatric Eye Care",
+    "count": 1
+  },
+  {
+    "name": "Stitch less Cataract Surgery (Phaco)",
+    "count": 1
+  },
+  {
+    "name": "Yag Laser",
+    "count": 1
+  },
+  {
+    "name": "Cosmetic and Orbital Reconstruction",
+    "count": 1
+  },
+  {
+    "name": "Lacrimal Sac Surgery",
+    "count": 1
+  },
+  {
+    "name": "Glaucoma Surgery",
+    "count": 1
+  },
+  {
+    "name": "Ptosis Correction",
+    "count": 1
+  },
+  {
+    "name": "Squint Surgery",
+    "count": 1
+  },
+  {
+    "name": "Retinal Surgery",
+    "count": 1
+  },
+  {
+    "name": "Green Laser for Diabetic Eye",
+    "count": 1
+  },
+  {
+    "name": "Nerve Fibre Analyser",
+    "count": 1
+  },
+  {
+    "name": "Non Contact Tonometry (NCT)",
+    "count": 1
+  },
+  {
+    "name": "Plastic Reconstructive Surgery",
+    "count": 1
+  },
+  {
+    "name": "Endocrinology and Diabetic",
+    "count": 1
+  },
+  {
+    "name": "Cancer Clinic",
+    "count": 1
+  },
+  {
+    "name": "Menopausal",
+    "count": 1
+  },
+  {
+    "name": "Antenatal",
+    "count": 1
+  },
+  {
+    "name": "Family Planning (Special Clinic)",
+    "count": 1
+  },
+  {
+    "name": "Postnatal (Special Clinic)",
+    "count": 1
+  },
+  {
+    "name": "Oral Maxillofacial and Dental Surgery",
+    "count": 1
+  },
+  {
+    "name": "Paediatrics and Paediatrics Surgery",
+    "count": 1
+  },
+  {
+    "name": "Chest and T.B.",
+    "count": 1
+  },
+  {
+    "name": "Gastro-entrology",
+    "count": 1
+  },
+  {
+    "name": "Neonatal and Paediatric Anaesthesia",
+    "count": 1
+  },
+  {
+    "name": "Oro-Maxillo Facial Surgery",
+    "count": 1
+  },
+  {
+    "name": "Cardiology and Diabetes",
+    "count": 1
+  },
+  {
+    "name": "Otorhino Laryngology",
+    "count": 1
+  },
+  {
+    "name": "Paediatrics  Surgery",
+    "count": 1
+  },
+  {
+    "name": "Acupressure",
+    "count": 1
+  },
+  {
+    "name": "Radiology(Sonography)",
+    "count": 1
+  },
+  {
+    "name": "Hearing and Balancing Clinic",
+    "count": 1
+  },
+  {
+    "name": "Ear Discharge",
+    "count": 1
+  },
+  {
+    "name": "Ear Wax",
+    "count": 1
+  },
+  {
+    "name": "Middle Ear Infection",
+    "count": 1
+  },
+  {
+    "name": "Allergies",
+    "count": 1
+  },
+  {
+    "name": "Deafness",
+    "count": 1
+  },
+  {
+    "name": "Adenoid",
+    "count": 1
+  },
+  {
+    "name": "Tonsil Infections",
+    "count": 1
+  },
+  {
+    "name": "Balance Disorders",
+    "count": 1
+  },
+  {
+    "name": "Cleft Palate",
+    "count": 1
+  },
+  {
+    "name": "Deviated Nasal Septum ( DNS )",
+    "count": 1
+  },
+  {
+    "name": "Ear Aches and Infections",
+    "count": 1
+  },
+  {
+    "name": "Dysphagia",
+    "count": 1
+  },
+  {
+    "name": "Sinusitis",
+    "count": 1
+  },
+  {
+    "name": "Nasal Growth",
+    "count": 1
+  },
+  {
+    "name": "Nasal Polyp",
+    "count": 1
+  },
+  {
+    "name": "Rhinitis",
+    "count": 1
+  },
+  {
+    "name": "Smell and Taste Disorders",
+    "count": 1
+  },
+  {
+    "name": "Sore Throats",
+    "count": 1
+  },
+  {
+    "name": "Swimmer's Ear",
+    "count": 1
+  },
+  {
+    "name": "Tinnitus",
+    "count": 1
+  },
+  {
+    "name": "Temporo-Mandibular Joint ( TMJ )",
+    "count": 1
+  },
+  {
+    "name": "Plastic and Cosmetic Surgery.",
+    "count": 1
+  },
+  {
+    "name": "TURP URS.",
+    "count": 1
+  },
+  {
+    "name": "Paediatric surgery.",
+    "count": 1
+  },
+  {
+    "name": "Laparoscopic surgery for gall bladders",
+    "count": 1
+  },
+  {
+    "name": "Appendix.",
+    "count": 1
+  },
+  {
+    "name": "Gynaecology and maternity.",
+    "count": 1
+  },
+  {
+    "name": "Paediatrics and immunization.",
+    "count": 1
+  },
+  {
+    "name": "De-addiction and Treatment of psycho ailments.",
+    "count": 1
+  },
+  {
+    "name": "Ortho :- Trauma and joint replacement.",
+    "count": 1
+  },
+  {
+    "name": "Treatment of liver diseases.",
+    "count": 1
+  },
+  {
+    "name": "Diabetes and Cardiac Clinic.",
+    "count": 1
+  },
+  {
+    "name": "Bronchoscope and Thoracoscopy.",
+    "count": 1
+  },
+  {
+    "name": "Endoscopic Surgery of E.N.T.",
+    "count": 1
+  },
+  {
+    "name": "Maxillo Facial Surgery.",
+    "count": 1
+  },
+  {
+    "name": "Treatment of piles with Surgery.",
+    "count": 1
+  },
+  {
+    "name": "Pace-maker for Heart Blocks.",
+    "count": 1
+  },
+  {
+    "name": "Scerotherapy for blood in Vomiting.",
+    "count": 1
+  },
+  {
+    "name": "Photo therapy for neonates.",
+    "count": 1
+  },
+  {
+    "name": "Pain clinic.",
+    "count": 1
+  },
+  {
+    "name": "Onco surgery.",
+    "count": 1
+  },
+  {
+    "name": "Treatment of cancer patients",
+    "count": 1
+  },
+  {
+    "name": "EECP",
+    "count": 1
+  },
+  {
+    "name": "Physiology Neurosurgery",
+    "count": 1
+  },
+  {
+    "name": "Otorhinolaryngology (ENT  Surgery)",
+    "count": 1
+  },
+  {
+    "name": "Bone and Joint Clinic",
+    "count": 1
+  },
+  {
+    "name": "Gynae.and Obst.",
+    "count": 1
+  },
+  {
+    "name": "Medicine and Dialectology",
+    "count": 1
+  },
+  {
+    "name": "Gen.and Laparoscopic Surgery",
+    "count": 1
+  },
+  {
+    "name": "In-Vitro Fertilization (Ivf)",
+    "count": 1
+  },
+  {
+    "name": "Orthodontics and Dental Care Centre",
+    "count": 1
+  },
+  {
+    "name": "Paediatric Critical Care",
+    "count": 1
+  },
+  {
+    "name": "Chest and T.B",
+    "count": 1
+  },
+  {
+    "name": "iFS Intralase",
+    "count": 1
+  },
+  {
+    "name": "Uveitis Clinic",
+    "count": 1
+  },
+  {
+    "name": "Diabetic Retinopathy Clinic",
+    "count": 1
+  },
+  {
+    "name": "Medical Retina Clinic",
+    "count": 1
+  },
+  {
+    "name": "Surgical Retina Clinic",
+    "count": 1
+  },
+  {
+    "name": "Multifocal and Toric IOL",
+    "count": 1
+  },
+  {
+    "name": "Bone and Joint Hospital",
+    "count": 1
+  },
+  {
+    "name": "Ivf",
+    "count": 1
+  },
+  {
+    "name": "Infertility Testing",
+    "count": 1
+  },
+  {
+    "name": "Urine Related Problems",
+    "count": 1
+  },
+  {
+    "name": "Bleeding Problems",
+    "count": 1
+  },
+  {
+    "name": "Infertility Problems",
+    "count": 1
+  },
+  {
+    "name": "Menopausal Problems",
+    "count": 1
+  },
+  {
+    "name": "Adolescent Health Problems",
+    "count": 1
+  },
+  {
+    "name": "Antenatal Care",
+    "count": 1
+  },
+  {
+    "name": "High Risk Pregnancy Care",
+    "count": 1
+  },
+  {
+    "name": "Laser Surgery for Stones and Prostate",
+    "count": 1
+  },
+  {
+    "name": "Tubeless Stentless PCNL",
+    "count": 1
+  },
+  {
+    "name": "Neo-Natology and Paediatric Oncology",
+    "count": 1
+  },
+  {
+    "name": "Gynaecological Oncology Gynaecology and Obstetrics",
+    "count": 1
+  },
+  {
+    "name": "And Gynaecology",
+    "count": 1
+  },
+  {
+    "name": "Minimally Invasive and Keyhole Surgery",
+    "count": 1
+  },
+  {
+    "name": "UROLOGY",
+    "count": 1
+  },
+  {
+    "name": "Orthopaedic Joint Replacement and Ortho-Oncology",
+    "count": 1
+  },
+  {
+    "name": "Anaesthesia and Intensive Care Unit",
+    "count": 1
+  },
+  {
+    "name": "Nuclear Medicine and Pet Ct",
+    "count": 1
+  },
+  {
+    "name": "Radiology and Radio Diagnosis",
+    "count": 1
+  },
+  {
+    "name": "Complicated Joints Surgery and Fracture",
+    "count": 1
+  },
+  {
+    "name": "Arthritis",
+    "count": 1
+  },
+  {
+    "name": "Eye and Maternity Hospital",
+    "count": 1
+  },
+  {
+    "name": "Neuropsychiatry",
+    "count": 1
+  },
+  {
+    "name": "ICU and Critical Care Unit",
+    "count": 1
+  },
+  {
+    "name": "Gynae",
+    "count": 1
+  },
+  {
+    "name": "Surgery (General and Laparoscopic)",
+    "count": 1
+  },
+  {
+    "name": "Eyes",
+    "count": 1
+  },
+  {
+    "name": "Dietary",
+    "count": 1
+  },
+  {
+    "name": "Super Heart Specialist",
+    "count": 1
+  },
+  {
+    "name": "Heart-Avoid Bypass",
+    "count": 1
+  },
+  {
+    "name": "Heart Flow Mapping",
+    "count": 1
+  },
+  {
+    "name": "Chelation",
+    "count": 1
+  },
+  {
+    "name": "Detoxification",
+    "count": 1
+  },
+  {
+    "name": "Arthritis Pain-Avoid Knee Surgery",
+    "count": 1
+  },
+  {
+    "name": "Kidney Stones-Remove With Rays",
+    "count": 1
+  },
+  {
+    "name": "Ozone",
+    "count": 1
+  },
+  {
+    "name": "Bio-oxidative Medicine",
+    "count": 1
+  },
+  {
+    "name": "Back Pain-Computerized Spinal Table Anti Ageing",
+    "count": 1
+  },
+  {
+    "name": "Contact lens clinic",
+    "count": 1
+  },
+  {
+    "name": "Paediairics",
+    "count": 1
+  },
+  {
+    "name": "Radiodianosis and Imaging",
+    "count": 1
+  },
+  {
+    "name": "ENT (EAR",
+    "count": 1
+  },
+  {
+    "name": "NOSE and THROAT)",
+    "count": 1
+  },
+  {
+    "name": "Tuberculosis",
+    "count": 1
+  },
+  {
+    "name": "Asthma and Allergies",
+    "count": 1
+  },
+  {
+    "name": "C.O.P.D",
+    "count": 1
+  },
+  {
+    "name": "I.L.D (I.P.F)",
+    "count": 1
+  },
+  {
+    "name": "Sarcoidosis",
+    "count": 1
+  },
+  {
+    "name": "Pleural Effusion",
+    "count": 1
+  },
+  {
+    "name": "Lung Cancer",
+    "count": 1
+  },
+  {
+    "name": "Sleep Apnea",
+    "count": 1
+  },
+  {
+    "name": "Breathlessness",
+    "count": 1
+  },
+  {
+    "name": "Gen and Laparoscopy Surgery",
+    "count": 1
+  },
+  {
+    "name": "Medicine Specialties",
+    "count": 1
+  },
+  {
+    "name": "Dental Unit",
+    "count": 1
+  },
+  {
+    "name": "Prostate Cancer",
+    "count": 1
+  },
+  {
+    "name": "Kidney Cancer",
+    "count": 1
+  },
+  {
+    "name": "Enlarged Prostate (BPH)",
+    "count": 1
+  },
+  {
+    "name": "Kidney Stones",
+    "count": 1
+  },
+  {
+    "name": "Female Urinary Incontinence",
+    "count": 1
+  },
+  {
+    "name": "Gall Bladder Stone",
+    "count": 1
+  },
+  {
+    "name": "Hernia Repair",
+    "count": 1
+  },
+  {
+    "name": "Ovarian Cysts",
+    "count": 1
+  },
+  {
+    "name": "Uterine Prolapse",
+    "count": 1
+  },
+  {
+    "name": "Gynaecological Laparoscopic Surgery",
+    "count": 1
+  },
+  {
+    "name": "Refractive Surgery Services",
+    "count": 1
+  },
+  {
+    "name": "Dietetics and Clinical Nutrition",
+    "count": 1
+  },
+  {
+    "name": "General Surgery and Minimal Access Surgery",
+    "count": 1
+  },
+  {
+    "name": "Laboratory Services and Blood Bank",
+    "count": 1
+  },
+  {
+    "name": "Respiratory and Sleep Medicine (Pulmonary Medicine)",
+    "count": 1
+  },
+  {
+    "name": "Otorhinolaryngology (ENT Surgery)",
+    "count": 1
+  },
+  {
+    "name": "Christian Dental College",
+    "count": 1
+  },
+  {
+    "name": "Endocrine and Diabetes Unit",
+    "count": 1
+  },
+  {
+    "name": "Radio diagnosis and Interventional Radiology",
+    "count": 1
+  },
+  {
+    "name": "Radiation Oncology and Radiotherapy",
+    "count": 1
+  },
+  {
+    "name": "Adolescent Health Services",
+    "count": 1
+  },
+  {
+    "name": "Physiotherapy and Occupational Therapy",
+    "count": 1
+  },
+  {
+    "name": "Trauma and AMARS",
+    "count": 1
+  },
+  {
+    "name": "Social And Preventive Medicine",
+    "count": 1
+  },
+  {
+    "name": "Biomedical Engineering",
+    "count": 1
+  },
+  {
+    "name": "Medical Records Department",
+    "count": 1
+  },
+  {
+    "name": "Medical Informatics",
+    "count": 1
+  },
+  {
+    "name": "Medical and Social Welfare",
+    "count": 1
+  },
+  {
+    "name": "Library",
+    "count": 1
+  },
+  {
+    "name": "Hand and Foot Trauma",
+    "count": 1
+  },
+  {
+    "name": "Polio Surgery",
+    "count": 1
+  },
+  {
+    "name": "Arthroscopy Surge",
+    "count": 1
+  },
+  {
+    "name": "E N T",
+    "count": 1
+  },
+  {
+    "name": "Skin and Vd",
+    "count": 1
+  },
+  {
+    "name": "Pathology Histology",
+    "count": 1
+  },
+  {
+    "name": "Weight loss Surgery",
+    "count": 1
+  },
+  {
+    "name": "Infertility Treatment",
+    "count": 1
+  },
+  {
+    "name": "General and Minimally Access Surgery",
+    "count": 1
+  },
+  {
+    "name": "Cardic Sciences",
+    "count": 1
+  },
+  {
+    "name": "Gynaecology and Infertility",
+    "count": 1
+  },
+  {
+    "name": "Other Allied Specialities",
+    "count": 1
+  },
+  {
+    "name": "Support Services",
+    "count": 1
+  },
+  {
+    "name": "Urology and Andrology",
+    "count": 1
+  },
+  {
+    "name": "Arthroscopy and Endoscope Spine Surgery",
+    "count": 1
+  },
+  {
+    "name": "Endocrinology andDiabetology",
+    "count": 1
+  },
+  {
+    "name": "24x7 Pharmacy",
+    "count": 1
+  },
+  {
+    "name": "24x7 Laboratory Services",
+    "count": 1
+  },
+  {
+    "name": "24x7 Radiology Services",
+    "count": 1
+  },
+  {
+    "name": "24x7 Ambulance Services",
+    "count": 1
+  },
+  {
+    "name": "International Patient Wing",
+    "count": 1
+  },
+  {
+    "name": "Head and Neck Surgery:",
+    "count": 1
+  },
+  {
+    "name": "Biochemistery",
+    "count": 1
+  },
+  {
+    "name": "E.N.T.-Otorhinolaryngology",
+    "count": 1
+  },
+  {
+    "name": "Obstetrics & Gynaecology",
+    "count": 1
+  },
+  {
+    "name": "Pathology And Lab Medicine",
+    "count": 1
+  },
+  {
+    "name": "Physical Medicine& Rehabilitation",
+    "count": 1
+  },
+  {
+    "name": "RadioTherapy",
+    "count": 1
+  },
+  {
+    "name": "Transfusion Medicine & Blood Bank",
+    "count": 1
+  },
+  {
+    "name": "Transplant surgery",
+    "count": 1
+  },
+  {
+    "name": "Adolescent medicine",
+    "count": 1
+  },
+  {
+    "name": "Cardiothoracic surgery",
+    "count": 1
+  },
+  {
+    "name": "Behavioral medicine",
+    "count": 1
+  },
+  {
+    "name": "Critical care medicine",
+    "count": 1
+  },
+  {
+    "name": "Emergency medicine",
+    "count": 1
+  },
+  {
+    "name": "Endocrinology and Metabolism",
+    "count": 1
+  },
+  {
+    "name": "[Medical and Surgical]",
+    "count": 1
+  },
+  {
+    "name": "Imaging Sciences",
+    "count": 1
+  },
+  {
+    "name": "Occupational therapy",
+    "count": 1
+  },
+  {
+    "name": "Preventive medicine",
+    "count": 1
+  },
+  {
+    "name": "Rehabilitation medicine",
+    "count": 1
+  },
+  {
+    "name": "Speech and Hearing Therapy",
+    "count": 1
+  },
+  {
+    "name": "Venereology",
+    "count": 1
+  },
+  {
+    "name": "Cardiac Anaesthesia",
+    "count": 1
+  },
+  {
+    "name": "Pre Conceptional Clinic",
+    "count": 1
+  },
+  {
+    "name": "Pre Marital Counseling and Family Planning",
+    "count": 1
+  },
+  {
+    "name": "Menopausal Clinic",
+    "count": 1
+  },
+  {
+    "name": "Sexual Problems",
+    "count": 1
+  },
+  {
+    "name": "Urologoy",
+    "count": 1
+  },
+  {
+    "name": "Paediatric surgeon",
+    "count": 1
+  },
+  {
+    "name": "ENT and Neurology",
+    "count": 1
+  },
+  {
+    "name": "Cardio thoracic Surgery",
+    "count": 1
+  },
+  {
+    "name": "Invitro Fertilization",
+    "count": 1
+  },
+  {
+    "name": "Surgeons",
+    "count": 1
+  },
+  {
+    "name": "Anaesthetia",
+    "count": 1
+  },
+  {
+    "name": "Psychiatrics",
+    "count": 1
+  },
+  {
+    "name": "General Medicine and Geriatrics",
+    "count": 1
+  },
+  {
+    "name": "Adult Psychiatry",
+    "count": 1
+  },
+  {
+    "name": "Child Psychiatry service offered",
+    "count": 1
+  },
+  {
+    "name": "Geriatric psychiatric services",
+    "count": 1
+  },
+  {
+    "name": "Psychological Services",
+    "count": 1
+  },
+  {
+    "name": "Dermotology",
+    "count": 1
+  },
+  {
+    "name": "Orthopedic Surgery ( Trauma and Joint Replacement)",
+    "count": 1
+  },
+  {
+    "name": "Hand Injury Unit",
+    "count": 1
+  },
+  {
+    "name": "Arthoscopic Surgery",
+    "count": 1
+  },
+  {
+    "name": "Accident and Emergency Services 24 hours",
+    "count": 1
+  },
+  {
+    "name": "General Medicine and General Surgery",
+    "count": 1
+  },
+  {
+    "name": "Advanced Key Hole Surgery",
+    "count": 1
+  },
+  {
+    "name": "Geriatrice",
+    "count": 1
+  },
+  {
+    "name": "Anaemia and Arthrits Clinic",
+    "count": 1
+  },
+  {
+    "name": "Gastroenterology ( Medical and Surgical )",
+    "count": 1
+  },
+  {
+    "name": "Allergy and Arthma Clinic",
+    "count": 1
+  },
+  {
+    "name": "Gynaecology and Obstetric",
+    "count": 1
+  },
+  {
+    "name": "Hypertensive Clinic",
+    "count": 1
+  },
+  {
+    "name": "Homeopathy Clinic",
+    "count": 1
+  },
+  {
+    "name": "Burns Unit",
+    "count": 1
+  },
+  {
+    "name": "Cardiology and lnterventional",
+    "count": 1
+  },
+  {
+    "name": "Holistic Approach Clinic Nutritionist and Psycologist",
+    "count": 1
+  },
+  {
+    "name": "Coronary Care Unit",
+    "count": 1
+  },
+  {
+    "name": "Chest Diseases Department",
+    "count": 1
+  },
+  {
+    "name": "Dermatology ( Skin Department )",
+    "count": 1
+  },
+  {
+    "name": "Oncology ( Cancer Medical and Surgical )",
+    "count": 1
+  },
+  {
+    "name": "Endocrinology Department",
+    "count": 1
+  },
+  {
+    "name": "Surgery and Cosmetic Surgery",
+    "count": 1
+  },
+  {
+    "name": "Reiki",
+    "count": 1
+  },
+  {
+    "name": "Radiology and Sonology",
+    "count": 1
+  },
+  {
+    "name": "Sports lnjury",
+    "count": 1
+  },
+  {
+    "name": "Stroke Therapy Unit",
+    "count": 1
+  },
+  {
+    "name": "Podiatric",
+    "count": 1
+  },
+  {
+    "name": "obstetrics and infertility",
+    "count": 1
+  },
+  {
+    "name": "Medical Department",
+    "count": 1
+  },
+  {
+    "name": "Gastroenterology (medical)",
+    "count": 1
+  },
+  {
+    "name": "Gastroenterology (surgical)",
+    "count": 1
+  },
+  {
+    "name": "Orthopaedic Department",
+    "count": 1
+  },
+  {
+    "name": "Paediatric Department",
+    "count": 1
+  },
+  {
+    "name": "Neuromedicine",
+    "count": 1
+  },
+  {
+    "name": "Dermatology Department",
+    "count": 1
+  },
+  {
+    "name": "Chest Department",
+    "count": 1
+  },
+  {
+    "name": "Oncology Department",
+    "count": 1
+  },
+  {
+    "name": "Dental Department",
+    "count": 1
+  },
+  {
+    "name": "Para Medical Facilities",
+    "count": 1
+  },
+  {
+    "name": "24hrs Pharmacy",
+    "count": 1
+  },
+  {
+    "name": "X Ray",
+    "count": 1
+  },
+  {
+    "name": "Intensive Care Medicine",
+    "count": 1
+  },
+  {
+    "name": "Obstetrics and gynaecology",
+    "count": 1
+  },
+  {
+    "name": "Forensic Medicne and Toxicology",
+    "count": 1
+  },
+  {
+    "name": "Anaesthesiology and Pain Clinic",
+    "count": 1
+  },
+  {
+    "name": "Casualty (Accident and Emergency Medicine)",
+    "count": 1
+  },
+  {
+    "name": "Cardiac Care Center",
+    "count": 1
+  },
+  {
+    "name": "Cardio Thoracic Surgery (Paediatric)",
+    "count": 1
+  },
+  {
+    "name": "Cardio Vascular Disease and Robotic Surgery",
+    "count": 1
+  },
+  {
+    "name": "In Vitro Fertilization",
+    "count": 1
+  },
+  {
+    "name": "Pain",
+    "count": 1
+  },
+  {
+    "name": "Physio Back School",
+    "count": 1
+  },
+  {
+    "name": "Joint Pain",
+    "count": 1
+  },
+  {
+    "name": "Mind",
+    "count": 1
+  },
+  {
+    "name": "Knee",
+    "count": 1
+  },
+  {
+    "name": "Child",
+    "count": 1
+  },
+  {
+    "name": "Cardio",
+    "count": 1
+  },
+  {
+    "name": "Vascular",
+    "count": 1
+  },
+  {
+    "name": "Endocrinolagy",
+    "count": 1
+  },
+  {
+    "name": "Head Injury",
+    "count": 1
+  },
+  {
+    "name": "Woman",
+    "count": 1
+  },
+  {
+    "name": "General Surgical and Laproscopic",
+    "count": 1
+  },
+  {
+    "name": "Birthing Center",
+    "count": 1
+  },
+  {
+    "name": "Cradle Fertility Center",
+    "count": 1
+  },
+  {
+    "name": "Bone and Joint Center",
+    "count": 1
+  },
+  {
+    "name": "Non Surgical Treatment",
+    "count": 1
+  },
+  {
+    "name": "Multi Speciality Hospital",
+    "count": 1
+  },
+  {
+    "name": "Community Health",
+    "count": 1
+  },
+  {
+    "name": "Skin And Cosmetology",
+    "count": 1
+  },
+  {
+    "name": "General And Pediatric Surgery",
+    "count": 1
+  },
+  {
+    "name": "Obstetrics andGynaecology",
+    "count": 1
+  },
+  {
+    "name": "Ortho and Joint Replacement",
+    "count": 1
+  },
+  {
+    "name": "Obstetrics and Gynacology",
+    "count": 1
+  },
+  {
+    "name": "Orbit and Oculoplasty",
+    "count": 1
+  },
+  {
+    "name": "Squint and Pediatric Ophthalmology",
+    "count": 1
+  },
+  {
+    "name": "Diabetes Care and Education",
+    "count": 1
+  },
+  {
+    "name": "Diabetes Heart Evaluation",
+    "count": 1
+  },
+  {
+    "name": "Preventive Diabetes Foot Care (Podiatry)",
+    "count": 1
+  },
+  {
+    "name": "Diabetic Eye Care",
+    "count": 1
+  },
+  {
+    "name": "Appropriate Dental Care for diabetic patients",
+    "count": 1
+  },
+  {
+    "name": "Diabetes Neuropathy Clinic",
+    "count": 1
+  },
+  {
+    "name": "State of Art Diagnostic Laboratory",
+    "count": 1
+  },
+  {
+    "name": "Special Diabetes Counselling",
+    "count": 1
+  },
+  {
+    "name": "Nutrition and Diet Counselling",
+    "count": 1
+  },
+  {
+    "name": "Impotence Clinic",
+    "count": 1
+  },
+  {
+    "name": "Obesity and Lifestyle Counselling",
+    "count": 1
+  },
+  {
+    "name": "Pain Clinic for special problems in diabetic patients like frozen shoulder",
+    "count": 1
+  },
+  {
+    "name": "Special Yoga classes for diabetes control",
+    "count": 1
+  },
+  {
+    "name": "Multi-disciplinary diabetic Foot clinic with all surgical experts",
+    "count": 1
+  },
+  {
+    "name": "Dia-Shoppe with products and medicines for diabetes treatment",
+    "count": 1
+  },
+  {
+    "name": "Weight Management Clinic",
+    "count": 1
+  },
+  {
+    "name": "Women Wellness Clinic",
+    "count": 1
+  },
+  {
+    "name": "Healthy Heart Clinic",
+    "count": 1
+  },
+  {
+    "name": "Special clinic for children with diabetes.",
+    "count": 1
+  },
+  {
+    "name": "Total Hip Replacement",
+    "count": 1
+  },
+  {
+    "name": "Knee Reconstruction and Replacement",
+    "count": 1
+  },
+  {
+    "name": "Limb Reconstruction",
+    "count": 1
+  },
+  {
+    "name": "Centre for Heart Failure Management",
+    "count": 1
+  },
+  {
+    "name": "Cardiac Emergency Care",
+    "count": 1
+  },
+  {
+    "name": "Brain and Spine Care",
+    "count": 1
+  },
+  {
+    "name": "Centre for Comprehensive Epilepsy Care",
+    "count": 1
+  },
+  {
+    "name": "Bone and Joint Care",
+    "count": 1
+  },
+  {
+    "name": "Centre for Knee Replacement",
+    "count": 1
+  },
+  {
+    "name": "Nephro and Uro Care",
+    "count": 1
+  },
+  {
+    "name": "Digestive Care",
+    "count": 1
+  },
+  {
+    "name": "Women Care",
+    "count": 1
+  },
+  {
+    "name": "Child care",
+    "count": 1
+  },
+  {
+    "name": "Associate Specialties",
+    "count": 1
+  },
+  {
+    "name": "Preventive health checks",
+    "count": 1
+  },
+  {
+    "name": "Cyanotic and Acyanotic Heart Diseases (Simple and Complex)",
+    "count": 1
+  },
+  {
+    "name": "Obesity and Bariatric Surgery",
+    "count": 1
+  },
+  {
+    "name": "General Surgery and Laparoscopic Surgery",
+    "count": 1
+  },
+  {
+    "name": "Emergency care",
+    "count": 1
+  },
+  {
+    "name": "Onocology",
+    "count": 1
+  },
+  {
+    "name": "Reproductive Technology",
+    "count": 1
+  },
+  {
+    "name": "Medical and Surgical Gastroenterology",
+    "count": 1
+  },
+  {
+    "name": "Obesity and Bariatric",
+    "count": 1
+  },
+  {
+    "name": "Breast Oncology",
+    "count": 1
+  },
+  {
+    "name": "Heart Transplantation",
+    "count": 1
+  },
+  {
+    "name": "HPB and Liver Surgery",
+    "count": 1
+  },
+  {
+    "name": "Lung Transplantation",
+    "count": 1
+  },
+  {
+    "name": "Maxillofacial surgery",
+    "count": 1
+  },
+  {
+    "name": "Multi-Organ Transplantation",
+    "count": 1
+  },
+  {
+    "name": "Radiation Therapy",
+    "count": 1
+  },
+  {
+    "name": "Infertility Treatment:IUI",
+    "count": 1
+  },
+  {
+    "name": "ICSI",
+    "count": 1
+  },
+  {
+    "name": "Embryo transfer",
+    "count": 1
+  },
+  {
+    "name": "Egg",
+    "count": 1
+  },
+  {
+    "name": "Surrogacy",
+    "count": 1
+  },
+  {
+    "name": "Blastocyst",
+    "count": 1
+  },
+  {
+    "name": "Sperm Bank",
+    "count": 1
+  },
+  {
+    "name": "TESA",
+    "count": 1
+  },
+  {
+    "name": "MESA",
+    "count": 1
+  },
+  {
+    "name": "PESA",
+    "count": 1
+  },
+  {
+    "name": "TESE",
+    "count": 1
+  },
+  {
+    "name": "Sexual Medicine e.t.c.Obstetrics and Gynaecology:Pregnancy (Ante-Natal) Care",
+    "count": 1
+  },
+  {
+    "name": "Normal Delivery and Cesarean",
+    "count": 1
+  },
+  {
+    "name": "Menstrual Disorders",
+    "count": 1
+  },
+  {
+    "name": "Chocolate Cyst",
+    "count": 1
+  },
+  {
+    "name": "Ovarian Cyst",
+    "count": 1
+  },
+  {
+    "name": "Fibroid Removal",
+    "count": 1
+  },
+  {
+    "name": "Polyp Removal",
+    "count": 1
+  },
+  {
+    "name": "IUD",
+    "count": 1
+  },
+  {
+    "name": "Insertion",
+    "count": 1
+  },
+  {
+    "name": "D and C",
+    "count": 1
+  },
+  {
+    "name": "PAP Smear e.t.c.Gynaecology and Laparoscopy Surgery:Hysterectomy",
+    "count": 1
+  },
+  {
+    "name": "Ovarian Cysts or Tumors",
+    "count": 1
+  },
+  {
+    "name": "Ectopic Pregnancy",
+    "count": 1
+  },
+  {
+    "name": "Pelvic Abscess",
+    "count": 1
+  },
+  {
+    "name": "Ovarian Cysts Removal e.t.c.General and Laparoscopy Surgery:Appendicectomy",
+    "count": 1
+  },
+  {
+    "name": "Cholecystectomy",
+    "count": 1
+  },
+  {
+    "name": "Cystoscopy",
+    "count": 1
+  },
+  {
+    "name": "Hemorrhoidectomy",
+    "count": 1
+  },
+  {
+    "name": "Inguinal Hernia",
+    "count": 1
+  },
+  {
+    "name": "Mastectomy",
+    "count": 1
+  },
+  {
+    "name": "Tonsillectomy and Adenoidectomy",
+    "count": 1
+  },
+  {
+    "name": "Umbilical Hernia e.t.c.Plastic Surgery:Liposuction",
+    "count": 1
+  },
+  {
+    "name": "Tummy Tuck",
+    "count": 1
+  },
+  {
+    "name": "Body Contour Surgery",
+    "count": 1
+  },
+  {
+    "name": "Breast Augmentation",
+    "count": 1
+  },
+  {
+    "name": "Breast Lift",
+    "count": 1
+  },
+  {
+    "name": "Breast Reduction",
+    "count": 1
+  },
+  {
+    "name": "Breast Reconstruction",
+    "count": 1
+  },
+  {
+    "name": "Ortho Biologicals",
+    "count": 1
+  },
+  {
+    "name": "Chest Physcian",
+    "count": 1
+  },
+  {
+    "name": "General Surgery and Oncology",
+    "count": 1
+  },
+  {
+    "name": "Surgical Gastroenterology and Endoscopy",
+    "count": 1
+  },
+  {
+    "name": "Lapraroscopic Surgery",
+    "count": 1
+  },
+  {
+    "name": "Advanced Skull Base Surgeries",
+    "count": 1
+  },
+  {
+    "name": "Coblation Tonsillectomy and Adenoidectomy",
+    "count": 1
+  },
+  {
+    "name": "EAR SURGERY for DISCHARGING EAR",
+    "count": 1
+  },
+  {
+    "name": "Endolaryngeal Surgery",
+    "count": 1
+  },
+  {
+    "name": "Endoscopic Dacryocystorhinostomy",
+    "count": 1
+  },
+  {
+    "name": "Snoring",
+    "count": 1
+  },
+  {
+    "name": "Sinus Surgery",
+    "count": 1
+  },
+  {
+    "name": "Stapedectomy",
+    "count": 1
+  },
+  {
+    "name": "Internist",
+    "count": 1
+  },
+  {
+    "name": "Endocrinologist",
+    "count": 1
+  },
+  {
+    "name": "General Preactitioner",
+    "count": 1
+  },
+  {
+    "name": "Obstetrician and Gynaecologist",
+    "count": 1
+  },
+  {
+    "name": "Dermatologist",
+    "count": 1
+  },
+  {
+    "name": "Pediatrician and Neonatologist",
+    "count": 1
+  },
+  {
+    "name": "Rheumatologist",
+    "count": 1
+  },
+  {
+    "name": "Cosmetologist (Plastic Surgeon)",
+    "count": 1
+  },
+  {
+    "name": "Anasthesiology",
+    "count": 1
+  },
+  {
+    "name": "Diet Counselling",
+    "count": 1
+  },
+  {
+    "name": "Interventional  Cardiology",
+    "count": 1
+  },
+  {
+    "name": "Surgical  Gastroenterology",
+    "count": 1
+  },
+  {
+    "name": "UroGynaecology",
+    "count": 1
+  },
+  {
+    "name": "Radiation Therapy  Radio Therapy",
+    "count": 1
+  },
+  {
+    "name": "Reproductive Medicine Unit",
+    "count": 1
+  },
+  {
+    "name": "Urology Neonatology",
+    "count": 1
+  },
+  {
+    "name": "Neurological Sciences  Neurology",
+    "count": 1
+  },
+  {
+    "name": "Neurological Sciences  Neurosurgery",
+    "count": 1
+  },
+  {
+    "name": "Dental and Oral Surgery",
+    "count": 1
+  },
+  {
+    "name": "Developmental Paediatrics",
+    "count": 1
+  },
+  {
+    "name": "Diabetes and Metabolism",
+    "count": 1
+  },
+  {
+    "name": "Gastrointestinal Sciences",
+    "count": 1
+  },
+  {
+    "name": "General Surgery and Head and Neck Surgery",
+    "count": 1
+  },
+  {
+    "name": "General Surgery and Vascular Surgery",
+    "count": 1
+  },
+  {
+    "name": "Accident and Emergency Services",
+    "count": 1
+  },
+  {
+    "name": "General  Medicine",
+    "count": 1
+  },
+  {
+    "name": "General and Laparoscopic",
+    "count": 1
+  },
+  {
+    "name": "Gynaecology Operations",
+    "count": 1
+  },
+  {
+    "name": "Family Planning",
+    "count": 1
+  },
+  {
+    "name": "IVF Treatments",
+    "count": 1
+  },
+  {
+    "name": "Uro Gynaecology",
+    "count": 1
+  },
+  {
+    "name": "Uro surgery",
+    "count": 1
+  },
+  {
+    "name": "Cardiology (Non-Invasive)",
+    "count": 1
+  },
+  {
+    "name": "Critical Care Dental",
+    "count": 1
+  },
+  {
+    "name": "Psychiatry and      Psychology",
+    "count": 1
+  },
+  {
+    "name": "Asthma and Allergy",
+    "count": 1
+  },
+  {
+    "name": "Cardiothoracic and Vascular Surgery (CTVS) Deptt.",
+    "count": 1
+  },
+  {
+    "name": "Drug",
+    "count": 1
+  },
+  {
+    "name": "Alcohol De-addiction and Stress Management",
+    "count": 1
+  },
+  {
+    "name": "Emergency Medical Services",
+    "count": 1
+  },
+  {
+    "name": "Laparoscopy Surgery (Minimal Access Surgery)",
+    "count": 1
+  },
+  {
+    "name": "Management of Poisoning and Snake Bite",
+    "count": 1
+  },
+  {
+    "name": "Oncology (Cancer)",
+    "count": 1
+  },
+  {
+    "name": "Pulmonary and Sleep Medicine",
+    "count": 1
+  },
+  {
+    "name": "Medical and Surgical  Gastroenterology",
+    "count": 1
+  },
+  {
+    "name": "Cardiac Surgery (CTVS)",
+    "count": 1
+  },
+  {
+    "name": "Gastroenternology",
+    "count": 1
+  },
+  {
+    "name": "Radio imaging Services",
+    "count": 1
+  },
+  {
+    "name": "Gastro-Intestinal Surgery",
+    "count": 1
+  },
+  {
+    "name": "Critical Care Services",
+    "count": 1
+  },
+  {
+    "name": "Dietics and Nutrition",
+    "count": 1
+  },
+  {
+    "name": "Cosmetic and Laser  Center",
+    "count": 1
+  },
+  {
+    "name": "Dental and Implant Center",
+    "count": 1
+  },
+  {
+    "name": "Cardiology and CTVs",
+    "count": 1
+  },
+  {
+    "name": "Vein Health",
+    "count": 1
+  },
+  {
+    "name": "Diabetic and Thyroid Clinic",
+    "count": 1
+  },
+  {
+    "name": "Caessarean Section",
+    "count": 1
+  },
+  {
+    "name": "Dental Department New Born and Child Specialist",
+    "count": 1
+  },
+  {
+    "name": "Cardiac (Heart Centre) Dentistry",
+    "count": 1
+  },
+  {
+    "name": "Dietetic",
+    "count": 1
+  },
+  {
+    "name": "Department",
+    "count": 1
+  },
+  {
+    "name": "Gastroenterology  General Surgery",
+    "count": 1
+  },
+  {
+    "name": "Nephrology  Neurology",
+    "count": 1
+  },
+  {
+    "name": "Physiotherapy and Rehabilitation (Pain Medicine)",
+    "count": 1
+  },
+  {
+    "name": "Pulmonology              Radio-diagnosis",
+    "count": 1
+  },
+  {
+    "name": "Cardiothoracic and Vascular",
+    "count": 1
+  },
+  {
+    "name": "Cardiac Anaesthesia Critical Care",
+    "count": 1
+  },
+  {
+    "name": "Crosslay Wellness",
+    "count": 1
+  },
+  {
+    "name": "General and Minimal Access",
+    "count": 1
+  },
+  {
+    "name": "Fetal Radiology",
+    "count": 1
+  },
+  {
+    "name": "AIDS",
+    "count": 1
+  },
+  {
+    "name": "Internal Medicine  Interventional Radiology",
+    "count": 1
+  },
+  {
+    "name": "Minimally Invasive Spine Surgery and Neuro Surgery",
+    "count": 1
+  },
+  {
+    "name": "Minimal Access",
+    "count": 1
+  },
+  {
+    "name": "Gynaecology  Surgery",
+    "count": 1
+  },
+  {
+    "name": "Paediatric  Physiotherapy",
+    "count": 1
+  },
+  {
+    "name": "Suicide Prevention Clinic",
+    "count": 1
+  },
+  {
+    "name": "Senior Chest Physician and allergist  Specialist",
+    "count": 1
+  },
+  {
+    "name": "Laparoscopic and Minimally access Surgery",
+    "count": 1
+  },
+  {
+    "name": "Maxillo Facial surgery",
+    "count": 1
+  },
+  {
+    "name": "Endocrinologist (Thyroid)",
+    "count": 1
+  },
+  {
+    "name": "Anaesthesiology and Intensive Care",
+    "count": 1
+  },
+  {
+    "name": "Blood bank",
+    "count": 1
+  },
+  {
+    "name": "Eye Transplantation",
+    "count": 1
+  },
+  {
+    "name": "Lasik Laser",
+    "count": 1
+  },
+  {
+    "name": "Corneal Speciality Clinic",
+    "count": 1
+  },
+  {
+    "name": "Child Eye Care",
+    "count": 1
+  },
+  {
+    "name": "Optical",
+    "count": 1
+  },
+  {
+    "name": "Cardiology (Heart Care)",
+    "count": 1
+  },
+  {
+    "name": "Renal Sciences",
+    "count": 1
+  },
+  {
+    "name": "Cardiothoracic and Vascular surgery",
+    "count": 1
+  },
+  {
+    "name": "Cardiac  Electrophysiology",
+    "count": 1
+  },
+  {
+    "name": "Child Psychology",
+    "count": 1
+  },
+  {
+    "name": "Dentistry and Dental Surgery",
+    "count": 1
+  },
+  {
+    "name": "Developmental",
+    "count": 1
+  },
+  {
+    "name": "Imaging and Interventional Radiology",
+    "count": 1
+  },
+  {
+    "name": "Oncology (Medical)",
+    "count": 1
+  },
+  {
+    "name": "Oncology (Surgical)",
+    "count": 1
+  },
+  {
+    "name": "Oral and Faciomaxillary Surgery",
+    "count": 1
+  },
+  {
+    "name": "Orthodontistry",
+    "count": 1
+  },
+  {
+    "name": "Paediatric haematology",
+    "count": 1
+  },
+  {
+    "name": "Paediatric Nephrology",
+    "count": 1
+  },
+  {
+    "name": "Pranic Healing",
+    "count": 1
+  },
+  {
+    "name": "Psychiatry and Psychometry",
+    "count": 1
+  },
+  {
+    "name": "Sleep medicine",
+    "count": 1
+  },
+  {
+    "name": "Transplant  Medicine",
+    "count": 1
+  },
+  {
+    "name": "Cardio thoracic surgery",
+    "count": 1
+  },
+  {
+    "name": "(Oncology) Surgery Cancer (Oncology) Medicine",
+    "count": 1
+  },
+  {
+    "name": "Eye Emergency Services",
+    "count": 1
+  },
+  {
+    "name": "Microsurgery",
+    "count": 1
+  },
+  {
+    "name": "Urology Urogynaecology",
+    "count": 1
+  },
+  {
+    "name": "Orthopaedic  Surgery",
+    "count": 1
+  },
+  {
+    "name": "Gynaecology  And Obstetrics",
+    "count": 1
+  },
+  {
+    "name": "Neuro Medicine",
+    "count": 1
+  },
+  {
+    "name": "ENT  Gastroenterology",
+    "count": 1
+  },
+  {
+    "name": "Medicine (general and cardiology)",
+    "count": 1
+  },
+  {
+    "name": "Hepatobiliary  Surgery",
+    "count": 1
+  },
+  {
+    "name": "Holistic",
+    "count": 1
+  },
+  {
+    "name": "Intervention radiology",
+    "count": 1
+  },
+  {
+    "name": "Liver  Transplantation",
+    "count": 1
+  },
+  {
+    "name": "and Digestive Disease",
+    "count": 1
+  },
+  {
+    "name": "Stem Cell  Therapy",
+    "count": 1
+  },
+  {
+    "name": "HematoOncology",
+    "count": 1
+  },
+  {
+    "name": "Nephrology  Operation Theaters",
+    "count": 1
+  },
+  {
+    "name": "Neurotology",
+    "count": 1
+  },
+  {
+    "name": "(Vertigo Care)",
+    "count": 1
+  },
+  {
+    "name": "Physiotherapy  OPD",
+    "count": 1
+  },
+  {
+    "name": "Gastroenterology (Endoscopy)",
+    "count": 1
+  },
+  {
+    "name": "Pre and Post Natal",
+    "count": 1
+  },
+  {
+    "name": "Paediatric  Nephrology",
+    "count": 1
+  },
+  {
+    "name": "Physical",
+    "count": 1
+  },
+  {
+    "name": "Medicine and Rehabilitation",
+    "count": 1
+  },
+  {
+    "name": "Cytology",
+    "count": 1
+  },
+  {
+    "name": "Minimally Invasive Cardiac Surgery",
+    "count": 1
+  }
+]

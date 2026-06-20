@@ -241,11 +241,15 @@ export default function HomePage() {
     setIsAiTyping(false)
 
     try {
-      const res = await fetch('/api/gemini', {
+      const controller = new AbortController()
+      const timeoutId = setTimeout(() => controller.abort(), 25000) // 25s client timeout
+      const res = await fetch('/api/ai', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ query: userMsg }),
+        signal: controller.signal,
       })
+      clearTimeout(timeoutId)
       const data = await res.json()
       const aiMsg: ChatMessage = {
         role: 'ai',

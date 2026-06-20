@@ -28,3 +28,28 @@ Stage Summary:
 - 2,806 specialties accessible via searchable dropdown
 - Web search integrated for hospitals not in directory
 - All changes in page.tsx, globals.css, gemini/route.ts, specialties/route.ts
+---
+Task ID: 2
+Agent: Main Agent
+Task: Replace Gemini AI with stable Z-AI SDK, fix server crashes
+
+Work Log:
+- Removed /api/gemini route entirely (was crashing Next.js)
+- Created new /api/ai route that proxies to standalone AI server on port 3001
+- Created standalone AI server (scripts/ai-server.js) that runs Z-AI SDK outside Next.js process
+- This prevents Next.js from crashing when Z-AI SDK uses memory
+- The /api/ai route has fallback: tries standalone server first, then embedded Z-AI, then local response
+- Added withTimeout() helper for all async operations (6s web search, 15s AI chat, 20s proxy)
+- Updated frontend to call /api/ai instead of /api/gemini
+- Added client-side AbortController with 25s timeout
+- Created scripts/start.sh that launches both servers
+- Tested 3 consecutive queries successfully (English, Hindi, specialty search)
+- Web search via zai.functions.invoke('web_search') confirmed working
+- AI responds in user's language and includes "Also on the web" results
+
+Stage Summary:
+- Gemini completely removed, replaced with Z-AI Web Dev SDK
+- Architecture: Next.js (port 3000) + Standalone AI Server (port 3001)
+- AI server handles Z-AI SDK to isolate memory usage from Next.js
+- Frontend updated to /api/ai route
+- All features working: AI chat, web search, local fallback, typing animation
